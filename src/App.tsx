@@ -1,9 +1,13 @@
+import Router from "@/modules/_core/routes/router.tsx";
+import { Toaster } from "sonner";
+
 import "./config/styles/global.css";
 
 function App() {
   return (
     <>
-      <h1>app</h1>
+      <Router />
+      <Toaster />
     </>
   );
 }
