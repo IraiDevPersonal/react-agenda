@@ -1,3 +1,5 @@
+import "./config/styles/global.css";
+
 const App = () => {
   return (
     <>
