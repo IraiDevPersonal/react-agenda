@@ -1,6 +1,17 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
-const router = createBrowserRouter([]);
+import AgendaPage from "./modules/agenda/pages/agenda-page";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <AgendaPage />,
+  },
+  {
+    path: "*",
+    element: <Navigate to="/" replace />,
+  },
+]);
 
 function Router() {
   return <RouterProvider router={router} />;
