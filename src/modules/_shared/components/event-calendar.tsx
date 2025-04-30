@@ -1,24 +1,15 @@
 import type { ReactNode } from "react";
 
-import {
-  eachDayOfInterval,
-  endOfMonth,
-  endOfWeek,
-  format,
-  isSameMonth,
-  isToday,
-  startOfMonth,
-  startOfWeek,
-} from "date-fns";
 import { Plus } from "lucide-react";
 import { memo, useCallback, useMemo } from "react";
 
-import { cn, isHoliday } from "@/lib/utils";
+import { DateHelper } from "@/lib/date-helper";
+import { cn } from "@/lib/utils";
 
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
-const daysOfWeek = [
+const DAY_OF_WEEK = [
   { name: "Lunes", shortName: "Lun" },
   { name: "Martes", shortName: "Mar" },
   { name: "Miércoles", shortName: "Mié" },
@@ -28,10 +19,12 @@ const daysOfWeek = [
   { name: "Domingo", shortName: "Dom" },
 ] as const;
 
+const dh = new DateHelper();
+
 const CalendarHeader = memo(() => {
   return (
     <>
-      {daysOfWeek.map(day => (
+      {DAY_OF_WEEK.map(day => (
         <div key={day.name} className="p-2 lg:p-4 text-center font-bold border-b">
           <span className="hidden lg:inline">{day.name}</span>
           <span className="inline lg:hidden">{day.shortName}</span>
@@ -50,11 +43,11 @@ type CalendarDayProps = {
 
 const CalendarDay = memo(({ day, monthStart, onDayClick, renderSlot }: CalendarDayProps) => {
   const dayStatus = useMemo(() => {
-    const isDayInCurrentMonth = isSameMonth(day, monthStart);
-    const isSunday = format(day, "E") === "Sun";
-    const isDayHoliday = isHoliday(day);
+    const isDayInCurrentMonth = dh.isSameMonth(day, monthStart);
+    const isSunday = dh.format(day, "E") === "Sun";
+    const isDayHoliday = dh.isHoliday(day);
     const isDisabled = !isDayInCurrentMonth || isSunday || isDayHoliday;
-    const isCurrentDay = isToday(day);
+    const isCurrentDay = dh.isToday(day);
 
     return {
       isDayInCurrentMonth,
@@ -89,7 +82,7 @@ const CalendarDay = memo(({ day, monthStart, onDayClick, renderSlot }: CalendarD
             dayStatus.isCurrentDay && "w-5 bg-primary text-primary-foreground rounded-md font-bold",
           )}
           >
-            {format(day, "d")}
+            {dh.format(day, "d")}
           </span>
         </div>
         <div className="flex space-x-1">
@@ -131,15 +124,15 @@ type EventCalendarProps = {
 } & Pick<CalendarDayProps, "onDayClick" | "renderSlot">;
 
 export const EventCalendar = memo(({ date, ...props }: EventCalendarProps) => {
-  const monthStart = useMemo(() => startOfMonth(date), [date]);
+  const monthStart = useMemo(() => dh.startOfMonth(date), [date]);
 
   const calendarDays = useMemo(() => {
     const generateCalendarDays = (date: Date) => {
-      const monthStart = startOfMonth(date);
-      const monthEnd = endOfMonth(date);
-      const startDate = startOfWeek(monthStart, { weekStartsOn: 1 });
-      const endDate = endOfWeek(monthEnd, { weekStartsOn: 1 });
-      return eachDayOfInterval({ start: startDate, end: endDate });
+      const monthStart = dh.startOfMonth(date);
+      const monthEnd = dh.endOfMonth(date);
+      const startDate = dh.startOfWeek(monthStart, { weekStartsOn: 1 });
+      const endDate = dh.endOfWeek(monthEnd, { weekStartsOn: 1 });
+      return dh.eachDayOfInterval({ start: startDate, end: endDate });
     };
 
     return generateCalendarDays(date);
@@ -151,7 +144,7 @@ export const EventCalendar = memo(({ date, ...props }: EventCalendarProps) => {
         <CalendarHeader />
         {calendarDays.map(day => (
           <CalendarDay
-            key={format(day, "yyyy-MM-dd")}
+            key={dh.format(day, "yyyy-MM-dd")}
             monthStart={monthStart}
             day={day}
             {...props}
@@ -163,7 +156,7 @@ export const EventCalendar = memo(({ date, ...props }: EventCalendarProps) => {
 });
 
 // const [view, setView] = useState<"day" | "week" | "month" | "agenda">("month");
-// const monthEnd = endOfMonth(date);
+// const monthEnd = dh.endOfMonth(date);
 // Modificar la generación de días para que la semana comience el lunes
 
 // const nextMonth = () => setCurrentDate(addMonths(date, 1));
@@ -189,7 +182,7 @@ export const EventCalendar = memo(({ date, ...props }: EventCalendarProps) => {
 //           <Button variant="outline" size="icon" onClick={nextMonth}>
 //             <ChevronRight className="h-4 w-4" />
 //           </Button>
-//           <h2 className="text-xl font-bold">{format(date, "MMMM yyyy", { locale: es })}</h2>
+//           <h2 className="text-xl font-bold">{dh.format(date, "MMMM yyyy", { locale: es })}</h2>
 //         </div>
 //         <div className="flex items-center space-x-2">
 //           <Select value={view} onValueChange={handleViewChange}>
