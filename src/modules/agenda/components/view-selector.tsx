@@ -1,16 +1,11 @@
-import type { ViewTypes } from "../types/view.type";
-
+import { useAgendaViewStore } from "../store/agenda-view-store";
 import { MonthView } from "./month-view";
 
-type ViewSelectorProps = {
-  view: ViewTypes;
-  date: Date;
-};
-
-export function ViewSelector({ view, date }: ViewSelectorProps) {
+export function ViewSelector() {
+  const view = useAgendaViewStore(s => s.view);
   return (
     <>
-      {view === "month" && <MonthView date={date} />}
+      {view === "month" && <MonthView />}
     </>
   );
 }

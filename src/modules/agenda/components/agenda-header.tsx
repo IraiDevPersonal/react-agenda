@@ -4,27 +4,21 @@ import { DateHelper } from "@/lib/date-helper";
 import { Button } from "@/modules/_shared/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/modules/_shared/components/ui/select";
 
-import type { ViewTypes } from "../types/view.type";
+import { useAgendaViewStore } from "../store/agenda-view-store";
 
 const dh = new DateHelper();
 
-type AgendaHeaderProps = {
-  onViewChange: (view: ViewTypes) => void;
-  onDateChange: (date: Date) => void;
-  view: ViewTypes;
-  date: Date;
-};
-
-export function AgendaHeader({ date, view, onDateChange, onViewChange }: AgendaHeaderProps) {
+export function AgendaHeader() {
   // const monthEnd = dh.endOfMonth(date);
+  const { view, date, setView, setDate } = useAgendaViewStore();
 
-  const nextMonth = () => onDateChange(dh.addMonths(date, 1));
-  const prevMonth = () => onDateChange(dh.subMonths(date, 1));
-  const goToToday = () => onDateChange(new Date());
+  const nextMonth = () => setDate(dh.addMonths(date, 1));
+  const prevMonth = () => setDate(dh.subMonths(date, 1));
+  const goToToday = () => setDate(new Date());
 
   const handleViewChange = (newView: string) => {
     if (newView === "day" || newView === "week" || newView === "month" || newView === "agenda") {
-      onViewChange(newView);
+      setView(newView);
     }
   };
 

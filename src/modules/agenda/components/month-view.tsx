@@ -2,13 +2,12 @@ import { DateHelper } from "@/lib/date-helper";
 import { EventCalendar } from "@/modules/_shared/components/event-calendar";
 import { Badge } from "@/modules/_shared/components/ui/badge";
 
+import { useAgendaViewStore } from "../store/agenda-view-store";
+
 const dh = new DateHelper();
 
-type MonthViewProps = {
-  date: Date;
-};
-
-export function MonthView({ date }: MonthViewProps) {
+export function MonthView() {
+  const date = useAgendaViewStore(s => s.date);
   return (
     <>
       <EventCalendar
