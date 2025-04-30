@@ -44,7 +44,7 @@ type CalendarDayProps = {
 const CalendarDay = memo(({ day, monthStart, onDayClick, renderSlot }: CalendarDayProps) => {
   const dayStatus = useMemo(() => {
     const isDayInCurrentMonth = dh.isSameMonth(day, monthStart);
-    const isSunday = dh.format(day, "e") === "7";
+    const isSunday = dh.isSunday(day);
     const isDayHoliday = dh.isHoliday(day);
     const isDisabled = !isDayInCurrentMonth || isSunday || isDayHoliday;
     const isCurrentDay = dh.isToday(day);

@@ -4,6 +4,8 @@ import { DateHelper } from "@/lib/date-helper";
 import { Button } from "@/modules/_shared/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/modules/_shared/components/ui/select";
 
+import type { ViewTypes } from "../types/view.type";
+
 import { useAgendaViewStore } from "../store/agenda-view-store";
 
 const dh = new DateHelper();
@@ -12,9 +14,32 @@ export function AgendaHeader() {
   // const monthEnd = dh.endOfMonth(date);
   const { view, date, setView, setDate } = useAgendaViewStore();
 
-  const nextMonth = () => setDate(dh.addMonths(date, 1));
-  const prevMonth = () => setDate(dh.subMonths(date, 1));
-  const goToToday = () => setDate(new Date());
+  const handleDateChange = (value: "next" | "prev" | "to-day") => () => {
+    const hash: Record<ViewTypes, Record<typeof value, any>> = {
+      agenda: {
+        "to-day": null,
+        "next": null,
+        "prev": null,
+      },
+      day: {
+        "to-day": null,
+        "next": null,
+        "prev": null,
+      },
+      month: {
+        "to-day": () => setDate(new Date()),
+        "next": () => setDate(dh.addMonths(date, 1)),
+        "prev": () => setDate(dh.subMonths(date, 1)),
+      },
+      week: {
+        "to-day": () => setDate(new Date()),
+        "next": () => setDate(dh.addWeeks(date, 1)),
+        "prev": () => setDate(dh.subWeeks(date, 1)),
+      },
+    };
+
+    hash[view][value]();
+  };
 
   const handleViewChange = (newView: string) => {
     if (newView === "day" || newView === "week" || newView === "month" || newView === "agenda") {
@@ -25,13 +50,13 @@ export function AgendaHeader() {
   return (
     <header className="flex items-center justify-between">
       <div className="flex items-center space-x-2">
-        <Button variant="outline" onClick={goToToday} disabled={dh.isToday(date)}>
+        <Button variant="outline" onClick={handleDateChange("to-day")} disabled={dh.isToday(date)}>
           Hoy
         </Button>
-        <Button variant="outline" size="icon" onClick={prevMonth}>
+        <Button variant="outline" size="icon" onClick={handleDateChange("prev")}>
           <ChevronLeft className="size-4" />
         </Button>
-        <Button variant="outline" size="icon" onClick={nextMonth}>
+        <Button variant="outline" size="icon" onClick={handleDateChange("next")}>
           <ChevronRight className="size-4" />
         </Button>
         <h2 className="text-xl font-bold capitalize">{dh.format(date, "MMMM yyyy")}</h2>

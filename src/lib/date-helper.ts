@@ -7,16 +7,22 @@ import type {
 
 import {
   addMonths as dateFnsAddMonths,
+  addWeeks as dateFnsAddWeeks,
   eachDayOfInterval as dateFnsEachDayOfInterval,
   endOfMonth as dateFnsEndOfMonth,
   endOfWeek as dateFnsEndOfWeek,
   format as dateFnsFormat,
   isEqual as dateFnsIsEqual,
+  isSameDay as dateFnsIsSameDay,
   isSameMonth as dateFnsIsSameMonth,
   isToday as dateFnsIsToday,
+  parseISO as dateFnsParseISO,
+  setHours as dateFnsSetHours,
+  setMinutes as dateFnsSetMinutes,
   startOfMonth as dateFnsStartOfMonth,
   startOfWeek as dateFnsStartOfWeek,
   subMonths as dateFnsSubMonths,
+  subWeeks as dateFnsSubWeeks,
 } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -99,5 +105,33 @@ export class DateHelper {
         && holiday.getMonth() === date.getMonth()
         && holiday.getFullYear() === date.getFullYear(),
     );
+  }
+
+  isSunday(date: Date) {
+    return this.format(date, "e") === "7";
+  }
+
+  parseISO(dateString: string) {
+    return dateFnsParseISO(dateString);
+  }
+
+  isSameDay(dateLeft: DateArg<Date>, dateRight: DateArg<Date>) {
+    return dateFnsIsSameDay(dateLeft, dateRight);
+  }
+
+  setHours(date: DateArg<Date>, hours: number) {
+    return dateFnsSetHours(date, hours);
+  }
+
+  setMinutes(date: DateArg<Date>, minutes: number) {
+    return dateFnsSetMinutes(date, minutes);
+  }
+
+  addWeeks(date: DateArg<Date>, amount: number) {
+    return dateFnsAddWeeks(date, amount);
+  }
+
+  subWeeks(date: DateArg<Date>, amount: number) {
+    return dateFnsSubWeeks(date, amount);
   }
 }
