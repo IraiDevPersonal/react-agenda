@@ -5,8 +5,6 @@ import { memo, useMemo } from "react";
 import { DateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
 
-import { useAgendaViewStore } from "../../agenda/store/agenda-view-store";
-
 const dh = new DateHelper();
 
 type DayHeaderProps = {
