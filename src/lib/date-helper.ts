@@ -6,14 +6,17 @@ import type {
 } from "date-fns";
 
 import {
-  eachDayOfInterval as dateEachDayOfInterval,
-  endOfMonth as dateEndOfMonth,
-  endOfWeek as dateEndOfWeek,
-  format as dateFormat,
-  isSameMonth as dateIsSameMonth,
-  isToday as dateIsToday,
-  startOfMonth as dateStartOfMonth,
-  startOfWeek as dateStartOfWeek,
+  addMonths as dateFnsAddMonths,
+  eachDayOfInterval as dateFnsEachDayOfInterval,
+  endOfMonth as dateFnsEndOfMonth,
+  endOfWeek as dateFnsEndOfWeek,
+  format as dateFnsFormat,
+  isEqual as dateFnsIsEqual,
+  isSameMonth as dateFnsIsSameMonth,
+  isToday as dateFnsIsToday,
+  startOfMonth as dateFnsStartOfMonth,
+  startOfWeek as dateFnsStartOfWeek,
+  subMonths as dateFnsSubMonths,
 } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -37,35 +40,56 @@ const CHILEAN_HOLIDAYS_2025 = [
 
 export class DateHelper {
   format(date: DateArg<Date> & {}, formatStr: string, options?: FormatOptions) {
-    return dateFormat(date, formatStr, { ...options, locale: es });
+    return dateFnsFormat(date, formatStr, { ...options, locale: es });
   }
 
   eachDayOfInterval(interval: Interval) {
-    return dateEachDayOfInterval(interval);
+    return dateFnsEachDayOfInterval(interval);
   }
 
   endOfMonth(date: DateArg<Date>) {
-    return dateEndOfMonth(date);
+    return dateFnsEndOfMonth(date);
   }
 
   endOfWeek(date: DateArg<Date>, options?: { weekStartsOn?: Day }) {
-    return dateEndOfWeek(date, options);
+    return dateFnsEndOfWeek(date, options);
   }
 
   isSameMonth(dateLeft: DateArg<Date>, dateRight: DateArg<Date>) {
-    return dateIsSameMonth(dateLeft, dateRight);
+    return dateFnsIsSameMonth(dateLeft, dateRight);
   }
 
   isToday(date: DateArg<Date>) {
-    return dateIsToday(date);
+    return dateFnsIsToday(date);
   }
 
   startOfMonth(date: DateArg<Date>) {
-    return dateStartOfMonth(date);
+    return dateFnsStartOfMonth(date);
   }
 
   startOfWeek(date: DateArg<Date>, options?: { weekStartsOn?: Day }) {
-    return dateStartOfWeek(date, options);
+    return dateFnsStartOfWeek(date, options);
+  }
+
+  addMonths(date: DateArg<Date>, amount: number) {
+    return dateFnsAddMonths(date, amount);
+  }
+
+  subMonths(date: DateArg<Date>, amount: number) {
+    return dateFnsSubMonths(date, amount);
+  }
+
+  isEqual(a: DateArg<Date>, b: DateArg<Date>, includeTime: boolean = false) {
+    if (includeTime) {
+      return dateFnsIsEqual(a, b);
+    }
+
+    const dateA = new Date(a);
+    const dateB = new Date(b);
+
+    return dateA.getFullYear() === dateB.getFullYear()
+      && dateA.getMonth() === dateB.getMonth()
+      && dateA.getDate() === dateB.getDate();
   }
 
   isHoliday(date: Date) {

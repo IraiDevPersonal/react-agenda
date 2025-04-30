@@ -25,7 +25,7 @@ const CalendarHeader = memo(() => {
   return (
     <>
       {DAY_OF_WEEK.map(day => (
-        <div key={day.name} className="p-2 lg:p-4 text-center font-bold border-b">
+        <div key={day.name} className="p-2 text-center font-bold border-b">
           <span className="hidden lg:inline">{day.name}</span>
           <span className="inline lg:hidden">{day.shortName}</span>
         </div>
@@ -44,7 +44,7 @@ type CalendarDayProps = {
 const CalendarDay = memo(({ day, monthStart, onDayClick, renderSlot }: CalendarDayProps) => {
   const dayStatus = useMemo(() => {
     const isDayInCurrentMonth = dh.isSameMonth(day, monthStart);
-    const isSunday = dh.format(day, "E") === "Sun";
+    const isSunday = dh.format(day, "e") === "7";
     const isDayHoliday = dh.isHoliday(day);
     const isDisabled = !isDayInCurrentMonth || isSunday || isDayHoliday;
     const isCurrentDay = dh.isToday(day);
@@ -154,48 +154,3 @@ export const EventCalendar = memo(({ date, ...props }: EventCalendarProps) => {
     </>
   );
 });
-
-// const [view, setView] = useState<"day" | "week" | "month" | "agenda">("month");
-// const monthEnd = dh.endOfMonth(date);
-// Modificar la generación de días para que la semana comience el lunes
-
-// const nextMonth = () => setCurrentDate(addMonths(date, 1));
-// const prevMonth = () => setCurrentDate(subMonths(date, 1));
-// const goToToday = () => setCurrentDate(new Date());
-
-// Manejar cambio de vista
-// const handleViewChange = (newView: string) => {
-//   if (newView === "day" || newView === "week" || newView === "month" || newView === "agenda") {
-//     setView(newView);
-//     onViewChange(newView);
-//   }
-// };
-
-// {/* <div className="flex items-center justify-between">
-//         <div className="flex items-center space-x-2">
-//           <Button variant="outline" onClick={goToToday}>
-//             Hoy
-//           </Button>
-//           <Button variant="outline" size="icon" onClick={prevMonth}>
-//             <ChevronLeft className="h-4 w-4" />
-//           </Button>
-//           <Button variant="outline" size="icon" onClick={nextMonth}>
-//             <ChevronRight className="h-4 w-4" />
-//           </Button>
-//           <h2 className="text-xl font-bold">{dh.format(date, "MMMM yyyy", { locale: es })}</h2>
-//         </div>
-//         <div className="flex items-center space-x-2">
-//           <Select value={view} onValueChange={handleViewChange}>
-//             <SelectTrigger className="w-[100px]">
-//               <SelectValue placeholder="Vista" />
-//             </SelectTrigger>
-//             <SelectContent>
-//               <SelectItem value="day">Día</SelectItem>
-//               <SelectItem value="week">Semana</SelectItem>
-//               <SelectItem value="month">Mes</SelectItem>
-//               <SelectItem value="agenda">Agenda</SelectItem>
-//             </SelectContent>
-//           </Select>
-//           <Button onClick={() => openNewAppointment(new Date())}>Nueva cita</Button>
-//         </div>
-//       </div> */}

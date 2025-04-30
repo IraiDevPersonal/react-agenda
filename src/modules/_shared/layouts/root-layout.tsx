@@ -1,16 +1,19 @@
-import React from "react";
+import type { ReactNode } from "react";
+
+import { useLayoutEffect } from "react";
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 function RootLayout({ children }: Props) {
-  React.useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.getElementById("root");
     if (root) {
       root.classList.add("dark", "min-h-svh", "w-full", "bg-background", "text-foreground", "flex");
     }
   }, []);
+
   return children;
 }
 
