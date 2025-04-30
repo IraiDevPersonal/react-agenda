@@ -8,6 +8,13 @@ import type { ViewTypes } from "../types/view.type";
 
 import { useAgendaViewStore } from "../store/agenda-view-store";
 
+const OPTIONS: { value: ViewTypes; label: string }[] = [
+  { value: "month", label: "Mes" },
+  { value: "week", label: "Semana" },
+  { value: "day", label: "Día" },
+  { value: "agenda", label: "Agenda" },
+] as const;
+
 const dh = new DateHelper();
 
 export function AgendaHeader() {
@@ -67,10 +74,11 @@ export function AgendaHeader() {
             <SelectValue placeholder="Vista" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="month">Mes</SelectItem>
-            <SelectItem value="week">Semana</SelectItem>
-            <SelectItem value="day">Día</SelectItem>
-            <SelectItem value="agenda">Agenda</SelectItem>
+            {
+              OPTIONS.map(({ value, label }) => (
+                <SelectItem key={value} value={value}>{label}</SelectItem>
+              ))
+            }
           </SelectContent>
         </Select>
         <Button>
