@@ -2,18 +2,16 @@ import type { ReactNode } from "react";
 
 import { memo, useMemo } from "react";
 
-import { DateHelper } from "@/lib/date-helper";
+import { dateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
-
-const dh = new DateHelper();
 
 type DayHeaderProps = {
   day: Date;
 };
 
 const DayHeader = memo(({ day }: DayHeaderProps) => {
-  const isSunday = dh.isSunday(day);
-  const isDayHoliday = dh.isHoliday(day);
+  const isSunday = dateHelper.isSunday(day);
+  const isDayHoliday = dateHelper.isHoliday(day);
   const isDisabled = isSunday || isDayHoliday;
 
   return (
@@ -24,7 +22,7 @@ const DayHeader = memo(({ day }: DayHeaderProps) => {
       )}
     >
       <div className={cn(isSunday && "text-muted-foreground", isDayHoliday && "text-destructive/60")}>
-        {dh.format(day, "EEE dd")}
+        {dateHelper.format(day, "EEE dd")}
       </div>
     </div>
   );
@@ -39,8 +37,8 @@ type TimeSlotProps = {
 };
 
 const TimeSlot = memo(({ day, hour: _hour, renderSlot }: TimeSlotProps) => {
-  const isSunday = dh.isSunday(day);
-  const isDayHoliday = dh.isHoliday(day);
+  const isSunday = dateHelper.isSunday(day);
+  const isDayHoliday = dateHelper.isHoliday(day);
   const isDisabled = isSunday || isDayHoliday;
 
   return (
@@ -73,7 +71,7 @@ const TimeRow = memo(({ hour, daysInWeek, ...props }: TimeRowProps) => (
     </div>
     {daysInWeek.map(day => (
       <TimeSlot
-        key={`${dh.format(day, "yyyy-MM-dd")}-${hour}`}
+        key={`${dateHelper.format(day, "yyyy-MM-dd")}-${hour}`}
         day={day}
         hour={hour}
         {...props}
@@ -90,9 +88,9 @@ type WeekCalendarProps = {
 
 export function WeekCalendar({ date, ...props }: WeekCalendarProps) {
   const { daysInWeek, hours } = useMemo(() => {
-    const weekStart = dh.startOfWeek(date, { weekStartsOn: 1 });
-    const weekEnd = dh.endOfWeek(date, { weekStartsOn: 1 });
-    const daysInWeek = dh.eachDayOfInterval({ start: weekStart, end: weekEnd });
+    const weekStart = dateHelper.startOfWeek(date, { weekStartsOn: 1 });
+    const weekEnd = dateHelper.endOfWeek(date, { weekStartsOn: 1 });
+    const daysInWeek = dateHelper.eachDayOfInterval({ start: weekStart, end: weekEnd });
     const hours = Array.from({ length: 13 }, (_, i) => i + 8);
 
     return { daysInWeek, hours };
@@ -106,7 +104,7 @@ export function WeekCalendar({ date, ...props }: WeekCalendarProps) {
         </div>
         {daysInWeek.map(day => (
           <DayHeader
-            key={dh.format(day, "yyyy-MM-dd")}
+            key={dateHelper.format(day, "yyyy-MM-dd")}
             day={day}
           />
         ))}

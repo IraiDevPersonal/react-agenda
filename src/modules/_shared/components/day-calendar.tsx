@@ -1,6 +1,4 @@
-import { DateHelper } from "@/lib/date-helper";
-
-const dh = new DateHelper();
+import { dateHelper } from "@/lib/date-helper";
 
 type DayCalendarProps = {
   date: Date;
@@ -19,8 +17,8 @@ export function DayCalendar({ date }: DayCalendarProps) {
   const hours = Array.from({ length: 13 }, (_, i) => i + 8);
 
   // Verificar si el día seleccionado es domingo o feriado
-  const isSunday = dh.isSunday(date);
-  const isDayHoliday = dh.isHoliday(date);
+  const isSunday = dateHelper.isSunday(date);
+  const isDayHoliday = dateHelper.isHoliday(date);
   const isDisabled = isSunday || isDayHoliday;
 
   return (

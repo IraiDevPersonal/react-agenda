@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { useCallback } from "react";
 
-import { DateHelper } from "@/lib/date-helper";
+import { dateHelper } from "@/lib/date-helper";
 import { Button } from "@/modules/_shared/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/modules/_shared/components/ui/select";
 
@@ -16,14 +16,12 @@ const OPTIONS: { value: ViewTypes; label: string }[] = [
   { value: "agenda", label: "Agenda" },
 ] as const;
 
-const dh = new DateHelper();
-
 function generateTitle(date: Date, view: ViewTypes) {
   const hash: Record<ViewTypes, string> = {
-    agenda: dh.format(date, "MMMM yyyy"),
-    day: dh.format(date, "EEEE d 'de' MMMM, yyyy"),
-    month: dh.format(date, "MMMM yyyy"),
-    week: dh.format(dh.endOfWeek(date, { weekStartsOn: 1 }), "MMM yyyy"),
+    agenda: dateHelper.format(date, "MMMM yyyy"),
+    day: dateHelper.format(date, "EEEE d 'de' MMMM, yyyy"),
+    month: dateHelper.format(date, "MMMM yyyy"),
+    week: dateHelper.format(dateHelper.endOfWeek(date, { weekStartsOn: 1 }), "MMM yyyy"),
   };
   return hash[view];
 }
@@ -40,18 +38,18 @@ export function AgendaHeader() {
       },
       day: {
         "to-day": setDate(new Date()),
-        "next": setDate(dh.addDays(date, 1)),
-        "prev": setDate(dh.subDays(date, 1)),
+        "next": setDate(dateHelper.addDays(date, 1)),
+        "prev": setDate(dateHelper.subDays(date, 1)),
       },
       month: {
         "to-day": () => setDate(new Date()),
-        "next": () => setDate(dh.addMonths(date, 1)),
-        "prev": () => setDate(dh.subMonths(date, 1)),
+        "next": () => setDate(dateHelper.addMonths(date, 1)),
+        "prev": () => setDate(dateHelper.subMonths(date, 1)),
       },
       week: {
         "to-day": () => setDate(new Date()),
-        "next": () => setDate(dh.addWeeks(date, 1)),
-        "prev": () => setDate(dh.subWeeks(date, 1)),
+        "next": () => setDate(dateHelper.addWeeks(date, 1)),
+        "prev": () => setDate(dateHelper.subWeeks(date, 1)),
       },
     };
 
@@ -67,7 +65,7 @@ export function AgendaHeader() {
   return (
     <header className="flex items-center justify-between">
       <div className="flex items-center space-x-2">
-        <Button variant="outline" onClick={handleDateChange("to-day")} disabled={dh.isToday(date)}>
+        <Button variant="outline" onClick={handleDateChange("to-day")} disabled={dateHelper.isToday(date)}>
           Hoy
         </Button>
         <Button variant="outline" size="icon" onClick={handleDateChange("prev")}>

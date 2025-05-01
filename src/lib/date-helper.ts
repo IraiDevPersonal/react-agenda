@@ -9,10 +9,14 @@ import {
   addDays as dateFnsAddDays,
   addMonths as dateFnsAddMonths,
   addWeeks as dateFnsAddWeeks,
+  differenceInDays as dateFnsDifferenceInDays,
   eachDayOfInterval as dateFnsEachDayOfInterval,
   endOfMonth as dateFnsEndOfMonth,
   endOfWeek as dateFnsEndOfWeek,
   format as dateFnsFormat,
+  getYear as dateFnsGetYear,
+  isAfter as dateFnsIsAfter,
+  isBefore as dateFnsIsBefore,
   isEqual as dateFnsIsEqual,
   isSameDay as dateFnsIsSameDay,
   isSameMonth as dateFnsIsSameMonth,
@@ -28,27 +32,77 @@ import {
 } from "date-fns";
 import { es } from "date-fns/locale";
 
-const CHILEAN_HOLIDAYS_2025 = [
-  new Date(2025, 0, 1), // Año Nuevo
-  new Date(2025, 3, 18), // Viernes Santo
-  new Date(2025, 3, 19), // Sábado Santo
-  new Date(2025, 4, 1), // Día del Trabajo
-  new Date(2025, 4, 21), // Día de las Glorias Navales
-  new Date(2025, 5, 29), // San Pedro y San Pablo
-  new Date(2025, 6, 16), // Día de la Virgen del Carmen
-  new Date(2025, 7, 15), // Asunción de la Virgen
-  new Date(2025, 8, 18), // Fiestas Patrias
-  new Date(2025, 8, 19), // Día de las Glorias del Ejército
-  new Date(2025, 9, 12), // Día del Encuentro de Dos Mundos
-  new Date(2025, 9, 31), // Día de las Iglesias Evangélicas
-  new Date(2025, 10, 1), // Día de Todos los Santos
-  new Date(2025, 11, 8), // Inmaculada Concepción
-  new Date(2025, 11, 25), // Navidad
-] as const;
+const DEFAULT_FORMAT_OPTIONS: FormatOptions = {
+  locale: es,
+};
+
+type FixedHoliday = {
+  name: string;
+  month: number; // 0-11
+  day: number; // 1-31
+};
+
+type MovableHoliday = {
+  name: string;
+  calculateDate: (year: number) => Date;
+};
+
+const FIXED_HOLIDAYS: FixedHoliday[] = [
+  { name: "Año Nuevo", month: 0, day: 1 },
+  { name: "Día del Trabajo", month: 4, day: 1 },
+  { name: "Día de las Glorias Navales", month: 4, day: 21 },
+  { name: "San Pedro y San Pablo", month: 5, day: 29 },
+  { name: "Día de la Virgen del Carmen", month: 6, day: 16 },
+  { name: "Asunción de la Virgen", month: 7, day: 15 },
+  { name: "Fiestas Patrias", month: 8, day: 18 },
+  { name: "Día de las Glorias del Ejército", month: 8, day: 19 },
+  { name: "Día del Encuentro de Dos Mundos", month: 9, day: 12 },
+  { name: "Día de las Iglesias Evangélicas", month: 9, day: 31 },
+  { name: "Día de Todos los Santos", month: 10, day: 1 },
+  { name: "Inmaculada Concepción", month: 11, day: 8 },
+  { name: "Navidad", month: 11, day: 25 },
+];
+
+// Función para calcular la fecha de Pascua (algoritmo de Meeus/Jones/Butcher)
+function calculateEasterDate(year: number): Date {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+
+  return new Date(year, month - 1, day);
+}
+
+const MOVABLE_HOLIDAYS: MovableHoliday[] = [
+  {
+    name: "Viernes Santo",
+    calculateDate: (year: number) => {
+      const easter = calculateEasterDate(year);
+      return dateFnsSubDays(easter, 2);
+    },
+  },
+  {
+    name: "Sábado Santo",
+    calculateDate: (year: number) => {
+      const easter = calculateEasterDate(year);
+      return dateFnsSubDays(easter, 1);
+    },
+  },
+];
 
 export class DateHelper {
   format(date: DateArg<Date> & {}, formatStr: string, options?: FormatOptions) {
-    return dateFnsFormat(date, formatStr, { ...options, locale: es });
+    return dateFnsFormat(date, formatStr, { ...DEFAULT_FORMAT_OPTIONS, ...options });
   }
 
   eachDayOfInterval(interval: Interval) {
@@ -100,13 +154,46 @@ export class DateHelper {
       && dateA.getDate() === dateB.getDate();
   }
 
-  isHoliday(date: Date) {
-    return CHILEAN_HOLIDAYS_2025.some(
-      holiday =>
-        holiday.getDate() === date.getDate()
-        && holiday.getMonth() === date.getMonth()
-        && holiday.getFullYear() === date.getFullYear(),
+  private calculateHolidaysForYear(year: number): { name: string; date: Date }[] {
+    const fixedHolidays = FIXED_HOLIDAYS.map(holiday => ({
+      name: holiday.name,
+      date: new Date(year, holiday.month, holiday.day),
+    }));
+
+    const movableHolidays = MOVABLE_HOLIDAYS.map(holiday => ({
+      name: holiday.name,
+      date: holiday.calculateDate(year),
+    }));
+
+    return [...fixedHolidays, ...movableHolidays];
+  }
+
+  isHoliday(date: Date): boolean {
+    const year = dateFnsGetYear(date);
+    const holidays = this.calculateHolidaysForYear(year);
+
+    return holidays.some(holiday =>
+      holiday.date.getDate() === date.getDate()
+      && holiday.date.getMonth() === date.getMonth()
+      && holiday.date.getFullYear() === date.getFullYear(),
     );
+  }
+
+  getHolidayName(date: Date): string | null {
+    const year = dateFnsGetYear(date);
+    const holidays = this.calculateHolidaysForYear(year);
+
+    const holiday = holidays.find(holiday =>
+      holiday.date.getDate() === date.getDate()
+      && holiday.date.getMonth() === date.getMonth()
+      && holiday.date.getFullYear() === date.getFullYear(),
+    );
+
+    return holiday?.name ?? null;
+  }
+
+  getHolidaysForYear(year: number): { name: string; date: Date }[] {
+    return this.calculateHolidaysForYear(year);
   }
 
   isSunday(date: Date) {
@@ -144,4 +231,18 @@ export class DateHelper {
   subDays(date: DateArg<Date>, amount: number) {
     return dateFnsSubDays(date, amount);
   }
+
+  isBefore(date: DateArg<Date>, dateToCompare: DateArg<Date>) {
+    return dateFnsIsBefore(date, dateToCompare);
+  }
+
+  isAfter(date: DateArg<Date>, dateToCompare: DateArg<Date>) {
+    return dateFnsIsAfter(date, dateToCompare);
+  }
+
+  differenceInDays(dateLeft: DateArg<Date>, dateRight: DateArg<Date>) {
+    return dateFnsDifferenceInDays(dateLeft, dateRight);
+  }
 }
+
+export const dateHelper = new DateHelper();
