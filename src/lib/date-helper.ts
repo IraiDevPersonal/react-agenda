@@ -6,6 +6,7 @@ import type {
 } from "date-fns";
 
 import {
+  addDays as dateFnsAddDays,
   addMonths as dateFnsAddMonths,
   addWeeks as dateFnsAddWeeks,
   eachDayOfInterval as dateFnsEachDayOfInterval,
@@ -21,6 +22,7 @@ import {
   setMinutes as dateFnsSetMinutes,
   startOfMonth as dateFnsStartOfMonth,
   startOfWeek as dateFnsStartOfWeek,
+  subDays as dateFnsSubDays,
   subMonths as dateFnsSubMonths,
   subWeeks as dateFnsSubWeeks,
 } from "date-fns";
@@ -133,5 +135,13 @@ export class DateHelper {
 
   subWeeks(date: DateArg<Date>, amount: number) {
     return dateFnsSubWeeks(date, amount);
+  }
+
+  addDays(date: DateArg<Date>, amount: number) {
+    return dateFnsAddDays(date, amount);
+  }
+
+  subDays(date: DateArg<Date>, amount: number) {
+    return dateFnsSubDays(date, amount);
   }
 }
