@@ -1,13 +1,16 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
+import AgendaLayout from "./modules/agenda/agenda-layout";
+import AgendaPage from "./modules/agenda/agenda-page";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    // element: <AuthLayout />,
+    element: <AgendaLayout />,
     children: [
       {
         index: true,
-        element: "Page",
+        element: <AgendaPage />,
       },
     ],
   },
