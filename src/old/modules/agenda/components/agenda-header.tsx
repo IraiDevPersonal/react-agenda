@@ -2,8 +2,8 @@ import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { useCallback } from "react";
 
 import { dateHelper } from "@/lib/date-helper";
-import { Button } from "@/modules/_shared/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/modules/_shared/components/ui/select";
+import { Button } from "@/old/modules/_shared/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/old/modules/_shared/components/ui/select";
 
 import type { ViewTypes } from "../types/view.type";
 

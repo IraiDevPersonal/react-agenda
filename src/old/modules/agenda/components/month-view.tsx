@@ -1,14 +1,14 @@
 import { dateHelper } from "@/lib/date-helper";
-import { Badge } from "@/modules/_shared/components/ui/badge";
-import { WeekCalendar } from "@/modules/_shared/components/week-calendar";
+import { EventCalendar } from "@/old/modules/_shared/components/event-calendar";
+import { Badge } from "@/old/modules/_shared/components/ui/badge";
 
 import { useAgendaViewStore } from "../store/agenda-view-store";
 
-export function WeekView() {
+export function MonthView() {
   const date = useAgendaViewStore(s => s.date);
   return (
     <>
-      <WeekCalendar
+      <EventCalendar
         date={date}
         renderSlot={({ day }) => {
           return (

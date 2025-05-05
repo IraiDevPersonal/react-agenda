@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode;
 };
 
-function RootLayout({ children }: Props) {
+function Layout({ children }: Props) {
   useLayoutEffect(() => {
     const root = document.getElementById("root");
     if (root) {
@@ -17,4 +17,4 @@ function RootLayout({ children }: Props) {
   return children;
 }
 
-export default RootLayout;
+export default Layout;

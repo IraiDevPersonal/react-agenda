@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarProvider } from "@/modules/_shared/components/ui/sidebar";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarProvider } from "@/old/modules/_shared/components/ui/sidebar";
 
 function AuthLayout() {
   return (

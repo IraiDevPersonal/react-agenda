@@ -1,16 +1,16 @@
 import { Toaster } from "sonner";
 
-import RootLayout from "@/modules/_shared/layouts/root-layout";
+import Layout from "@/layout";
 
 import Router from "./router";
 import "./config/styles/global.css";
 
 function App() {
   return (
-    <RootLayout>
+    <Layout>
       <Router />
       <Toaster />
-    </RootLayout>
+    </Layout>
   );
 }
 

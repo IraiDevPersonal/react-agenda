@@ -1,4 +1,4 @@
-import { DayCalendar } from "@/modules/_shared/components/day-calendar";
+import { DayCalendar } from "@/old/modules/_shared/components/day-calendar";
 
 import { useAgendaViewStore } from "../store/agenda-view-store";
 

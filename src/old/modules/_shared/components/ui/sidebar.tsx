@@ -6,24 +6,24 @@ import { PanelLeftIcon } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/modules/_shared/components/ui/button";
-import { Input } from "@/modules/_shared/components/ui/input";
-import { Separator } from "@/modules/_shared/components/ui/separator";
+import { Button } from "@/old/modules/_shared/components/ui/button";
+import { Input } from "@/old/modules/_shared/components/ui/input";
+import { Separator } from "@/old/modules/_shared/components/ui/separator";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@/modules/_shared/components/ui/sheet";
-import { Skeleton } from "@/modules/_shared/components/ui/skeleton";
+} from "@/old/modules/_shared/components/ui/sheet";
+import { Skeleton } from "@/old/modules/_shared/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/modules/_shared/components/ui/tooltip";
-import { useIsMobile } from "@/modules/_shared/hooks/use-mobile";
+} from "@/old/modules/_shared/components/ui/tooltip";
+import { useIsMobile } from "@/old/modules/_shared/hooks/use-mobile";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
