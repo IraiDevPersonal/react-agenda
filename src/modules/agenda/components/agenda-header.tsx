@@ -21,7 +21,7 @@ function generateTitle(date: Date, view: ViewTypes) {
     agenda: dateHelper.format(date, "MMMM yyyy"),
     day: dateHelper.format(date, "EEEE d 'de' MMMM, yyyy"),
     month: dateHelper.format(date, "MMMM yyyy"),
-    week: dateHelper.format(dateHelper.endOfWeek(date, { weekStartsOn: 1 }), "MMM yyyy"),
+    week: dateHelper.format(dateHelper.endOfWeek(date, { weekStartsOn: 1 }), "MMMM yyyy"),
   };
   return hash[view];
 }
@@ -29,27 +29,27 @@ function generateTitle(date: Date, view: ViewTypes) {
 export function AgendaHeader() {
   const { view, date, setView, setDate } = useAgendaViewStore();
 
-  const handleDateChange = (value: "next" | "prev" | "to-day") => () => {
+  const handleDateChange = (value: "next" | "prev" | "today") => () => {
     const hash: Record<ViewTypes, Record<typeof value, any>> = {
       agenda: {
-        "to-day": null,
-        "next": null,
-        "prev": null,
+        today: null,
+        next: null,
+        prev: null,
       },
       day: {
-        "to-day": setDate(new Date()),
-        "next": setDate(dateHelper.addDays(date, 1)),
-        "prev": setDate(dateHelper.subDays(date, 1)),
+        today: setDate(new Date()),
+        next: setDate(dateHelper.addDays(date, 1)),
+        prev: setDate(dateHelper.subDays(date, 1)),
       },
       month: {
-        "to-day": () => setDate(new Date()),
-        "next": () => setDate(dateHelper.addMonths(date, 1)),
-        "prev": () => setDate(dateHelper.subMonths(date, 1)),
+        today: () => setDate(new Date()),
+        next: () => setDate(dateHelper.addMonths(date, 1)),
+        prev: () => setDate(dateHelper.subMonths(date, 1)),
       },
       week: {
-        "to-day": () => setDate(new Date()),
-        "next": () => setDate(dateHelper.addWeeks(date, 1)),
-        "prev": () => setDate(dateHelper.subWeeks(date, 1)),
+        today: () => setDate(new Date()),
+        next: () => setDate(dateHelper.addWeeks(date, 1)),
+        prev: () => setDate(dateHelper.subWeeks(date, 1)),
       },
     };
 
@@ -65,7 +65,7 @@ export function AgendaHeader() {
   return (
     <header className="flex items-center justify-between">
       <div className="flex items-center space-x-2">
-        <Button variant="outline" onClick={handleDateChange("to-day")} disabled={dateHelper.isToday(date)}>
+        <Button variant="outline" onClick={handleDateChange("today")} disabled={dateHelper.isToday(date)}>
           Hoy
         </Button>
         <Button variant="outline" size="icon" onClick={handleDateChange("prev")}>
