@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
-import AgendaLayout from "./modules/agenda/agenda-layout";
-import AgendaPage from "./modules/agenda/agenda-page";
+import AgendaLayout from "@/modules/agenda/agenda-layout";
+import AgendaPage from "@/modules/agenda/agenda-page";
 
 const router = createBrowserRouter([
   {

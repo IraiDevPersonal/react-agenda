@@ -36,7 +36,6 @@ import {
   WeekCellsHeight,
   WeekView,
 } from "@/shared/components/event-calendar";
-import Participants from "@/shared/components/participants";
 import ThemeToggle from "@/shared/components/theme-toggle";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -309,7 +308,6 @@ export function EventCalendar({
                 {viewTitle}
               </h2>
             </div>
-            <Participants />
           </div>
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center justify-between gap-2">

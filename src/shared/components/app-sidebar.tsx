@@ -1,37 +1,45 @@
-import { RiCheckLine } from "@remixicon/react";
+import { Calendar, Users } from "lucide-react";
 import * as React from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 
-import { etiquettes } from "@/shared/components/big-calendar";
-import { useCalendarContext } from "@/shared/components/event-calendar/calendar-context";
-import { NavUser } from "@/shared/components/nav-user";
-import SidebarCalendar from "@/shared/components/sidebar-calendar";
-import { Checkbox } from "@/shared/components/ui/checkbox";
+import { cn } from "@/lib/utils";
+import { NavUser } from "@/modules/user/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
   SidebarTrigger,
 } from "@/shared/components/ui/sidebar";
 
-const data = {
+const userData = {
   user: {
-    name: "Sofia Safier",
-    email: "sofia@safier.com",
+    name: "User",
+    email: "user@gmail.com",
     avatar:
       "https://res.cloudinary.com/dlzlfasou/image/upload/v1743935337/user-01_l4if9t.png",
   },
 };
 
+const paths: Array<{ path: string; icon: React.ReactNode; label: string }> = [
+  {
+    icon: <Calendar size={20} />,
+    label: "Agenda",
+    path: "/",
+  },
+  {
+    icon: <Users size={20} />,
+    label: "Pacientes",
+    path: "/pacientes",
+  },
+] as const;
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { isColorVisible, toggleColorVisibility } = useCalendarContext();
+  // const { isColorVisible, toggleColorVisibility } = useCalendarContext();
   return (
     <Sidebar
       variant="inset"
@@ -40,7 +48,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     >
       <SidebarHeader>
         <div className="flex justify-between items-center gap-2">
-          <Link className="inline-flex" to="/">
+          <Link className="inline-flex gap-x-2" to="/">
             <span className="sr-only">Logo</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,67 +65,86 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 d="M17.28 0h-2.56v12.91L5.591 3.78l-1.81 1.81 9.129 9.129H0v2.56h12.91L3.78 26.409l1.81 1.81 9.129-9.129V32h2.56V19.09l9.128 9.129 1.81-1.81-9.128-9.129H32v-2.56H19.09l9.129-9.129-1.81-1.81-9.129 9.129V0Z"
               />
             </svg>
+            <span className="text-xl font-bold">Agenda</span>
           </Link>
           <SidebarTrigger className="text-muted-foreground/80 hover:text-foreground/80 hover:bg-transparent!" />
         </div>
       </SidebarHeader>
+
       <SidebarContent className="gap-0 mt-3 pt-3 border-t">
-        <SidebarGroup className="px-1">
-          <SidebarCalendar />
-        </SidebarGroup>
-        <SidebarGroup className="px-1 mt-3 pt-4 border-t">
-          <SidebarGroupLabel className="uppercase text-muted-foreground/65">
+        <SidebarGroup className="px-1 mt-3 pt-4">
+          {/* <SidebarGroupLabel className="uppercase text-muted-foreground/65">
             Calendars
-          </SidebarGroupLabel>
+          </SidebarGroupLabel> */}
           <SidebarGroupContent>
             <SidebarMenu>
-              {etiquettes.map(item => (
-                <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton
-                    asChild
-                    className="relative rounded-md [&>svg]:size-auto justify-between has-focus-visible:border-ring has-focus-visible:ring-ring/50 has-focus-visible:ring-[3px]"
-                  >
-                    <span>
-                      <span className="font-medium flex items-center justify-between gap-3">
-                        <Checkbox
-                          id={item.id}
-                          className="sr-only peer"
-                          checked={isColorVisible(item.color)}
-                          onCheckedChange={() =>
-                            toggleColorVisibility(item.color)}
-                        />
-                        <RiCheckLine
-                          className="peer-not-data-[state=checked]:invisible"
-                          size={16}
-                          aria-hidden="true"
-                        />
-                        <label
-                          htmlFor={item.id}
-                          className="peer-not-data-[state=checked]:line-through peer-not-data-[state=checked]:text-muted-foreground/65 after:absolute after:inset-0"
-                        >
-                          {item.name}
-                        </label>
-                      </span>
-                      <span
-                        className="size-1.5 rounded-full bg-(--event-color)"
-                        style={
-                          {
-                            "--event-color": `var(--color-${item.color}-400)`,
-                          } as React.CSSProperties
-                        }
-                      >
-                      </span>
-                    </span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {
+                paths.map(item => (
+                  <SidebarMenuItem key={item.path}>
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) => cn(
+                        "inline-flex gap-2 items-center w-full h-10 px-2 rounded-md font-semibold hover:[&_svg]:scale-110 transition-color [&_svg]:transition-transform",
+                        isActive ? "bg-primary text-primary-foreground" : "hover:bg-muted",
+                      )}
+                    >
+                      {item.icon}
+                      {item.label}
+                    </NavLink>
+                  </SidebarMenuItem>
+                ))
+              }
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userData.user} />
       </SidebarFooter>
     </Sidebar>
   );
 }
+
+{ /* <SidebarMenu>
+  {etiquettes.map(item => (
+    <SidebarMenuItem key={item.id}>
+      <SidebarMenuButton
+        asChild
+        className="relative rounded-md [&>svg]:size-auto justify-between has-focus-visible:border-ring has-focus-visible:ring-ring/50 has-focus-visible:ring-[3px]"
+      >
+        <span>
+          <span className="font-medium flex items-center justify-between gap-3">
+            <Checkbox
+              id={item.id}
+              className="sr-only peer"
+              checked={isColorVisible(item.color)}
+              onCheckedChange={() =>
+                toggleColorVisibility(item.color)}
+            />
+            <RiCheckLine
+              className="peer-not-data-[state=checked]:invisible"
+              size={16}
+              aria-hidden="true"
+            />
+            <label
+              htmlFor={item.id}
+              className="peer-not-data-[state=checked]:line-through peer-not-data-[state=checked]:text-muted-foreground/65 after:absolute after:inset-0"
+            >
+              {item.name}
+            </label>
+          </span>
+          <span
+            className="size-1.5 rounded-full bg-(--event-color)"
+            style={
+              {
+                "--event-color": `var(--color-${item.color}-400)`,
+              } as React.CSSProperties
+            }
+          >
+          </span>
+        </span>
+      </SidebarMenuButton>
+    </SidebarMenuItem>
+  ))}
+</SidebarMenu> */ }
