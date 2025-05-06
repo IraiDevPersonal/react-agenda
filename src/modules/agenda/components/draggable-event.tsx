@@ -5,12 +5,10 @@ import { useRef, useState } from "react";
 
 import type {
   CalendarEvent,
-} from "@/modules/agenda/components/agenda-calendar";
+} from "../types/index";
 
-import {
-  EventItem,
-  useCalendarDnd,
-} from "@/modules/agenda/components/agenda-calendar";
+import { useCalendarDnd } from "./calendar-dnd-context";
+import { EventItem } from "./event-item";
 
 type DraggableEventProps = {
   "event": CalendarEvent;

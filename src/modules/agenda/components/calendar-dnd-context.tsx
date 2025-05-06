@@ -23,9 +23,9 @@ import {
 
 } from "react";
 
-import type { CalendarEvent } from "@/modules/agenda/components/agenda-calendar";
+import type { CalendarEvent } from "../types/index";
 
-import { EventItem } from "@/modules/agenda/components/agenda-calendar";
+import { EventItem } from "./event-item";
 
 // Define the context type
 type CalendarDndContextType = {

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { createContext, use, useCallback, useMemo, useState } from "react";
 
-import { etiquettes } from "@/modules/agenda/components/big-agenda-calendar";
+import { etiquettes } from "../utils/etiquettes";
 
 type CalendarContextType = {
   // Date management

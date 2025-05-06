@@ -12,27 +12,20 @@ import {
 } from "date-fns";
 import React, { useEffect, useMemo, useState } from "react";
 
-import type { CalendarEvent } from "@/modules/agenda/components/agenda-calendar";
-
-import {
-
-  DraggableEvent,
-  DroppableCell,
-  EventGap,
-  EventHeight,
-  EventItem,
-  getAllEventsForDay,
-  getEventsForDay,
-  getSpanningEventsForDay,
-  sortEvents,
-  useEventVisibility,
-} from "@/modules/agenda/components/agenda-calendar";
-import { DefaultStartHour } from "@/modules/agenda/components/agenda-calendar/constants";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/shared/components/ui/popover";
+
+import type { CalendarEvent } from "../types/index";
+
+import { useEventVisibility } from "../hooks/use-event-visibility";
+import { DefaultStartHour, EventGap, EventHeight } from "../utils/constants";
+import { getAllEventsForDay, getEventsForDay, getSpanningEventsForDay, sortEvents } from "../utils/helpers";
+import { DraggableEvent } from "./draggable-event";
+import { DroppableCell } from "./droppable-cell";
+import { EventItem } from "./event-item";
 
 type MonthViewProps = {
   currentDate: Date;
@@ -220,6 +213,7 @@ export function MonthView({
                         <Popover modal>
                           <PopoverTrigger asChild>
                             <button
+                              type="button"
                               className="focus-visible:border-ring focus-visible:ring-ring/50 text-muted-foreground hover:text-foreground hover:bg-muted/50 mt-[var(--event-gap)] flex h-[var(--event-height)] w-full items-center overflow-hidden px-1 text-left text-[10px] backdrop-blur-md transition outline-none select-none focus-visible:ring-[3px] sm:px-2 sm:text-xs"
                               onClick={e => e.stopPropagation()}
                             >

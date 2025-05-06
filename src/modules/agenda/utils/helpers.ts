@@ -1,7 +1,6 @@
 import { isSameDay } from "date-fns";
 
-import type { CalendarEvent, EventColor } from "@/modules/agenda/components/agenda-calendar";
-
+import type { CalendarEvent, EventColor } from "../types";
 /**
  * Get CSS classes for event colors
  */

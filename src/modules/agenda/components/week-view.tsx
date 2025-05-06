@@ -16,19 +16,16 @@ import {
 } from "date-fns";
 import React, { useMemo } from "react";
 
-import type { CalendarEvent } from "@/modules/agenda/components/agenda-calendar";
-
 import { cn } from "@/lib/utils";
-import {
+import { EndHour, StartHour, WeekCellsHeight } from "@/modules/agenda/utils/constants";
 
-  DraggableEvent,
-  DroppableCell,
-  EventItem,
-  isMultiDayEvent,
-  useCurrentTimeIndicator,
-  WeekCellsHeight,
-} from "@/modules/agenda/components/agenda-calendar";
-import { EndHour, StartHour } from "@/modules/agenda/components/agenda-calendar/constants";
+import type { CalendarEvent } from "../types/index";
+
+import { useCurrentTimeIndicator } from "../hooks/use-current-time-indicator";
+import { isMultiDayEvent } from "../utils/helpers";
+import { DraggableEvent } from "./draggable-event";
+import { DroppableCell } from "./droppable-cell";
+import { EventItem } from "./event-item";
 
 type WeekViewProps = {
   currentDate: Date;

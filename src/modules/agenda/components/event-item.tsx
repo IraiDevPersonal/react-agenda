@@ -4,14 +4,11 @@ import type { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
 import { differenceInMinutes, format, getMinutes, isPast } from "date-fns";
 import { useMemo } from "react";
 
-import type { CalendarEvent } from "@/modules/agenda/components/agenda-calendar";
-
 import { cn } from "@/lib/utils";
-import {
 
-  getBorderRadiusClasses,
-  getEventColorClasses,
-} from "@/modules/agenda/components/agenda-calendar";
+import type { CalendarEvent } from "../types/index";
+
+import { getBorderRadiusClasses, getEventColorClasses } from "../utils/helpers";
 
 // Using date-fns format with custom formatting:
 // 'h' - hours (1-12)
@@ -231,6 +228,7 @@ export function EventItem({
   // Agenda view - kept separate since it's significantly different
   return (
     <button
+      type="button"
       className={cn(
         "focus-visible:border-ring focus-visible:ring-ring/50 flex w-full flex-col gap-1 rounded p-2 text-left transition outline-none focus-visible:ring-[3px] data-past-event:line-through data-past-event:opacity-90",
         getEventColorClasses(eventColor),

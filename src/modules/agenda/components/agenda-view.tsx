@@ -4,13 +4,11 @@ import { useMemo } from "react";
 
 import type {
   CalendarEvent,
-} from "@/modules/agenda/components/agenda-calendar";
+} from "../types/index";
 
-import {
-  AgendaDaysToShow,
-  EventItem,
-  getAgendaEventsForDay,
-} from "@/modules/agenda/components/agenda-calendar";
+import { AgendaDaysToShow } from "../utils/constants";
+import { getAgendaEventsForDay } from "../utils/helpers";
+import { EventItem } from "./event-item";
 
 type AgendaViewProps = {
   currentDate: Date;
@@ -25,14 +23,14 @@ export function AgendaView({
 }: AgendaViewProps) {
   // Show events for the next days based on constant
   const days = useMemo(() => {
-    console.log("Agenda view updating with date:", currentDate.toISOString());
+    // console.log("Agenda view updating with date:", currentDate.toISOString());
     return Array.from({ length: AgendaDaysToShow }, (_, i) =>
       addDays(new Date(currentDate), i));
   }, [currentDate]);
 
   const handleEventClick = (event: CalendarEvent, e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log("Agenda view event clicked:", event);
+    // console.log("Agenda view event clicked:", event);
     onEventSelect(event);
   };
 

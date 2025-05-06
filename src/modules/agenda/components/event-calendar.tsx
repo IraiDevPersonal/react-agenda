@@ -17,25 +17,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
-import type {
-  CalendarEvent,
-  CalendarView,
-} from "@/modules/agenda/components/agenda-calendar";
-
 import { cn } from "@/lib/utils";
-import {
-  addHoursToDate,
-  AgendaDaysToShow,
-  AgendaView,
-  CalendarDndProvider,
-  DayView,
-  EventDialog,
-  EventGap,
-  EventHeight,
-  MonthView,
-  WeekCellsHeight,
-  WeekView,
-} from "@/modules/agenda/components/agenda-calendar";
 import ThemeToggle from "@/shared/components/theme-toggle";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -47,7 +29,20 @@ import {
 } from "@/shared/components/ui/dropdown-menu";
 import { SidebarTrigger, useSidebar } from "@/shared/components/ui/sidebar";
 
+import type {
+  CalendarEvent,
+  CalendarView,
+} from "../types/index";
+
+import { AgendaDaysToShow, EventGap, EventHeight, WeekCellsHeight } from "../utils/constants";
+import { addHoursToDate } from "../utils/helpers";
+import { AgendaView } from "./agenda-view";
 import { useCalendarContext } from "./calendar-context";
+import { CalendarDndProvider } from "./calendar-dnd-context";
+import { DayView } from "./day-view";
+import { EventDialog } from "./event-dialog";
+import { MonthView } from "./month-view";
+import { WeekView } from "./week-view";
 
 export type EventCalendarProps = {
   events?: CalendarEvent[];
@@ -58,8 +53,10 @@ export type EventCalendarProps = {
   initialView?: CalendarView;
 };
 
+const defaultEvents: CalendarEvent[] = [];
+
 export function EventCalendar({
-  events = [],
+  events = defaultEvents,
   onEventAdd,
   onEventUpdate,
   onEventDelete,
@@ -149,13 +146,13 @@ export function EventCalendar({
   };
 
   const handleEventSelect = (event: CalendarEvent) => {
-    console.log("Event selected:", event); // Debug log
+    // console.log("Event selected:", event); // Debug log
     setSelectedEvent(event);
     setIsEventDialogOpen(true);
   };
 
   const handleEventCreate = (startTime: Date) => {
-    console.log("Creating new event at:", startTime); // Debug log
+    // console.log("Creating new event at:", startTime); // Debug log
 
     // Snap to 15-minute intervals
     const minutes = startTime.getMinutes();

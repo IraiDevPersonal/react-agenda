@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 
 import { Toaster } from "@/shared/components/ui/sonner";
 
-import { CalendarProvider } from "./components/agenda-calendar/calendar-context";
+import { CalendarProvider } from "./components/calendar-context";
 
 export default function AgendaLayout() {
   return (

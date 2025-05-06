@@ -2,15 +2,13 @@ import { RiCalendarLine, RiDeleteBinLine } from "@remixicon/react";
 import { format, isBefore } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 
-import type { CalendarEvent, EventColor } from "@/modules/agenda/components/agenda-calendar";
-
 import { cn } from "@/lib/utils";
 import {
   DefaultEndHour,
   DefaultStartHour,
   EndHour,
   StartHour,
-} from "@/modules/agenda/components/agenda-calendar/constants";
+} from "@/modules/agenda/utils/constants";
 import { Button } from "@/shared/components/ui/button";
 import { Calendar } from "@/shared/components/ui/calendar";
 import { Checkbox } from "@/shared/components/ui/checkbox";
@@ -38,6 +36,8 @@ import {
   SelectValue,
 } from "@/shared/components/ui/select";
 import { Textarea } from "@/shared/components/ui/textarea";
+
+import type { CalendarEvent, EventColor } from "../types/index";
 
 type EventDialogProps = {
   event: CalendarEvent | null;
@@ -87,9 +87,9 @@ export function EventDialog({
   };
 
   // Debug log to check what event is being passed
-  useEffect(() => {
-    console.log("EventDialog received event:", event);
-  }, [event]);
+  // useEffect(() => {
+  //   console.log("EventDialog received event:", event);
+  // }, [event]);
 
   useEffect(() => {
     if (event) {
