@@ -16,7 +16,7 @@ import {
 } from "date-fns";
 import React, { useMemo } from "react";
 
-import type { CalendarEvent } from "@/shared/components/event-calendar";
+import type { CalendarEvent } from "@/modules/agenda/components/agenda-calendar";
 
 import { cn } from "@/lib/utils";
 import {
@@ -27,8 +27,8 @@ import {
   isMultiDayEvent,
   useCurrentTimeIndicator,
   WeekCellsHeight,
-} from "@/shared/components/event-calendar";
-import { EndHour, StartHour } from "@/shared/components/event-calendar/constants";
+} from "@/modules/agenda/components/agenda-calendar";
+import { EndHour, StartHour } from "@/modules/agenda/components/agenda-calendar/constants";
 
 type WeekViewProps = {
   currentDate: Date;

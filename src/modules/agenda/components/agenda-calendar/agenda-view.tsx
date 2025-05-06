@@ -4,13 +4,13 @@ import { useMemo } from "react";
 
 import type {
   CalendarEvent,
-} from "@/shared/components/event-calendar";
+} from "@/modules/agenda/components/agenda-calendar";
 
 import {
   AgendaDaysToShow,
   EventItem,
   getAgendaEventsForDay,
-} from "@/shared/components/event-calendar";
+} from "@/modules/agenda/components/agenda-calendar";
 
 type AgendaViewProps = {
   currentDate: Date;

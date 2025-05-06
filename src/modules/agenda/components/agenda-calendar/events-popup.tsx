@@ -2,9 +2,9 @@ import { format, isSameDay } from "date-fns";
 import { XIcon } from "lucide-react";
 import { useEffect, useMemo, useRef } from "react";
 
-import type { CalendarEvent } from "@/shared/components/event-calendar";
+import type { CalendarEvent } from "@/modules/agenda/components/agenda-calendar";
 
-import { EventItem } from "@/shared/components/event-calendar";
+import { EventItem } from "@/modules/agenda/components/agenda-calendar";
 
 type EventsPopupProps = {
   date: Date;

@@ -4,14 +4,14 @@ import type { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
 import { differenceInMinutes, format, getMinutes, isPast } from "date-fns";
 import { useMemo } from "react";
 
-import type { CalendarEvent } from "@/shared/components/event-calendar";
+import type { CalendarEvent } from "@/modules/agenda/components/agenda-calendar";
 
 import { cn } from "@/lib/utils";
 import {
 
   getBorderRadiusClasses,
   getEventColorClasses,
-} from "@/shared/components/event-calendar";
+} from "@/modules/agenda/components/agenda-calendar";
 
 // Using date-fns format with custom formatting:
 // 'h' - hours (1-12)

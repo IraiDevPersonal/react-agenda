@@ -1,14 +1,12 @@
 import { addDays, getDay, setHours, setMinutes } from "date-fns";
 import { useMemo, useState } from "react";
 
-import type { CalendarEvent, EventColor } from "@/shared/components/event-calendar";
+import type { CalendarEvent, EventColor } from "./agenda-calendar";
 
 import {
-
   EventCalendar,
-
-} from "@/shared/components/event-calendar";
-import { useCalendarContext } from "@/shared/components/event-calendar/calendar-context";
+} from "./agenda-calendar";
+import { useCalendarContext } from "./agenda-calendar/calendar-context";
 
 // Etiquettes data for calendar filtering
 export const etiquettes = [
@@ -591,7 +589,7 @@ const sampleEvents: CalendarEvent[] = [
   },
 ];
 
-export function BigCalendar() {
+export function BigAgendaCalendar() {
   const [events, setEvents] = useState<CalendarEvent[]>(sampleEvents);
   const { isColorVisible } = useCalendarContext();
 

@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
-import { createContext, use, useState } from "react";
+import { createContext, use, useCallback, useMemo, useState } from "react";
 
-import { etiquettes } from "@/shared/components/big-calendar";
+import { etiquettes } from "@/modules/agenda/components/big-agenda-calendar";
 
 type CalendarContextType = {
   // Date management
@@ -34,7 +34,7 @@ type CalendarProviderProps = {
 };
 
 export function CalendarProvider({ children }: CalendarProviderProps) {
-  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const [currentDate, setCurrentDate] = useState<Date>(() => new Date());
 
   // Initialize visibleColors based on the isActive property in etiquettes
   const [visibleColors, setVisibleColors] = useState<string[]>(() => {
@@ -57,19 +57,19 @@ export function CalendarProvider({ children }: CalendarProviderProps) {
   };
 
   // Check if a color is visible
-  const isColorVisible = (color: string | undefined) => {
+  const isColorVisible = useCallback((color: string | undefined) => {
     if (!color)
       return true; // Events without a color are always visible
     return visibleColors.includes(color);
-  };
+  }, [visibleColors]);
 
-  const value = {
+  const value = useMemo(() => ({
     currentDate,
     setCurrentDate,
     visibleColors,
     toggleColorVisibility,
     isColorVisible,
-  };
+  }), [currentDate, isColorVisible, visibleColors]);
 
   return (
     <CalendarContext value={value}>

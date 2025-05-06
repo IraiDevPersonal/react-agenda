@@ -1,3 +1,6 @@
+// Hook exports
+export * from "../../hooks/use-current-time-indicator";
+export * from "../../hooks/use-event-visibility";
 // Component exports
 export { AgendaView } from "./agenda-view";
 export { CalendarDndProvider, useCalendarDnd } from "./calendar-dnd-context";
@@ -9,11 +12,8 @@ export { DroppableCell } from "./droppable-cell";
 export { EventCalendar } from "./event-calendar";
 export { EventDialog } from "./event-dialog";
 export { EventItem } from "./event-item";
-export { EventsPopup } from "./events-popup";
-// Hook exports
-export * from "./hooks/use-current-time-indicator";
 
-export * from "./hooks/use-event-visibility";
+export { EventsPopup } from "./events-popup";
 export { MonthView } from "./month-view";
 
 // Type exports

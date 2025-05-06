@@ -1,7 +1,8 @@
 import { Outlet } from "react-router";
 
-import { CalendarProvider } from "@/shared/components/event-calendar/calendar-context";
 import { Toaster } from "@/shared/components/ui/sonner";
+
+import { CalendarProvider } from "./components/agenda-calendar/calendar-context";
 
 export default function AgendaLayout() {
   return (

@@ -29,7 +29,7 @@ const paths: Array<{ path: string; icon: React.ReactNode; label: string }> = [
   {
     icon: <Calendar size={20} />,
     label: "Agenda",
-    path: "/",
+    path: "/agenda",
   },
   {
     icon: <Users size={20} />,

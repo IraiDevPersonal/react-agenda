@@ -12,7 +12,7 @@ import {
 } from "date-fns";
 import React, { useEffect, useMemo, useState } from "react";
 
-import type { CalendarEvent } from "@/shared/components/event-calendar";
+import type { CalendarEvent } from "@/modules/agenda/components/agenda-calendar";
 
 import {
 
@@ -26,8 +26,8 @@ import {
   getSpanningEventsForDay,
   sortEvents,
   useEventVisibility,
-} from "@/shared/components/event-calendar";
-import { DefaultStartHour } from "@/shared/components/event-calendar/constants";
+} from "@/modules/agenda/components/agenda-calendar";
+import { DefaultStartHour } from "@/modules/agenda/components/agenda-calendar/constants";
 import {
   Popover,
   PopoverContent,

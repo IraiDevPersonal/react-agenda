@@ -5,12 +5,12 @@ import { useRef, useState } from "react";
 
 import type {
   CalendarEvent,
-} from "@/shared/components/event-calendar";
+} from "@/modules/agenda/components/agenda-calendar";
 
 import {
   EventItem,
   useCalendarDnd,
-} from "@/shared/components/event-calendar";
+} from "@/modules/agenda/components/agenda-calendar";
 
 type DraggableEventProps = {
   "event": CalendarEvent;

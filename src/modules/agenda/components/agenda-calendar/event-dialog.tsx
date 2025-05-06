@@ -2,7 +2,7 @@ import { RiCalendarLine, RiDeleteBinLine } from "@remixicon/react";
 import { format, isBefore } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 
-import type { CalendarEvent, EventColor } from "@/shared/components/event-calendar";
+import type { CalendarEvent, EventColor } from "@/modules/agenda/components/agenda-calendar";
 
 import { cn } from "@/lib/utils";
 import {
@@ -10,7 +10,7 @@ import {
   DefaultStartHour,
   EndHour,
   StartHour,
-} from "@/shared/components/event-calendar/constants";
+} from "@/modules/agenda/components/agenda-calendar/constants";
 import { Button } from "@/shared/components/ui/button";
 import { Calendar } from "@/shared/components/ui/calendar";
 import { Checkbox } from "@/shared/components/ui/checkbox";

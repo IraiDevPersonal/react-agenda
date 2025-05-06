@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import type {
   CalendarEvent,
   CalendarView,
-} from "@/shared/components/event-calendar";
+} from "@/modules/agenda/components/agenda-calendar";
 
 import { cn } from "@/lib/utils";
 import {
@@ -35,7 +35,7 @@ import {
   MonthView,
   WeekCellsHeight,
   WeekView,
-} from "@/shared/components/event-calendar";
+} from "@/modules/agenda/components/agenda-calendar";
 import ThemeToggle from "@/shared/components/theme-toggle";
 import { Button } from "@/shared/components/ui/button";
 import {

@@ -1,8 +1,8 @@
 import { Toaster } from "sonner";
 
-import Layout from "@/layout";
+import Layout from "@/shared/layout";
+import Router from "@/shared/router";
 
-import Router from "./router";
 import "./config/styles/global.css";
 
 function App() {
