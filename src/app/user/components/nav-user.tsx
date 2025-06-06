@@ -1,3 +1,5 @@
+import { EllipsisVerticalIcon, UserRoundPen } from "lucide-react";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -5,22 +7,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { EllipsisVerticalIcon, UserRoundPen } from "lucide-react";
 
 export function NavUser() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="hover:bg-sidebar-accent flex w-full items-center hover:cursor-pointer p-2 rounded-lg transition-[color,background,scale] data-[state=open]:scale-95 data-[state=open]:bg-sidebar-accent">
+      <DropdownMenuTrigger className="bg-primary text-accent hover:bg-primary/90 flex w-full items-center hover:cursor-pointer p-2 rounded-lg transition-[color,background,scale] data-[state=open]:scale-95 data-[state=open]:bg-primary/90">
         <Avatar className="transition-[width,height] duration-200 ease-in-out">
           <AvatarImage src="" alt="user" />
-          <AvatarFallback>IA</AvatarFallback>
+          <AvatarFallback className="bg-neutral-300 text-primary">IA</AvatarFallback>
         </Avatar>
-        <span className="grid flex-1 text-left text-sm leading-tight ms-1 truncate font-semibold">Ignacio A.</span>
+        <span className="grid flex-1 text-left text-sm leading-tight ms-3 truncate font-semibold">Ignacio A.</span>
         <EllipsisVerticalIcon size={20} />
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-        align="end"
+        align="center"
         sideOffset={4}
       >
         <DropdownMenuItem className="gap-2 px-1">

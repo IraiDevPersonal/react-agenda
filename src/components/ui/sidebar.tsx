@@ -27,9 +27,9 @@ export function Sidebar() {
                 <NavLink
                   to={path.href}
                   className={({ isActive }) => cn(
-                    "p-2 rounded-lg flex hover:bg-sidebar-accent transition-colors font-semibold gap-x-2",
-                    "hover:[&_svg]:scale-[115%] [&_svg]:transition-transform",
-                    isActive && "bg-accent-foreground text-accent hover:bg-accent-foreground/80",
+                    "p-2 rounded-lg flex hover:bg-primary/5 transition-colors font-semibold gap-x-2",
+                    "hover:[&_svg]:scale-[115%] [&_svg]:transition-transform [&_svg]:antialiased",
+                    isActive && "bg-primary text-accent hover:bg-primary/90",
                   )}
                 >
                   {path.icon}

@@ -6,3 +6,7 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export function safeArray<T>(data: any): T[] {
+  return (Array.isArray(data) ? data : []) as T[];
+}

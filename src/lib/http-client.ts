@@ -2,50 +2,53 @@ import type { AxiosInstance, CreateAxiosDefaults } from "axios";
 
 import axios from "axios";
 
-type HttpClient = {
-  create: (config: CreateAxiosDefaults & { withAutorizacion?: boolean }) => AxiosInstance;
+type HttpClientCreateReturn = AxiosInstance & {
+  useAuthInterceptor: () => void;
 };
 
-export const httpClient: HttpClient = {
-  create: ({ withAutorizacion = false, ...config }) => {
-    const axiosInstance = axios.create(config);
+type HttpClient = {
+  create: (config: CreateAxiosDefaults) => HttpClientCreateReturn;
+};
 
-    if (withAutorizacion) {
-      const AuthToken = localStorage.getItem("token"); // TODO: reemplazar por AUTH_TOKEN almacenado en LocalStorage
+function useAuthInterceptor(axiosInstance: AxiosInstance) {
+  axiosInstance.interceptors.request.use((config) => {
+    const AuthToken = localStorage.getItem("token");
 
-      if (!AuthToken)
-        throw new Error("No existe token...");
-
-      axiosInstance.interceptors.request.use((config) => {
-        config.headers.Authorization = `Bearer ${AuthToken}`;
-        return config;
-      });
+    if (!AuthToken) {
+      return Promise.reject(new Error("No existe token..."));
     }
 
-    return axiosInstance;
+    config.headers.Authorization = `Bearer ${AuthToken}`;
+    return config;
+  });
+}
+
+export const httpClient: HttpClient = {
+  create: (config) => {
+    const instance: AxiosInstance = axios.create(config);
+
+    return Object.assign(instance, {
+      useAuthInterceptor: () => useAuthInterceptor(instance),
+    });
   },
 };
 
 export const httpHelper = {
-  getErrorMessage: (error: unknown) => {
-    let errorMessage = "";
-    const axiosError = axios.isAxiosError(error) ? error : null;
-
-    if (axiosError) {
-      if (axiosError.response) {
-        errorMessage = axiosError.response.data?.message || "Error inesperado...";
+  getErrorMessage(error: unknown) {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        return error.response.data?.message ?? "Error inesperado...";
       }
-      else if (axiosError.request) {
-        errorMessage = "No se recibió respuesta del servidor...";
+      if (error.request) {
+        return "No se recibió respuesta del servidor...";
       }
-      else {
-        errorMessage = axiosError.message;
-      }
-    }
-    else if (error instanceof Error) {
-      errorMessage = error.message;
+      return error.message;
     }
 
-    return errorMessage;
+    if (error instanceof Error) {
+      return error.message;
+    }
+
+    return "Ocurrió un error desconocido.";
   },
 };
