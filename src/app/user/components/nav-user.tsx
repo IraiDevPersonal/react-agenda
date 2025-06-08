@@ -1,4 +1,4 @@
-import { EllipsisVerticalIcon, UserRoundPen } from "lucide-react";
+import { EllipsisVerticalIcon, LogOutIcon, UserRoundPenIcon } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -25,11 +25,18 @@ export function NavUser() {
         sideOffset={4}
       >
         <DropdownMenuItem className="gap-2 px-1">
-          <UserRoundPen
+          <UserRoundPenIcon
             size={20}
             aria-hidden="true"
           />
-          <span>Dashboard</span>
+          <span>Mi Perfil</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="gap-2 px-1">
+          <LogOutIcon
+            size={20}
+            aria-hidden="true"
+          />
+          <span>Cerrar Sesión</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

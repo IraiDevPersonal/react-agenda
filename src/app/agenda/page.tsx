@@ -1,39 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
 
+import PageLayout from "@/components/page-layout";
 import { QueryKeys } from "@/constants/query-keys";
 
 import { agendaActions } from "./actions/agenda.actions";
+import { Appointments } from "./components/Appointments";
 
 function AgendaPage() {
   const { isLoading, data } = useQuery({
     queryKey: [QueryKeys.appointments],
-    queryFn: () => agendaActions.getAgenda(),
+    queryFn: () => agendaActions.getAppointments(),
   });
 
   return (
-    <main>
-      <h1>Pagia agenda</h1>
-      {isLoading && "cargando..."}
-      <ul>
-        {
-          data?.map(item => (
-            <li key={item.uid}>
-              {item.uid}
-              {" "}
-              /
-              {item.professional_name}
-              {" "}
-              /
-              {item.patient_name}
-              {" "}
-              / (
-              {item.date}
-              )
-            </li>
-          ))
-        }
-      </ul>
-    </main>
+    <PageLayout title="Agenda | Mi día">
+      <header>
+        <h1 className="text-4xl font-bold">Agenda</h1>
+      </header>
+      <main>
+        <Appointments />
+      </main>
+    </PageLayout>
   );
 }
 
