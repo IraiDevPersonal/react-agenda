@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { date } from "@/lib/date";
+import { date, DateFormats } from "@/lib/date";
 
 import { getAppointmentsQueryOptions } from "../queries/appointment-queries";
 import { AppointmentCard } from "./appointment-card";
@@ -16,7 +16,7 @@ function DayAppointmentsView() {
             Horario
           </Grid.Col>
           <Grid.Col className="text-left col-span-6 first-letter:uppercase">
-            {date.format(new Date(), "EEEE dd 'de' MMMM 'de' yyyy")}
+            {date.format(new Date(), DateFormats["EEEE dd 'de' MMMM 'de' yyyy"])}
           </Grid.Col>
         </Grid.Header>
         {

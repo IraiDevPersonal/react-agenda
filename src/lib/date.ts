@@ -7,3 +7,8 @@ export const date = {
   format,
   parseISO,
 };
+
+export enum DateFormats {
+  "dd-MM-yyyy" = "dd-MM-yyyy",
+  "EEEE dd 'de' MMMM 'de' yyyy" = "EEEE dd 'de' MMMM 'de' yyyy",
+}
