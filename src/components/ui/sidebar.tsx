@@ -6,7 +6,7 @@ import { Routes } from "@/constants/routes.constant";
 import { cn } from "@/lib/utils";
 
 const Paths = [
-  { href: Routes.agenda, label: "Agenda", icon: <CalendarIcon size={20} /> },
+  { href: Routes.agenda, label: "Mi agenda", icon: <CalendarIcon size={20} /> },
   { href: Routes.patients, label: "Pacientes", icon: <UsersIcon size={20} /> },
   { href: Routes.reports, label: "Informes", icon: <FileIcon size={20} /> },
 ];

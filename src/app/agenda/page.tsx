@@ -6,7 +6,7 @@ function AgendaPage() {
   return (
     <PageLayout title="Agenda | Mi día">
       <header>
-        <h1 className="text-4xl font-bold">Agenda</h1>
+        <h1 className="text-4xl font-bold">Mi Agenda</h1>
       </header>
       <main className="space-y-4 h-full overflow-y-auto">
         <AppointmentViewSelector />

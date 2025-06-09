@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getAppointmentsQueryOptions } from "../querys/appointment-queries";
+import { getAppointmentsQueryOptions } from "../queries/appointment-queries";
 import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
 

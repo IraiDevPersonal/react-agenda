@@ -1,6 +1,6 @@
 import type { UseQueryOptions } from "@tanstack/react-query";
 
-import { QueryKeys } from "@/constants/query-keys";
+import { QueryKeys } from "@/constants/query-keys.constant";
 
 import type { Appointment } from "../types/appointment";
 
