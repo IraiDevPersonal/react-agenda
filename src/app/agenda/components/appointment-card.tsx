@@ -1,0 +1,45 @@
+import type { PropsWithChildren } from "react";
+
+import { cn } from "@/lib/utils";
+
+import type { Appointment } from "../types/appointment";
+
+import { StatusColors } from "../helpers/constants";
+import { generateDatetimeText } from "../helpers/utils";
+import { AppointmentStatus } from "../types/appointment";
+
+type Props = PropsWithChildren<{
+  appointment: Appointment;
+}>;
+
+function AppointmentCard({ appointment }: Props) {
+  const isAvailable = appointment.appointment_status === AppointmentStatus.AVAILABLE;
+
+  return (
+    <div className={cn(
+      "relative bg-card p-2 ps-4 flex flex-col rounded-lg overflow-hidden border hover:border-primary/30 transition-colors w-full",
+      "before:content-[' '] before:absolute before:top-0 before:left-0 before:w-2 before:h-full",
+      StatusColors[appointment.appointment_status],
+    )}
+    >
+      {
+        isAvailable
+          ? (
+              <span>{generateDatetimeText(appointment)}</span>
+            )
+          : (
+              <>
+                <span className="font-semibold text-base capitalize">{appointment.patient_name}</span>
+                <span className="text-muted-foreground">{appointment.patient_rut}</span>
+                <span className="text-muted-foreground">{appointment.patient_phone}</span>
+                <small className="text-muted-foreground">
+                  {generateDatetimeText(appointment)}
+                </small>
+              </>
+            )
+      }
+    </div>
+  );
+}
+
+export { AppointmentCard };

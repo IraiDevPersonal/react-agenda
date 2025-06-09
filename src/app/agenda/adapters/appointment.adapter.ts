@@ -9,18 +9,18 @@ function createDefaultAppointment(): Appointment {
   return {
     uid: uuid.createV4(),
     date: "00-00-0000",
-    time_from: "--:--",
-    time_to: "--:--",
-    patient_name: "S/N",
-    patient_rut: "S/R",
-    patient_phone: "S/T",
-    professional_name: "S/N",
+    time_from: "00:00",
+    time_to: "00:00",
+    patient_name: "Paciente sin nombre",
+    patient_rut: "1.111.111-1",
+    patient_phone: "+569 0000 0000",
+    professional_name: "Profesional sin nombre",
     professions: ["S/P"],
     appointment_status: AppointmentStatus.INDETERMINATE,
   };
 }
 
-function itemAdapter(entry: Record<string, any>) {
+function itemAdapter(entry: Record<string, any> | undefined) {
   if (typeof entry !== "object" || Array.isArray(entry)) {
     console.warn("httpResponseAdapter: entrada en formato no esperado!!");
     return createDefaultAppointment();
@@ -32,6 +32,7 @@ function itemAdapter(entry: Record<string, any>) {
   } satisfies Appointment;
 }
 
-export const appointmentAdapters = {
+export const appointmentAdapter = {
   httpResponse: (data: unknown) => safeArray<Appointment>(data).map(itemAdapter),
+  item: itemAdapter,
 };
