@@ -25,7 +25,7 @@ function AppointmentCard({ appointment }: Props) {
       {
         isAvailable
           ? (
-              <small className="text-center">{generateDatetimeText(appointment)}</small>
+              <small className="text-center font-semibold">{generateDatetimeText(appointment)}</small>
             )
           : (
               <>

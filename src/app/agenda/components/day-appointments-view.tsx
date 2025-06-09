@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { date } from "@/lib/date";
+
 import { getAppointmentsQueryOptions } from "../queries/appointment-queries";
 import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
@@ -10,8 +12,12 @@ function DayAppointmentsView() {
     <>
       <Grid className="max-w-xl">
         <Grid.Header>
-          <Grid.Col className="text-right">Horario</Grid.Col>
-          <Grid.Col className="text-left">Día</Grid.Col>
+          <Grid.Col className="text-right">
+            Horario
+          </Grid.Col>
+          <Grid.Col className="text-left col-span-6 first-letter:uppercase">
+            {date.format(new Date(), "EEEE dd 'de' MMMM 'de' yyyy")}
+          </Grid.Col>
         </Grid.Header>
         {
           data?.map(appointment => (
