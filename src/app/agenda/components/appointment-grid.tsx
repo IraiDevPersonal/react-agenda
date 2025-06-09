@@ -35,10 +35,20 @@ function Col({ children, className }: ColProps) {
   );
 }
 
+function TimeCol({ from, to }: { to: string; from: string }) {
+  return (
+    <AppointmentGrid.Col className="text-right text-muted-foreground flex flex-col gap-y-2 justify-between">
+      <span>{from}</span>
+      <span>{to}</span>
+    </AppointmentGrid.Col>
+  );
+}
+
 type CustomRowProps = Omit<RowProps, "asHeader">;
 
 AppointmentGrid.Header = (props: CustomRowProps) => <Row asHeader {...props} />;
 AppointmentGrid.Row = (props: CustomRowProps) => <Row {...props} />;
+AppointmentGrid.TimeCol = TimeCol;
 AppointmentGrid.Col = Col;
 
 export default AppointmentGrid;

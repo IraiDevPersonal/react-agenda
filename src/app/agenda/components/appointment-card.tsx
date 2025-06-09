@@ -17,7 +17,7 @@ function AppointmentCard({ appointment }: Props) {
 
   return (
     <div className={cn(
-      "relative bg-card p-2 ps-4 flex flex-col rounded-lg overflow-hidden border hover:border-primary/30 transition-colors w-full",
+      "relative bg-card p-2 ps-4 flex flex-col rounded-lg overflow-hidden border hover:border-primary/30 transition-colors w-full h-full justify-center",
       "before:content-[' '] before:absolute before:top-0 before:left-0 before:w-2 before:h-full",
       StatusColors[appointment.appointment_status],
     )}
@@ -25,7 +25,7 @@ function AppointmentCard({ appointment }: Props) {
       {
         isAvailable
           ? (
-              <span>{generateDatetimeText(appointment)}</span>
+              <small className="text-center">{generateDatetimeText(appointment)}</small>
             )
           : (
               <>

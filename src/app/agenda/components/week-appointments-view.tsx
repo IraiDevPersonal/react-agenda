@@ -1,8 +1,11 @@
-import { appointmentAdapter } from "../adapters/appointment.adapter";
+import { useQuery } from "@tanstack/react-query";
+
+import { getAppointmentsQueryOptions } from "../querys/appointment-queries";
 import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
 
 function WeekAppointmentsView() {
+  const { data } = useQuery(getAppointmentsQueryOptions());
   return (
     <Grid>
       <Grid.Header>
@@ -16,22 +19,27 @@ function WeekAppointmentsView() {
         {/* <Grid.Col>Domingo</Grid.Col> */}
       </Grid.Header>
       {
-        Array.from({ length: 10 }).map((_, idx) => (
-          <Grid.Row key={idx}>
-            <Grid.Col className="text-right text-muted-foreground flex flex-col justify-between">
-              <span>09:30</span>
-              <span>10:30</span>
+        data?.map(appointment => (
+          <Grid.Row key={appointment.uid}>
+            <Grid.TimeCol from={appointment.time_from} to={appointment.time_to} />
+            <Grid.Col>
+              <AppointmentCard appointment={appointment} />
             </Grid.Col>
             <Grid.Col>
-              <AppointmentCard appointment={appointmentAdapter.item(undefined)} />
+              <AppointmentCard appointment={appointment} />
             </Grid.Col>
             <Grid.Col>
-              <AppointmentCard appointment={appointmentAdapter.item(undefined)} />
+              <AppointmentCard appointment={appointment} />
             </Grid.Col>
-            <Grid.Col></Grid.Col>
-            <Grid.Col></Grid.Col>
-            <Grid.Col></Grid.Col>
-            <Grid.Col></Grid.Col>
+            <Grid.Col>
+              <AppointmentCard appointment={appointment} />
+            </Grid.Col>
+            <Grid.Col>
+              <AppointmentCard appointment={appointment} />
+            </Grid.Col>
+            <Grid.Col>
+              <AppointmentCard appointment={appointment} />
+            </Grid.Col>
             {/* <Grid.Col></Grid.Col> */}
           </Grid.Row>
         ))

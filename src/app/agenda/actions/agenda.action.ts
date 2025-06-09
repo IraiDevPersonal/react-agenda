@@ -2,7 +2,7 @@ import { agendaService } from "@/services/agenda.service";
 
 import { appointmentAdapter } from "../adapters/appointment.adapter";
 
-async function getAppointments() {
+async function getAppointments(filters?: any) {
   // const search = this.stringifyFilters(filters);
   // agendaService.withAutorization();
   const { data } = await agendaService.get(`/agenda?`);
