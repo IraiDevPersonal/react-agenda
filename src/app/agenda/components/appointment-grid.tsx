@@ -15,7 +15,7 @@ type RowProps = PropsWithChildren<{ asHeader?: boolean; className?: string }>;
 function Row({ children, asHeader, className }: RowProps) {
   return (
     <div className={cn(
-      "grid grid-cols-[70px_1fr_1fr_1fr_1fr_1fr_1fr] border-b last:border-b-0",
+      "grid grid-cols-[50px_1fr_1fr_1fr_1fr_1fr_1fr] border-b last:border-b-0",
       asHeader && "font-semibold text-center bg-sidebar sticky top-0 z-20",
       className,
     )}

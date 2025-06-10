@@ -1,49 +1,46 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { For } from "@/components/for";
+import { Show } from "@/components/show";
+
+import { showAppointmentInDay } from "../lib/utils";
 import { getAppointmentsQueryOptions } from "../queries/appointment-queries";
 import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
 
 function WeekAppointmentsView() {
   const { data } = useQuery(getAppointmentsQueryOptions());
+
   return (
     <Grid>
       <Grid.Header>
-        <Grid.Col className="text-right">Horario</Grid.Col>
+        <Grid.Col></Grid.Col>
         <Grid.Col>Lunes</Grid.Col>
         <Grid.Col>Martes</Grid.Col>
         <Grid.Col>Miercoles</Grid.Col>
         <Grid.Col>Jueves</Grid.Col>
         <Grid.Col>Viernes</Grid.Col>
         <Grid.Col>Sabado</Grid.Col>
-        {/* <Grid.Col>Domingo</Grid.Col> */}
       </Grid.Header>
-      {
-        data?.map(appointment => (
+      <For
+        fallback={cls => <Grid.Col className={cls}>No hay citas...</Grid.Col>}
+        items={data}
+      >
+        {appointment => (
           <Grid.Row key={appointment.uid}>
             <Grid.TimeCol from={appointment.time_from} to={appointment.time_to} />
-            <Grid.Col>
-              <AppointmentCard appointment={appointment} />
-            </Grid.Col>
-            <Grid.Col>
-              <AppointmentCard appointment={appointment} />
-            </Grid.Col>
-            <Grid.Col>
-              <AppointmentCard appointment={appointment} />
-            </Grid.Col>
-            <Grid.Col>
-              <AppointmentCard appointment={appointment} />
-            </Grid.Col>
-            <Grid.Col>
-              <AppointmentCard appointment={appointment} />
-            </Grid.Col>
-            <Grid.Col>
-              <AppointmentCard appointment={appointment} />
-            </Grid.Col>
-            {/* <Grid.Col></Grid.Col> */}
+            <For items={[1, 2, 3, 4, 5, 6]}>
+              {weekday => (
+                <Grid.Col key={weekday}>
+                  <Show when={showAppointmentInDay(appointment.date, weekday)}>
+                    <AppointmentCard appointment={appointment} />
+                  </Show>
+                </Grid.Col>
+              )}
+            </For>
           </Grid.Row>
-        ))
-      }
+        )}
+      </For>
     </Grid>
   );
 }

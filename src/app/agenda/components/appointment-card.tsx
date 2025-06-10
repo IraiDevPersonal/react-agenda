@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import type { Appointment } from "../types/appointment";
 
 import { StatusColors } from "../lib/constants";
-import { generateDatetimeText } from "../lib/utils";
+import { generateAppoinmentDatetimeText } from "../lib/utils";
 import { AppointmentStatus } from "../types/appointment";
 
 type Props = PropsWithChildren<{
@@ -25,7 +25,7 @@ function AppointmentCard({ appointment }: Props) {
       {
         isAvailable
           ? (
-              <small className="text-center font-semibold">{generateDatetimeText(appointment)}</small>
+              <small className="text-center font-semibold">{generateAppoinmentDatetimeText(appointment)}</small>
             )
           : (
               <>
@@ -33,7 +33,7 @@ function AppointmentCard({ appointment }: Props) {
                 <span className="text-muted-foreground">{appointment.patient_rut}</span>
                 <span className="text-muted-foreground">{appointment.patient_phone}</span>
                 <small className="text-muted-foreground">
-                  {generateDatetimeText(appointment)}
+                  {generateAppoinmentDatetimeText(appointment)}
                 </small>
               </>
             )

@@ -1,11 +1,13 @@
-import { format, parseISO, setDefaultOptions } from "date-fns";
+import { format, getDay, getISODay, parseISO, setDefaultOptions } from "date-fns";
 import { es } from "date-fns/locale";
 
-setDefaultOptions({ locale: es });
+setDefaultOptions({ locale: es, weekStartsOn: 1 });
 
 export const date = {
-  format,
+  getISODay,
   parseISO,
+  format,
+  getDay,
 };
 
 export enum DateFormats {
