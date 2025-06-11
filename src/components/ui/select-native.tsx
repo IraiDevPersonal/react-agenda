@@ -31,7 +31,7 @@ function SelectNative({
         )}
         {...props}
       >
-        {withEmptyOption && <option value="">Sin selecion...</option>}
+        {withEmptyOption && <option value="">Sin selección...</option>}
         {options.map(({ label, value }) => (
           <option key={value} value={value}>{label}</option>
         ))}

@@ -1,8 +1,3 @@
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { useId } from "react";
 
@@ -10,9 +5,15 @@ import type { DateWeekRange } from "@/types/global.type";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { dateFormat, dateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
 
+import { FieldWrapper } from "./field-wrapper";
 import { Label } from "./label";
 
 type Props = {
@@ -39,14 +40,14 @@ function DateWeekSelector({ label, value, classNames, onValueChange }: Props) {
   };
 
   return (
-    <div className={cn("flex flex-col space-y-1", classNames?.root)}>
+    <FieldWrapper className={classNames?.root}>
       {label && <Label htmlFor={id} className={cn(classNames?.label)}>{label}</Label>}
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id={id}
             variant="outline"
-            className="group bg-background hover:bg-background border-input w-56 justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]"
+            className="group bg-background hover:bg-background border-input w-52 justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]"
           >
             <span
               className={cn("truncate", !value && "text-muted-foreground")}
@@ -92,7 +93,7 @@ function DateWeekSelector({ label, value, classNames, onValueChange }: Props) {
           />
         </PopoverContent>
       </Popover>
-    </div>
+    </FieldWrapper>
   );
 }
 
