@@ -3,11 +3,12 @@ import { cn } from "@/lib/utils";
 
 import { StatusColors, StatusNames } from "../lib/constants";
 import { AppointmentStatus } from "../types/appointment";
+import { AppointmentFilterSection } from "./appointment-filter-section";
 
 function AppointmentHeader() {
   return (
     <>
-      <header>
+      <header className="flex items-start justify-between">
         <div>
           <h1 className="text-4xl font-bold mb-4">Mi Agenda</h1>
           <div className="flex gap-2 items-center">
@@ -19,6 +20,7 @@ function AppointmentHeader() {
             <ColorBall status={AppointmentStatus.CANCELLED} />
           </div>
         </div>
+        <AppointmentFilterSection />
       </header>
     </>
   );

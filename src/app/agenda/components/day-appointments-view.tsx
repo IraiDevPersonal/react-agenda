@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { For } from "@/components/for";
 import { Show } from "@/components/show";
-import { date, DateFormats } from "@/lib/date";
+import { dateFormat, dateHelper } from "@/lib/date-helper";
 
 import { showAppointmentInDay } from "../lib/utils";
 import { getAppointmentsQueryOptions } from "../queries/appointment-queries";
@@ -18,7 +18,7 @@ function DayAppointmentsView() {
         <Grid.Header>
           <Grid.Col></Grid.Col>
           <Grid.Col className="text-left col-span-6 first-letter:uppercase">
-            {date.format(new Date(), DateFormats["EEEE dd 'de' MMMM 'de' yyyy"])}
+            {dateHelper.format(new Date(), dateFormat["EEEE dd 'de' MMMM 'de' yyyy"])}
           </Grid.Col>
         </Grid.Header>
         <For
@@ -29,7 +29,7 @@ function DayAppointmentsView() {
             <Grid.Row key={appointment.uid}>
               <Grid.TimeCol from={appointment.time_from} to={appointment.time_to} />
               <Grid.Col className="col-span-6">
-                <Show when={showAppointmentInDay(appointment.date, date.getISODay(new Date()))}>
+                <Show when={showAppointmentInDay(appointment.date, dateHelper.getISODay(new Date()))}>
                   <AppointmentCard appointment={appointment} />
                 </Show>
               </Grid.Col>
