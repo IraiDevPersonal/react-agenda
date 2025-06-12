@@ -63,7 +63,7 @@ function DateWeekSelector({ label, value, classNames, onValueChange }: Props) {
                         {dateHelper.format(value.to, dateFormat["dd LLL y"])}
                       </>
                     )
-                  : ("Seleccione Fecha...")
+                  : ("desde - hasta")
               }
             </span>
             <CalendarIcon
