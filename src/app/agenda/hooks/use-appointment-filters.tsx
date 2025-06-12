@@ -4,6 +4,7 @@ import { parseAsInteger, parseAsIsoDate, parseAsString, useQueryStates } from "n
 
 import { dateHelper } from "@/lib/date-helper";
 
+import { serializeQueryParams } from "@/lib/utils";
 import type { AppointmentFilters } from "../types/appointment";
 
 export function useAppointmentFilters() {
@@ -27,8 +28,11 @@ export function useAppointmentFilters() {
     date: filters.date || undefined,
   };
 
+  const filtersAsParams = serializeQueryParams<keyof AppointmentFilters>(adaptedFilters)
+
   return {
     onFilter,
+    filtersAsParams,
     filters: adaptedFilters,
   };
 }

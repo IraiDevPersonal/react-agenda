@@ -11,7 +11,7 @@ import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
 
 function DayAppointmentsView() {
-  const { filters } = useAppointmentFilters();
+  const { filtersAsParams: { date_to, ...filters } } = useAppointmentFilters();
   const { data } = useQuery(getAppointmentsQueryOptions(filters));
 
   return (

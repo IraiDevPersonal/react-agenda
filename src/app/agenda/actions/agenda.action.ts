@@ -2,7 +2,7 @@ import { agendaService } from "@/services/agenda.service";
 
 import { appointmentAdapter } from "../adapters/appointment.adapter";
 
-async function getAppointments(filters?: Record<string, string>) {
+async function getAppointments(filters?: any) {
   // agendaService.useAuthInterceptor();
   console.log({ filters });
   const { data } = await agendaService.get(`/agenda`, { params: filters });
