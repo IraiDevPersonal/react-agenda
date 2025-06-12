@@ -4,6 +4,7 @@ import { appointmentAdapter } from "../adapters/appointment.adapter";
 
 async function getAppointments(filters?: Record<string, string>) {
   // agendaService.useAuthInterceptor();
+  console.log({ filters });
   const { data } = await agendaService.get(`/agenda`, { params: filters });
   return appointmentAdapter.httpResponse(data);
 }

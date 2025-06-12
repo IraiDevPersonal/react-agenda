@@ -5,12 +5,14 @@ import { Show } from "@/components/show";
 import { dateFormat, dateHelper } from "@/lib/date-helper";
 
 import { showAppointmentInDay } from "../helpers/utils";
-import { getAppointmentsQueryOptions } from "../queries/appointment-queries";
+import { useAppointmentFilters } from "../hooks/use-appointment-filters";
+import { getAppointmentsQueryOptions } from "../queries/appointment.query";
 import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
 
 function DayAppointmentsView() {
-  const { data } = useQuery(getAppointmentsQueryOptions());
+  const { filters } = useAppointmentFilters();
+  const { data } = useQuery(getAppointmentsQueryOptions(filters));
 
   return (
     <>

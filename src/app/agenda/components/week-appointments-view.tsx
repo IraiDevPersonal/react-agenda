@@ -4,12 +4,14 @@ import { For } from "@/components/for";
 import { Show } from "@/components/show";
 
 import { showAppointmentInDay } from "../helpers/utils";
-import { getAppointmentsQueryOptions } from "../queries/appointment-queries";
+import { useAppointmentFilters } from "../hooks/use-appointment-filters";
+import { getAppointmentsQueryOptions } from "../queries/appointment.query";
 import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
 
 function WeekAppointmentsView() {
-  const { data } = useQuery(getAppointmentsQueryOptions());
+  const { filters } = useAppointmentFilters();
+  const { data } = useQuery(getAppointmentsQueryOptions(filters));
 
   return (
     <Grid>

@@ -5,7 +5,7 @@ import type { Appointment } from "../types/appointment";
 
 import { AppointmentStatus } from "../types/appointment";
 
-function createDefaultAppointment(): Appointment {
+function createDefault(): Appointment {
   return {
     uid: uuid.createV4(),
     date: "00-00-0000",
@@ -20,15 +20,15 @@ function createDefaultAppointment(): Appointment {
   };
 }
 
-function itemAdapter(entry: Record<string, any> | undefined) {
-  if (typeof entry !== "object" || Array.isArray(entry)) {
-    console.warn("httpResponseAdapter: entrada en formato no esperado!!");
-    return createDefaultAppointment();
+function itemAdapter(item: Record<string, any> | undefined) {
+  if (typeof item !== "object" || Array.isArray(item)) {
+    console.warn("appointment.adapter: entrada en formato no esperado!!");
+    return createDefault();
   }
 
   return {
-    ...createDefaultAppointment(),
-    ...entry,
+    ...createDefault(),
+    ...item,
   } satisfies Appointment;
 }
 

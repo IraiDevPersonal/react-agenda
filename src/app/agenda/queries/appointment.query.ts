@@ -6,7 +6,7 @@ import type { Appointment } from "../types/appointment";
 
 import { agendaActions } from "../actions/agenda.action";
 
-export function getAppointmentsQueryOptions(filters?: Record<string, string>): UseQueryOptions<Appointment[]> {
+export function getAppointmentsQueryOptions(filters?: Record<string, any>): UseQueryOptions<Appointment[]> {
   return {
     queryKey: [QueryKeys.appointments, filters],
     queryFn: () => agendaActions.getAppointments(filters),
