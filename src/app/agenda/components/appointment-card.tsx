@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 
 import type { Appointment } from "../types/appointment";
 
-import { StatusColors } from "../lib/constants";
-import { generateAppoinmentDatetimeText } from "../lib/utils";
+import { StatusColors } from "../helpers/constants";
+import { generateAppoinmentDatetimeText } from "../helpers/utils";
 import { AppointmentStatus } from "../types/appointment";
 
 type Props = PropsWithChildren<{

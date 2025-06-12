@@ -18,3 +18,13 @@ export type Appointment = {
   professions: string[];
   appointment_status: AppointmentStatus;
 };
+
+export type AppointmentFilters = {
+  professional_id: number;
+  profession_id: number;
+  patient_rut: string;
+  year_month: string;
+  date_from: Date;
+  date_to: Date;
+  date: Date;
+};

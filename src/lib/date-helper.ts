@@ -25,5 +25,6 @@ function getWeekRange(inputDate: Date): DateWeekRange {
 export enum dateFormat {
   "dd LLL y" = "dd LLL y",
   "dd-MM-yyyy" = "dd-MM-yyyy",
+  "yyyy-MM-dd" = "yyyy-MM-dd",
   "EEEE dd 'de' MMMM 'de' yyyy" = "EEEE dd 'de' MMMM 'de' yyyy",
 }

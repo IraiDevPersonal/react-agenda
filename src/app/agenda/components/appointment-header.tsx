@@ -1,7 +1,7 @@
 import { DefaultTooltip } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-import { StatusColors, StatusNames } from "../lib/constants";
+import { StatusColors, StatusNames } from "../helpers/constants";
 import { AppointmentStatus } from "../types/appointment";
 import { AppointmentFilter } from "./appointment-filter";
 

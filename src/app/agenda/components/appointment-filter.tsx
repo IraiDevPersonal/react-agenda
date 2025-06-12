@@ -1,6 +1,4 @@
-import { useState } from "react";
 
-import type { DateWeekRange } from "@/types/global.type";
 
 import { Show } from "@/components/show";
 import { Button } from "@/components/ui/button";
@@ -13,19 +11,21 @@ import { dateHelper } from "@/lib/date-helper";
 
 import type { AppointmentViewMode } from "../types";
 
+import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 import { useAppointmentUiStore } from "../stores/appointment-ui-store";
 
 function AppointmentFilter() {
   const viewMode = useAppointmentUiStore(s => s.viewMode);
   const onViewModeChange = useAppointmentUiStore(s => s.onViewModeChange);
 
-  const [week, setWeek] = useState<DateWeekRange | undefined>(undefined);
-  const [date, setDate] = useState<Date | undefined>(undefined);
-  const [profession, setProfession] = useState("");
-  const [professional, setProfessional] = useState("");
+  const { filters, onFilter } = useAppointmentFilters();
 
   const handleSelectCurrentWeek = () => {
-    setWeek(dateHelper.getWeekRange(new Date()));
+    const newDate = dateHelper.getWeekRange(new Date())
+    onFilter({
+      date: newDate.from,
+      date_to: newDate.to
+    });
   };
 
   return (
@@ -34,8 +34,8 @@ function AppointmentFilter() {
         <Label>Profesión</Label>
         <SelectNative
           className="w-52"
-          value={profession}
-          onChange={e => setProfession(e.target.value)}
+          value={filters.profession_id}
+          onChange={e => onFilter({ profession_id: +e.target.value })}
           options={[
             { label: "Profesión 1", value: "1" },
             { label: "Profesión 2", value: "2" },
@@ -47,8 +47,8 @@ function AppointmentFilter() {
         <Label>Profesional</Label>
         <SelectNative
           className="w-52"
-          value={professional}
-          onChange={e => setProfessional(e.target.value)}
+          value={filters.professional_id}
+          onChange={e => onFilter({ professional_id: +e.target.value })}
           options={[
             { label: "Profesional 1", value: "1" },
             { label: "Profesional 2", value: "2" },
@@ -57,11 +57,25 @@ function AppointmentFilter() {
       </FieldWrapper>
 
       <Show when={viewMode === "week"}>
-        <DateWeekSelector label="Semana" value={week} onValueChange={setWeek} />
+        <DateWeekSelector
+          label="Semana"
+          value={{
+            from: filters.date_from!,
+            to: filters.date_to!
+          }}
+          onValueChange={v => onFilter({
+            date_from: v?.from,
+            date_to: v?.to,
+          })}
+        />
       </Show>
 
       <Show when={viewMode === "day"}>
-        <DatePicker label="Fecha" value={date} onValueChange={setDate} />
+        <DatePicker
+          label="Fecha"
+          value={filters.date}
+          onValueChange={v => onFilter({ date: v, date_from: null, date_to: null })}
+        />
       </Show>
 
       <Button variant="outline" onClick={handleSelectCurrentWeek}>
@@ -71,7 +85,17 @@ function AppointmentFilter() {
       <SelectNative
         value={viewMode}
         withEmptyOption={false}
-        onChange={e => onViewModeChange(e.target.value as AppointmentViewMode)}
+        onChange={e => {
+          const value = e.target.value as AppointmentViewMode
+          if (value === "day") {
+            onFilter({ date_from: null, date_to: null })
+          }
+          if (value === "week") {
+            const date = dateHelper.getWeekRange(filters.date ?? new Date())
+            onFilter({ date_from: date.from, date_to: date.to, date: null })
+          }
+          onViewModeChange(value)
+        }}
         options={[
           { label: "Día", value: "day" },
           { label: "Semana", value: "week" },
@@ -82,3 +106,4 @@ function AppointmentFilter() {
 }
 
 export { AppointmentFilter };
+

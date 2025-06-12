@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { For } from "@/components/for";
 import { Show } from "@/components/show";
 
-import { showAppointmentInDay } from "../lib/utils";
+import { showAppointmentInDay } from "../helpers/utils";
 import { getAppointmentsQueryOptions } from "../queries/appointment-queries";
 import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
