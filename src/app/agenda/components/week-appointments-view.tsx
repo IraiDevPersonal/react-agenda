@@ -10,8 +10,8 @@ import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
 
 function WeekAppointmentsView() {
-  const { filtersAsParams } = useAppointmentFilters();
-  const { data } = useQuery(getAppointmentsQueryOptions(filtersAsParams));
+  const { filtersAsParams: { date, date_from, ...params } } = useAppointmentFilters();
+  const { data } = useQuery(getAppointmentsQueryOptions({ ...params, date: date_from }));
 
   return (
     <Grid>

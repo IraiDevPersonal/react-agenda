@@ -11,8 +11,8 @@ import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
 
 function DayAppointmentsView() {
-  const { filtersAsParams: { date_to, ...filters } } = useAppointmentFilters();
-  const { data } = useQuery(getAppointmentsQueryOptions(filters));
+  const { filtersAsParams: { date_to, date_from, ...params }, filters } = useAppointmentFilters();
+  const { data } = useQuery(getAppointmentsQueryOptions(params));
 
   return (
     <>
@@ -20,7 +20,7 @@ function DayAppointmentsView() {
         <Grid.Header>
           <Grid.Col></Grid.Col>
           <Grid.Col className="text-left col-span-6 first-letter:uppercase">
-            {dateHelper.format(new Date(), dateFormat["EEEE dd 'de' MMMM 'de' yyyy"])}
+            {dateHelper.format(filters.date, dateFormat["EEEE dd 'de' MMMM 'de' yyyy"])}
           </Grid.Col>
         </Grid.Header>
         <For
@@ -31,7 +31,9 @@ function DayAppointmentsView() {
             <Grid.Row key={appointment.uid}>
               <Grid.TimeCol from={appointment.time_from} to={appointment.time_to} />
               <Grid.Col className="col-span-6">
-                <Show when={showAppointmentInDay(appointment.date, dateHelper.getISODay(new Date()))}>
+                <Show
+                  when={showAppointmentInDay(appointment.date, dateHelper.getISODay(filters.date))}
+                >
                   <AppointmentCard appointment={appointment} />
                 </Show>
               </Grid.Col>

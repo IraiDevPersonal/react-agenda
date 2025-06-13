@@ -3,7 +3,6 @@ import { useId } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
@@ -29,8 +28,7 @@ function DatePicker({ value, label, classNames, dateViewStyle = "PPP", onValueCh
   const id = useId();
 
   return (
-    <FieldWrapper className={classNames?.root}>
-      {label && <Label htmlFor={id} className={classNames?.label}>{label}</Label>}
+    <FieldWrapper classNames={classNames} label={label} labelId={id}>
       <Popover>
         <PopoverTrigger asChild>
           <Button

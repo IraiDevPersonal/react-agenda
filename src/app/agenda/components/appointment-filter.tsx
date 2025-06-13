@@ -1,65 +1,38 @@
-import type { ChangeEvent } from "react";
+import { SearchIcon } from "lucide-react";
 
-import { useQuery } from "@tanstack/react-query";
-
-import { getProfessionForFilterQueryOptions } from "@/app/profession/queries/profession.query";
-import { getProfessionalForFilterQueryOptions } from "@/app/professional/queries/professional.query";
 import { Show } from "@/components/show";
 import { Button } from "@/components/ui/button";
-import { DateWeekSelector } from "@/components/ui/date-week-selector";
 import { DatePicker } from "@/components/ui/day-picker";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
-import { Label } from "@/components/ui/label";
+import { FieldWrapperWithAccessory } from "@/components/ui/field-wrapper-with-accessory";
+import { Input } from "@/components/ui/input";
 import { SelectNative } from "@/components/ui/select-native";
+import { WeekPicker } from "@/components/ui/week-picker";
 import { dateHelper } from "@/lib/date-helper";
 
-import type { AppointmentViewMode } from "../types";
-
-import { useAppointmentFilters } from "../hooks/use-appointment-filters";
-import { useAppointmentUiStore } from "../stores/appointment-ui-store";
+import { useFilterAppointmentController } from "../hooks/use-filter-appointment-controller";
 
 function AppointmentFilter() {
-  const viewMode = useAppointmentUiStore(s => s.viewMode);
-  const onViewModeChange = useAppointmentUiStore(s => s.onViewModeChange);
-
-  const { filters, onFilter } = useAppointmentFilters();
-
-  const { data: professionOptions } = useQuery({
-    enabled: true,
-    ...getProfessionForFilterQueryOptions(),
-  });
-
-  const { data: professionalOptions } = useQuery({
-    enabled: true,
-    ...getProfessionalForFilterQueryOptions(),
-  });
-
-  const handleSelectCurrentWeek = () => {
-    const newDate = dateHelper.getWeekRange(new Date());
-    onFilter({
-      date: newDate.from,
-      date_to: newDate.to,
-    });
-  };
-
-  const handleViewModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value as AppointmentViewMode;
-
-    if (value === "day") {
-      onFilter({ date_to: null });
-    }
-    if (value === "week") {
-      const newDate = dateHelper.getWeekRange(filters.date ?? new Date());
-      onFilter({ date_to: newDate.to, date: newDate.from });
-    }
-
-    onViewModeChange(value);
-  };
+  const {
+    filters,
+    viewMode,
+    professionOptions,
+    professionalOptions,
+    onFilter,
+    handleSelectToday,
+    handleViewModeChange,
+  } = useFilterAppointmentController();
 
   return (
     <>
-      <FieldWrapper>
-        <Label>Profesión</Label>
+      <FieldWrapperWithAccessory
+        label="Rut Paciente"
+        endComponent={<SearchIcon size={20} />}
+      >
+        <Input className="w-52 pe-8" placeholder="Buscar..." />
+      </FieldWrapperWithAccessory>
+
+      <FieldWrapper label="Profesión">
         <SelectNative
           className="w-52"
           value={filters.profession_id}
@@ -68,8 +41,7 @@ function AppointmentFilter() {
         />
       </FieldWrapper>
 
-      <FieldWrapper>
-        <Label>Profesional</Label>
+      <FieldWrapper label="Profesional">
         <SelectNative
           className="w-52"
           value={filters.professional_id}
@@ -79,14 +51,14 @@ function AppointmentFilter() {
       </FieldWrapper>
 
       <Show when={viewMode === "week"}>
-        <DateWeekSelector
+        <WeekPicker
           label="Semana"
           value={{
-            from: filters.date!,
-            to: filters.date_to!,
+            from: filters.date_from,
+            to: filters.date_to,
           }}
           onValueChange={v => onFilter({
-            date: v?.from,
+            date_from: v?.from,
             date_to: v?.to,
           })}
         />
@@ -96,11 +68,11 @@ function AppointmentFilter() {
         <DatePicker
           label="Fecha"
           value={filters.date}
-          onValueChange={v => onFilter({ date: v, date_to: null })}
+          onValueChange={v => onFilter({ date: dateHelper.normalizeDate(v) })}
         />
       </Show>
 
-      <Button variant="outline" onClick={handleSelectCurrentWeek}>
+      <Button variant="outline" onClick={() => handleSelectToday(viewMode)}>
         Hoy
       </Button>
 

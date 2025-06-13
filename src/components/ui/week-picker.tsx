@@ -14,7 +14,6 @@ import { dateFormat, dateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
 
 import { FieldWrapper } from "./field-wrapper";
-import { Label } from "./label";
 
 type Props = {
   onValueChange?: (value: Props["value"]) => void;
@@ -26,22 +25,21 @@ type Props = {
   }>;
 };
 
-function DateWeekSelector({ label, value, classNames, onValueChange }: Props) {
+function WeekPicker({ label, value, classNames, onValueChange }: Props) {
   const id = useId();
 
   const handleSelect = (value: Date | undefined) => {
     if (value) {
       const week = dateHelper.getWeekRange(value);
       onValueChange?.({
-        from: new Date(week.from),
-        to: new Date(week.to),
+        from: week.from,
+        to: week.to,
       });
     }
   };
 
   return (
-    <FieldWrapper className={classNames?.root}>
-      {label && <Label htmlFor={id} className={cn(classNames?.label)}>{label}</Label>}
+    <FieldWrapper classNames={classNames} label={label} labelId={id}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -97,4 +95,4 @@ function DateWeekSelector({ label, value, classNames, onValueChange }: Props) {
   );
 }
 
-export { DateWeekSelector };
+export { WeekPicker };
