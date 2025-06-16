@@ -6,7 +6,7 @@ import type { DateWeekRange } from "@/types/global.type";
 setDefaultOptions({ locale: es, weekStartsOn: 1 });
 
 export const dateHelper = {
-  createDate: (date?: Date) => normalizeDate(date ?? new Date()),
+  createDate: (date?: Date | null) => normalizeDate(date ?? new Date()),
   normalizeDate,
   getWeekRange,
   startOfWeek,

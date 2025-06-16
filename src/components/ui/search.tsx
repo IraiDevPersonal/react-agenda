@@ -30,7 +30,7 @@ function Search({ label, deboundeDelay = 1000, value, onSearch, onClearValue, on
       label={label}
       endComponent={(
         <>
-          {onClearValue
+          {onClearValue && value
             && (
               <button
                 type="button"

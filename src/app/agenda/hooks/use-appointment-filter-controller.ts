@@ -74,6 +74,18 @@ export function useAppointmentFilterController() {
     onFilter({ patient_rut: "" });
   };
 
+  const handleClearAllFilters = () => {
+    onFilter({
+      professional_id: null,
+      profession_id: null,
+      patient_rut: null,
+      date_from: null,
+      date_to: null,
+      date: null,
+    });
+    searchRef.current!.value = "";
+  };
+
   return {
     // states
     filters,
@@ -88,7 +100,8 @@ export function useAppointmentFilterController() {
     handelSearch,
     handleSelectToday,
     handleClearSearch,
-    // handleSearchChange,
     handleViewModeChange,
+    handleClearAllFilters,
+    // handleSearchChange,
   };
 }

@@ -1,3 +1,5 @@
+import { FunnelXIcon } from "lucide-react";
+
 import { Show } from "@/components/show";
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/day-picker";
@@ -21,6 +23,7 @@ function AppointmentFilter() {
     handleSelectToday,
     handleClearSearch,
     handleViewModeChange,
+    handleClearAllFilters,
   } = useAppointmentFilterController();
 
   return (
@@ -31,14 +34,14 @@ function AppointmentFilter() {
         onSearch={handelSearch}
         key={filters.patient_rut}
         onClearValue={handleClearSearch}
-        defaultValue={filters.patient_rut}
+        defaultValue={filters.patient_rut ?? ""}
       />
 
       <FieldWrapper label="Profesión">
         <SelectNative
           className="w-52"
           options={professionOptions}
-          value={filters.profession_id}
+          value={filters.profession_id ?? ""}
           onChange={e => onFilter({ profession_id: +e.target.value, professional_id: null })}
         />
       </FieldWrapper>
@@ -47,7 +50,7 @@ function AppointmentFilter() {
         <SelectNative
           className="w-52"
           options={filteredProfessional}
-          value={filters.professional_id}
+          value={filters.professional_id ?? ""}
           onChange={e => onFilter({ professional_id: +e.target.value })}
         />
       </FieldWrapper>
@@ -55,10 +58,12 @@ function AppointmentFilter() {
       <Show when={viewMode === "week"}>
         <WeekPicker
           label="Semana"
-          value={{
-            from: filters.date_from,
-            to: filters.date_to,
-          }}
+          value={filters.date_from && filters.date_to
+            ? {
+                from: filters.date_from,
+                to: filters.date_to,
+              }
+            : undefined}
           onValueChange={v => onFilter({
             date_from: v?.from,
             date_to: v?.to,
@@ -69,7 +74,7 @@ function AppointmentFilter() {
       <Show when={viewMode === "day"}>
         <DatePicker
           label="Fecha"
-          value={filters.date}
+          value={filters.date ?? undefined}
           onValueChange={v => onFilter({ date: dateHelper.normalizeDate(v) })}
         />
       </Show>
@@ -87,6 +92,11 @@ function AppointmentFilter() {
           { label: "Semana", value: "week" },
         ]}
       />
+
+      <Button variant="outline" onClick={handleClearAllFilters}>
+        <span>Limpiar</span>
+        <FunnelXIcon size={20} />
+      </Button>
     </>
   );
 }
