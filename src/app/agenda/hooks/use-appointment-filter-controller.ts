@@ -1,11 +1,12 @@
 import type { ChangeEvent } from "react";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { prettifyRut } from "react-rut-formatter";
 
 import { getProfessionForFilterQueryOptions } from "@/app/profession/queries/profession.query";
 import { getProfessionalForFilterQueryOptions } from "@/app/professional/queries/professional.query";
+import { QueryKeys } from "@/constants/query-keys.constant";
 import { dateHelper } from "@/lib/date-helper";
 
 import type { AppointmentViewMode } from "../types";
@@ -17,6 +18,7 @@ export function useAppointmentFilterController() {
   const viewMode = useAppointmentUiStore(s => s.viewMode);
   const onViewModeChange = useAppointmentUiStore(s => s.onViewModeChange);
   const { filters, onFilter } = useAppointmentFilters();
+  const queryClient = useQueryClient();
   // const [search, setSearch] = useState(filters.patient_rut);
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -86,6 +88,21 @@ export function useAppointmentFilterController() {
     searchRef.current!.value = "";
   };
 
+  const handleRefreshAppointments = () => {
+    queryClient.invalidateQueries({
+      queryKey: [QueryKeys.appointments],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: [QueryKeys.prefessionals],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: [QueryKeys.prefessions],
+    });
+
+  };
+
   return {
     // states
     filters,
@@ -102,6 +119,7 @@ export function useAppointmentFilterController() {
     handleClearSearch,
     handleViewModeChange,
     handleClearAllFilters,
+    handleRefreshAppointments,
     // handleSearchChange,
   };
 }

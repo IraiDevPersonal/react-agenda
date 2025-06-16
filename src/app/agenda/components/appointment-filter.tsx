@@ -1,4 +1,4 @@
-import { FunnelXIcon } from "lucide-react";
+import { FunnelXIcon, RotateCcwIcon } from "lucide-react";
 
 import { Show } from "@/components/show";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import { DatePicker } from "@/components/ui/day-picker";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
+import { DefaultTooltip } from "@/components/ui/tooltip";
 import { WeekPicker } from "@/components/ui/week-picker";
 import { dateHelper } from "@/lib/date-helper";
 
@@ -24,6 +25,7 @@ function AppointmentFilter() {
     handleClearSearch,
     handleViewModeChange,
     handleClearAllFilters,
+    handleRefreshAppointments,
   } = useAppointmentFilterController();
 
   return (
@@ -93,10 +95,18 @@ function AppointmentFilter() {
         ]}
       />
 
-      <Button variant="outline" onClick={handleClearAllFilters}>
-        <span>Limpiar</span>
-        <FunnelXIcon size={20} />
-      </Button>
+      <DefaultTooltip content="Refrescar datos">
+        <Button variant="outline" size="icon" onClick={handleRefreshAppointments}>
+          <RotateCcwIcon size={20} />
+        </Button>
+      </DefaultTooltip>
+
+      <DefaultTooltip content="Limpiar todos los filtros">
+        <Button variant="outline" onClick={handleClearAllFilters}>
+          <span>Limpiar</span>
+          <FunnelXIcon size={20} />
+        </Button>
+      </DefaultTooltip>
     </>
   );
 }
