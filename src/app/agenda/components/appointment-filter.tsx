@@ -7,31 +7,31 @@ import { SelectNative } from "@/components/ui/select-native";
 import { WeekPicker } from "@/components/ui/week-picker";
 import { dateHelper } from "@/lib/date-helper";
 
-import { useFilterAppointmentController } from "../hooks/use-filter-appointment-controller";
+import { useAppointmentFilterController } from "../hooks/use-appointment-filter-controller";
 
 function AppointmentFilter() {
   const {
     filters,
     viewMode,
-    searchValue,
+    searchRef,
     professionOptions,
     filteredProfessional,
     onFilter,
     handelSearch,
     handleSelectToday,
     handleClearSearch,
-    handleSearchChange,
     handleViewModeChange,
-  } = useFilterAppointmentController();
+  } = useAppointmentFilterController();
 
   return (
     <>
       <Search
-        value={searchValue}
+        ref={searchRef}
         label="Rut paciente"
         onSearch={handelSearch}
-        onChange={handleSearchChange}
+        key={filters.patient_rut}
         onClearValue={handleClearSearch}
+        defaultValue={filters.patient_rut}
       />
 
       <FieldWrapper label="Profesión">

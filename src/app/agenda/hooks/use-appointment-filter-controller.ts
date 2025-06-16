@@ -1,7 +1,7 @@
 import type { ChangeEvent } from "react";
 
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useRef } from "react";
 import { prettifyRut } from "react-rut-formatter";
 
 import { getProfessionForFilterQueryOptions } from "@/app/profession/queries/profession.query";
@@ -13,11 +13,12 @@ import type { AppointmentViewMode } from "../types";
 import { useAppointmentUiStore } from "../stores/appointment-ui-store";
 import { useAppointmentFilters } from "./use-appointment-filters";
 
-export function useFilterAppointmentController() {
+export function useAppointmentFilterController() {
   const viewMode = useAppointmentUiStore(s => s.viewMode);
   const onViewModeChange = useAppointmentUiStore(s => s.onViewModeChange);
   const { filters, onFilter } = useAppointmentFilters();
-  const [search, setSearch] = useState(filters.patient_rut);
+  // const [search, setSearch] = useState(filters.patient_rut);
+  const searchRef = useRef<HTMLInputElement>(null);
 
   const { data: professionOptions = [] } = useQuery({
     enabled: true,
@@ -34,7 +35,7 @@ export function useFilterAppointmentController() {
   );
 
   const handleSelectToday = (viewMode: AppointmentViewMode) => {
-    const currentDate = dateHelper.normalizeDate(filters.date);
+    const currentDate = dateHelper.createDate(filters.date);
     if (viewMode === "day") {
       onFilter({ date: currentDate, date_to: null, date_from: null });
     }
@@ -56,15 +57,20 @@ export function useFilterAppointmentController() {
     onViewModeChange(viewMode);
   };
 
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearch(value.length > 2 ? prettifyRut(value) : value);
+  // const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const value = e.target.value;
+  //   setSearch(value.length > 2 ? prettifyRut(value) : value);
+  // };
+
+  const handelSearch = (v: string) => {
+    const rut = prettifyRut(v);
+    searchRef.current!.value = rut;
+    onFilter({ patient_rut: rut });
   };
 
-  const handelSearch = (v: string) => onFilter({ patient_rut: prettifyRut(v) });
-
   const handleClearSearch = () => {
-    setSearch("");
+    // setSearch("");
+    searchRef.current!.value = "";
     onFilter({ patient_rut: "" });
   };
 
@@ -72,16 +78,17 @@ export function useFilterAppointmentController() {
     // states
     filters,
     viewMode,
+    searchRef,
     professionOptions,
     professionalOptions,
     filteredProfessional,
-    searchValue: search,
+    // searchValue: search,
     // methods
     onFilter,
     handelSearch,
     handleSelectToday,
     handleClearSearch,
-    handleSearchChange,
+    // handleSearchChange,
     handleViewModeChange,
   };
 }

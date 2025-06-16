@@ -9,7 +9,7 @@ import type { AppointmentFilters } from "../types/appointment";
 
 export function useAppointmentFilters() {
   const [filters, onFilter] = useQueryStates<UseQueryStatesKeysMap<AppointmentFilters>>((() => {
-    const currentDate = dateHelper.normalizeDate(new Date());
+    const currentDate = dateHelper.createDate();
     const rangeDate = dateHelper.getWeekRange(currentDate);
 
     return {
