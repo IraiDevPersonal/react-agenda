@@ -1,12 +1,12 @@
 import type { UseQueryOptions } from "@tanstack/react-query";
 
-import type { Option } from "@/types/global.type";
-
 import { QueryKeys } from "@/constants/query-keys.constant";
+
+import type { ProfessionalOption } from "../apdapters/professional-filter.adapter";
 
 import { professionalAction } from "../actions/prefessional.action";
 
-export function getProfessionalForFilterQueryOptions(): UseQueryOptions<Option[]> {
+export function getProfessionalForFilterQueryOptions(): UseQueryOptions<ProfessionalOption[]> {
   return {
     refetchOnWindowFocus: false,
     queryKey: [QueryKeys.prefessionals, "to-filter"],

@@ -17,13 +17,13 @@ function FieldWrapperWithAccessory({ children, label, classNames, endComponent, 
     <FieldWrapper classNames={classNames} label={label}>
       <div className="relative">
         {startComponent && (
-          <div className="px-2 absolute top-1/2 -translate-y-1/2 start-0 text-muted-foreground">
+          <div className="px-2 absolute top-1/2 -translate-y-1/2 start-0 text-muted-foreground flex items-center gap-1">
             {startComponent}
           </div>
         )}
         {children}
         {endComponent && (
-          <div className="px-2 absolute top-1/2 -translate-y-1/2 end-0 text-muted-foreground">
+          <div className="px-2 absolute top-1/2 -translate-y-1/2 end-0 text-muted-foreground flex items-center gap-1">
             {endComponent}
           </div>
         )}
