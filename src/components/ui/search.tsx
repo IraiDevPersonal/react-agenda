@@ -4,6 +4,8 @@ import { SearchIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
+import { cn } from "@/lib/utils";
+
 import { FieldWrapperWithAccessory } from "./field-wrapper-with-accessory";
 import { Input } from "./input";
 
@@ -12,9 +14,24 @@ type Props = PropsWithChildren<{
   onSearch?: (v: string) => void;
   deboundeDelay?: number;
   label?: string;
+  classNames?: Partial<{
+    input: string;
+    root: string;
+    label: string;
+  }>;
 }> & ComponentProps<"input">;
 
-function Search({ label, deboundeDelay = 1000, value, onSearch, onClearValue, onChange, onKeyDown, ...props }: Props) {
+function Search({
+  deboundeDelay = 1000,
+  classNames,
+  label,
+  value,
+  onClearValue,
+  onKeyDown,
+  onSearch,
+  onChange,
+  ...props
+}: Props) {
   const [isSubmited, setIsSubmited] = useState(false);
   const debounced = useDebouncedCallback(
     (value) => {
@@ -28,6 +45,7 @@ function Search({ label, deboundeDelay = 1000, value, onSearch, onClearValue, on
   return (
     <FieldWrapperWithAccessory
       label={label}
+      classNames={classNames}
       endComponent={(
         <>
           {onClearValue && value
@@ -45,7 +63,7 @@ function Search({ label, deboundeDelay = 1000, value, onSearch, onClearValue, on
       )}
     >
       <Input
-        className="w-52 pe-14"
+        className={cn("w-48 pe-14", classNames?.input)}
         placeholder="Buscar..."
         value={value}
         onChange={(e) => {

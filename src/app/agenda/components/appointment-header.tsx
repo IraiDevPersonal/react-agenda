@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 import { StatusColors, StatusNames } from "../helpers/constants";
 import { AppointmentStatus } from "../types/appointment";
-import { AppointmentFilter } from "./appointment-filter";
+import { AppointmentFilters } from "./appointment-filters";
 
 function AppointmentHeader() {
   return (
@@ -20,9 +20,7 @@ function AppointmentHeader() {
             <ColorBall status={AppointmentStatus.CANCELLED} />
           </div>
         </div>
-        <div className="flex items-end gap-2">
-          <AppointmentFilter />
-        </div>
+        <AppointmentFilters />
       </header>
     </>
   );

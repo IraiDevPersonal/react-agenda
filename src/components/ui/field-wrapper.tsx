@@ -1,7 +1,5 @@
 import type { PropsWithChildren } from "react";
 
-import { useId } from "react";
-
 import { cn } from "@/lib/utils";
 
 import { Label } from "./label";

@@ -12,7 +12,7 @@ import { dateHelper } from "@/lib/date-helper";
 
 import { useAppointmentFilterController } from "../hooks/use-appointment-filter-controller";
 
-function AppointmentFilter() {
+function InlineAppointmentFilters() {
   const {
     filters,
     viewMode,
@@ -111,4 +111,4 @@ function AppointmentFilter() {
   );
 }
 
-export { AppointmentFilter };
+export { InlineAppointmentFilters };

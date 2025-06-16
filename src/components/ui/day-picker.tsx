@@ -21,6 +21,7 @@ type Props = {
   classNames?: Partial<{
     root: string;
     label: string;
+    trigger: string;
   }>;
 };
 
@@ -34,7 +35,7 @@ function DatePicker({ value, label, classNames, dateViewStyle = "PPP", onValueCh
           <Button
             id={id}
             variant="outline"
-            className="group bg-background hover:bg-background border-input w-52 justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]"
+            className={cn("group bg-background hover:bg-background border-input w-52 justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]", classNames?.trigger)}
           >
             <span
               className={cn("truncate", !value && "text-muted-foreground")}
