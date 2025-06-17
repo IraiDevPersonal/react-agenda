@@ -89,18 +89,17 @@ export function useAppointmentFilterController() {
   };
 
   const handleRefreshAppointments = () => {
-    queryClient.invalidateQueries({
+    queryClient.refetchQueries({
       queryKey: [QueryKeys.appointments],
     });
 
-    queryClient.invalidateQueries({
+    queryClient.refetchQueries({
       queryKey: [QueryKeys.prefessionals],
     });
 
-    queryClient.invalidateQueries({
+    queryClient.refetchQueries({
       queryKey: [QueryKeys.prefessions],
     });
-
   };
 
   return {
