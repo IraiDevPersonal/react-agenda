@@ -77,7 +77,7 @@ function WeekPicker({ label, value, classNames, onValueChange }: Props) {
             mode="single"
             selected={value?.from}
             onSelect={handleSelect}
-            defaultMonth={value?.from ?? new Date()}
+            defaultMonth={value?.from ?? dateHelper.createDate()}
             numberOfMonths={1}
             modifiers={{
               selected: value ? [value.from!, value.to!] : undefined,

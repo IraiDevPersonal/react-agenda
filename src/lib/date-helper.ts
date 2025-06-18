@@ -1,26 +1,13 @@
-import { endOfWeek, format, getDay, getISODay, parseISO, setDefaultOptions, startOfWeek } from "date-fns";
+import { addDays, eachDayOfInterval, endOfWeek, format, getDay, getISODay, isSameMonth, parseISO, setDefaultOptions, startOfWeek } from "date-fns";
 import { es } from "date-fns/locale";
 
 import type { DateWeekRange } from "@/types/global.type";
 
 setDefaultOptions({ locale: es, weekStartsOn: 1 });
 
-export const dateHelper = {
-  createDate: (date?: Date | null) => normalizeDate(date ?? new Date()),
-  normalizeDate,
-  getWeekRange,
-  startOfWeek,
-  endOfWeek,
-  getISODay,
-  parseISO,
-  format,
-  getDay,
-};
-
 function getWeekRange(inputDate: Date): DateWeekRange {
-  const from = normalizeDate(dateHelper.startOfWeek(inputDate, { weekStartsOn: 1 }));
-  const to = normalizeDate(from);
-  to.setDate(from.getDate() + 6);
+  const from = startOfWeek(normalizeDate(inputDate), { weekStartsOn: 1 });
+  const to = addDays(from, 6);
   return { from, to };
 }
 
@@ -28,9 +15,25 @@ function normalizeDate(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
-export enum dateFormat {
+enum dateFormat {
   "dd LLL y" = "dd LLL y",
   "dd-MM-yyyy" = "dd-MM-yyyy",
   "yyyy-MM-dd" = "yyyy-MM-dd",
   "EEEE dd 'de' MMMM 'de' yyyy" = "EEEE dd 'de' MMMM 'de' yyyy",
 }
+
+const dateHelper = {
+  createDate: (date?: Date | null) => normalizeDate(date ?? new Date()),
+  eachDayOfInterval,
+  normalizeDate,
+  getWeekRange,
+  startOfWeek,
+  isSameMonth,
+  endOfWeek,
+  getISODay,
+  parseISO,
+  format,
+  getDay,
+};
+
+export { dateFormat, dateHelper };

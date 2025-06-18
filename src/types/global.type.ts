@@ -4,6 +4,10 @@ export type StrictRequired<T> = {
   [P in keyof T]-?: Exclude<T[P], undefined>;
 };
 
+export type StringifyObject<T> = {
+  [K in keyof T]: string;
+};
+
 export type Option<T extends object = object> = {
   label: string;
   value: string | number;
