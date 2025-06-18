@@ -17,9 +17,9 @@ import { useAppointmentFilters } from "./use-appointment-filters";
 export function useAppointmentFilterController() {
   const viewMode = useAppointmentUiStore(s => s.viewMode);
   const onViewModeChange = useAppointmentUiStore(s => s.onViewModeChange);
+
+  const { refetchQueries } = useQueryClient();
   const { filters, onFilter } = useAppointmentFilters();
-  const queryClient = useQueryClient();
-  // const [search, setSearch] = useState(filters.patient_rut);
   const searchRef = useRef<HTMLInputElement>(null);
 
   const { data: professionOptions = [] } = useQuery({
@@ -59,11 +59,6 @@ export function useAppointmentFilterController() {
     onViewModeChange(viewMode);
   };
 
-  // const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const value = e.target.value;
-  //   setSearch(value.length > 2 ? prettifyRut(value) : value);
-  // };
-
   const handelSearch = (v: string) => {
     const rut = prettifyRut(v);
     searchRef.current!.value = rut;
@@ -71,7 +66,6 @@ export function useAppointmentFilterController() {
   };
 
   const handleClearSearch = () => {
-    // setSearch("");
     searchRef.current!.value = "";
     onFilter({ patient_rut: "" });
   };
@@ -89,15 +83,15 @@ export function useAppointmentFilterController() {
   };
 
   const handleRefreshAppointments = () => {
-    queryClient.refetchQueries({
+    refetchQueries({
       queryKey: [QueryKeys.appointments],
     });
 
-    queryClient.refetchQueries({
+    refetchQueries({
       queryKey: [QueryKeys.prefessionals],
     });
 
-    queryClient.refetchQueries({
+    refetchQueries({
       queryKey: [QueryKeys.prefessions],
     });
   };

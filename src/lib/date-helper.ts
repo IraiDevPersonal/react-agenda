@@ -11,6 +11,7 @@ function getWeekRange(inputDate: Date): DateWeekRange {
   return { from, to };
 }
 
+// normaliza una fecha a media noche
 function normalizeDate(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
@@ -23,6 +24,7 @@ enum dateFormat {
 }
 
 const dateHelper = {
+  // crea una fecha a media noche
   createDate: (date?: Date | null) => normalizeDate(date ?? new Date()),
   eachDayOfInterval,
   normalizeDate,

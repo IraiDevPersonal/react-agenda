@@ -9,7 +9,7 @@ import { serializeQueryParams } from "@/lib/utils";
 import type { AppointmentFilters } from "../types/appointment";
 
 function parser(): UseQueryStatesKeysMap<AppointmentFilters> {
-  const currentDate = new Date();
+  const currentDate = dateHelper.createDate();
   const rangeDate = dateHelper.getWeekRange(currentDate);
 
   return {
