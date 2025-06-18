@@ -12,14 +12,13 @@ import { WeekPicker } from "@/components/ui/week-picker";
 import { dateHelper } from "@/lib/date-helper";
 
 import { useAppointmentFilterController } from "../hooks/use-appointment-filter-controller";
+import { useAppointmentFilterOptions } from "../hooks/use-appointment-filter-options";
 
 function ModalAppointmentFilters() {
   const {
     filters,
     viewMode,
     searchRef,
-    professionOptions,
-    filteredProfessional,
     onFilter,
     handelSearch,
     handleSelectToday,
@@ -28,6 +27,9 @@ function ModalAppointmentFilters() {
     handleClearAllFilters,
     handleRefreshAppointments,
   } = useAppointmentFilterController();
+
+  const { professionOptions, filteredProfessionals } = useAppointmentFilterOptions();
+
   return (
     <>
       <DefaultTooltip content="Refrescar datos">
@@ -67,15 +69,15 @@ function ModalAppointmentFilters() {
             <Show when={viewMode === "week"}>
               <WeekPicker
                 label="Semana"
-                classNames={{
-                  trigger: "w-full",
-                }}
-                value={filters.date_from && filters.date_to
-                  ? {
-                      from: filters.date_from,
-                      to: filters.date_to,
-                    }
-                  : undefined}
+                classNames={{ trigger: "w-full" }}
+                value={
+                  filters.date_from && filters.date_to
+                    ? {
+                        from: filters.date_from,
+                        to: filters.date_to,
+                      }
+                    : undefined
+                }
                 onValueChange={v => onFilter({
                   date_from: v?.from,
                   date_to: v?.to,
@@ -108,7 +110,7 @@ function ModalAppointmentFilters() {
 
             <FieldWrapper label="Profesional">
               <SelectNative
-                options={filteredProfessional}
+                options={filteredProfessionals}
                 value={filters.professional_id ?? ""}
                 onChange={e => onFilter({ professional_id: +e.target.value })}
               />
@@ -116,9 +118,7 @@ function ModalAppointmentFilters() {
 
             <Search
               ref={searchRef}
-              classNames={{
-                input: "w-full",
-              }}
+              classNames={{ input: "w-full" }}
               label="Rut paciente"
               onSearch={handelSearch}
               key={filters.patient_rut}
@@ -127,7 +127,7 @@ function ModalAppointmentFilters() {
             />
 
             <Button variant="outline" onClick={handleClearAllFilters}>
-              <span>Limpiar</span>
+              <span>Limpiar filtros</span>
               <FunnelXIcon size={20} />
             </Button>
           </div>

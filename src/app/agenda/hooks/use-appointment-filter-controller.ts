@@ -1,11 +1,9 @@
 import type { ChangeEvent } from "react";
 
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { prettifyRut } from "react-rut-formatter";
 
-import { getProfessionForFilterQueryOptions } from "@/app/profession/queries/profession.query";
-import { getProfessionalForFilterQueryOptions } from "@/app/professional/queries/professional.query";
 import { QueryKeys } from "@/constants/query-keys.constant";
 import { dateHelper } from "@/lib/date-helper";
 
@@ -21,20 +19,6 @@ export function useAppointmentFilterController() {
   const { refetchQueries } = useQueryClient();
   const { filters, onFilter } = useAppointmentFilters();
   const searchRef = useRef<HTMLInputElement>(null);
-
-  const { data: professionOptions = [] } = useQuery({
-    enabled: true,
-    ...getProfessionForFilterQueryOptions(),
-  });
-
-  const { data: professionalOptions = [] } = useQuery({
-    enabled: true,
-    ...getProfessionalForFilterQueryOptions(),
-  });
-
-  const filteredProfessional = professionalOptions.filter(opt =>
-    filters.profession_id ? opt.professions.includes(+filters.profession_id) : true,
-  );
 
   const handleSelectToday = (viewMode: AppointmentViewMode) => {
     const currentDate = dateHelper.createDate(filters.date);
@@ -101,9 +85,6 @@ export function useAppointmentFilterController() {
     filters,
     viewMode,
     searchRef,
-    professionOptions,
-    professionalOptions,
-    filteredProfessional,
     // searchValue: search,
     // methods
     onFilter,

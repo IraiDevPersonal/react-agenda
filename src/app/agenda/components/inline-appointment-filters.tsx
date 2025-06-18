@@ -11,14 +11,13 @@ import { WeekPicker } from "@/components/ui/week-picker";
 import { dateHelper } from "@/lib/date-helper";
 
 import { useAppointmentFilterController } from "../hooks/use-appointment-filter-controller";
+import { useAppointmentFilterOptions } from "../hooks/use-appointment-filter-options";
 
 function InlineAppointmentFilters() {
   const {
     filters,
     viewMode,
     searchRef,
-    professionOptions,
-    filteredProfessional,
     onFilter,
     handelSearch,
     handleSelectToday,
@@ -27,6 +26,8 @@ function InlineAppointmentFilters() {
     handleClearAllFilters,
     handleRefreshAppointments,
   } = useAppointmentFilterController();
+
+  const { professionOptions, filteredProfessionals } = useAppointmentFilterOptions();
 
   return (
     <>
@@ -51,7 +52,7 @@ function InlineAppointmentFilters() {
       <FieldWrapper label="Profesional">
         <SelectNative
           className="w-52"
-          options={filteredProfessional}
+          options={filteredProfessionals}
           value={filters.professional_id ?? ""}
           onChange={e => onFilter({ professional_id: +e.target.value })}
         />
@@ -60,12 +61,14 @@ function InlineAppointmentFilters() {
       <Show when={viewMode === "week"}>
         <WeekPicker
           label="Semana"
-          value={filters.date_from && filters.date_to
-            ? {
-                from: filters.date_from,
-                to: filters.date_to,
-              }
-            : undefined}
+          value={
+            filters.date_from && filters.date_to
+              ? {
+                  from: filters.date_from,
+                  to: filters.date_to,
+                }
+              : undefined
+          }
           onValueChange={v => onFilter({
             date_from: v?.from,
             date_to: v?.to,

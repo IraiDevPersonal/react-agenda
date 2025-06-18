@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { For } from "@/components/for";
 import { Show } from "@/components/show";
 import { dateHelper } from "@/lib/date-helper";
-import { cn } from "@/lib/utils";
 
 import { showAppointmentInDay } from "../helpers/utils";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 import { getAppointmentsQueryOptions } from "../queries/appointment.query";
 import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
+import { AppointmentListFallback } from "./appointment-list-fallback";
 
 const { isSameMonth, format, getDay, eachDayOfInterval } = dateHelper;
 
@@ -30,7 +30,7 @@ const weekDays = [
 ];
 
 function WeekAppointmentsView() {
-  const { filters, filtersAsParams: { date, date_from, ...params } } = useAppointmentFilters();
+  const { filtersAsParams: { date, date_from, ...params }, filters } = useAppointmentFilters();
   const { data } = useQuery(getAppointmentsQueryOptions({ ...params, date: date_from }));
 
   return (
@@ -57,13 +57,7 @@ function WeekAppointmentsView() {
         </For>
       </Grid.Header>
       <For
-        fallback={cls => (
-          <Grid.Col className={cn(cls, "h-96 grid place-content-center")}>
-            {
-              filters.profession_id ? "Sin Agenda para fecha seleccionada..." : "Seleccione profesión"
-            }
-          </Grid.Col>
-        )}
+        fallback={cls => <AppointmentListFallback className={cls} />}
         items={filters.profession_id ? data : []}
       >
         {appointment => (
