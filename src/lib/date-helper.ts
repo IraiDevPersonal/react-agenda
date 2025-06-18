@@ -1,4 +1,4 @@
-import { addDays, eachDayOfInterval, endOfWeek, format, getDay, getISODay, isSameMonth, parseISO, setDefaultOptions, startOfWeek } from "date-fns";
+import { addDays, eachDayOfInterval, endOfWeek, format, getDay, getISODay, isSameMonth, parseISO, setDefaultOptions, startOfWeek, subDays } from "date-fns";
 import { es } from "date-fns/locale";
 
 import type { DateWeekRange } from "@/types/global.type";
@@ -34,6 +34,8 @@ const dateHelper = {
   endOfWeek,
   getISODay,
   parseISO,
+  addDays,
+  subDays,
   format,
   getDay,
 };

@@ -2,7 +2,7 @@ import { FunnelXIcon, RotateCcwIcon } from "lucide-react";
 
 import { Show } from "@/components/show";
 import { Button } from "@/components/ui/button";
-import { DatePicker } from "@/components/ui/day-picker";
+import { DatePicker } from "@/components/ui/date-picker";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
@@ -78,6 +78,7 @@ function InlineAppointmentFilters() {
 
       <Show when={viewMode === "day"}>
         <DatePicker
+          showControls
           label="Fecha"
           value={filters.date ?? undefined}
           onValueChange={v => onFilter({ date: dateHelper.normalizeDate(v) })}
