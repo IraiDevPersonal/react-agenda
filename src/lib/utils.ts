@@ -27,3 +27,9 @@ export function serializeQueryParams<T extends object>(obj: Record<string, any>)
     return acc;
   }, {} as StringifyObject<T>);
 }
+
+export function getUrl() {
+  return {
+    ...location,
+  };
+}

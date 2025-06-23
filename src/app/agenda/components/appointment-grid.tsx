@@ -6,7 +6,7 @@ type GridProps = PropsWithChildren<{ className?: string }>;
 
 function AppointmentGrid({ children, className }: GridProps) {
   return (
-    <div className={cn("border rounded-lg overflow-hidden", className)}>{children}</div>
+    <div className={cn("border rounded-lg overflow-hidden w-full h-max", className)}>{children}</div>
   );
 }
 

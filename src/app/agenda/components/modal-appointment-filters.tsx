@@ -2,7 +2,7 @@ import { FunnelIcon, FunnelXIcon, RotateCcwIcon } from "lucide-react";
 
 import { Show } from "@/components/show";
 import { Button } from "@/components/ui/button";
-import { DatePicker } from "@/components/ui/day-picker";
+import { DatePicker } from "@/components/ui/date-picker";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Search } from "@/components/ui/search";

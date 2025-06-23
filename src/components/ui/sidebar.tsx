@@ -2,13 +2,13 @@ import { CalendarIcon, FileIcon, UsersIcon } from "lucide-react";
 import { NavLink } from "react-router";
 
 import { NavUser } from "@/app/user/components/nav-user";
-import { Routes } from "@/constants/routes.constant";
+import { ROUTES } from "@/constants/routes.constant";
 import { cn } from "@/lib/utils";
 
 const Paths = [
-  { href: Routes.agenda, label: "Mi agenda", icon: <CalendarIcon size={20} /> },
-  { href: Routes.patients, label: "Pacientes", icon: <UsersIcon size={20} /> },
-  { href: Routes.reports, label: "Informes", icon: <FileIcon size={20} /> },
+  { href: ROUTES.agenda, label: "Mi agenda", icon: <CalendarIcon size={20} /> },
+  { href: ROUTES.patients, label: "Pacientes", icon: <UsersIcon size={20} /> },
+  { href: ROUTES.reports, label: "Informes", icon: <FileIcon size={20} /> },
 ];
 
 export function Sidebar() {

@@ -1,4 +1,4 @@
-export const Routes = {
+export const ROUTES = {
   root: "/",
   agenda: "/agenda",
   patients: "/pacientes",

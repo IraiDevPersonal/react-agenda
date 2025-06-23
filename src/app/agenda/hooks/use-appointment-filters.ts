@@ -23,7 +23,7 @@ function parser(): UseQueryStatesKeysMap<AppointmentFilters> {
 }
 
 export function useAppointmentFilters() {
-  const [filters, onFilter] = useQueryStates(parser());
+  const [filters, onFilter] = useQueryStates(parser(), { history: "replace" });
 
   const filtersAsParams = serializeQueryParams<AppointmentFilters>(filters);
 

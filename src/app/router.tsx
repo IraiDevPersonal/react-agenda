@@ -1,31 +1,32 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
-import { Routes } from "@/constants/routes.constant";
+import { ROUTES } from "@/constants/routes.constant";
 
 import AgendaPage from "./agenda/page";
 import Layout from "./layout";
 
 const router = createBrowserRouter([{
-  path: Routes.root,
+  path: ROUTES.root,
   children: [
     {
-      path: Routes.agenda,
+      path: ROUTES.agenda,
       element: <Layout />,
       children: [
         {
           index: true,
+          path: ":appointmentId?",
           element: <AgendaPage />,
         },
       ],
     },
     {
       index: true,
-      element: <Navigate to={Routes.agenda} />,
+      element: <Navigate to={ROUTES.agenda} />,
     },
   ],
 }, {
   path: "*",
-  element: <Navigate to={Routes.agenda} />,
+  element: <Navigate to={ROUTES.agenda} />,
 }]);
 
 export function Router() {

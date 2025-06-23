@@ -7,7 +7,7 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 1,
-      staleTime: 5 * 60 * 1000, // 5 minutos,
+      // staleTime: 5 * 60 * 1000, // 5 minutos,
       throwOnError(error) {
         const errorMessage = httpHelper.getErrorMessage(error);
         toast.error(errorMessage, { duration: 4000 });
