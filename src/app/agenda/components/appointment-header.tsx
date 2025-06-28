@@ -9,7 +9,7 @@ import { AppointmentFilters } from "./appointment-filters";
 function AppointmentHeader() {
   return (
     <>
-      <header className="flex items-end justify-between">
+      <header className="flex items-end justify-between w-full">
         <div>
           <h1 className="text-4xl font-bold mb-4">Mi Agenda</h1>
           <div className="flex gap-2 items-center">
@@ -31,13 +31,13 @@ function ColorBall({ status }: { status: AppointmentStatus }) {
   return (
     <DefaultTooltip content={STATUS_NAMES[status]}>
       <span
-        data-status={status.toLocaleLowerCase()}
+        data-status={status.toLocaleLowerCase().replace("_", "")}
         className={cn(
           "rounded-full h-6 w-6 cursor-help grid place-content-center",
-          "data-[status=available]:bg-neutral-100",
-          "data-[status=cancelled]:bg-red-100",
-          "data-[status=confirmed]:bg-green-100",
-          "data-[status=to_confirm]:bg-amber-100",
+          "data-[status=available]:bg-neutral-100/70",
+          "data-[status=cancelled]:bg-red-100/70",
+          "data-[status=confirmed]:bg-green-100/70",
+          "data-[status=toconfirm]:bg-amber-100/70",
           "data-[status=indeterminate]:border data-[status=indeterminate]:border-border data-[status=indeterminate]:hover:border-primary/30",
         )}
       >

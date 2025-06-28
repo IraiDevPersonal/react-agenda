@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import { useNavigate } from "react-router";
 
 import { ROUTES } from "@/constants/routes.constant";
-import { cn, getUrl } from "@/lib/utils";
+import { cn, getUrlData } from "@/lib/utils";
 
 import type { Appointment } from "../types/appointment";
 
@@ -21,19 +21,21 @@ function AppointmentCard({ appointment }: Props) {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    if (getUrl().pathname.includes(appointment.uid))
+    const { pathname, search } = getUrlData();
+
+    if (pathname.includes(appointment.uid))
       return;
-    navigate(`${ROUTES.agenda}/${appointment.uid}/${getUrl().search}`);
+    navigate(`${ROUTES.agenda}/${appointment.uid}${search}`);
   };
 
   return (
     <div
       onClick={handleNavigate}
-      data-status={appointment.appointment_status.toLocaleLowerCase()}
+      data-status={appointment.appointment_status.toLocaleLowerCase().replace("_", "")}
       className={cn(
         "relative bg-card p-2 ps-4 flex flex-col rounded-lg overflow-hidden border hover:border-primary/30 transition-colors w-full h-full justify-center cursor-pointer",
         "before:content-[' '] before:absolute before:top-0 before:left-0 before:w-2 before:h-full",
-        "data-[status=to_confirm]:before:bg-amber-400",
+        "data-[status=toconfirm]:before:bg-amber-400",
         "data-[status=available]:before:bg-neutral-200",
         "data-[status=cancelled]:before:bg-red-400",
         "data-[status=confirmed]:before:bg-green-400",

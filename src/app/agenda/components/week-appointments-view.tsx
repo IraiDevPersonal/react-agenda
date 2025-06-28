@@ -34,7 +34,7 @@ function WeekAppointmentsView() {
   const { data } = useQuery(getAppointmentsQueryOptions({ ...params, date: date_from }));
 
   return (
-    <Grid>
+    <Grid className="min-w-[1632px] w-full">
       <Grid.Header className="grid-cols-[100px_1fr_1fr_1fr_1fr_1fr_1fr]">
         <Grid.Col className="capitalize">
           {isSameMonth(filters.date_from!, filters.date_to!)

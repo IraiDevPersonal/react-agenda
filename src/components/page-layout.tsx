@@ -11,7 +11,7 @@ function PageLayout({ title, children, className = "p-4" }: Props) {
   return (
     <>
       <title>{title}</title>
-      <div className={cn("flex flex-col space-y-4 w-full", className)}>
+      <div className={cn("flex flex-col space-y-4 overflow-hidden w-full", className)}>
         {children}
       </div>
     </>

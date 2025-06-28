@@ -7,7 +7,7 @@ import { WeekAppointmentsView } from "./week-appointments-view";
 function AppointmentViewSelector() {
   const viewMode = useAppointmentUiStore(s => s.viewMode);
   return (
-    <>
+    <div className="overflow-x-auto">
       <Show when={viewMode === "day"}>
         <DayAppointmentsView />
       </Show>
@@ -15,7 +15,7 @@ function AppointmentViewSelector() {
       <Show when={viewMode === "week"}>
         <WeekAppointmentsView />
       </Show>
-    </>
+    </div>
   );
 }
 

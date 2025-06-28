@@ -13,7 +13,7 @@ const Paths = [
 
 export function Sidebar() {
   return (
-    <aside className="p-4 space-y-8 bg-sidebar w-64 flex flex-col">
+    <aside className="p-4 space-y-8 bg-sidebar min-w-64 w-64 flex flex-col">
       <div>
         <span className="text-3xl font-bold italic">Agenda</span>
       </div>
