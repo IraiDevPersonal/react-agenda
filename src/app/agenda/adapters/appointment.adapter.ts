@@ -1,12 +1,20 @@
-import { safeArray } from "@/lib/utils";
+import { mergeObjects, safeArray } from "@/lib/utils";
 import { uuid } from "@/lib/uuid";
 
-import type { Appointment } from "../types/appointment";
+import type { Appointment, OneAppointment } from "../types/appointment";
 
 import { AppointmentStatus } from "../types/appointment";
 
-function createDefault(): Appointment {
-  return {
+function validateInput(value: Record<string, any> | undefined, message?: string) {
+  if (typeof value !== "object" || Array.isArray(value)) {
+    console.warn(message ?? "appointment.adapter: entrada en formato no esperado!!");
+    return false;
+  }
+  return true;
+}
+
+function itemAdapter(value: Record<string, any> | undefined) {
+  const defaultValue: Appointment = {
     uid: uuid.createV4(),
     date: "00-00-0000",
     time_from: "00:00",
@@ -18,21 +26,48 @@ function createDefault(): Appointment {
     professions: ["S/P"],
     appointment_status: AppointmentStatus.INDETERMINATE,
   };
-}
 
-function itemAdapter(item: Record<string, any> | undefined) {
-  if (typeof item !== "object" || Array.isArray(item)) {
-    console.warn("appointment.adapter: entrada en formato no esperado!!");
-    return createDefault();
+  if (!validateInput(value)) {
+    return defaultValue;
   }
 
   return {
-    ...createDefault(),
-    ...item,
+    ...defaultValue,
+    ...value,
   } satisfies Appointment;
 }
 
+function oneAppointment(value: Record<string, any> | undefined) {
+  const defaultValue: OneAppointment = {
+    alert: {
+      message: "",
+      type: "",
+    },
+    patient: {
+      email: "Paciente sin correo...",
+      full_name: "Paciente sin nombre...",
+      phone: "Paciente sin numero...",
+      rut: "Paciente sin rut",
+    },
+    patient_history: [],
+    professional: {
+      confirm_method: [],
+      full_name: "Profesional sin nombre",
+      pay_method: [],
+    },
+  };
+
+  if (!validateInput(value)) {
+    return defaultValue;
+  }
+
+  const result = mergeObjects(defaultValue, value);
+
+  return result satisfies OneAppointment;
+}
+
 export const appointmentAdapter = {
-  httpResponse: (data: unknown) => safeArray<Appointment>(data).map(itemAdapter),
+  getAppintmentsHttpResponse: (data: unknown) => safeArray<Appointment>(data).map(itemAdapter),
+  getOneAppintmentHttpResponse: oneAppointment,
   item: itemAdapter,
 };

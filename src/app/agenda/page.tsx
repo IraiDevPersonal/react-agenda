@@ -11,11 +11,11 @@ function AgendaPage() {
   return (
     <PageLayout title="Mi Agenda">
       <AppointmentHeader />
-      <main className="space-y-4 h-full overflow-y-auto flex w-full">
+      <main className="space-y-4 h-full overflow-y-auto flex justify-between w-full">
         <AppointmentViewSelector />
 
         {appointmentId && (
-          <AppointmentDetail appointmentId={appointmentId} />
+          <AppointmentDetail key={appointmentId} appointmentId={appointmentId} />
         )}
       </main>
     </PageLayout>

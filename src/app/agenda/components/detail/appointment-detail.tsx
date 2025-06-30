@@ -1,4 +1,5 @@
-import { CopyIcon } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { CheckCheckIcon, CopyIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 
 import { ProfessionalAppointmentInfo } from "@/app/professional/components/professional-appointment-info";
@@ -6,9 +7,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 import { ROUTES } from "@/constants/routes.constant";
+import { useClipboard } from "@/lib/hooks/use-clipboard";
 import { getUrlData } from "@/lib/utils";
 
 import { STATUS_NAMES } from "../../helpers/constants";
+import { getOneAppointmentQueryOptions } from "../../queries/appointment.query";
 import { AppointmentStatus } from "../../types/appointment";
 import { AppointmentStatusIcon } from "../appoinment-status-icon";
 import { DatetimeAttetionAppointment } from "../datetime-attetion-appointment";
@@ -19,6 +22,8 @@ type Props = {
 };
 
 function AppointmentDetail({ appointmentId }: Props) {
+  const { data, isLoading } = useQuery(getOneAppointmentQueryOptions(appointmentId));
+  const [copyValue, copyFn] = useClipboard({ withState: true, clearCopyDelay: 1000 });
   const navigate = useNavigate();
 
   const handleCloseDetail = () => {
@@ -26,16 +31,21 @@ function AppointmentDetail({ appointmentId }: Props) {
     navigate(`${ROUTES.agenda}${search}`, { replace: true });
   };
 
+  if (isLoading)
+    return null;
+
   return (
-    <aside className="pl-4 min-w-lg w-lg space-y-4 ml-4 border-l flex flex-col">
+    <aside className="pl-4 min-w-lg space-y-4 ml-4 border-l flex flex-col">
       <div className="flex items-center">
         <h3 className="text-xl w-72 truncate">
           <span className="min-w-max font-semibold mr-1.5">Cita ID:</span>
           {appointmentId}
         </h3>
         <DefaultTooltip content="Copiar ID">
-          <Button size="icon" variant="ghost">
-            <CopyIcon size={20} />
+          <Button size="icon" variant="ghost" onClick={() => copyFn(appointmentId)}>
+            {copyValue
+              ? <CheckCheckIcon size={20} />
+              : <CopyIcon size={20} />}
           </Button>
         </DefaultTooltip>
         <Badge
@@ -51,7 +61,7 @@ function AppointmentDetail({ appointmentId }: Props) {
 
       <ProfessionalAppointmentInfo />
 
-      <AppointmentDetailForm />
+      <AppointmentDetailForm patient={data!.patient} />
 
       <div className="mt-auto flex justify-end gap-2">
         <Button onClick={handleCloseDetail}>

@@ -33,3 +33,32 @@ export function getUrlData() {
     ...location,
   };
 }
+
+export function mergeObjects<T>(defaults: T, value: Partial<T> | undefined): T {
+  if (value === undefined)
+    return defaults;
+
+  const result = { ...defaults };
+
+  for (const key in defaults) {
+    const defaultValue = defaults[key];
+    const valueProp = value[key];
+
+    if (
+      typeof defaultValue === "object"
+      && defaultValue !== null
+      && !Array.isArray(defaultValue)
+      && typeof valueProp === "object"
+      && valueProp !== null
+      && !Array.isArray(valueProp)
+    ) {
+      // merge profundo en sub-objetos
+      result[key] = mergeObjects(defaultValue, valueProp);
+    }
+    else if (valueProp !== undefined) {
+      result[key] = valueProp as T[typeof key];
+    }
+  }
+
+  return result;
+}

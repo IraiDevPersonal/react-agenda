@@ -3,4 +3,4 @@ export const ROUTES = {
   agenda: "/agenda",
   patients: "/pacientes",
   reports: "/informes",
-};
+} as const;
