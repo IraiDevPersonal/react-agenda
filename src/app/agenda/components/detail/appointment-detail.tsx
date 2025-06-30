@@ -3,6 +3,7 @@ import { CheckCheckIcon, CopyIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 
 import { ProfessionalAppointmentInfo } from "@/app/professional/components/professional-appointment-info";
+import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
@@ -59,13 +60,24 @@ function AppointmentDetail({ appointmentId }: Props) {
 
       <DatetimeAttetionAppointment status={AppointmentStatus.CANCELLED} />
 
-      <ProfessionalAppointmentInfo />
+      <ProfessionalAppointmentInfo professional={data!.professional} />
+
+      {data!.alert.type === "require" && (
+        <Alert>
+          {data!.alert.message}
+          .
+        </Alert>
+      )}
 
       <AppointmentDetailForm patient={data!.patient} />
 
       <div className="mt-auto flex justify-end gap-2">
-        <Button onClick={handleCloseDetail}>
+        <Button variant="secondary" onClick={handleCloseDetail}>
           Cerrar
+        </Button>
+
+        <Button onClick={handleCloseDetail}>
+          Agendar Paciente
         </Button>
       </div>
     </aside>
