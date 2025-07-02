@@ -7,8 +7,8 @@ import { cn, getUrlData } from "@/lib/utils";
 
 import type { Appointment } from "../types/appointment";
 
-import { generateAppoinmentDatetimeText } from "../helpers/utils";
 import { AppointmentStatus } from "../types/appointment";
+import { generateAppoinmentDatetimeText } from "../utils";
 import { AppointmentStatusIcon } from "./appoinment-status-icon";
 
 type Props = PropsWithChildren<{

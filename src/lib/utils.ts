@@ -62,3 +62,11 @@ export function mergeObjects<T>(defaults: T, value: Partial<T> | undefined): T {
 
   return result;
 }
+
+export function isValidObject(value: any | undefined, warningMessage: string) {
+  if (typeof value !== "object" || Array.isArray(value)) {
+    console.warn(warningMessage);
+    return false;
+  }
+  return true;
+}

@@ -6,7 +6,7 @@ import { QueryKeys } from "@/constants/query-keys.constant";
 
 import type { Appointment, AppointmentFilters } from "../types/appointment";
 
-import { agendaActions } from "../actions/agenda.action";
+import { agendaActions } from "../actions/agenda-actions";
 
 type Filters = Partial<StringifyObject<AppointmentFilters>>;
 

@@ -4,9 +4,9 @@ import { For } from "@/components/for";
 import { Show } from "@/components/show";
 import { dateHelper } from "@/lib/date-helper";
 
-import { showAppointmentInDay } from "../helpers/utils";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 import { getAppointmentsQueryOptions } from "../queries/appointment.query";
+import { showAppointmentInDay } from "../utils";
 import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
 import { AppointmentListFallback } from "./appointment-list-fallback";

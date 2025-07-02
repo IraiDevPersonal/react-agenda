@@ -11,7 +11,7 @@ import { ROUTES } from "@/constants/routes.constant";
 import { useClipboard } from "@/lib/hooks/use-clipboard";
 import { getUrlData } from "@/lib/utils";
 
-import { STATUS_NAMES } from "../../helpers/constants";
+import { STATUS_NAMES } from "../../constants";
 import { getOneAppointmentQueryOptions } from "../../queries/appointment.query";
 import { AppointmentStatus } from "../../types/appointment";
 import { AppointmentStatusIcon } from "../appoinment-status-icon";

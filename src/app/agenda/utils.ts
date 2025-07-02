@@ -1,6 +1,6 @@
 import { dateFormat, dateHelper } from "@/lib/date-helper";
 
-import type { Appointment } from "../types/appointment";
+import type { Appointment } from "./types/appointment";
 
 export function generateAppoinmentDatetimeText(data: Pick<Appointment, "date" | "time_from" | "time_to">) {
   const formatedDate = dateHelper.format(dateHelper.parseISO(data.date), dateFormat["dd-MM-yyyy"]);

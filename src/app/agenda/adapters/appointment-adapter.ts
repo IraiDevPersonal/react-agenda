@@ -1,17 +1,11 @@
-import { mergeObjects, safeArray } from "@/lib/utils";
+import { isValidObject, mergeObjects, safeArray } from "@/lib/utils";
 import { uuid } from "@/lib/uuid";
 
 import type { Appointment, OneAppointment } from "../types/appointment";
 
 import { AppointmentStatus } from "../types/appointment";
 
-function validateInput(value: Record<string, any> | undefined, message?: string) {
-  if (typeof value !== "object" || Array.isArray(value)) {
-    console.warn(message ?? "appointment.adapter: entrada en formato no esperado!!");
-    return false;
-  }
-  return true;
-}
+const ERROR_MESSAGE = "appointment.adapter: entrada en formato no esperado!!";
 
 function itemAdapter(value: Record<string, any> | undefined) {
   const defaultValue: Appointment = {
@@ -27,7 +21,7 @@ function itemAdapter(value: Record<string, any> | undefined) {
     appointment_status: AppointmentStatus.INDETERMINATE,
   };
 
-  if (!validateInput(value)) {
+  if (!isValidObject(value, ERROR_MESSAGE)) {
     return defaultValue;
   }
 
@@ -57,7 +51,7 @@ function oneAppointment(value: Record<string, any> | undefined) {
     },
   };
 
-  if (!validateInput(value)) {
+  if (!isValidObject(value, ERROR_MESSAGE)) {
     return defaultValue;
   }
 
@@ -67,7 +61,6 @@ function oneAppointment(value: Record<string, any> | undefined) {
 }
 
 export const appointmentAdapter = {
-  getAppintmentsHttpResponse: (data: unknown) => safeArray<Appointment>(data).map(itemAdapter),
-  getOneAppintmentHttpResponse: oneAppointment,
-  item: itemAdapter,
+  getAppointmentsHttpResponse: (data: unknown) => safeArray<Appointment>(data).map(itemAdapter),
+  getOneAppointmentHttpResponse: oneAppointment,
 };
