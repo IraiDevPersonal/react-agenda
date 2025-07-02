@@ -71,7 +71,7 @@ function AppointmentDetail({ appointmentId }: Props) {
 
       <AppointmentDetailForm patient={data!.patient} />
 
-      <div className="mt-auto flex justify-end gap-2">
+      <div className="flex justify-end gap-2">
         <Button variant="secondary" onClick={handleCloseDetail}>
           Cerrar
         </Button>
