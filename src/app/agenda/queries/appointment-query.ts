@@ -10,7 +10,7 @@ import { agendaActions } from "../actions/agenda-actions";
 
 type Filters = Partial<StringifyObject<AppointmentFilters>>;
 
-export function getAppointmentsQueryOptions(filters?: Filters) {
+function getAppointments(filters?: Filters) {
   return queryOptions({
     queryKey: [QueryKeys.appointments, filters],
     queryFn: () => agendaActions.getAppointments(filters),
@@ -18,10 +18,15 @@ export function getAppointmentsQueryOptions(filters?: Filters) {
   });
 }
 
-export function getOneAppointmentQueryOptions(uid: Appointment["uid"]) {
+function getOneAppointment(uid: Appointment["uid"]) {
   return queryOptions({
     queryKey: [QueryKeys.appointments, "one", uid],
     queryFn: () => agendaActions.getOneAppointment(uid),
     enabled: !!uid,
   });
 }
+
+export const appointmentQueryOptions = {
+  getOne: getOneAppointment,
+  getAll: getAppointments,
+};

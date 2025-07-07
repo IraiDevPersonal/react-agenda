@@ -8,19 +8,21 @@ import { Button } from "@/components/ui/button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 import { useClipboard } from "@/lib/hooks/use-clipboard";
 
+import type { Appointment } from "../../types/appointment";
+
 import { STATUS_NAMES } from "../../constants";
-import { getOneAppointmentQueryOptions } from "../../queries/appointment.query";
+import { appointmentQueryOptions } from "../../queries/appointment-query";
 import { AppointmentStatusIcon } from "../appoinment-status-icon";
 import { DatetimeAttetionAppointment } from "../datetime-attetion-appointment";
 import { AppointmentDetailForm } from "./appointment-detail-form";
 import { AppointmentDetailFormActions } from "./appointment-detail-form-actions";
 
 type Props = {
-  appointmentUid: string;
+  appointmentUid: Appointment["uid"];
 };
 
 function AppointmentDetail({ appointmentUid }: Props) {
-  const { data, isError, error, isLoading } = useQuery(getOneAppointmentQueryOptions(appointmentUid));
+  const { data, isError, error, isLoading } = useQuery(appointmentQueryOptions.getOne(appointmentUid));
   const [copyValue, copyFn] = useClipboard({ withState: true, clearCopyDelay: 1000 });
 
   if (isLoading) {
