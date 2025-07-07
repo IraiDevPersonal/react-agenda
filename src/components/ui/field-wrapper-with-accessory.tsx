@@ -9,7 +9,7 @@ type Props = PropsWithChildren<{
     root: string;
     label: string;
   }>;
-  label?: string;
+  label?: ReactNode;
 }>;
 
 function FieldWrapperWithAccessory({ children, label, classNames, endComponent, startComponent }: Props) {

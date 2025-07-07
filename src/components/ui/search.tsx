@@ -1,4 +1,4 @@
-import type { ComponentProps, PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren, ReactNode } from "react";
 
 import { SearchIcon, XIcon } from "lucide-react";
 import { useState } from "react";
@@ -13,7 +13,7 @@ type Props = PropsWithChildren<{
   onClearValue?: () => void;
   onSearch?: (v: string) => void;
   deboundeDelay?: number;
-  label?: string;
+  label?: ReactNode;
   classNames?: Partial<{
     input: string;
     root: string;

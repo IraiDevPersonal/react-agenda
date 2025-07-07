@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -10,7 +10,7 @@ type Props = PropsWithChildren<{
     root: string;
     label: string;
   }>;
-  label?: string;
+  label?: ReactNode;
 }>;
 
 function FieldWrapper({ children, labelId, label, classNames }: Props) {

@@ -1,6 +1,10 @@
+import { LucideMessageCircleQuestion } from "lucide-react";
+
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
+import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
+import { DefaultTooltip } from "@/components/ui/tooltip";
 
 import type { OneAppointment } from "../../types/one-appointment";
 
@@ -21,13 +25,22 @@ function AppointmentDetailForm({ patient }: Props) {
     <form className="grid grid-cols-2 gap-4" id={APPOINTMENT_DETAIL_FORM_ID} onSubmit={handleSubmit}>
       <h5 className="text-lg font-semibold col-span-2">Datos paciente:</h5>
 
-      <FieldWrapper label="Rut">
+      {/* <FieldWrapper label="Rut">
         <Input placeholder="Rut paciente" defaultValue={patient.rut} />
-      </FieldWrapper>
+      </FieldWrapper> */}
+      <Search
+        label="Rut (buscar paciente)"
+        placeholder="Rut paciente"
+        defaultValue={patient.rut}
+        classNames={{
+          input: "w-full",
+          label: "inline-flex items-center",
+        }}
+      />
 
-      <FieldWrapper label="Teléfono">
-        <Input placeholder="Teléfono paciente" defaultValue={patient.phone} />
-      </FieldWrapper>
+      <DefaultTooltip content="si no se encuentra puede crear uno nuevo llenando todos los campos">
+        <LucideMessageCircleQuestion size={16} className="text-blue-500 ml-1" />
+      </DefaultTooltip>
 
       <FieldWrapper label="Nombres">
         <Input placeholder="Nombres paciente" defaultValue={patient.names} />
@@ -37,8 +50,12 @@ function AppointmentDetailForm({ patient }: Props) {
         <Input placeholder="Apellidos paciente" defaultValue={patient.lastnames} />
       </FieldWrapper>
 
-      <FieldWrapper label="Correo" classNames={{ root: "col-span-2" }}>
+      <FieldWrapper label="Correo">
         <Input placeholder="Correo paciente" defaultValue={patient.email} />
+      </FieldWrapper>
+
+      <FieldWrapper label="Teléfono">
+        <Input placeholder="Teléfono paciente" defaultValue={patient.phone} />
       </FieldWrapper>
 
       <FieldWrapper label="Dirección" classNames={{ root: "col-span-2" }}>
