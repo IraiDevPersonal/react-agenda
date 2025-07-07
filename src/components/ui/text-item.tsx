@@ -1,8 +1,9 @@
-import { cn } from "@/lib/utils";
 import type { PropsWithChildren } from "react";
 
+import { cn } from "@/lib/utils";
+
 type Props = PropsWithChildren<{
-  className?: string
+  className?: string;
 }>;
 
 function TextItem({ children, className }: Props) {
@@ -15,14 +16,14 @@ function TextItem({ children, className }: Props) {
 
 function Label({ children }: Props) {
   return (
-    <dt className="font-semibold capitalize">{children}</dt>
+    <dt className="font-semibold first-letter:capitalize">{children}</dt>
   );
 }
 
 type ValueProps = PropsWithChildren<{
-  className?: string
-  capitalize?: boolean
-}>
+  className?: string;
+  capitalize?: boolean;
+}>;
 
 function Value({ children, className, capitalize }: ValueProps) {
   return (

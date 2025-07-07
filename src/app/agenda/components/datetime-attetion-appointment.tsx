@@ -1,12 +1,15 @@
+import { dateFormat, dateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
 
 import type { AppointmentStatus } from "../types/appointment";
+import type { OneAppointment } from "../types/one-appointment";
 
 type Props = {
   status: AppointmentStatus;
+  datetime: Pick<OneAppointment, "date" | "time_from" | "time_to">;
 };
 
-function DatetimeAttetionAppointment({ status }: Props) {
+function DatetimeAttetionAppointment({ status, datetime }: Props) {
   return (
     <div
       data-status={status.toLocaleLowerCase().replace("_", "")}
@@ -22,10 +25,12 @@ function DatetimeAttetionAppointment({ status }: Props) {
         Horario de atención
       </span>
       <span>
-        16-06-2025
+        {dateHelper.format(dateHelper.parseISO(datetime.date), dateFormat["dd-MM-yyyy"])}
       </span>
       <span>
-        10:00 - 10:45
+        {datetime.time_from}
+        -
+        {datetime.time_to}
       </span>
     </div>
   );

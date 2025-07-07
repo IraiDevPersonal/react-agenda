@@ -4,21 +4,21 @@ import { Sidebar } from "@/components/ui/sidebar";
 
 function Layout() {
   // const navigate = useNavigate();
-  // const { appointmentId } = useParams();
+  // const { appointmentUid } = useParams();
   // const isFirstPageLoad = useRef(true);
 
   // useEffect(() => {
   //   if (!isFirstPageLoad.current)
   //     return;
-  //   if (appointmentId !== undefined) {
+  //   if (appointmentUid !== undefined) {
   //     const { pathname, search, hash } = getUrlData();
-  //     const newPathname = pathname.replace(`/${appointmentId}`, "");
+  //     const newPathname = pathname.replace(`/${appointmentUid}`, "");
 
   //     navigate(`${newPathname}${search}${hash}`, { replace: true });
 
   //     isFirstPageLoad.current = false;
   //   }
-  // }, [navigate, appointmentId]);
+  // }, [navigate, appointmentUid]);
 
   return (
     <>

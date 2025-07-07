@@ -1,11 +1,9 @@
-import { isValidObject, mergeObjects, safeArray } from "@/lib/utils";
+import { isValidObject, safeArray } from "@/lib/utils";
 import { uuid } from "@/lib/uuid";
 
-import type { Appointment, OneAppointment } from "../types/appointment";
+import type { Appointment } from "../types/appointment";
 
 import { AppointmentStatus } from "../types/appointment";
-
-const ERROR_MESSAGE = "appointment.adapter: entrada en formato no esperado!!";
 
 function itemAdapter(value: Record<string, any> | undefined) {
   const defaultValue: Appointment = {
@@ -21,7 +19,7 @@ function itemAdapter(value: Record<string, any> | undefined) {
     appointment_status: AppointmentStatus.INDETERMINATE,
   };
 
-  if (!isValidObject(value, ERROR_MESSAGE)) {
+  if (!isValidObject(value, "appointment-adapter: entrada en formato no esperado!!")) {
     return defaultValue;
   }
 
@@ -31,36 +29,4 @@ function itemAdapter(value: Record<string, any> | undefined) {
   } satisfies Appointment;
 }
 
-function oneAppointment(value: Record<string, any> | undefined) {
-  const defaultValue: OneAppointment = {
-    alert: {
-      message: "",
-      type: "",
-    },
-    patient: {
-      email: "Paciente sin correo...",
-      full_name: "Paciente sin nombre...",
-      phone: "Paciente sin numero...",
-      rut: "Paciente sin rut",
-    },
-    patient_history: [],
-    professional: {
-      confirm_method: [],
-      full_name: "Profesional sin nombre",
-      pay_method: [],
-    },
-  };
-
-  if (!isValidObject(value, ERROR_MESSAGE)) {
-    return defaultValue;
-  }
-
-  const result = mergeObjects(defaultValue, value);
-
-  return result satisfies OneAppointment;
-}
-
-export const appointmentAdapter = {
-  getAppointmentsHttpResponse: (data: unknown) => safeArray<Appointment>(data).map(itemAdapter),
-  getOneAppointmentHttpResponse: oneAppointment,
-};
+export const appointmentAdapter = (data: unknown) => safeArray<Appointment>(data).map(itemAdapter);

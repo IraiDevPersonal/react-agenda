@@ -27,33 +27,3 @@ export type AppointmentFilters = {
   date_to: Date;
   date: Date;
 };
-
-export type OneAppointment = {
-  professional: Professional;
-  patient: Patient;
-  alert: Alert;
-  patient_history: PatientHistory[];
-};
-
-export type Alert = {
-  message: string;
-  type: string;
-};
-
-export type Patient = {
-  full_name: string;
-  rut: string;
-  phone: string;
-  email: string;
-};
-
-export type PatientHistory = {
-  date_time: Date;
-  status: string;
-};
-
-export type Professional = {
-  full_name: string;
-  pay_method: string[];
-  confirm_method: string[];
-};

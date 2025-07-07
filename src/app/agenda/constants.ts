@@ -7,3 +7,5 @@ export const STATUS_NAMES: Record<AppointmentStatus, string> = {
   CONFIRMED: "Confirmado",
   INDETERMINATE: "Indeterminado",
 };
+
+export const APPOINTMENT_DETAIL_FORM_ID = "appointment-detail-form";

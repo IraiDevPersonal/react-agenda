@@ -1,85 +1,84 @@
 import { useQuery } from "@tanstack/react-query";
 import { CheckCheckIcon, CopyIcon } from "lucide-react";
-import { useNavigate } from "react-router";
 
 import { ProfessionalAppointmentInfo } from "@/app/professional/components/professional-appointment-info";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
-import { ROUTES } from "@/constants/routes.constant";
 import { useClipboard } from "@/lib/hooks/use-clipboard";
-import { getUrlData } from "@/lib/utils";
 
 import { STATUS_NAMES } from "../../constants";
 import { getOneAppointmentQueryOptions } from "../../queries/appointment.query";
-import { AppointmentStatus } from "../../types/appointment";
 import { AppointmentStatusIcon } from "../appoinment-status-icon";
 import { DatetimeAttetionAppointment } from "../datetime-attetion-appointment";
 import { AppointmentDetailForm } from "./appointment-detail-form";
+import { AppointmentDetailFormActions } from "./appointment-detail-form-actions";
 
 type Props = {
-  appointmentId: string;
+  appointmentUid: string;
 };
 
-function AppointmentDetail({ appointmentId }: Props) {
-  const { data, isLoading } = useQuery(getOneAppointmentQueryOptions(appointmentId));
+function AppointmentDetail({ appointmentUid }: Props) {
+  const { data, isError, error, isLoading } = useQuery(getOneAppointmentQueryOptions(appointmentUid));
   const [copyValue, copyFn] = useClipboard({ withState: true, clearCopyDelay: 1000 });
-  const navigate = useNavigate();
 
-  const handleCloseDetail = () => {
-    const { search } = getUrlData();
-    navigate(`${ROUTES.agenda}${search}`, { replace: true });
-  };
-
-  if (isLoading)
+  if (isLoading) {
     return null;
+  }
+
+  if (isError) {
+    return <p>{error.message}</p>;
+  }
+
+  const { alert, patient, professional, status, date, time_from, time_to } = data!;
 
   return (
     <aside className="pl-4 min-w-lg space-y-4 ml-4 border-l flex flex-col">
       <div className="flex items-center">
         <h3 className="text-xl w-72 truncate">
           <span className="min-w-max font-semibold mr-1.5">Cita ID:</span>
-          {appointmentId}
+          {appointmentUid}
         </h3>
+
         <DefaultTooltip content="Copiar ID">
-          <Button size="icon" variant="ghost" onClick={() => copyFn(appointmentId)}>
+          <Button size="icon" variant="ghost" onClick={() => copyFn(appointmentUid)}>
             {copyValue
               ? <CheckCheckIcon size={20} />
               : <CopyIcon size={20} />}
           </Button>
         </DefaultTooltip>
+
         <Badge
-          variant="available"
+          variant={status.toLocaleLowerCase() as any}
           className="pe-2.5 ml-auto"
         >
-          <AppointmentStatusIcon status={AppointmentStatus.AVAILABLE} />
-          {STATUS_NAMES.AVAILABLE}
+          <AppointmentStatusIcon status={status} />
+          {STATUS_NAMES[status]}
         </Badge>
       </div>
 
-      <DatetimeAttetionAppointment status={AppointmentStatus.CANCELLED} />
+      <DatetimeAttetionAppointment
+        status={status}
+        datetime={{
+          time_from,
+          time_to,
+          date,
+        }}
+      />
 
-      <ProfessionalAppointmentInfo professional={data!.professional} />
+      <ProfessionalAppointmentInfo professional={professional} />
 
-      {data!.alert.type === "require" && (
+      {alert.is_required && (
         <Alert>
-          {data!.alert.message}
+          {alert.message}
           .
         </Alert>
       )}
 
-      <AppointmentDetailForm patient={data!.patient} />
+      <AppointmentDetailForm patient={patient} />
 
-      <div className="flex justify-end gap-2">
-        <Button variant="secondary" onClick={handleCloseDetail}>
-          Cerrar
-        </Button>
-
-        <Button onClick={handleCloseDetail}>
-          Agendar Paciente
-        </Button>
-      </div>
+      <AppointmentDetailFormActions />
     </aside>
   );
 }

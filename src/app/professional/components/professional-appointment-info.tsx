@@ -1,4 +1,4 @@
-import type { OneAppointment } from "@/app/agenda/types/appointment";
+import type { OneAppointment } from "@/app/agenda/types/one-appointment";
 
 import { TextItem } from "@/components/ui/text-item";
 
@@ -13,17 +13,26 @@ function ProfessionalAppointmentInfo({ professional }: Props) {
 
       <TextItem>
         <TextItem.Label>Nombre:</TextItem.Label>
-        <TextItem.Value capitalize>{professional.full_name}</TextItem.Value>
+        <TextItem.Value capitalize>{professional.fullname}</TextItem.Value>
+      </TextItem>
+
+      <TextItem>
+        <TextItem.Label>Profesión(es):</TextItem.Label>
+        <TextItem.Value capitalize>{professional.professions.join(", ")}</TextItem.Value>
       </TextItem>
 
       <TextItem>
         <TextItem.Label>Metodos de pago:</TextItem.Label>
-        <TextItem.Value capitalize>{professional.pay_method.join(", ")}.</TextItem.Value>
+        <TextItem.Value capitalize>
+          {professional.pay_methods.join(", ")}
+        </TextItem.Value>
       </TextItem>
 
       <TextItem>
         <TextItem.Label>Metodo de confirmación:</TextItem.Label>
-        <TextItem.Value capitalize>{professional.confirm_method.join(", ")}.</TextItem.Value>
+        <TextItem.Value capitalize>
+          {professional.confirm_methods.join(", ")}
+        </TextItem.Value>
       </TextItem>
     </div>
   );

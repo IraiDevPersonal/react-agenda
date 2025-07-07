@@ -14,7 +14,7 @@ const router = createBrowserRouter([{
       children: [
         {
           index: true,
-          path: ":appointmentId?",
+          path: ":appointmentUid?",
           element: <AgendaPage />,
         },
       ],
