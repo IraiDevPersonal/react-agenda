@@ -1,3 +1,4 @@
+import { CustomError } from "@/lib/custom-error";
 import { safeArray } from "@/lib/utils";
 
 import type { ProfessionalOption } from "../models/professional-to-filter-model";
@@ -20,8 +21,7 @@ function validate(item: any) {
     return ProfessionalOptionSchema.parse(data);
   }
   catch (error) {
-    console.error("Error validating profession item:", error);
-    throw new Error("Invalid profession item");
+    throw CustomError.handleError(error, { showLog: true });
   }
 }
 

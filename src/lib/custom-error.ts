@@ -12,7 +12,7 @@ export class CustomError extends Error {
     const { message, stack } = this.getError(error);
 
     if (options?.showLog) {
-      console.error("CustomError: ", message, { stack });
+      console.error(`CustomError: ${message}`, { stack });
     }
 
     throw new CustomError(message);

@@ -1,4 +1,5 @@
 import { AppointmentStatus } from "@/app/agenda/models/appointment-model";
+import { CustomError } from "@/lib/custom-error";
 import { safeArray } from "@/lib/utils";
 
 import type { PatientForAppointmentDetailModel, PatientHistoryModel } from "../models/patient-model";
@@ -18,14 +19,13 @@ function validatePatientForAppointmentDetail(item: any) {
     return PatientForAppointmentDetailSchema.parse(data);
   }
   catch (error) {
-    console.error("Invalid patient data for appointment detail:", error);
-    throw new Error("Invalid patient data");
+    throw CustomError.handleError(error, { showLog: true });
   }
 }
 
 function patientHistoryToArray(data: any) {
   try {
-    return safeArray<any>(data).map((item) => {
+    return safeArray(data).map((item) => {
       const history: PatientHistoryModel = {
         uid: item.uid,
         date_time: item.date_time,
@@ -35,8 +35,7 @@ function patientHistoryToArray(data: any) {
     });
   }
   catch (error) {
-    console.error("Invalid patient history data:", error);
-    throw new Error("Invalid patient history data");
+    throw CustomError.handleError(error, { showLog: true });
   }
 }
 

@@ -1,3 +1,5 @@
+import { CustomError } from "@/lib/custom-error";
+
 import type { ProfessionalForAppointmentDetail } from "../models/professional-model";
 
 import { ProfessionalForAppointmentDetailSchema } from "../models/professional-model";
@@ -13,8 +15,7 @@ function validateProfessionalForAppointmentDetail(item: any) {
     return ProfessionalForAppointmentDetailSchema.parse(data);
   }
   catch (error) {
-    console.error("Error validating professional data:", error);
-    throw new Error("Invalid professional data");
+    throw CustomError.handleError(error, { showLog: true });
   }
 }
 

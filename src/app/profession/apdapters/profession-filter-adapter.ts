@@ -1,5 +1,6 @@
 import type { Option } from "@/types/global-types";
 
+import { CustomError } from "@/lib/custom-error";
 import { safeArray } from "@/lib/utils";
 import { OptionSchema } from "@/schemas/global-schemas";
 
@@ -12,8 +13,7 @@ function validate(item: any) {
     return OptionSchema.parse(data);
   }
   catch (error) {
-    console.error("Error validating profession item:", error);
-    throw new Error("Invalid profession item");
+    throw CustomError.handleError(error, { showLog: true });
   }
 }
 

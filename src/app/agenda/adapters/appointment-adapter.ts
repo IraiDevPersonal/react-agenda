@@ -1,3 +1,4 @@
+import { CustomError } from "@/lib/custom-error";
 import { safeArray } from "@/lib/utils";
 
 import type { AppointmentModel } from "../models/appointment-model";
@@ -15,14 +16,14 @@ function validate(item: any): AppointmentModel {
       patient_rut: item.patient_rut,
       patient_phone: item.patient_phone,
       professional_name: item.professional_name,
-      professions: safeArray<any>(item.professions ?? []).map(String),
+      professions: safeArray(item.professions ?? []).map(String),
       appointment_status: item.appointment_status ?? AppointmentStatus.INDETERMINATE,
     };
 
     return AppointmentSchema.parse(data);
   }
   catch (error) {
-    throw new Error(`Invalid appointment data: ${error}`);
+    throw CustomError.handleError(error, { showLog: true });
   }
 }
 

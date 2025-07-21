@@ -1,5 +1,6 @@
 import { PatientAdapter } from "@/app/patient/adapters/patient-adapter";
 import { ProfessionalAdapter } from "@/app/professional/apdapters/professional-adapter";
+import { CustomError } from "@/lib/custom-error";
 
 import type { AppointmentDetailModel } from "../models/appointment-detail-model";
 
@@ -23,8 +24,7 @@ function validate(item: any) {
     return AppointmentDetailSchema.parse(data);
   }
   catch (error) {
-    console.error("Validation error:", error);
-    throw new Error("Invalid appointment data");
+    throw CustomError.handleError(error, { showLog: true });
   }
 }
 export const AppointmentDetailAdapter = {
