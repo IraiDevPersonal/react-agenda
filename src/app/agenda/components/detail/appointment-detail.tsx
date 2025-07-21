@@ -36,8 +36,8 @@ function AppointmentDetail({ appointmentUid }: Props) {
   const { alert, patient, professional, status, date, time_from, time_to } = data!;
 
   return (
-    <aside className="pl-4 min-w-lg space-y-4 ml-4 border-l flex flex-col">
-      <div className="flex items-center">
+    <aside className="pl-4 min-w-lg max-w-lg w-full space-y-4 ml-4 border-l flex flex-col">
+      <div className="flex items-center w-full">
         <h3 className="text-xl w-72 truncate">
           <span className="min-w-max font-semibold mr-1.5">Cita ID:</span>
           {appointmentUid}

@@ -25,6 +25,10 @@ export class CustomError extends Error {
       return { message: error.message, stack: error.stack };
     }
 
+    if (isAxiosError(error)) {
+      return { message: error.message, stack: error.stack };
+    }
+
     if (error instanceof ZodError) {
       return { message: errorMessage, stack: error.stack };
     }
