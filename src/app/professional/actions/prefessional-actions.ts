@@ -1,4 +1,4 @@
-import { AgendaService } from "@/services/agenda.service";
+import { AgendaService } from "@/services/agenda-service";
 
 import { ProfessionalFilterAdapter } from "../apdapters/professional-filter-adapter";
 

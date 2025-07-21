@@ -1,4 +1,4 @@
-import { AgendaService } from "@/services/agenda.service";
+import { AgendaService } from "@/services/agenda-service";
 
 import { AppointmentAdapter } from "../adapters/appointment-adapter";
 import { AppointmentDetailAdapter } from "../adapters/appointment-detail-adapter";
