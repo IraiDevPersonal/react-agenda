@@ -4,18 +4,28 @@ import { ROUTES } from "@/constants/routes";
 
 import AgendaPage from "./agenda/page";
 import Layout from "./layout";
+import PatientPage from "./patient/page";
 
 const router = createBrowserRouter([{
   path: ROUTES.root,
+  element: <Layout />,
   children: [
     {
       path: ROUTES.agenda,
-      element: <Layout />,
       children: [
         {
           index: true,
           path: ":appointmentUid?",
           element: <AgendaPage />,
+        },
+      ],
+    },
+    {
+      path: ROUTES.patients,
+      children: [
+        {
+          index: true,
+          element: <PatientPage />,
         },
       ],
     },

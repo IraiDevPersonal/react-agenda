@@ -8,13 +8,13 @@ import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import { APPOINTMENT_DETAIL_FORM_ID } from "../../constants";
-
 type Props = {
+  id: string;
   patient: PatientForAppointmentDetailModel;
+  withSearchPatient?: boolean;
 };
 
-function AppointmentDetailForm({ patient }: Props) {
+function PatientForm({ patient, withSearchPatient = false, id }: Props) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = Object.fromEntries(new FormData(e.currentTarget));
@@ -22,25 +22,33 @@ function AppointmentDetailForm({ patient }: Props) {
   };
 
   return (
-    <form className="grid grid-cols-2 gap-4" id={APPOINTMENT_DETAIL_FORM_ID} onSubmit={handleSubmit}>
+    <form className="grid grid-cols-2 gap-4 items-end" id={id} onSubmit={handleSubmit}>
       <h5 className="text-lg font-semibold col-span-2">Datos paciente:</h5>
 
-      {/* <FieldWrapper label="Rut">
-        <Input placeholder="Rut paciente" defaultValue={patient.rut} />
-      </FieldWrapper> */}
-      <Search
-        label="Rut (buscar paciente)"
-        placeholder="Rut paciente"
-        defaultValue={patient.rut}
-        classNames={{
-          input: "w-full",
-          label: "inline-flex items-center",
-        }}
-      />
+      {withSearchPatient
+        ? (
+            <Search
+              label="Rut (buscar paciente)"
+              placeholder="Rut paciente"
+              defaultValue={patient.rut}
+              classNames={{
+                input: "w-full",
+              }}
+            />
+          )
+        : (
+            <FieldWrapper label="Rut">
+              <Input placeholder="Rut paciente" defaultValue={patient.rut} />
+            </FieldWrapper>
+          )}
 
-      <DefaultTooltip content="si no se encuentra puede crear uno nuevo llenando todos los campos">
-        <LucideMessageCircleQuestion size={16} className="text-blue-500 ml-1" />
-      </DefaultTooltip>
+      {withSearchPatient
+        ? (
+            <DefaultTooltip content="si no se encuentra puede crear uno nuevo llenando todos los campos">
+              <LucideMessageCircleQuestion size={24} className="text-blue-500 mb-2" />
+            </DefaultTooltip>
+          )
+        : <span />}
 
       <FieldWrapper label="Nombres">
         <Input placeholder="Nombres paciente" defaultValue={patient.names} />
@@ -69,4 +77,4 @@ function AppointmentDetailForm({ patient }: Props) {
   );
 }
 
-export { AppointmentDetailForm };
+export { PatientForm };

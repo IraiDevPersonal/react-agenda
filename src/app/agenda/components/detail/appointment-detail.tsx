@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { CheckCheckIcon, CopyIcon } from "lucide-react";
 
+import { PatientForm } from "@/app/patient/components/patient-form";
 import { ProfessionalAppointmentInfo } from "@/app/professional/components/professional-appointment-info";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -10,11 +11,10 @@ import { useClipboard } from "@/lib/hooks/use-clipboard";
 
 import type { AppointmentModel } from "../../models/appointment-model";
 
-import { STATUS_NAMES } from "../../constants";
+import { APPOINTMENT_DETAIL_FORM_ID, STATUS_NAMES } from "../../constants";
 import { AppointmentQueryOptions } from "../../queries/appointment-queries";
 import { AppointmentStatusIcon } from "../appoinment-status-icon";
 import { DatetimeAttetionAppointment } from "../datetime-attetion-appointment";
-import { AppointmentDetailForm } from "./appointment-detail-form";
 import { AppointmentDetailFormActions } from "./appointment-detail-form-actions";
 
 type Props = {
@@ -78,7 +78,7 @@ function AppointmentDetail({ appointmentUid }: Props) {
         </Alert>
       )}
 
-      <AppointmentDetailForm patient={patient} />
+      <PatientForm withSearchPatient id={APPOINTMENT_DETAIL_FORM_ID} patient={patient} />
 
       <AppointmentDetailFormActions />
     </aside>
