@@ -25,7 +25,7 @@ function AppointmentCard({ appointment }: Props) {
 
     if (pathname.includes(appointment.uid))
       return;
-    navigate(`${ROUTES.agenda}/${appointment.uid}${search}`);
+    navigate(`${ROUTES.agenda}/${appointment.uid}${search}`, { preventScrollReset: true });
   };
 
   return (

@@ -22,7 +22,7 @@ type Props = {
 };
 
 function AppointmentDetail({ appointmentUid }: Props) {
-  const { data, isError, error, isLoading } = useQuery(appointmentQueryOptions.getOne(appointmentUid));
+  const { data, isError, error, isLoading } = useQuery(appointmentQueryOptions.getDetail(appointmentUid));
   const [copyValue, copyFn] = useClipboard({ withState: true, clearCopyDelay: 1000 });
 
   if (isLoading) {

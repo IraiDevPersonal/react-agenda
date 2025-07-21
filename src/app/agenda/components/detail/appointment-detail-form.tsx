@@ -1,17 +1,17 @@
 import { LucideMessageCircleQuestion } from "lucide-react";
 
+import type { PatientForAppointmentDetail } from "@/app/patient/types/patient";
+
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
 import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import type { OneAppointment } from "../../types/one-appointment";
-
 import { APPOINTMENT_DETAIL_FORM_ID } from "../../constants";
 
 type Props = {
-  patient: OneAppointment["patient"];
+  patient: PatientForAppointmentDetail;
 };
 
 function AppointmentDetailForm({ patient }: Props) {
@@ -47,7 +47,7 @@ function AppointmentDetailForm({ patient }: Props) {
       </FieldWrapper>
 
       <FieldWrapper label="Apellidos">
-        <Input placeholder="Apellidos paciente" defaultValue={patient.lastnames} />
+        <Input placeholder="Apellidos paciente" defaultValue={patient.last_names} />
       </FieldWrapper>
 
       <FieldWrapper label="Correo">

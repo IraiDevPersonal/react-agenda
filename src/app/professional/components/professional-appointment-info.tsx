@@ -1,9 +1,9 @@
-import type { OneAppointment } from "@/app/agenda/types/one-appointment";
-
 import { TextItem } from "@/components/ui/text-item";
 
+import type { ProfessionalForAppointmentDetail } from "./types/professional";
+
 type Props = {
-  professional: OneAppointment["professional"];
+  professional: ProfessionalForAppointmentDetail;
 };
 
 function ProfessionalAppointmentInfo({ professional }: Props) {

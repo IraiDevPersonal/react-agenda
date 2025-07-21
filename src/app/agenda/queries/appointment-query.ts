@@ -18,7 +18,7 @@ function getAppointments(filters?: Filters) {
   });
 }
 
-function getOneAppointment(uid: Appointment["uid"]) {
+function getAppointmentDetail(uid: Appointment["uid"]) {
   return queryOptions({
     queryKey: [QueryKeys.appointments, "one", uid],
     queryFn: () => agendaActions.getOneAppointment(uid),
@@ -27,6 +27,6 @@ function getOneAppointment(uid: Appointment["uid"]) {
 }
 
 export const appointmentQueryOptions = {
-  getOne: getOneAppointment,
+  getDetail: getAppointmentDetail,
   getAll: getAppointments,
 };

@@ -5,13 +5,13 @@ import { AppointmentStatus } from "../types/appointment";
 function AppointmentStatusIcon({ status }: { status: AppointmentStatus }) {
   switch (status) {
     case AppointmentStatus.AVAILABLE:
-      return <CirclePlus size={22} className="text-neutral-400" />;
+      return <CirclePlus size={22} className="text-neutral-500" />;
     case AppointmentStatus.CANCELLED:
-      return <CircleX size={22} className="text-red-400" />;
+      return <CircleX size={22} className="text-red-500" />;
     case AppointmentStatus.CONFIRMED:
-      return <CircleCheck size={22} className="text-green-400" />;
+      return <CircleCheck size={22} className="text-green-500" />;
     case AppointmentStatus.TO_CONFIRM:
-      return <CircleAlertIcon size={22} className="text-amber-400" />;
+      return <CircleAlertIcon size={22} className="text-amber-500" />;
     default:
       return null;
   }
