@@ -1,0 +1,32 @@
+import { queryOptions } from "@tanstack/react-query";
+
+import type { StringifyObject } from "@/types/global-types";
+
+import { QueryKeys } from "@/constants/query-keys";
+
+import type { AppointmentFilters, AppointmentModel } from "../models/appointment-model";
+
+import { AgendaActions } from "../actions/agenda-actions";
+
+type Filters = Partial<StringifyObject<AppointmentFilters>>;
+
+function getAll(filters?: Filters) {
+  return queryOptions({
+    queryKey: [QueryKeys.appointments, filters],
+    queryFn: () => AgendaActions.getAppointments(filters),
+    enabled: !!filters?.profession_id,
+  });
+}
+
+function getDetail(uid: AppointmentModel["uid"]) {
+  return queryOptions({
+    queryKey: [QueryKeys.appointments, "one", uid],
+    queryFn: () => AgendaActions.getAppointmentDetail(uid),
+    enabled: !!uid,
+  });
+}
+
+export const AppointmentQueryOptions = {
+  getDetail,
+  getAll,
+};

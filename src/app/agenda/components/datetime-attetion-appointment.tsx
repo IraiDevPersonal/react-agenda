@@ -1,12 +1,12 @@
 import { dateFormat, dateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
 
-import type { AppointmentStatus } from "../types/appointment";
-import type { AppointmentDetail } from "../types/appointment-detail";
+import type { AppointmentStatus } from "../models/appointment-model";
+import type { AppointmentDetailModel } from "../models/appointment-detail-model";
 
 type Props = {
   status: AppointmentStatus;
-  datetime: Pick<AppointmentDetail, "date" | "time_from" | "time_to">;
+  datetime: Pick<AppointmentDetailModel, "date" | "time_from" | "time_to">;
 };
 
 function DatetimeAttetionAppointment({ status, datetime }: Props) {

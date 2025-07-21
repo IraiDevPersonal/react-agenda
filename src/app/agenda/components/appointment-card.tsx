@@ -2,17 +2,17 @@ import type { PropsWithChildren } from "react";
 
 import { useNavigate } from "react-router";
 
-import { ROUTES } from "@/constants/routes.constant";
+import { ROUTES } from "@/constants/routes";
 import { cn, getUrlData } from "@/lib/utils";
 
-import type { Appointment } from "../types/appointment";
+import type { AppointmentModel } from "../models/appointment-model";
 
-import { AppointmentStatus } from "../types/appointment";
+import { AppointmentStatus } from "../models/appointment-model";
 import { generateAppoinmentDatetimeText } from "../utils";
 import { AppointmentStatusIcon } from "./appoinment-status-icon";
 
 type Props = PropsWithChildren<{
-  appointment: Appointment;
+  appointment: AppointmentModel;
 }>;
 
 function AppointmentCard({ appointment }: Props) {

@@ -1,21 +1,22 @@
-import type { Option } from "@/types/global.type";
+import type { Option } from "@/types/global-types";
 
-import { isValidObject, safeArray } from "@/lib/utils";
+import { safeArray } from "@/lib/utils";
+import { OptionSchema } from "@/schemas/global-schemas";
 
-function itemAdapter(item: Record<string, any>): Option {
-  const defaulValue: Option = {
-    label: "Profesión indeterminada",
-    value: 0,
-  };
-
-  if (!isValidObject(item, "profession-filter-adapter: entrada en formato no esperado!!")) {
-    return defaulValue;
+function validate(item: any) {
+  try {
+    const data: Option = {
+      label: item.label,
+      value: item.value,
+    };
+    return OptionSchema.parse(data);
   }
-
-  return {
-    ...defaulValue,
-    ...item,
-  } satisfies Option;
+  catch (error) {
+    console.error("Error validating profession item:", error);
+    throw new Error("Invalid profession item");
+  }
 }
 
-export const professionFilterAdapter = (data: unknown) => safeArray<Option>(data).map(itemAdapter);
+export const ProfessionFilterAdapter = {
+  httpResponse: (data: any) => safeArray(data).map(validate),
+};

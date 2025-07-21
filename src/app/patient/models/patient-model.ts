@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { AppointmentStatus } from "@/app/agenda/types/appointment";
+import { AppointmentStatus } from "@/app/agenda/models/appointment-model";
 
 export const PatientForAppointmentDetailSchema = z.object({
   names: z.string(),
@@ -17,5 +17,5 @@ export const PatientHistorySchema = z.object({
   status: z.enum(AppointmentStatus),
 });
 
-export type PatientForAppointmentDetail = z.infer<typeof PatientForAppointmentDetailSchema>;
-export type PatientHistory = z.infer<typeof PatientHistorySchema>;
+export type PatientForAppointmentDetailModel = z.infer<typeof PatientForAppointmentDetailSchema>;
+export type PatientHistoryModel = z.infer<typeof PatientHistorySchema>;

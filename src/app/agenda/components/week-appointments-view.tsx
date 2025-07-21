@@ -5,7 +5,7 @@ import { Show } from "@/components/show";
 import { dateHelper } from "@/lib/date-helper";
 
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
-import { appointmentQueryOptions } from "../queries/appointment-query";
+import { AppointmentQueryOptions } from "../queries/appointment-queries";
 import { showAppointmentInDay } from "../utils";
 import { AppointmentCard } from "./appointment-card";
 import Grid from "./appointment-grid";
@@ -31,7 +31,7 @@ const weekDays = [
 
 function WeekAppointmentsView() {
   const { filtersAsParams: { date, date_from, ...params }, filters } = useAppointmentFilters();
-  const { data } = useQuery(appointmentQueryOptions.getAll({ ...params, date: date_from }));
+  const { data } = useQuery(AppointmentQueryOptions.getAll({ ...params, date: date_from }));
 
   return (
     <Grid className="min-w-[1632px] w-full">

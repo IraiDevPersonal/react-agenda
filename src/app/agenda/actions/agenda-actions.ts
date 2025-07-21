@@ -1,21 +1,21 @@
 import { agendaService } from "@/services/agenda.service";
 
-import { appointmentAdapter } from "../adapters/appointment-adapter";
+import { AppointmentAdapter } from "../adapters/appointment-adapter";
 import { AppointmentDetailAdapter } from "../adapters/appointment-detail-adapter";
 
 async function getAppointments(filters?: Record<string, string>) {
   // agendaService.useAuthInterceptor();
   const { data } = await agendaService.get(`/appointments`, { params: filters });
-  return appointmentAdapter(data);
+  return AppointmentAdapter.httpResponse(data);
 }
 
-async function getOneAppointment(uid: string) {
+async function getAppointmentDetail(uid: string) {
   // agendaService.useAuthInterceptor();
   const { data } = await agendaService.get(`/appointments/${uid}`);
   return AppointmentDetailAdapter.httpResponse(data);
 }
 
-export const agendaActions = {
+export const AgendaActions = {
   getAppointments,
-  getOneAppointment,
+  getAppointmentDetail,
 };

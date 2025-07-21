@@ -1,17 +1,17 @@
 import { queryOptions } from "@tanstack/react-query";
 
-import { QueryKeys } from "@/constants/query-keys.constant";
+import { QueryKeys } from "@/constants/query-keys";
 
-import { professionActions } from "../actions/prefession-actions";
+import { ProfessionActions } from "../actions/prefession-actions";
 
 function getProfessionForFilter() {
   return queryOptions({
     refetchOnWindowFocus: false,
     queryKey: [QueryKeys.prefessions, "to-filter"],
-    queryFn: () => professionActions.getProfessionForFilters(),
+    queryFn: () => ProfessionActions.getProfessionForFilters(),
   });
 }
 
-export const professionQueryOptions = {
+export const ProfessionQueryOptions = {
   forFitlers: getProfessionForFilter,
 };

@@ -1,24 +1,30 @@
-import type { Option } from "@/types/global.type";
+import { safeArray } from "@/lib/utils";
 
-import { isValidObject, safeArray } from "@/lib/utils";
+import type { ProfessionalOption } from "../models/professional-to-filter-model";
 
-export type ProfessionalOption = Option<{ professions: number[] }>;
+import { ProfessionalOptionSchema } from "../models/professional-to-filter-model";
 
-function itemAdapter(value: any): ProfessionalOption {
-  const defaultValue: ProfessionalOption = {
-    label: "Profesional sin nombre",
-    value: 0,
-    professions: [],
-  };
-
-  if (!isValidObject(value, "professional-filter-adapter: entrada en formato no esperado!!")) {
-    return defaultValue;
-  }
+function mapper(item: any): ProfessionalOption {
+  const professions = safeArray(item.professions).map(String);
 
   return {
-    ...defaultValue,
-    ...value,
-  } satisfies ProfessionalOption;
+    label: item.label,
+    value: item.value,
+    professions,
+  };
 }
 
-export const professionalFilterAdapter = (data: unknown) => safeArray<ProfessionalOption>(data).map(itemAdapter);
+function validate(item: any) {
+  try {
+    const data = mapper(item);
+    return ProfessionalOptionSchema.parse(data);
+  }
+  catch (error) {
+    console.error("Error validating profession item:", error);
+    throw new Error("Invalid profession item");
+  }
+}
+
+export const ProfessionalFilterAdapter = {
+  httpResponse: (data: any) => safeArray(data).map(validate),
+};

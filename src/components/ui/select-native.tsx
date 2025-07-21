@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from "lucide-react";
 import * as React from "react";
 
-import type { Option } from "@/types/global.type";
+import type { Option } from "@/types/global-types";
 
 import { cn } from "@/lib/utils";
 

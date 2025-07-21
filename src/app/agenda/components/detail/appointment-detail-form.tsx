@@ -1,6 +1,6 @@
 import { LucideMessageCircleQuestion } from "lucide-react";
 
-import type { PatientForAppointmentDetail } from "@/app/patient/types/patient";
+import type { PatientForAppointmentDetailModel } from "@/app/patient/models/patient-model";
 
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
@@ -11,7 +11,7 @@ import { DefaultTooltip } from "@/components/ui/tooltip";
 import { APPOINTMENT_DETAIL_FORM_ID } from "../../constants";
 
 type Props = {
-  patient: PatientForAppointmentDetail;
+  patient: PatientForAppointmentDetailModel;
 };
 
 function AppointmentDetailForm({ patient }: Props) {

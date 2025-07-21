@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
-import { ROUTES } from "@/constants/routes.constant";
+import { ROUTES } from "@/constants/routes";
 
 import AgendaPage from "./agenda/page";
 import Layout from "./layout";

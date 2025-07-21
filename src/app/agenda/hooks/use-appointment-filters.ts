@@ -6,7 +6,7 @@ import { dateHelper } from "@/lib/date-helper";
 import { parseAsLocalDate } from "@/lib/nuqs-parser";
 import { serializeQueryParams } from "@/lib/utils";
 
-import type { AppointmentFilters } from "../types/appointment";
+import type { AppointmentFilters } from "../models/appointment-model";
 
 function parser(): UseQueryStatesKeysMap<AppointmentFilters> {
   const currentDate = dateHelper.createDate();

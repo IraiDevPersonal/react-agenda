@@ -4,10 +4,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { prettifyRut } from "react-rut-formatter";
 
-import { QueryKeys } from "@/constants/query-keys.constant";
+import { QueryKeys } from "@/constants/query-keys";
 import { dateHelper } from "@/lib/date-helper";
 
-import type { AppointmentViewMode } from "../types";
+import type { AppointmentViewMode } from "../models";
 
 import { useAppointmentUiStore } from "../stores/appointment-ui-store";
 import { useAppointmentFilters } from "./use-appointment-filters";

@@ -1,24 +1,23 @@
-import type { ProfessionalForAppointmentDetail } from "../components/types/professional";
+import type { ProfessionalForAppointmentDetail } from "../models/professional-model";
 
-import { ProfessionalForAppointmentDetailSchema } from "../components/types/professional";
+import { ProfessionalForAppointmentDetailSchema } from "../models/professional-model";
 
-export class ProfessionalAdapter {
-  static validate(item: any) {
-    try {
-      const data = this.mapper(item);
-      return ProfessionalForAppointmentDetailSchema.parse(data);
-    }
-    catch (error) {
-      throw new Error(`${error}`);
-    }
-  }
-
-  private static mapper(item: any) {
-    return {
+function validateProfessionalForAppointmentDetail(item: any) {
+  try {
+    const data: ProfessionalForAppointmentDetail = {
       fullname: item.full_name,
       professions: item.professions,
       pay_methods: item.pay_methods,
       confirm_methods: item.confirm_methods,
-    } satisfies ProfessionalForAppointmentDetail;
+    };
+    return ProfessionalForAppointmentDetailSchema.parse(data);
   }
+  catch (error) {
+    console.error("Error validating professional data:", error);
+    throw new Error("Invalid professional data");
+  }
+}
+
+export const ProfessionalAdapter = {
+  validateProfessionalForAppointmentDetail,
 };

@@ -1,9 +1,9 @@
 import z from "zod";
 
-import { PatientForAppointmentDetailSchema, PatientHistorySchema } from "@/app/patient/types/patient";
-import { ProfessionalForAppointmentDetailSchema } from "@/app/professional/components/types/professional";
+import { PatientForAppointmentDetailSchema, PatientHistorySchema } from "@/app/patient/models/patient-model";
+import { ProfessionalForAppointmentDetailSchema } from "@/app/professional/models/professional-model";
 
-import { AppointmentStatus } from "./appointment";
+import { AppointmentStatus } from "./appointment-model";
 
 export const AlertForAppointmentDetailSchema = z.object({
   message: z.string(),
@@ -23,5 +23,5 @@ export const AppointmentDetailSchema = z.object({
   alert: AlertForAppointmentDetailSchema,
 });
 
-export type AppointmentDetail = z.infer<typeof AppointmentDetailSchema>;
-export type AlertForAppointmentDetail = z.infer<typeof AlertForAppointmentDetailSchema>;
+export type AppointmentDetailModel = z.infer<typeof AppointmentDetailSchema>;
+export type AlertForAppointmentDetailModel = z.infer<typeof AlertForAppointmentDetailSchema>;

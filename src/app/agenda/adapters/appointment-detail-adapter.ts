@@ -1,18 +1,14 @@
 import { PatientAdapter } from "@/app/patient/adapters/patient-adapter";
 import { ProfessionalAdapter } from "@/app/professional/apdapters/professional-adapter";
 
-import type { AppointmentDetail } from "../types/appointment-detail";
+import type { AppointmentDetailModel } from "../models/appointment-detail-model";
 
-import { AppointmentStatus } from "../types/appointment";
-import { AppointmentDetailSchema } from "../types/appointment-detail";
+import { AppointmentDetailSchema } from "../models/appointment-detail-model";
+import { AppointmentStatus } from "../models/appointment-model";
 
-export class AppointmentDetailAdapter {
-  static httpResponse(response: any) {
-    return this.validate(response);
-  }
-
-  private static mapper(item: any) {
-    return {
+function validate(item: any) {
+  try {
+    const data: AppointmentDetailModel = {
       uid: item.uid,
       date: item.date,
       time_from: item.time_from,
@@ -20,20 +16,17 @@ export class AppointmentDetailAdapter {
       is_enabled: item.is_enabled,
       status: item.status ?? AppointmentStatus.INDETERMINATE,
       patient_history: PatientAdapter.patientHistoryToArray(item.patient_history ?? []),
-      professional: ProfessionalAdapter.validate(item.professional),
+      professional: ProfessionalAdapter.validateProfessionalForAppointmentDetail(item.professional),
       patient: PatientAdapter.validatePatientForAppointmentDetail(item.patient),
       alert: item.alert,
-    } satisfies AppointmentDetail;
+    };
+    return AppointmentDetailSchema.parse(data);
   }
-
-  private static validate(item: any) {
-    try {
-      const data = this.mapper(item);
-      return AppointmentDetailSchema.parse(data);
-    }
-    catch (error) {
-      console.error("Validation error:", error);
-      throw new Error("Invalid appointment data");
-    }
+  catch (error) {
+    console.error("Validation error:", error);
+    throw new Error("Invalid appointment data");
   }
+}
+export const AppointmentDetailAdapter = {
+  httpResponse: (response: any) => validate(response),
 };
