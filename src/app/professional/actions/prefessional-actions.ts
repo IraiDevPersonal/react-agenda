@@ -1,9 +1,9 @@
-import { agendaService } from "@/services/agenda.service";
+import { AgendaService } from "@/services/agenda.service";
 
 import { ProfessionalFilterAdapter } from "../apdapters/professional-filter-adapter";
 
 async function getProfessionalForFilters() {
-  const { data } = await agendaService.get("/professionals/to-filter");
+  const { data } = await AgendaService.get("/professionals/to-filter");
   return ProfessionalFilterAdapter.httpResponse(data);
 }
 

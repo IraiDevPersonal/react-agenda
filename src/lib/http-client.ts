@@ -8,6 +8,7 @@ type HttpClientCreateReturn = AxiosInstance & {
 
 type HttpClient = {
   create: (config: CreateAxiosDefaults) => HttpClientCreateReturn;
+  isRequestCancelled: (error: unknown) => boolean;
 };
 
 function useAuthInterceptor(axiosInstance: AxiosInstance) {
@@ -23,7 +24,7 @@ function useAuthInterceptor(axiosInstance: AxiosInstance) {
   });
 }
 
-export const httpClient: HttpClient = {
+export const HttpClient: HttpClient = {
   create: (config) => {
     const instance: AxiosInstance = axios.create(config);
 
@@ -31,24 +32,7 @@ export const httpClient: HttpClient = {
       useAuthInterceptor: () => useAuthInterceptor(instance),
     });
   },
-};
-
-export const httpHelper = {
-  getErrorMessage(error: unknown) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        return error.response.data?.message ?? "Error inesperado...";
-      }
-      if (error.request) {
-        return "No se recibió respuesta del servidor...";
-      }
-      return error.message;
-    }
-
-    if (error instanceof Error) {
-      return error.message;
-    }
-
-    return "Ocurrió un error desconocido.";
+  isRequestCancelled(error: unknown): boolean {
+    return axios.isCancel(error);
   },
 };

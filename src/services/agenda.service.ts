@@ -1,5 +1,5 @@
-import { httpClient } from "@/lib/http-client";
+import { HttpClient } from "@/lib/http-client";
 
-export const agendaService = httpClient.create({
+export const AgendaService = HttpClient.create({
   baseURL: "http://localhost:3000/api",
-})
+});

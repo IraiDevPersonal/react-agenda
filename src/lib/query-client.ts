@@ -1,7 +1,8 @@
 import { QueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { httpHelper } from "./http-client";
+import { CustomError } from "./custom-error";
+import { HttpClient } from "./http-client";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -9,10 +10,12 @@ export const queryClient = new QueryClient({
       retry: 1,
       // staleTime: 5 * 60 * 1000, // 5 minutos,
       throwOnError(error) {
-        const errorMessage = httpHelper.getErrorMessage(error);
-        toast.error(errorMessage, { duration: 4000 });
+        if (!HttpClient.isRequestCancelled(error)) {
+          const { message } = CustomError.getError(error);
+          toast.error(message, { duration: 4000 });
+        }
 
-        // TODO: return false para que la aplicacion no caiga despues del error
+        // return false para que la aplicacion no caiga despues del error
         return false;
       },
     },
