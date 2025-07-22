@@ -1,4 +1,5 @@
 import PageLayout from "@/components/page-layout";
+import { Main } from "@/components/ui/main";
 
 import { AppointmentHeader } from "./components/appointment-header";
 import { AppointmentViewSelector } from "./components/appointment-view-selector";
@@ -8,10 +9,10 @@ function AgendaPage() {
   return (
     <PageLayout title="Mi Agenda">
       <AppointmentHeader />
-      <main className="space-y-4 h-full overflow-y-auto flex justify-between w-full">
+      <Main className="justify-between">
         <AppointmentViewSelector />
         <AppoinmentDetailContainer />
-      </main>
+      </Main>
     </PageLayout>
   );
 }

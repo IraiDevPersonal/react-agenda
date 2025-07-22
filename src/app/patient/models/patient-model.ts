@@ -2,6 +2,16 @@ import z from "zod";
 
 import { AppointmentStatus } from "@/app/agenda/models/appointment-model";
 
+export const PatientSchema = z.object({
+  uid: z.string(),
+  rut: z.string(),
+  names: z.string(),
+  last_names: z.string(),
+  email: z.string(),
+  phone: z.string(),
+  address: z.string(),
+});
+
 export const PatientForAppointmentDetailSchema = z.object({
   names: z.string(),
   last_names: z.string(),
@@ -19,3 +29,4 @@ export const PatientHistorySchema = z.object({
 
 export type PatientForAppointmentDetailModel = z.infer<typeof PatientForAppointmentDetailSchema>;
 export type PatientHistoryModel = z.infer<typeof PatientHistorySchema>;
+export type PatientModel = z.infer<typeof PatientSchema>;

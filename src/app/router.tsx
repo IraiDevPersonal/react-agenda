@@ -4,7 +4,8 @@ import { ROUTES } from "@/constants/routes";
 
 import AgendaPage from "./agenda/page";
 import Layout from "./layout";
-import PatientPage from "./patient/page";
+import PatientPage from "./patient/pages/patient-page";
+import UpdatePatientPage from "./patient/pages/update-patient-page";
 
 const router = createBrowserRouter([{
   path: ROUTES.root,
@@ -26,6 +27,10 @@ const router = createBrowserRouter([{
         {
           index: true,
           element: <PatientPage />,
+        },
+        {
+          path: ":patientUid",
+          element: <UpdatePatientPage />,
         },
       ],
     },

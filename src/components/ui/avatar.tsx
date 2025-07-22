@@ -50,4 +50,7 @@ function AvatarFallback({
   );
 }
 
-export { Avatar, AvatarFallback, AvatarImage };
+Avatar.Fallback = AvatarFallback;
+Avatar.Image = AvatarImage;
+
+export { Avatar };

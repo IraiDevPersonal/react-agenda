@@ -8,8 +8,7 @@ type Props = PropsWithChildren<{
 function Show({ when, children, fallback }: Props) {
   return (
     <>
-      {fallback}
-      {when ? children : null}
+      {when ? children : fallback}
     </>
   );
 }

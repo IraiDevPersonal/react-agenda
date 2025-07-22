@@ -2,9 +2,28 @@ import { AppointmentStatus } from "@/app/agenda/models/appointment-model";
 import { CustomError } from "@/lib/custom-error";
 import { safeArray } from "@/lib/utils";
 
-import type { PatientForAppointmentDetailModel, PatientHistoryModel } from "../models/patient-model";
+import type { PatientForAppointmentDetailModel, PatientHistoryModel, PatientModel } from "../models/patient-model";
 
-import { PatientForAppointmentDetailSchema, PatientHistorySchema } from "../models/patient-model";
+import { PatientForAppointmentDetailSchema, PatientHistorySchema, PatientSchema } from "../models/patient-model";
+
+function validate(item: any) {
+  try {
+    const data: PatientModel = {
+      uid: item.uid,
+      rut: item.rut,
+      names: item.names,
+      last_names: item.last_names,
+      email: item.email,
+      phone: item.phone,
+      address: item.address,
+    };
+
+    return PatientSchema.parse(data);
+  }
+  catch (error) {
+    throw CustomError.handleError(error, { showLog: true });
+  }
+}
 
 function validatePatientForAppointmentDetail(item: any) {
   try {
@@ -42,4 +61,5 @@ function patientHistoryToArray(data: any) {
 export const PatientAdapter = {
   validatePatientForAppointmentDetail,
   patientHistoryToArray,
+  httpResponse: (data: any) => safeArray(data).map(validate),
 };

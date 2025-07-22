@@ -1,3 +1,5 @@
+import type { PropsWithChildren } from "react";
+
 import { LucideMessageCircleQuestion } from "lucide-react";
 
 import type { PatientForAppointmentDetailModel } from "@/app/patient/models/patient-model";
@@ -5,24 +7,17 @@ import type { PatientForAppointmentDetailModel } from "@/app/patient/models/pati
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
 import { Search } from "@/components/ui/search";
-import { SelectNative } from "@/components/ui/select-native";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-type Props = {
-  id: string;
-  patient: PatientForAppointmentDetailModel;
+type Props = PropsWithChildren<{
+  patient?: PatientForAppointmentDetailModel;
   withSearchPatient?: boolean;
-};
+  id?: string;
+}>;
 
-function PatientForm({ patient, withSearchPatient = false, id }: Props) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = Object.fromEntries(new FormData(e.currentTarget));
-    console.log(form);
-  };
-
+function PatientForm({ patient, withSearchPatient = false, id, children }: Props) {
   return (
-    <form className="grid grid-cols-2 gap-4 items-end" id={id} onSubmit={handleSubmit}>
+    <form className="grid grid-cols-2 gap-4 items-end" id={id}>
       <h5 className="text-lg font-semibold col-span-2">Datos paciente:</h5>
 
       {withSearchPatient
@@ -30,7 +25,7 @@ function PatientForm({ patient, withSearchPatient = false, id }: Props) {
             <Search
               label="Rut (buscar paciente)"
               placeholder="Rut paciente"
-              defaultValue={patient.rut}
+              defaultValue={patient?.rut}
               classNames={{
                 input: "w-full",
               }}
@@ -38,7 +33,7 @@ function PatientForm({ patient, withSearchPatient = false, id }: Props) {
           )
         : (
             <FieldWrapper label="Rut">
-              <Input placeholder="Rut paciente" defaultValue={patient.rut} />
+              <Input placeholder="Rut paciente" defaultValue={patient?.rut} />
             </FieldWrapper>
           )}
 
@@ -51,28 +46,25 @@ function PatientForm({ patient, withSearchPatient = false, id }: Props) {
         : <span />}
 
       <FieldWrapper label="Nombres">
-        <Input placeholder="Nombres paciente" defaultValue={patient.names} />
+        <Input placeholder="Nombres paciente" defaultValue={patient?.names} />
       </FieldWrapper>
 
       <FieldWrapper label="Apellidos">
-        <Input placeholder="Apellidos paciente" defaultValue={patient.last_names} />
+        <Input placeholder="Apellidos paciente" defaultValue={patient?.last_names} />
       </FieldWrapper>
 
       <FieldWrapper label="Correo">
-        <Input placeholder="Correo paciente" defaultValue={patient.email} />
+        <Input placeholder="Correo paciente" defaultValue={patient?.email} />
       </FieldWrapper>
 
       <FieldWrapper label="Teléfono">
-        <Input placeholder="Teléfono paciente" defaultValue={patient.phone} />
+        <Input placeholder="Teléfono paciente" defaultValue={patient?.phone} />
       </FieldWrapper>
 
       <FieldWrapper label="Dirección" classNames={{ root: "col-span-2" }}>
-        <Input placeholder="Dirección paciente" defaultValue={patient.address} />
+        <Input placeholder="Dirección paciente" defaultValue={patient?.address} />
       </FieldWrapper>
-
-      <FieldWrapper label="Forma de pago" classNames={{ root: "col-span-2" }}>
-        <SelectNative />
-      </FieldWrapper>
+      {children}
     </form>
   );
 }
