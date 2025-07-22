@@ -1,16 +1,16 @@
 import PageLayout from "@/components/page-layout";
 import { Main } from "@/components/ui/main";
 
-import { UpdatePatientPresenter } from "../components/update-patient-presenter";
+import { CreatePatientPresenter } from "../components/create-patient-presenter";
 
-function UpdatePatientPage() {
+function CreatePatientPage() {
   return (
     <PageLayout title="Pacientes">
       <Main className="flex-col justify-center items-center">
-        <UpdatePatientPresenter />
+        <CreatePatientPresenter />
       </Main>
     </PageLayout>
   );
 }
 
-export default UpdatePatientPage;
+export default CreatePatientPage;

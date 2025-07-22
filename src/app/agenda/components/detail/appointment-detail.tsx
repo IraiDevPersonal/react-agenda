@@ -1,13 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { CheckCheckIcon, CopyIcon } from "lucide-react";
 
 import { ProfessionalAppointmentInfo } from "@/app/professional/components/professional-appointment-info";
 import { Show } from "@/components/show";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
-import { useClipboard } from "@/lib/hooks/use-clipboard";
 
 import type { AppointmentModel } from "../../models/appointment-model";
 
@@ -24,7 +22,6 @@ type Props = {
 
 function AppointmentDetail({ appointmentUid }: Props) {
   const { data, isError, error, isLoading } = useQuery(AppointmentQueryOptions.getDetail(appointmentUid));
-  const [copyValue, copyFn] = useClipboard({ withState: true, clearCopyDelay: 1000 });
 
   if (isLoading) {
     return null;
@@ -45,11 +42,7 @@ function AppointmentDetail({ appointmentUid }: Props) {
         </h3>
 
         <DefaultTooltip content="Copiar ID">
-          <Button size="icon" variant="ghost" onClick={() => copyFn(appointmentUid)}>
-            {copyValue
-              ? <CheckCheckIcon size={20} />
-              : <CopyIcon size={20} />}
-          </Button>
+          <CopyButton value={appointmentUid} />
         </DefaultTooltip>
 
         <Badge

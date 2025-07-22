@@ -17,7 +17,7 @@ type Props = PropsWithChildren<{
 
 function PatientForm({ patient, withSearchPatient = false, id, children }: Props) {
   return (
-    <form className="grid grid-cols-2 gap-4 items-end" id={id}>
+    <form className="grid grid-cols-2 gap-4 items-end w-full" id={id}>
       <h5 className="text-lg font-semibold col-span-2">Datos paciente:</h5>
 
       {withSearchPatient
