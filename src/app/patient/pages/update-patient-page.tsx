@@ -5,7 +5,7 @@ import { UpdatePatientPresenter } from "../components/update-patient-presenter";
 
 function UpdatePatientPage() {
   return (
-    <PageLayout title="Pacientes">
+    <PageLayout title="Editar Paciente">
       <Main className="flex-col justify-center items-center">
         <UpdatePatientPresenter />
       </Main>

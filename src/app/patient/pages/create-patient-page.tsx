@@ -5,7 +5,7 @@ import { CreatePatientPresenter } from "../components/create-patient-presenter";
 
 function CreatePatientPage() {
   return (
-    <PageLayout title="Pacientes">
+    <PageLayout title="Crear Paciente">
       <Main className="flex-col justify-center items-center">
         <CreatePatientPresenter />
       </Main>

@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 
 import { AppointmentDetail } from "./appointment-detail";
 
-function AppoinmentDetailContainer() {
+function AppoinmentDetailPresenter() {
   const { appointmentUid } = useParams();
 
   if (!appointmentUid) {
@@ -14,4 +14,4 @@ function AppoinmentDetailContainer() {
   );
 }
 
-export { AppoinmentDetailContainer };
+export { AppoinmentDetailPresenter };

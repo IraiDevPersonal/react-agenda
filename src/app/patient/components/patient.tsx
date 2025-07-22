@@ -3,6 +3,7 @@ import type { PropsWithChildren } from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
+import { DefaultTooltip } from "@/components/ui/tooltip";
 
 import { PatientForm } from "./patient-form";
 
@@ -46,11 +47,13 @@ PropsWithChildren<{ uid: string; fullname: string }>) {
       <div className="flex items-center gap-1">
         <span
           className="max-w-48 truncate block text-muted-foreground"
-          title={`uid-usuario: ${uid}`}
+          title={`id usuario: ${uid}`}
         >
           {uid}
         </span>
-        <CopyButton value={uid} />
+        <DefaultTooltip content="Copiar ID de usuario">
+          <CopyButton value={uid} />
+        </DefaultTooltip>
       </div>
     </div>
   );

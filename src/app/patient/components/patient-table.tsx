@@ -12,7 +12,7 @@ import {
 import { PatientQueryOptions } from "../queries/patient-queries";
 
 function PatientTable() {
-  const { data, isError, error } = useQuery(PatientQueryOptions.getAll());
+  const { data: patients = [], isError, error } = useQuery(PatientQueryOptions.getAll());
 
   if (isError) {
     return (
@@ -24,24 +24,23 @@ function PatientTable() {
   }
 
   return (
-    <div>
+    <Table.Container>
       <Table>
         <Table.Header>
-          <Table.Row className="hover:bg-transparent font-bold">
+          <Table.Row className="hover:bg-transparent bg-muted font-bold">
             <Table.Head>Nombre</Table.Head>
-            <Table.Head>Rut</Table.Head>
             <Table.Head>Correo</Table.Head>
-            <Table.Head>Teléfono</Table.Head>
             <Table.Head>Dirección</Table.Head>
+            <Table.Head>Estado</Table.Head>
             <Table.Head></Table.Head>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {(data ?? []).map(item => (
+          {patients.map(item => (
             <Table.Row key={item.uid}>
               <Table.Cell>
                 <div className="flex items-center gap-3">
-                  <Avatar className="size-9 ">
+                  <Avatar className="size-9">
                     <Avatar.Image src="" alt="user" />
                     <Avatar.Fallback className="bg-neutral-300 text-primary uppercase">
                       {item.names.charAt(0)}
@@ -54,19 +53,26 @@ function PatientTable() {
                       {" "}
                       {item.last_names}
                     </span>
-                    <Badge
-                      className="mt-0.5 text-xs px-1.5 leading-none py-0.5"
-                      variant="available"
+                    <span
+                      className="mt-0.5 text-muted-foreground text-xs"
                     >
-                      estado
-                    </Badge>
+                      {item.rut}
+                    </span>
                   </div>
                 </div>
               </Table.Cell>
-              <Table.Cell>{item.rut}</Table.Cell>
-              <Table.Cell>{item.email}</Table.Cell>
-              <Table.Cell>{item.phone}</Table.Cell>
+              <Table.Cell>
+                <div>
+                  <span className="block font-semibold">{item.email}</span>
+                  <span className="mt-0.5 text-muted-foreground text-xs">{item.phone}</span>
+                </div>
+              </Table.Cell>
               <Table.Cell>{item.address}</Table.Cell>
+              <Table.Cell>
+                <Badge variant="available">
+                  estado
+                </Badge>
+              </Table.Cell>
               <Table.Cell>
                 <div className="flex items-center justify-end">
                   <Link
@@ -84,7 +90,7 @@ function PatientTable() {
           ))}
         </Table.Body>
       </Table>
-    </div>
+    </Table.Container>
   );
 }
 

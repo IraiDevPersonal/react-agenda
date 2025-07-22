@@ -3,7 +3,7 @@ import { Main } from "@/components/ui/main";
 
 import { AppointmentHeader } from "./components/appointment-header";
 import { AppointmentViewSelector } from "./components/appointment-view-selector";
-import { AppoinmentDetailContainer } from "./components/detail/appoinment-detail-container";
+import { AppoinmentDetailPresenter } from "./components/detail/appoinment-detail-presenter";
 
 function AgendaPage() {
   return (
@@ -11,7 +11,7 @@ function AgendaPage() {
       <AppointmentHeader />
       <Main className="justify-between">
         <AppointmentViewSelector />
-        <AppoinmentDetailContainer />
+        <AppoinmentDetailPresenter />
       </Main>
     </PageLayout>
   );

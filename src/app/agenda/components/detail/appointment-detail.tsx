@@ -41,13 +41,13 @@ function AppointmentDetail({ appointmentUid }: Props) {
           {appointmentUid}
         </h3>
 
-        <DefaultTooltip content="Copiar ID">
+        <DefaultTooltip content="Copiar ID de cita">
           <CopyButton value={appointmentUid} />
         </DefaultTooltip>
 
         <Badge
           variant={status.toLocaleLowerCase() as any}
-          className="pe-2.5 ml-auto"
+          className="px-0.5 pe-2 ml-auto"
         >
           <AppointmentStatusIcon status={status} />
           {STATUS_NAMES[status]}

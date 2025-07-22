@@ -1,3 +1,4 @@
+import { PageTitle } from "@/components/ui/page-title";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
@@ -11,9 +12,9 @@ function AppointmentHeader() {
     <>
       <header className="flex items-end justify-between w-full">
         <div>
-          <h1 className="text-4xl font-bold mb-4">Mi Agenda</h1>
+          <PageTitle>Mi Agenda</PageTitle>
           <div className="flex gap-2 items-center">
-            <h5 className="text-muted-foreground">Estados: </h5>
+            <span className="text-muted-foreground">Estados: </span>
             <ColorBall status={AppointmentStatus.INDETERMINATE} />
             <ColorBall status={AppointmentStatus.AVAILABLE} />
             <ColorBall status={AppointmentStatus.CONFIRMED} />

@@ -74,7 +74,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "text-muted-foreground h-10 px-2 text-left align-middle font-medium has-[role=checkbox]:w-px [&:has([role=checkbox])]:pr-0",
+        "text-muted-foreground h-10 px-3 text-left align-middle font-medium has-[role=checkbox]:w-px [&:has([role=checkbox])]:pr-0",
         className,
       )}
       {...props}
@@ -87,7 +87,7 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
     <td
       data-slot="table-cell"
       className={cn(
-        "p-2 align-middle [&:has([role=checkbox])]:pr-0",
+        "py-2 px-3 align-middle [&:has([role=checkbox])]:pr-0",
         className,
       )}
       {...props}
@@ -108,6 +108,14 @@ function TableCaption({
   );
 }
 
+function TableContainer({ children, className }: React.PropsWithChildren<{ className?: string }>) {
+  return (
+    <div className={cn("max-w-max mx-auto border rounded-lg overflow-hidden", className)}>
+      {children}
+    </div>
+  );
+}
+
 Table.Header = TableHeader;
 Table.Body = TableBody;
 Table.Footer = TableFooter;
@@ -115,6 +123,7 @@ Table.Row = TableRow;
 Table.Head = TableHead;
 Table.Cell = TableCell;
 Table.Caption = TableCaption;
+Table.Container = TableContainer;
 
 export {
   Table,
