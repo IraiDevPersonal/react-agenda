@@ -39,7 +39,9 @@ function PatientForm({ patient, withSearchPatient = false, id, children }: Props
 
       {withSearchPatient
         ? (
-            <DefaultTooltip content="si no se encuentra puede crear uno nuevo llenando todos los campos">
+            <DefaultTooltip
+              content="si no se encuentra puede crear uno nuevo llenando todos los campos"
+            >
               <LucideMessageCircleQuestion size={24} className="text-blue-500 mb-2" />
             </DefaultTooltip>
           )

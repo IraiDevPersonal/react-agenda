@@ -3,6 +3,7 @@ import { PencilIcon, Trash2Icon } from "lucide-react";
 import { Link } from "react-router";
 
 import { Avatar } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Table,
@@ -32,7 +33,6 @@ function PatientTable() {
             <Table.Head>Correo</Table.Head>
             <Table.Head>Teléfono</Table.Head>
             <Table.Head>Dirección</Table.Head>
-            <Table.Head>Estado</Table.Head>
             <Table.Head></Table.Head>
           </Table.Row>
         </Table.Header>
@@ -54,9 +54,12 @@ function PatientTable() {
                       {" "}
                       {item.last_names}
                     </span>
-                    <small className="text-muted-foreground mt-0.5 text-xs">
-                      {item.last_names}
-                    </small>
+                    <Badge
+                      className="mt-0.5 text-xs px-1.5 leading-none py-0.5"
+                      variant="available"
+                    >
+                      estado
+                    </Badge>
                   </div>
                 </div>
               </Table.Cell>
@@ -64,7 +67,6 @@ function PatientTable() {
               <Table.Cell>{item.email}</Table.Cell>
               <Table.Cell>{item.phone}</Table.Cell>
               <Table.Cell>{item.address}</Table.Cell>
-              <Table.Cell>estado</Table.Cell>
               <Table.Cell>
                 <div className="flex items-center justify-end">
                   <Link
