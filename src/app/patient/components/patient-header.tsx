@@ -1,13 +1,15 @@
 import { PageTitle } from "@/components/ui/page-title";
 
+import { PatientFilters } from "./patient-filters";
+
 function PatientHeader() {
   return (
     <header className="flex items-end justify-between w-full">
       <div>
-        <PageTitle>Pacientes</PageTitle>
-        <span className="font-semibold">Total: 123</span>
+        <PageTitle>122 Pacientes</PageTitle>
+        <span className="font-semibold">Pagína: 1 de 13</span>
       </div>
-      <span>filtros</span>
+      <PatientFilters />
     </header>
   );
 }

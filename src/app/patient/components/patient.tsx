@@ -1,5 +1,7 @@
 import type { PropsWithChildren } from "react";
 
+import { useNavigate } from "react-router";
+
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
@@ -10,6 +12,12 @@ import { PatientForm } from "./patient-form";
 type Props = PropsWithChildren;
 
 function Patient({ children }: Props) {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div
       className="flex flex-col lg:flex-row items-center justify-center h-full gap-x-4 lg:gap-x-8"
@@ -17,10 +25,10 @@ function Patient({ children }: Props) {
       {children}
       <div className="max-w-lg w-full lg:border-l md:pl-4 lg:pl-8">
         <PatientForm>
-          <Button variant="secondary">
+          <Button variant="secondary" onClick={handleBack}>
             Volver
           </Button>
-          <Button type="submit" className="w-full mt-4">
+          <Button type="submit">
             Guardar
           </Button>
         </PatientForm>

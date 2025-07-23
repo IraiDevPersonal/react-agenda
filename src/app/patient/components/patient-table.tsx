@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { PencilIcon, Trash2Icon } from "lucide-react";
+import { PencilIcon, PhoneIcon, Trash2Icon } from "lucide-react";
 import { Link } from "react-router";
 
 import { Avatar } from "@/components/ui/avatar";
@@ -64,7 +64,12 @@ function PatientTable() {
               <Table.Cell>
                 <div>
                   <span className="block font-semibold">{item.email}</span>
-                  <span className="mt-0.5 text-muted-foreground text-xs">{item.phone}</span>
+                  <div
+                    className="mt-0.5 text-muted-foreground text-xs flex items-baseline-last gap-x-1"
+                  >
+                    <PhoneIcon size={12} />
+                    <span>{item.phone}</span>
+                  </div>
                 </div>
               </Table.Cell>
               <Table.Cell>{item.address}</Table.Cell>

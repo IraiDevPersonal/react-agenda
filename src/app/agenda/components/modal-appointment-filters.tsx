@@ -48,7 +48,7 @@ function ModalAppointmentFilters() {
 
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Filtros</DialogTitle>
+            <DialogTitle>Filtrar citas</DialogTitle>
             <DialogDescription hidden>
             </DialogDescription>
           </DialogHeader>

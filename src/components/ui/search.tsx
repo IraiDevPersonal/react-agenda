@@ -35,9 +35,9 @@ function Search({
   const [isSubmited, setIsSubmited] = useState(false);
   const debounced = useDebouncedCallback(
     (value) => {
-      if (isSubmited)
-        return;
-      onSearch?.(value);
+      if (!isSubmited) {
+        onSearch?.(value);
+      }
     },
     deboundeDelay,
   );
@@ -58,7 +58,18 @@ function Search({
                 <XIcon size={14} />
               </button>
             )}
-          <SearchIcon size={20} />
+          <button
+            type="button"
+            className="cursor-pointer hover:text-primary transition-colors"
+            onClick={() => {
+              if (value) {
+                setIsSubmited(true);
+                onSearch?.(value.toString());
+              }
+            }}
+          >
+            <SearchIcon size={20} />
+          </button>
         </>
       )}
     >
