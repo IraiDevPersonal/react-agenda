@@ -20,7 +20,12 @@ export const PatientResponseSchema = z.object({
   page: z.number(),
   pages: z.number(),
   limit: z.number(),
-})
+});
+
+export const PatientDetailResponseSchema = z.object({
+  data: PatientSchema,
+  appointment_history: z.array(z.any()).optional(),
+});
 
 export const PatientForAppointmentDetailSchema = z.object({
   names: z.string(),
@@ -41,3 +46,4 @@ export type PatientForAppointmentDetailModel = z.infer<typeof PatientForAppointm
 export type PatientHistoryModel = z.infer<typeof PatientHistorySchema>;
 export type PatientModel = z.infer<typeof PatientSchema>;
 export type PatientResponseModel = z.infer<typeof PatientResponseSchema>;
+export type PatientDetailResponseModel = z.infer<typeof PatientDetailResponseSchema>;

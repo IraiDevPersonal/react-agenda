@@ -11,6 +11,12 @@ async function getAll(filters?: StringifyObject<PatientFilters>) {
   return PatientAdapter.httpResponse(data);
 }
 
+async function getDetail(uid: string) {
+  const { data } = await AgendaService.get(`/patients/${uid}`);
+  return PatientAdapter.patientDetailHttpResponse(data);
+}
+
 export const PatientActions = {
   getAll,
+  getDetail,
 };

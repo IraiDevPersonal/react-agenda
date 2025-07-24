@@ -35,8 +35,16 @@ function getPatientMetaData(filters?: StringifyObject<PatientFilters>) {
   });
 }
 
+function getDetail(uid: string) {
+  return queryOptions({
+    queryKey: [QueryKeys.patients, "one", uid],
+    queryFn: () => PatientActions.getDetail(uid),
+  });
+}
+
 export const PatientQueryOptions = {
   getAll,
+  getDetail,
   getTotalPatients,
   getPatientMetaData,
 };

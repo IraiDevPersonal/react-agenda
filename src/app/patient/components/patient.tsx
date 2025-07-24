@@ -8,11 +8,15 @@ import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
+import type { PatientModel } from "../models/patient-model";
+
 import { PatientForm } from "./patient-form";
 
-type Props = PropsWithChildren;
+type Props = PropsWithChildren<{
+  patient?: PatientModel;
+}>;
 
-function Patient({ children }: Props) {
+function Patient({ children, patient }: Props) {
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -25,7 +29,7 @@ function Patient({ children }: Props) {
     >
       {children}
       <div className="max-w-lg w-full lg:border-l md:pl-4 lg:pl-8">
-        <PatientForm>
+        <PatientForm patient={patient}>
           <Button variant="secondary" onClick={handleBack}>
             Volver
           </Button>
