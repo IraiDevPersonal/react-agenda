@@ -1,16 +1,42 @@
 import { queryOptions } from "@tanstack/react-query";
 
+import type { StringifyObject } from "@/types/global-types";
+
 import { QueryKeys } from "@/constants/query-keys";
+
+import type { PatientFilters } from "../models";
 
 import { PatientActions } from "../actions/patient-actions";
 
-function getAll() {
+function getAll(filters?: StringifyObject<PatientFilters>) {
   return queryOptions({
-    queryKey: [QueryKeys.patients],
-    queryFn: () => PatientActions.getAll(),
+    queryKey: [QueryKeys.patients, filters],
+    queryFn: () => PatientActions.getAll(filters),
+  });
+}
+
+function getTotalPatients(filters?: StringifyObject<PatientFilters>) {
+  return queryOptions({
+    ...getAll(filters),
+    select: data => data.total,
+  });
+}
+
+function getPatientMetaData(filters?: StringifyObject<PatientFilters>) {
+  return queryOptions({
+    ...getAll(filters),
+    select: (data) => {
+      return {
+        limit: data.limit,
+        page: data.page,
+        pages: data.pages,
+      };
+    },
   });
 }
 
 export const PatientQueryOptions = {
   getAll,
+  getTotalPatients,
+  getPatientMetaData,
 };

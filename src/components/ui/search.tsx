@@ -12,6 +12,8 @@ import { Input } from "./input";
 type Props = PropsWithChildren<{
   onClearValue?: () => void;
   onSearch?: (v: string) => void;
+  // showClearButton?: boolean;
+  searchIconSize?: number;
   deboundeDelay?: number;
   label?: ReactNode;
   classNames?: Partial<{
@@ -23,6 +25,7 @@ type Props = PropsWithChildren<{
 
 function Search({
   deboundeDelay = 1000,
+  searchIconSize = 20,
   classNames,
   label,
   value,
@@ -37,6 +40,7 @@ function Search({
     (value) => {
       if (!isSubmited) {
         onSearch?.(value);
+        setIsSubmited(true);
       }
     },
     deboundeDelay,
@@ -48,11 +52,14 @@ function Search({
       classNames={classNames}
       endComponent={(
         <>
-          {onClearValue && value
+          {onClearValue && isSubmited
             && (
               <button
                 type="button"
-                onClick={() => onClearValue()}
+                onClick={() => {
+                  setIsSubmited(false);
+                  onClearValue();
+                }}
                 className="cursor-pointer hover:text-red-600 transition-colors"
               >
                 <XIcon size={14} />
@@ -68,7 +75,7 @@ function Search({
               }
             }}
           >
-            <SearchIcon size={20} />
+            <SearchIcon size={searchIconSize} />
           </button>
         </>
       )}

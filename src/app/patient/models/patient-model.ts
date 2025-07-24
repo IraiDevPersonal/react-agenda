@@ -10,7 +10,17 @@ export const PatientSchema = z.object({
   email: z.string(),
   phone: z.string(),
   address: z.string(),
+  is_deleted: z.boolean().optional().default(false),
+  avatar_image: z.string().optional().nullable(),
 });
+
+export const PatientResponseSchema = z.object({
+  data: z.array(PatientSchema),
+  total: z.number(),
+  page: z.number(),
+  pages: z.number(),
+  limit: z.number(),
+})
 
 export const PatientForAppointmentDetailSchema = z.object({
   names: z.string(),
@@ -30,3 +40,4 @@ export const PatientHistorySchema = z.object({
 export type PatientForAppointmentDetailModel = z.infer<typeof PatientForAppointmentDetailSchema>;
 export type PatientHistoryModel = z.infer<typeof PatientHistorySchema>;
 export type PatientModel = z.infer<typeof PatientSchema>;
+export type PatientResponseModel = z.infer<typeof PatientResponseSchema>;

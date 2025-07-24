@@ -1,9 +1,13 @@
+import type { StringifyObject } from "@/types/global-types";
+
 import { AgendaService } from "@/services/agenda-service";
+
+import type { PatientFilters } from "../models";
 
 import { PatientAdapter } from "../adapters/patient-adapter";
 
-async function getAll() {
-  const { data } = await AgendaService.get("/patients");
+async function getAll(filters?: StringifyObject<PatientFilters>) {
+  const { data } = await AgendaService.get("/patients", { params: filters });
   return PatientAdapter.httpResponse(data);
 }
 

@@ -2,11 +2,11 @@ import { AppointmentStatus } from "@/app/agenda/models/appointment-model";
 import { CustomError } from "@/lib/custom-error";
 import { safeArray } from "@/lib/utils";
 
-import type { PatientForAppointmentDetailModel, PatientHistoryModel, PatientModel } from "../models/patient-model";
+import type { PatientForAppointmentDetailModel, PatientHistoryModel, PatientModel, PatientResponseModel } from "../models/patient-model";
 
-import { PatientForAppointmentDetailSchema, PatientHistorySchema, PatientSchema } from "../models/patient-model";
+import { PatientForAppointmentDetailSchema, PatientHistorySchema, PatientResponseSchema, PatientSchema } from "../models/patient-model";
 
-function validate(item: any) {
+function validatePatientItem(item: any) {
   try {
     const data: PatientModel = {
       uid: item.uid,
@@ -16,11 +16,29 @@ function validate(item: any) {
       email: item.email,
       phone: item.phone,
       address: item.address,
+      is_deleted: item.is_deleted ?? false,
+      avatar_image: item.avatar_image ?? null,
     };
 
     return PatientSchema.parse(data);
   }
   catch (error) {
+    throw CustomError.handleError(error, { showLog: true });
+  }
+}
+
+function validatePatientResponse(response: any) {
+  try {
+    const data: PatientResponseModel = {
+      data: safeArray(response.data).map(validatePatientItem),
+      limit: response.limit,
+      total: response.total,
+      page: response.page,
+      pages: response.pages,
+    }
+
+    return PatientResponseSchema.parse(data);
+  } catch (error) {
     throw CustomError.handleError(error, { showLog: true });
   }
 }
@@ -61,5 +79,5 @@ function patientHistoryToArray(data: any) {
 export const PatientAdapter = {
   validatePatientForAppointmentDetail,
   patientHistoryToArray,
-  httpResponse: (data: any) => safeArray(data).map(validate),
+  httpResponse: validatePatientResponse,
 };
