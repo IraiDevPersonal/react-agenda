@@ -7,7 +7,7 @@ import { ProfessionalForAppointmentDetailSchema } from "../models/professional-m
 function validateProfessionalForAppointmentDetail(item: any) {
   try {
     const data: ProfessionalForAppointmentDetail = {
-      fullname: item.full_name,
+      fullname: item.fullname,
       professions: item.professions,
       pay_methods: item.pay_methods,
       confirm_methods: item.confirm_methods,
