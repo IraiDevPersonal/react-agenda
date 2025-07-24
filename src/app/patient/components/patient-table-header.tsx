@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { usePatientFilterController } from "../hooks/use-patient-filter-controller";
 import { PatientStatus } from "../models";
 
-const INPUT_STYLES = "w-full border-transparent bg-transparent shadow-none focus-visible:ring-transparent focus-visible:border-transparent pe-7 text-muted-foreground placeholder:text-muted-foreground";
+const INPUT_STYLES = "w-full border-transparent bg-transparent shadow-none focus-visible:ring-transparent focus-visible:border-transparent h-full pe-7 text-muted-foreground placeholder:text-muted-foreground font-normal placeholder:font-normal";
 
 function PatientTableHeader() {
   const {
@@ -21,12 +21,23 @@ function PatientTableHeader() {
 
   return (
     <Table.Header>
-      <Table.Row className="!hover:bg-transparent bg-muted font-bold *:h-full">
+      <Table.Row className="!hover:bg-transparent bg-muted">
+        <Table.Head>Nombre</Table.Head>
+        <Table.Head>Rut</Table.Head>
+        <Table.Head>Correo</Table.Head>
+        <Table.Head>Dirección</Table.Head>
+        <Table.Head align="center">Estado</Table.Head>
+        <Table.Head></Table.Head>
+      </Table.Row>
+
+      <Table.Row
+        className="!hover:bg-transparent bg- font-bold *:h-full *:border-r *:last-of-type:border-r-0"
+      >
         <Table.Head className="p-0">
           <Search
             ref={nameRef}
-            placeholder="Nombre"
             searchIconSize={16}
+            placeholder="Buscar por nombre..."
             classNames={{ input: INPUT_STYLES }}
             defaultValue={filters.name ?? ""}
             onSearch={v => handelSearch(v, "name")}
@@ -36,8 +47,8 @@ function PatientTableHeader() {
         <Table.Head className="p-0">
           <Search
             ref={rutRef}
-            placeholder="Rut"
             searchIconSize={16}
+            placeholder="Buscar por rut..."
             classNames={{ input: INPUT_STYLES, root: "w-36" }}
             defaultValue={filters.rut ?? ""}
             onSearch={v => handelSearch(v, "rut")}
@@ -47,21 +58,19 @@ function PatientTableHeader() {
         <Table.Head className="p-0">
           <Search
             ref={emailRef}
-            placeholder="Correo"
             searchIconSize={16}
+            placeholder="Buscar por correo..."
             classNames={{ input: INPUT_STYLES }}
             defaultValue={filters.email ?? ""}
             onSearch={v => handelSearch(v, "email")}
             onClearValue={() => handleClearSearch("email")}
           />
         </Table.Head>
-        <Table.Head>Dirección</Table.Head>
-        <Table.Head>
+        <Table.Head></Table.Head>
+        <Table.Head className="p-0">
           <SelectNative
-            withEmptyOption={false}
-            className={cn(INPUT_STYLES, "w-24")}
+            className={cn(INPUT_STYLES, "max-w-max")}
             options={[
-              { value: "", label: "Estado" },
               { value: PatientStatus.ACTIVE, label: "Activo" },
               { value: PatientStatus.INACTIVE, label: "Inactivo" },
             ]}

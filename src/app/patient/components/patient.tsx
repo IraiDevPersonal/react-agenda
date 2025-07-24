@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from "react";
 
+import { UserIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 
 import { Avatar } from "@/components/ui/avatar";
@@ -72,10 +73,12 @@ function PatientImage({ showCaption }: { showCaption?: boolean }) {
     <div>
       <Avatar className="size-52 lg:size-72">
         <Avatar.Image
-          src="https://avatars.githubusercontent.com/u/12345678?v=4"
+          src=""
           alt="Patient Avatar"
         />
-        <Avatar.Fallback>NA</Avatar.Fallback>
+        <Avatar.Fallback>
+          <UserIcon size={80} className="text-muted-foreground" />
+        </Avatar.Fallback>
         <Avatar.ChooseImage />
       </Avatar>
       {showCaption

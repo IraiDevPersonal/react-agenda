@@ -8,14 +8,15 @@ import { PatientFilters } from "./patient-filters";
 
 function PatientHeader() {
   const { filtersAsParams } = usePatientFilters();
-  const { data: totalPatients } = useQuery(PatientQueryOptions.getTotalPatients(filtersAsParams));
+  const { data: totalPatients = 0 } = useQuery(PatientQueryOptions.getTotalPatients(filtersAsParams));
 
   return (
     <header className="flex items-center justify-between w-full">
       <PageTitle>
         {totalPatients}
         {" "}
-        Pacientes
+        Paciente
+        {totalPatients > 1 ? "s" : ""}
       </PageTitle>
       <PatientFilters />
     </header>
