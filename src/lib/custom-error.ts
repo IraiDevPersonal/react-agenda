@@ -57,9 +57,10 @@ export class CustomError extends Error {
 
     if (error instanceof ZodError) {
       const issues = error.issues.map(
-        issue => `[${issue.path.join(".")}] ${issue.message}`,
+        // issue => `[${issue.path.join(".")}] ${issue.message}`,
+        issue => `${issue.message}`,
       );
-      return `Error de validación: ${issues.join("; ")}`;
+      return issues.join(";\n");
     }
 
     if (error instanceof Error) {

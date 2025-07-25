@@ -1,71 +1,75 @@
 import type { PropsWithChildren } from "react";
 
 import { UserIcon } from "lucide-react";
-import { useNavigate } from "react-router";
+import { createContext, use, useMemo } from "react";
 
 import { Avatar } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
+import { CustomError } from "@/lib/custom-error";
 
-import type { PatientModel } from "../models/patient-model";
+import type { PatientModel, UpsertActionState } from "../models/patient-model";
 
 import { PatientForm } from "./patient-form";
 
 type Props = PropsWithChildren<{
-  patient?: PatientModel;
+  upsertAction: (prevState: UpsertActionState, formData: FormData) => Promise<UpsertActionState>;
+  patient?: PatientModel | undefined;
 }>;
 
-function Patient({ children, patient }: Props) {
-  const navigate = useNavigate();
+const Context = createContext<Pick<Props, "patient">>({
+  patient: undefined,
+});
 
-  const handleBack = () => {
-    navigate(-1);
-  };
+function usePatientContext() {
+  const context = use(Context);
+
+  if (!context) {
+    throw new CustomError("el usePatientContext solo puede ser usado dentro de su Provider");
+  }
+
+  return context;
+}
+
+function Patient({ children, patient, upsertAction }: Props) {
+  const value = useMemo(() => ({ patient }), [patient]);
 
   return (
-    <div
-      className="flex flex-col lg:flex-row items-center justify-center h-full gap-x-4 lg:gap-x-8"
-    >
-      {children}
-      <div className="max-w-lg w-full lg:border-l md:pl-4 lg:pl-8">
-        <PatientForm patient={patient}>
-          <Button variant="secondary" onClick={handleBack}>
-            Volver
-          </Button>
-          <Button type="submit">
-            Guardar
-          </Button>
-        </PatientForm>
+    <Context value={value}>
+      <div
+        className="flex flex-col lg:flex-row items-center justify-center h-full gap-x-4 lg:gap-x-8"
+      >
+        {children}
+        <div className="max-w-lg w-full lg:border-l md:pl-4 lg:pl-8">
+          <PatientForm upsertAction={upsertAction} patient={patient} />
+        </div>
       </div>
-    </div>
+    </Context>
   );
 }
 
-function PatientData({
-  uid,
-  fullname,
-  children,
-}:
-PropsWithChildren<{ uid: string; fullname: string }>) {
+function PatientData({ children }: PropsWithChildren) {
+  const { patient } = usePatientContext();
   return (
     <div className="flex flex-col items-center">
       {children}
       <h5
         className="text-2xl font-semibold capitalize text-center max-w-72 md:max-w-96 xl:max-w-full mt-4 md:mt-8"
       >
-        {fullname}
+        {patient?.names}
+        {" "}
+        {patient?.last_names}
         .
       </h5>
       <div className="flex items-center gap-1">
         <span
           className="max-w-48 truncate block text-muted-foreground"
-          title={`id usuario: ${uid}`}
+          title={`id usuario: ${patient?.uid}`}
         >
-          {uid}
+          {patient?.uid}
         </span>
         <DefaultTooltip content="Copiar ID de usuario">
-          <CopyButton value={uid} />
+          <CopyButton value={patient?.uid ?? ""} />
         </DefaultTooltip>
       </div>
     </div>
@@ -73,11 +77,12 @@ PropsWithChildren<{ uid: string; fullname: string }>) {
 }
 
 function PatientImage({ showCaption }: { showCaption?: boolean }) {
+  const { patient } = usePatientContext();
   return (
     <div>
       <Avatar className="size-52 lg:size-72">
         <Avatar.Image
-          src=""
+          src={patient?.avatar_image ?? ""}
           alt="Patient Avatar"
         />
         <Avatar.Fallback>

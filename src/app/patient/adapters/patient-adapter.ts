@@ -8,6 +8,7 @@ import type {
   PatientHistoryModel,
   PatientModel,
   PatientResponseModel,
+  UpsertPatientResponseModel,
 } from "../models/patient-model";
 
 import {
@@ -16,6 +17,7 @@ import {
   PatientHistorySchema,
   PatientResponseSchema,
   PatientSchema,
+  UpsertPatientResponseSchema,
 } from "../models/patient-model";
 
 function validatePatientItem(item: any) {
@@ -103,9 +105,24 @@ function patientHistoryToArray(data: any) {
   }
 }
 
+function validateUpsertResponse(response: any) {
+  try {
+    const data: UpsertPatientResponseModel = {
+      data: validatePatientItem(response.data),
+      message: response.message,
+    };
+
+    return UpsertPatientResponseSchema.parse(data);
+  }
+  catch (error) {
+    throw CustomError.handleError(error, { showLog: true });
+  }
+}
+
 export const PatientAdapter = {
   validatePatientForAppointmentDetail,
   patientHistoryToArray,
   httpResponse: validatePatientResponse,
   patientDetailHttpResponse: validatePatientDetail,
+  upsertPatientResponse: validateUpsertResponse,
 };

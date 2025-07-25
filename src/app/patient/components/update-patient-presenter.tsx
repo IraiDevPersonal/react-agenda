@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 
+import { PatientMutations } from "../actions/patient-mutations";
 import { PatientQueryOptions } from "../queries/patient-queries";
 import { Patient } from "./patient";
 
@@ -28,11 +29,11 @@ function UpdatePatientPresenter() {
 
   return (
     <>
-      <Patient patient={patient?.data}>
-        <Patient.Data
-          fullname={`${patient?.data.names} ${patient?.data.last_names}`}
-          uid={patient?.data.uid ?? ""}
-        >
+      <Patient
+        patient={patient?.data}
+        upsertAction={PatientMutations.updatePatient}
+      >
+        <Patient.Data>
           <Patient.Image />
         </Patient.Data>
       </Patient>

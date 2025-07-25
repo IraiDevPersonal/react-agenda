@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
 import { usePatientFilterController } from "../hooks/use-patient-filter-controller";
+import { usePatientFilters } from "../hooks/use-patient-filters";
 import { PatientQueryOptions } from "../queries/patient-queries";
 
 function PatientFilters() {
@@ -13,8 +14,9 @@ function PatientFilters() {
     handlePageChange,
     handleClearAllFilters,
   } = usePatientFilterController();
+  const { filtersAsParams } = usePatientFilters();
 
-  const { data } = useQuery(PatientQueryOptions.getPatientMetaData());
+  const { data } = useQuery(PatientQueryOptions.getPatientMetaData(filtersAsParams));
 
   return (
     <div className="flex items-center gap-2">

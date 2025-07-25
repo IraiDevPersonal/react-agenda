@@ -1,72 +1,106 @@
-import type { PropsWithChildren } from "react";
+import { useActionState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
-import { LucideMessageCircleQuestion } from "lucide-react";
+import type { PatientModel, UpsertActionState } from "@/app/patient/models/patient-model";
 
-import type { PatientForAppointmentDetailModel } from "@/app/patient/models/patient-model";
-
+import { Button } from "@/components/ui/button";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
-import { Search } from "@/components/ui/search";
-import { DefaultTooltip } from "@/components/ui/tooltip";
 
-type Props = PropsWithChildren<{
-  patient?: PatientForAppointmentDetailModel;
-  withSearchPatient?: boolean;
-  id?: string;
-}>;
+type Props = {
+  upsertAction: (prevState: UpsertActionState, formData: FormData) => Promise<UpsertActionState>;
+  patient?: PatientModel;
+};
 
-function PatientForm({ patient, withSearchPatient = false, id, children }: Props) {
+function PatientForm({
+  patient,
+  upsertAction,
+}: Props) {
+  const [
+    state,
+    formAction,
+    isPending,
+  ] = useActionState(upsertAction, {
+    data: patient,
+    success: false,
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!patient && state.success) {
+      navigate(-1);
+    }
+  }, [state.success, patient, navigate]);
+
   return (
-    <form className="grid grid-cols-2 gap-4 items-end w-full" id={id}>
+    <form
+      className="grid grid-cols-2 gap-4 items-end w-full [&>div]:col-span-2"
+      action={formAction}
+    >
       <h5 className="text-lg font-semibold col-span-2">Datos paciente:</h5>
 
-      {withSearchPatient
-        ? (
-            <Search
-              label="Rut (buscar paciente)"
-              placeholder="Rut paciente"
-              defaultValue={patient?.rut}
-              classNames={{
-                input: "w-full",
-              }}
-            />
-          )
-        : (
-            <FieldWrapper label="Rut">
-              <Input placeholder="Rut paciente" defaultValue={patient?.rut} />
-            </FieldWrapper>
-          )}
+      <FieldWrapper label="Rut" classNames={{ root: "!col-span-1" }}>
+        <Input
+          name="rut"
+          disabled={isPending}
+          placeholder="Rut paciente"
+          defaultValue={state.data?.rut}
+          key={state.data?.rut}
+        />
+      </FieldWrapper>
 
-      {withSearchPatient
-        ? (
-            <DefaultTooltip
-              content="si no se encuentra puede crear uno nuevo llenando todos los campos"
-            >
-              <LucideMessageCircleQuestion size={24} className="text-blue-500 mb-2" />
-            </DefaultTooltip>
-          )
-        : <span />}
+      <FieldWrapper label="Teléfono" classNames={{ root: "!col-span-1" }}>
+        <Input
+          name="phone"
+          placeholder="Teléfono paciente"
+          defaultValue={state.data?.phone}
+          key={state.data?.phone}
+        />
+      </FieldWrapper>
 
       <FieldWrapper label="Nombres">
-        <Input placeholder="Nombres paciente" defaultValue={patient?.names} />
+        <Input
+          name="names"
+          placeholder="Nombres paciente"
+          defaultValue={state.data?.names}
+          key={state.data?.names}
+        />
       </FieldWrapper>
 
       <FieldWrapper label="Apellidos">
-        <Input placeholder="Apellidos paciente" defaultValue={patient?.last_names} />
+        <Input
+          name="last_names"
+          placeholder="Apellidos paciente"
+          defaultValue={state.data?.last_names}
+          key={state.data?.last_names}
+        />
       </FieldWrapper>
 
       <FieldWrapper label="Correo">
-        <Input placeholder="Correo paciente" defaultValue={patient?.email} />
-      </FieldWrapper>
-
-      <FieldWrapper label="Teléfono">
-        <Input placeholder="Teléfono paciente" defaultValue={patient?.phone} />
+        <Input
+          name="email"
+          type="email"
+          placeholder="Correo paciente"
+          defaultValue={state.data?.email}
+          key={state.data?.email}
+        />
       </FieldWrapper>
 
       <FieldWrapper label="Dirección" classNames={{ root: "col-span-2" }}>
-        <Input placeholder="Dirección paciente" defaultValue={patient?.address} />
+        <Input
+          name="address"
+          placeholder="Dirección paciente"
+          defaultValue={state.data?.address}
+          key={state.data?.address}
+        />
       </FieldWrapper>
-      {children}
+
+      <Button variant="secondary" onClick={() => navigate(-1)} disabled={isPending}>
+        Volver
+      </Button>
+      <Button type="submit" disabled={isPending}>
+        Guardar
+      </Button>
     </form>
   );
 }

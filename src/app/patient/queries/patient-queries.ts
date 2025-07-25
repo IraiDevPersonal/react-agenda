@@ -37,6 +37,7 @@ function getPatientMetaData(filters?: StringifyObject<PatientFilters>) {
 
 function getDetail(uid: string) {
   return queryOptions({
+    refetchOnWindowFocus: false,
     queryKey: [QueryKeys.patients, "one", uid],
     queryFn: () => PatientActions.getDetail(uid),
   });
