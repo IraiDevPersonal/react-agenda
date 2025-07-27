@@ -1,15 +1,15 @@
 import type { PropsWithChildren } from "react";
 
 import { UserIcon } from "lucide-react";
-import { createContext, use, useMemo } from "react";
+import { useMemo } from "react";
 
 import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
-import { CustomError } from "@/lib/custom-error";
 
 import type { PatientModel, UpsertActionState } from "../models/patient-model";
 
+import { PatientCompoundContext, usePatientCompoundContext } from "../context/patient-compound-context";
 import { PatientForm } from "./patient-form";
 
 type Props = PropsWithChildren<{
@@ -17,25 +17,11 @@ type Props = PropsWithChildren<{
   patient?: PatientModel | undefined;
 }>;
 
-const Context = createContext<Pick<Props, "patient">>({
-  patient: undefined,
-});
-
-function usePatientContext() {
-  const context = use(Context);
-
-  if (!context) {
-    throw new CustomError("el usePatientContext solo puede ser usado dentro de su Provider");
-  }
-
-  return context;
-}
-
 function Patient({ children, patient, upsertAction }: Props) {
   const value = useMemo(() => ({ patient }), [patient]);
 
   return (
-    <Context value={value}>
+    <PatientCompoundContext value={value}>
       <div
         className="flex flex-col lg:flex-row items-center justify-center h-full gap-x-4 lg:gap-x-8"
       >
@@ -44,12 +30,12 @@ function Patient({ children, patient, upsertAction }: Props) {
           <PatientForm upsertAction={upsertAction} patient={patient} />
         </div>
       </div>
-    </Context>
+    </PatientCompoundContext>
   );
 }
 
 function PatientData({ children }: PropsWithChildren) {
-  const { patient } = usePatientContext();
+  const { patient } = usePatientCompoundContext();
   return (
     <div className="flex flex-col items-center">
       {children}
@@ -77,7 +63,7 @@ function PatientData({ children }: PropsWithChildren) {
 }
 
 function PatientImage({ showCaption }: { showCaption?: boolean }) {
-  const { patient } = usePatientContext();
+  const { patient } = usePatientCompoundContext();
   return (
     <div>
       <Avatar className="size-52 lg:size-72">
