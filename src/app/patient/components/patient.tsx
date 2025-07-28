@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import { UserIcon } from "lucide-react";
+import { Loader2Icon, UserIcon } from "lucide-react";
 import { useMemo } from "react";
 
 import { Avatar } from "@/components/ui/avatar";
@@ -27,7 +27,7 @@ function Patient({ children, patient, upsertService }: Props) {
         className="flex flex-col lg:flex-row items-center justify-center h-full gap-x-4 lg:gap-x-8"
       >
         {children}
-        <div className="max-w-lg w-full lg:border-l md:pl-4 lg:pl-8">
+        <div className="max-w-lg min-w-lg lg:border-l md:pl-4 lg:pl-8">
           <PatientForm upsertService={upsertService} patient={patient} />
         </div>
       </div>
@@ -41,7 +41,7 @@ function PatientData({ children }: PropsWithChildren) {
     <div className="flex flex-col items-center">
       {children}
       <h5
-        className="text-2xl font-semibold capitalize text-center max-w-72 md:max-w-96 xl:max-w-full mt-4 md:mt-8"
+        className="text-2xl font-semibold capitalize text-center max-w-52 md:max-w-96 xl:max-w-full mt-4 md:mt-8"
       >
         {patient?.names}
         {" "}
@@ -59,12 +59,20 @@ function PatientData({ children }: PropsWithChildren) {
           <CopyButton value={patient?.uid ?? ""} />
         </DefaultTooltip>
       </div>
+      <div className="flex items-center gap-1">
+        <span className="text-muted-foreground">{patient?.rut}</span>
+        <DefaultTooltip content="Copiar ID de usuario">
+          <CopyButton value={patient?.rut ?? ""} />
+        </DefaultTooltip>
+      </div>
     </div>
   );
 }
 
 function PatientImage({ showCaption }: { showCaption?: boolean }) {
   const { patient } = usePatientCompoundContext();
+  const isPending = false;
+
   return (
     <div>
       <Avatar className="size-52 lg:size-72">
@@ -76,11 +84,22 @@ function PatientImage({ showCaption }: { showCaption?: boolean }) {
           <UserIcon size={80} className="text-muted-foreground" />
         </Avatar.Fallback>
         <Avatar.ChooseImage />
+        {isPending && (
+          <Loader2Icon
+            className="animate-spin text-muted-foreground absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            strokeWidth={1}
+            size={180}
+          />
+        )}
       </Avatar>
-      {showCaption
+      {(showCaption || isPending)
         && (
           <span className="italic text-muted-foreground text-center block mt-8">
-            Seleccionar foto de perfil.
+            {
+              isPending
+                ? "Cargando foto de perfil..."
+                : "Seleccionar foto de perfil."
+            }
           </span>
         )}
     </div>

@@ -1,3 +1,7 @@
+import { Loader2Icon } from "lucide-react";
+import { useState } from "react";
+import { prettifyRut } from "react-rut-formatter";
+
 import type { PatientModel } from "@/app/patient/models/patient-model";
 
 import { Button } from "@/components/ui/button";
@@ -21,11 +25,17 @@ function PatientForm({ patient, upsertService }: Props) {
     patientUid: patient?.uid,
     upsertService,
   });
+  const [rutValue, setRutValue] = useState(patient?.rut ?? "");
+
+  const handleRutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setRutValue(value.length <= 3 ? value : prettifyRut(value));
+  };
 
   return (
     <form
       className="grid grid-cols-2 gap-4 items-end w-full [&>div]:col-span-2"
-      action={mutation.mutate}
+      onSubmit={mutation.mutate}
     >
       <h5 className="text-lg font-semibold col-span-2">Datos paciente:</h5>
 
@@ -33,9 +43,9 @@ function PatientForm({ patient, upsertService }: Props) {
         <Input
           name="rut"
           placeholder="Rut paciente"
-          defaultValue={patient?.rut}
           disabled={mutation.isPending}
-          key={patient?.rut}
+          onChange={handleRutChange}
+          value={rutValue}
         />
       </FieldWrapper>
 
@@ -93,8 +103,14 @@ function PatientForm({ patient, upsertService }: Props) {
       <Button variant="secondary" onClick={handleBack} disabled={mutation.isPending}>
         Volver
       </Button>
+
       <Button type="submit" disabled={mutation.isPending}>
-        Guardar
+        {mutation.isPending && (
+          <Loader2Icon className="text-inherit animate-spin" size={20} />
+        )}
+        <span>
+          {mutation.isPending ? "Guardando..." : "Guardar"}
+        </span>
       </Button>
     </form>
   );

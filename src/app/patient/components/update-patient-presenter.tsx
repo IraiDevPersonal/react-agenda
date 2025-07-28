@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { PatientQueryOptions } from "../queries/patient-queries";
 import { PatientServices } from "../services/patient-services";
 import { Patient } from "./patient";
+import { PatientSkeleton } from "./patient-skeleton";
 
 function UpdatePatientPresenter() {
   const { patientUid = "" } = useParams();
@@ -24,7 +25,7 @@ function UpdatePatientPresenter() {
   }
 
   if (isLoading) {
-    return <p>cargando...</p>;
+    return <PatientSkeleton />;
   }
 
   return (

@@ -8,7 +8,7 @@ export const PatientSchema = z.object({
   last_names: z.string().min(1, "apellidos obligatorios"),
   email: z.email("correo invalido"),
   phone: z.string().min(1, "teléfono obligatorio"),
-  address: z.string().min(1, "dirección obligatoria"),
+  address: z.string().min(1, "dirección obligatoria").min(10, "dirección muy corta, minimo 10 caracteres"),
   is_deleted: z.boolean().optional().default(false),
   avatar_image: z.string().optional().nullable(),
 });

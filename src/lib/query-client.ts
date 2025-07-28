@@ -20,13 +20,10 @@ export const queryClient = new QueryClient({
       },
     },
     mutations: {
-      retry: 1,
-      throwOnError(error) {
-        if (!HttpClient.isRequestCancelled(error)) {
-          const { message } = CustomError.getError(error);
-          toast.error(message, { duration: 4000 });
-        }
-        return false;
+      retry: 0,
+      onError: (error) => {
+        const { message } = CustomError.getError(error);
+        toast.error(message, { duration: 4000 });
       },
     },
   },

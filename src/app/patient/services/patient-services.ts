@@ -1,6 +1,7 @@
 import type { StringifyObject } from "@/types/global-types";
 
 import { AgendaApi } from "@/api/agenda-api";
+import { sleep } from "@/lib/utils";
 
 import type { PatientFilters } from "../models";
 import type { PatientFormValues } from "../models/patient-form-model";
@@ -13,22 +14,25 @@ async function getAll(filters?: StringifyObject<PatientFilters>) {
 }
 
 async function getDetail(uid: string) {
+  await sleep();
   const { data } = await AgendaApi.get(`/patients/${uid}`);
   return PatientAdapter.patientDetailHttpResponse(data);
 }
 
 async function updatePatient(
   uid: string,
-  patientLike: PatientFormValues,
+  payload: PatientFormValues,
 ) {
-  const { data } = await AgendaApi.put(`/patients/${uid}`, patientLike);
+  await sleep();
+  const { data } = await AgendaApi.put(`/patients/${uid}`, payload);
   return PatientAdapter.upsertPatientResponse(data);
 }
 
 async function createPatient(
-  patientLike: PatientFormValues,
+  payload: PatientFormValues,
 ) {
-  const { data } = await AgendaApi.post("/patients", patientLike);
+  await sleep();
+  const { data } = await AgendaApi.post("/patients", payload);
   return PatientAdapter.upsertPatientResponse(data);
 }
 

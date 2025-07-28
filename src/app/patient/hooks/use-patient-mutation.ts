@@ -22,9 +22,11 @@ export function usePatientMutation({ upsertService, patientUid }: Props) {
   };
 
   const mutation = useMutation({
-    mutationFn: (formData: FormData) => {
-      const form = Object.fromEntries(formData);
-      const payload = PatientFormSchema.parse(form);
+    mutationFn: (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      const formValues = Object.fromEntries(new FormData(e.target as any));
+      const payload = PatientFormSchema.parse(formValues);
 
       return upsertService(payload);
     },

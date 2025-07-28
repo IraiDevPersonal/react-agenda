@@ -19,19 +19,7 @@ export class CustomError extends Error {
   };
 
   static getError(error: unknown): { message: string; stack?: string } {
-    const errorMessage = CustomError.getErrorMessage(error);
-
-    if (error instanceof CustomError) {
-      return { message: error.message, stack: error.stack };
-    }
-
-    if (isAxiosError(error)) {
-      return { message: error.message, stack: error.stack };
-    }
-
-    if (error instanceof ZodError) {
-      return { message: errorMessage, stack: error.stack };
-    }
+    const errorMessage = this.getErrorMessage(error);
 
     if (error instanceof Error) {
       return { message: errorMessage, stack: error.stack };
@@ -45,9 +33,9 @@ export class CustomError extends Error {
       return error.message;
     }
 
-    if (isAxiosError(error)) {
+    if (isAxiosError<{ error: string }>(error)) {
       if (error.response) {
-        return error.response.data?.message ?? "Error inesperado...";
+        return error.response.data?.error ?? "Error de respuesta desconocida...";
       }
       if (error.request) {
         return "No se recibió respuesta del servidor...";
@@ -60,7 +48,7 @@ export class CustomError extends Error {
         // issue => `[${issue.path.join(".")}] ${issue.message}`,
         issue => `${issue.message}`,
       );
-      return issues.join(";\n");
+      return issues.join("; \n");
     }
 
     if (error instanceof Error) {
