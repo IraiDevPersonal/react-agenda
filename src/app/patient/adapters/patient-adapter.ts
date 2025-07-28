@@ -2,22 +2,20 @@ import { AppointmentStatus } from "@/app/agenda/models/appointment-model";
 import { CustomError } from "@/lib/custom-error";
 import { safeArray } from "@/lib/utils";
 
+import type { UpsertPatientResponseModel } from "../models/patient-action-model";
+import type { PatientDetailResponseModel } from "../models/patient-detail-model";
+import type { PatientHistoryModel } from "../models/patient-history-model";
 import type {
-  PatientDetailResponseModel,
-  PatientForAppointmentDetailModel,
-  PatientHistoryModel,
   PatientModel,
   PatientResponseModel,
-  UpsertPatientResponseModel,
 } from "../models/patient-model";
 
+import { UpsertPatientResponseSchema } from "../models/patient-action-model";
+import { PatientDetailResponseSchema } from "../models/patient-detail-model";
+import { PatientHistorySchema } from "../models/patient-history-model";
 import {
-  PatientDetailResponseSchema,
-  PatientForAppointmentDetailSchema,
-  PatientHistorySchema,
   PatientResponseSchema,
   PatientSchema,
-  UpsertPatientResponseSchema,
 } from "../models/patient-model";
 
 function validatePatientItem(item: any) {
@@ -74,7 +72,10 @@ function validatePatientDetail(item: any) {
 
 function validatePatientForAppointmentDetail(item: any) {
   try {
-    const data: PatientForAppointmentDetailModel = {
+    const data: PatientModel = {
+      is_deleted: item.is_deleted,
+      uid: item.uid,
+      avatar_image: item.avatar_image,
       names: item.names,
       last_names: item.last_names,
       rut: item.rut,
@@ -82,7 +83,7 @@ function validatePatientForAppointmentDetail(item: any) {
       email: item.email,
       address: item.address,
     };
-    return PatientForAppointmentDetailSchema.parse(data);
+    return PatientSchema.parse(data);
   }
   catch (error) {
     throw CustomError.handleError(error, { showLog: true });

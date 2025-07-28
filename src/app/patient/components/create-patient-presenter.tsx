@@ -1,10 +1,10 @@
-import { PatientMutations } from "../actions/patient-mutations";
+import { PatientActions } from "../actions/patient-actions";
 import { Patient } from "./patient";
 
 function CreatePatientPresenter() {
   return (
     <>
-      <Patient upsertAction={PatientMutations.createPatient}>
+      <Patient upsertService={PatientActions.createPatient}>
         <Patient.Image showCaption />
       </Patient>
     </>

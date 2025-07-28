@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 
-import { PatientMutations } from "../actions/patient-mutations";
+import { PatientActions } from "../actions/patient-actions";
 import { PatientQueryOptions } from "../queries/patient-queries";
 import { Patient } from "./patient";
 
@@ -31,7 +31,7 @@ function UpdatePatientPresenter() {
     <>
       <Patient
         patient={patient?.data}
-        upsertAction={PatientMutations.updatePatient}
+        upsertService={payload => PatientActions.updatePatient(patientUid, payload)}
       >
         <Patient.Data>
           <Patient.Image />

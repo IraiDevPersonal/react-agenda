@@ -1,6 +1,7 @@
 import z from "zod";
 
-import { PatientForAppointmentDetailSchema, PatientHistorySchema } from "@/app/patient/models/patient-model";
+import { PatientHistorySchema } from "@/app/patient/models/patient-history-model";
+import { PatientSchema } from "@/app/patient/models/patient-model";
 import { ProfessionalForAppointmentDetailSchema } from "@/app/professional/models/professional-model";
 
 import { AppointmentStatus } from "./appointment-model";
@@ -19,7 +20,7 @@ export const AppointmentDetailSchema = z.object({
   status: z.enum(AppointmentStatus),
   patient_history: z.array(PatientHistorySchema),
   professional: ProfessionalForAppointmentDetailSchema,
-  patient: PatientForAppointmentDetailSchema,
+  patient: PatientSchema.omit({ is_deleted: true }).nullable(),
   alert: AlertForAppointmentDetailSchema,
 });
 

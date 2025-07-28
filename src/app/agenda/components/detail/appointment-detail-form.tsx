@@ -1,7 +1,7 @@
-import type { PatientForAppointmentDetailModel } from "@/app/patient/models/patient-model";
+import type { PatientModel } from "@/app/patient/models/patient-model";
 
 type Props = {
-  patient?: PatientForAppointmentDetailModel;
+  patient?: PatientModel;
 };
 
 function AppointmentDetailForm({ patient }: Props) {

@@ -7,17 +7,18 @@ import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import type { PatientModel, UpsertActionState } from "../models/patient-model";
+import type { UpsertServiceModel } from "../models/patient-action-model";
+import type { PatientModel } from "../models/patient-model";
 
 import { PatientCompoundContext, usePatientCompoundContext } from "../context/patient-compound-context";
 import { PatientForm } from "./patient-form";
 
 type Props = PropsWithChildren<{
-  upsertAction: (prevState: UpsertActionState, formData: FormData) => Promise<UpsertActionState>;
+  upsertService: UpsertServiceModel;
   patient?: PatientModel | undefined;
 }>;
 
-function Patient({ children, patient, upsertAction }: Props) {
+function Patient({ children, patient, upsertService }: Props) {
   const value = useMemo(() => ({ patient }), [patient]);
 
   return (
@@ -27,7 +28,7 @@ function Patient({ children, patient, upsertAction }: Props) {
       >
         {children}
         <div className="max-w-lg w-full lg:border-l md:pl-4 lg:pl-8">
-          <PatientForm upsertAction={upsertAction} patient={patient} />
+          <PatientForm upsertService={upsertService} patient={patient} />
         </div>
       </div>
     </PatientCompoundContext>

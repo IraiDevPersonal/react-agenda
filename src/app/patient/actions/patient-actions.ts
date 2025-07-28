@@ -3,7 +3,7 @@ import type { StringifyObject } from "@/types/global-types";
 import { AgendaService } from "@/services/agenda-service";
 
 import type { PatientFilters } from "../models";
-import type { PatientModel } from "../models/patient-model";
+import type { PatientFormValues } from "../models/patient-model";
 
 import { PatientAdapter } from "../adapters/patient-adapter";
 
@@ -19,14 +19,14 @@ async function getDetail(uid: string) {
 
 async function updatePatient(
   uid: string,
-  patientLike: Omit<PatientModel, "is_deleted" | "avatar_image" | "uid">,
+  patientLike: PatientFormValues,
 ) {
   const { data } = await AgendaService.put(`/patients/${uid}`, patientLike);
   return PatientAdapter.upsertPatientResponse(data);
 }
 
 async function createPatient(
-  patientLike: Omit<PatientModel, "is_deleted" | "avatar_image" | "uid">,
+  patientLike: PatientFormValues,
 ) {
   const { data } = await AgendaService.post("/patients", patientLike);
   return PatientAdapter.upsertPatientResponse(data);
