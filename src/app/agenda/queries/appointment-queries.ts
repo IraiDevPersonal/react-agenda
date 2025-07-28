@@ -6,14 +6,14 @@ import { QueryKeys } from "@/constants/query-keys";
 
 import type { AppointmentFilters, AppointmentModel } from "../models/appointment-model";
 
-import { AgendaActions } from "../actions/agenda-actions";
+import { AgendaServices } from "../services/agenda-services";
 
 type Filters = Partial<StringifyObject<AppointmentFilters>>;
 
 function getAll(filters?: Filters) {
   return queryOptions({
     queryKey: [QueryKeys.appointments, filters],
-    queryFn: () => AgendaActions.getAppointments(filters),
+    queryFn: () => AgendaServices.getAppointments(filters),
     enabled: !!filters?.profession_id,
   });
 }
@@ -21,7 +21,7 @@ function getAll(filters?: Filters) {
 function getDetail(uid: AppointmentModel["uid"]) {
   return queryOptions({
     queryKey: [QueryKeys.appointments, "one", uid],
-    queryFn: () => AgendaActions.getAppointmentDetail(uid),
+    queryFn: () => AgendaServices.getAppointmentDetail(uid),
     enabled: !!uid,
   });
 }

@@ -3,7 +3,7 @@ import type { StringifyObject } from "@/types/global-types";
 import { AgendaApi } from "@/api/agenda-api";
 
 import type { PatientFilters } from "../models";
-import type { PatientFormValues } from "../models/patient-model";
+import type { PatientFormValues } from "../models/patient-form-model";
 
 import { PatientAdapter } from "../adapters/patient-adapter";
 
@@ -32,7 +32,7 @@ async function createPatient(
   return PatientAdapter.upsertPatientResponse(data);
 }
 
-export const PatientActions = {
+export const PatientServices = {
   getAll,
   getDetail,
   updatePatient,

@@ -6,12 +6,12 @@ import { QueryKeys } from "@/constants/query-keys";
 
 import type { PatientFilters } from "../models";
 
-import { PatientActions } from "../actions/patient-actions";
+import { PatientServices } from "../services/patient-services";
 
 function getAll(filters?: StringifyObject<PatientFilters>) {
   return queryOptions({
     queryKey: [QueryKeys.patients, filters],
-    queryFn: () => PatientActions.getAll(filters),
+    queryFn: () => PatientServices.getAll(filters),
   });
 }
 
@@ -39,7 +39,7 @@ function getDetail(uid: string) {
   return queryOptions({
     refetchOnWindowFocus: false,
     queryKey: [QueryKeys.patients, "one", uid],
-    queryFn: () => PatientActions.getDetail(uid),
+    queryFn: () => PatientServices.getDetail(uid),
   });
 }
 

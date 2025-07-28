@@ -15,7 +15,7 @@ async function getAppointmentDetail(uid: string) {
   return AppointmentDetailAdapter.httpResponse(data);
 }
 
-export const AgendaActions = {
+export const AgendaServices = {
   getAppointments,
   getAppointmentDetail,
 };

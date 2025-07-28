@@ -7,6 +7,6 @@ async function getProfessionForFilters() {
   return ProfessionFilterAdapter.httpResponse(data);
 }
 
-export const ProfessionActions = {
+export const ProfessionServices = {
   getProfessionForFilters,
 };

@@ -57,7 +57,7 @@ function ChooseImage(props: React.ComponentProps<"input">) {
   const ref = React.useRef<HTMLInputElement>(null);
   return (
     <>
-      <input {...props} ref={ref} hidden type="file"  />
+      <input {...props} ref={ref} hidden type="file" />
       <Button
         size="icon"
         onClick={() => ref.current?.click()}

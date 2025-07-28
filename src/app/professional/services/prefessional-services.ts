@@ -7,6 +7,6 @@ async function getProfessionalForFilters() {
   return ProfessionalFilterAdapter.httpResponse(data);
 }
 
-export const ProfessionalActions = {
+export const ProfessionalServices = {
   getProfessionalForFilters,
 };

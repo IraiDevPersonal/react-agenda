@@ -2,13 +2,13 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { QueryKeys } from "@/constants/query-keys";
 
-import { ProfessionActions } from "../actions/prefession-actions";
+import { ProfessionServices } from "../services/prefession-services";
 
 function getProfessionForFilter() {
   return queryOptions({
     refetchOnWindowFocus: false,
     queryKey: [QueryKeys.prefessions, "to-filter"],
-    queryFn: () => ProfessionActions.getProfessionForFilters(),
+    queryFn: () => ProfessionServices.getProfessionForFilters(),
   });
 }
 
