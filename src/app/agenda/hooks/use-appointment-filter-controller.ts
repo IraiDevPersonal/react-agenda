@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { prettifyRut } from "react-rut-formatter";
 
-import { QueryKeys } from "@/constants/query-keys";
+import { QUERY_KEYS } from "@/constants/query-keys";
 import { dateHelper } from "@/lib/date-helper";
 
 import type { AppointmentViewMode } from "../models";
@@ -68,15 +68,15 @@ export function useAppointmentFilterController() {
 
   const handleRefreshAppointments = () => {
     refetchQueries({
-      queryKey: [QueryKeys.appointments],
+      queryKey: [QUERY_KEYS.appointments],
     });
 
     refetchQueries({
-      queryKey: [QueryKeys.prefessionals],
+      queryKey: [QUERY_KEYS.prefessionals],
     });
 
     refetchQueries({
-      queryKey: [QueryKeys.prefessions],
+      queryKey: [QUERY_KEYS.prefessions],
     });
   };
 

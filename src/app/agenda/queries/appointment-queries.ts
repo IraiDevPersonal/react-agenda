@@ -2,7 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 
 import type { StringifyObject } from "@/types/global-types";
 
-import { QueryKeys } from "@/constants/query-keys";
+import { QUERY_KEYS } from "@/constants/query-keys";
 
 import type { AppointmentFilters, AppointmentModel } from "../models/appointment-model";
 
@@ -12,7 +12,7 @@ type Filters = Partial<StringifyObject<AppointmentFilters>>;
 
 function getAll(filters?: Filters) {
   return queryOptions({
-    queryKey: [QueryKeys.appointments, filters],
+    queryKey: [QUERY_KEYS.appointments, filters],
     queryFn: () => AgendaServices.getAppointments(filters),
     enabled: !!filters?.profession_id,
   });
@@ -20,7 +20,7 @@ function getAll(filters?: Filters) {
 
 function getDetail(uid: AppointmentModel["uid"]) {
   return queryOptions({
-    queryKey: [QueryKeys.appointments, "one", uid],
+    queryKey: [QUERY_KEYS.appointments, "one", uid],
     queryFn: () => AgendaServices.getAppointmentDetail(uid),
     enabled: !!uid,
   });

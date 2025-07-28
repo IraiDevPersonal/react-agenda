@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
-import { QueryKeys } from "@/constants/query-keys";
+import { QUERY_KEYS } from "@/constants/query-keys";
 
 import type { UpsertServiceModel } from "../models/patient-action-model";
 
@@ -36,7 +36,7 @@ export function usePatientMutation({ upsertService, patientUid }: Props) {
         message = "Paciente creado correctamente";
       }
 
-      queryClient.invalidateQueries({ queryKey: [QueryKeys.patients] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.patients] });
       toast.success(message);
     },
   });

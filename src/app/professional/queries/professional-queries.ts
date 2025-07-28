@@ -1,13 +1,13 @@
 import { queryOptions } from "@tanstack/react-query";
 
-import { QueryKeys } from "@/constants/query-keys";
+import { QUERY_KEYS } from "@/constants/query-keys";
 
 import { ProfessionalServices } from "../services/prefessional-services";
 
 export function getProfessionalForFilter() {
   return queryOptions({
     refetchOnWindowFocus: false,
-    queryKey: [QueryKeys.prefessionals, "to-filter"],
+    queryKey: [QUERY_KEYS.prefessionals, "to-filter"],
     queryFn: () => ProfessionalServices.getProfessionalForFilters(),
   });
 }

@@ -2,7 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { prettifyRut } from "react-rut-formatter";
 
-import { QueryKeys } from "@/constants/query-keys";
+import { QUERY_KEYS } from "@/constants/query-keys";
 
 import { usePatientFilters } from "./use-patient-filters";
 
@@ -60,7 +60,7 @@ export function usePatientFilterController() {
 
   const handleRefresh = () => {
     refetchQueries({
-      queryKey: [QueryKeys.patients],
+      queryKey: [QUERY_KEYS.patients],
     });
   };
 

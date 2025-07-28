@@ -30,7 +30,7 @@ const router = createBrowserRouter([{
           element: <PatientPage />,
         },
         {
-          path: "crear-paciente",
+          path: ROUTES.actions.create,
           element: <CreatePatientPage />,
         },
         {

@@ -2,7 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 
 import type { StringifyObject } from "@/types/global-types";
 
-import { QueryKeys } from "@/constants/query-keys";
+import { QUERY_KEYS } from "@/constants/query-keys";
 
 import type { PatientFilters } from "../models";
 
@@ -10,7 +10,7 @@ import { PatientServices } from "../services/patient-services";
 
 function getAll(filters?: StringifyObject<PatientFilters>) {
   return queryOptions({
-    queryKey: [QueryKeys.patients, filters],
+    queryKey: [QUERY_KEYS.patients, filters],
     queryFn: () => PatientServices.getAll(filters),
   });
 }
@@ -38,7 +38,7 @@ function getPatientMetaData(filters?: StringifyObject<PatientFilters>) {
 function getDetail(uid: string) {
   return queryOptions({
     refetchOnWindowFocus: false,
-    queryKey: [QueryKeys.patients, "one", uid],
+    queryKey: [QUERY_KEYS.patients, "one", uid],
     queryFn: () => PatientServices.getDetail(uid),
   });
 }

@@ -1,4 +1,4 @@
-export const QueryKeys = {
+export const QUERY_KEYS = {
   appointments: "appointments",
   prefessions: "professions",
   prefessionals: "professionals",

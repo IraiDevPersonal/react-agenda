@@ -3,4 +3,7 @@ export const ROUTES = {
   agenda: "/agenda",
   patients: "/pacientes",
   reports: "/informes",
+  actions: {
+    create: "crear-paciente",
+  },
 } as const;
