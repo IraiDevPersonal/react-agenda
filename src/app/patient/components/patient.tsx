@@ -68,9 +68,9 @@ function PatientData({ children }: PropsWithChildren) {
 function PatientImage({ showCaption }: { showCaption?: boolean }) {
   const { patient } = usePatientCompoundContext();
   // TODO: para identificar cuando estoy realizando una mutacion en otro componente mediante el mutationKey
-  const isPending = useIsMutating({
+  const isPending = Boolean(useIsMutating({
     mutationKey: [QUERY_KEYS.patients],
-  });
+  }));
 
   return (
     <div>
@@ -79,28 +79,27 @@ function PatientImage({ showCaption }: { showCaption?: boolean }) {
           src={patient?.avatar_image ?? ""}
           alt="Patient Avatar"
         />
-        <Avatar.Fallback>
+        <Avatar.Fallback className={isPending ? "animate-pulse" : ""}>
           <UserIcon size={80} className="text-muted-foreground" />
         </Avatar.Fallback>
         <Avatar.ChooseImage />
         {isPending && (
           <Loader2Icon
-            className="animate-spin text-muted-foreground absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            className="animate-spin text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
             strokeWidth={1}
             size={180}
           />
         )}
       </Avatar>
-      {(showCaption || isPending)
-        && (
-          <span className="italic text-muted-foreground text-center block mt-8">
-            {
-              isPending
-                ? "Cargando foto de perfil..."
-                : "Seleccionar foto de perfil."
-            }
-          </span>
-        )}
+      {showCaption && (
+        <span className="italic text-muted-foreground text-center block mt-8">
+          {
+            isPending
+              ? "Cargando foto de perfil..."
+              : "Seleccionar foto de perfil."
+          }
+        </span>
+      )}
     </div>
   );
 }
