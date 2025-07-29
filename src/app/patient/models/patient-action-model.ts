@@ -10,4 +10,5 @@ export const UpsertPatientResponseSchema = z.object({
 });
 
 export type UpsertPatientResponseModel = z.infer<typeof UpsertPatientResponseSchema>;
-export type UpsertServiceFn = (payload: PatientFormValues) => Promise<UpsertPatientResponseModel>;
+export type UpsertPatientServiceFn = (payload: PatientFormValues) => Promise<UpsertPatientResponseModel>;
+export type DeletePatientServiceFn = (uid: string) => Promise<UpsertPatientResponseModel>;

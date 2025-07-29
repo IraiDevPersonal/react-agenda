@@ -4,16 +4,17 @@ import { toast } from "sonner";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
-import type { UpsertServiceFn } from "../models/patient-action-model";
+import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 
 import { PatientFormSchema } from "../models/patient-form-model";
+import { PatientQueryOptions } from "../queries/patient-queries";
 
 type Props = {
-  upsertService: UpsertServiceFn;
+  upsertService: UpsertPatientServiceFn;
   patientUid?: string;
 };
 
-export function usePatientMutation({ upsertService, patientUid }: Props) {
+export function useUpsertPatientMutation({ upsertService, patientUid }: Props) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -22,7 +23,7 @@ export function usePatientMutation({ upsertService, patientUid }: Props) {
   };
 
   const mutation = useMutation({
-    mutationKey: [QUERY_KEYS.patients],
+    ...PatientQueryOptions.upsert(),
     mutationFn: (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 

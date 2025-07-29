@@ -3,7 +3,7 @@ import { FunnelIcon, FunnelXIcon, RotateCcwIcon } from "lucide-react";
 import { Show } from "@/components/show";
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/date-picker";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog } from "@/components/ui/dialog";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
@@ -25,7 +25,7 @@ function ModalAppointmentFilters() {
     handleClearSearch,
     handleViewModeChange,
     handleClearAllFilters,
-    handleRefreshAppointments,
+    handleRefresh: handleRefreshAppointments,
   } = useAppointmentFilterController();
 
   const { professionOptions, filteredProfessionals } = useAppointmentFilterOptions();
@@ -39,19 +39,19 @@ function ModalAppointmentFilters() {
       </DefaultTooltip>
 
       <Dialog>
-        <DialogTrigger asChild>
+        <Dialog.Trigger asChild>
           <Button variant="outline">
             Filtros
             <FunnelIcon size={20} />
           </Button>
-        </DialogTrigger>
+        </Dialog.Trigger>
 
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Filtrar citas</DialogTitle>
-            <DialogDescription hidden>
-            </DialogDescription>
-          </DialogHeader>
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>Filtrar citas</Dialog.Title>
+            <Dialog.Description hidden>
+            </Dialog.Description>
+          </Dialog.Header>
 
           <div className="space-y-4 *:w-full">
             <FieldWrapper label="Modo de vista">
@@ -131,7 +131,7 @@ function ModalAppointmentFilters() {
               <FunnelXIcon size={20} />
             </Button>
           </div>
-        </DialogContent>
+        </Dialog.Content>
       </Dialog>
     </>
   );

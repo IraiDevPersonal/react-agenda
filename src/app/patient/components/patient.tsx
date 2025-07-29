@@ -7,16 +7,16 @@ import { useMemo } from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
-import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
-import type { UpsertServiceFn } from "../models/patient-action-model";
+import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 import type { PatientModel } from "../models/patient-model";
 
 import { PatientCompoundContext, usePatientCompoundContext } from "../context/patient-compound-context";
+import { PatientQueryOptions } from "../queries/patient-queries";
 import { PatientForm } from "./patient-form";
 
 type Props = PropsWithChildren<{
-  upsertService: UpsertServiceFn;
+  upsertService: UpsertPatientServiceFn;
   patient?: PatientModel | undefined;
 }>;
 
@@ -69,7 +69,7 @@ function PatientImage({ showCaption }: { showCaption?: boolean }) {
   const { patient } = usePatientCompoundContext();
   // TODO: para identificar cuando estoy realizando una mutacion en otro componente mediante el mutationKey
   const isPending = Boolean(useIsMutating({
-    mutationKey: [QUERY_KEYS.patients],
+    ...PatientQueryOptions.upsert(),
   }));
 
   return (

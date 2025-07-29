@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 function Dialog({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot="dialog" {...props} />;
+  return <DialogPrimitive.Root data-slot="dialog"{...props} />;
 }
 
 function DialogTrigger({
@@ -45,10 +45,11 @@ function DialogOverlay({
 }
 
 function DialogContent({
+  hiddeCloseButton = false,
   className,
   children,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content>) {
+}: React.ComponentProps<typeof DialogPrimitive.Content> & { hiddeCloseButton?: boolean }) {
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -61,13 +62,15 @@ function DialogContent({
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className="group focus-visible:border-ring focus-visible:ring-ring/50 absolute top-3 right-3 flex size-7 items-center justify-center rounded transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:pointer-events-none">
-          <XIcon
-            size={16}
-            className="opacity-60 transition-opacity group-hover:opacity-100"
-          />
-          <span className="sr-only">Close</span>
-        </DialogPrimitive.Close>
+        {!hiddeCloseButton && (
+          <DialogPrimitive.Close className="group focus-visible:border-ring focus-visible:ring-ring/50 absolute top-3 right-3 flex size-7 items-center justify-center rounded transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:pointer-events-none">
+            <XIcon
+              size={16}
+              className="opacity-60 transition-opacity group-hover:opacity-100"
+            />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
+        )}
       </DialogPrimitive.Content>
     </DialogPortal>
   );
@@ -121,6 +124,16 @@ function DialogDescription({
     />
   );
 }
+
+Dialog.Close = DialogClose;
+Dialog.Content = DialogContent;
+Dialog.Description = DialogDescription;
+Dialog.Footer = DialogFooter;
+Dialog.Header = DialogHeader;
+Dialog.Overlay = DialogOverlay;
+Dialog.Portal = DialogPortal;
+Dialog.Title = DialogTitle;
+Dialog.Trigger = DialogTrigger;
 
 export {
   Dialog,

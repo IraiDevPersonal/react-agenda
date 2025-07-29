@@ -1,10 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
+import { Loader2Icon } from "lucide-react";
+
 import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
 import { Table } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
 import { usePatientFilterController } from "../hooks/use-patient-filter-controller";
+import { usePatientFilters } from "../hooks/use-patient-filters";
 import { PatientStatus } from "../models";
+import { PatientQueryOptions } from "../queries/patient-queries";
 
 function PatientTableHeader() {
   const {
@@ -16,6 +21,8 @@ function PatientTableHeader() {
     handelSearch,
     handleClearSearch,
   } = usePatientFilterController();
+  const { filtersAsParams } = usePatientFilters();
+  const { isFetching } = useQuery(PatientQueryOptions.getPatientLoaderState(filtersAsParams));
 
   return (
     <Table.Header>
@@ -25,7 +32,9 @@ function PatientTableHeader() {
         <Table.Head>Correo</Table.Head>
         <Table.Head>Dirección</Table.Head>
         <Table.Head align="center">Estado</Table.Head>
-        <Table.Head></Table.Head>
+        <Table.Head align="center">
+          {isFetching && <Loader2Icon size={20} className="animate-spin" />}
+        </Table.Head>
       </Table.HeaderRow>
 
       <Table.HeaderFilterRow>
@@ -67,8 +76,8 @@ function PatientTableHeader() {
           <SelectNative
             className={cn("table-filter-field", "max-w-max")}
             options={[
-              { value: PatientStatus.ACTIVE, label: "Activo" },
-              { value: PatientStatus.INACTIVE, label: "Inactivo" },
+              { value: PatientStatus.ACTIVE, label: "Habilitados" },
+              { value: PatientStatus.INACTIVE, label: "Deshabilitados" },
             ]}
             value={filters.status ?? ""}
             onChange={e => onFilter({ status: e.target.value })}

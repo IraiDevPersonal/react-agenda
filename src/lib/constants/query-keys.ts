@@ -6,5 +6,7 @@ export const QUERY_KEYS = {
   generic: {
     detail: "detail",
     list: "list",
+    delete: "delete",
+    upsert: "upsert",
   },
 } as const;

@@ -24,7 +24,7 @@ function InlineAppointmentFilters() {
     handleClearSearch,
     handleViewModeChange,
     handleClearAllFilters,
-    handleRefreshAppointments,
+    handleRefresh: handleRefreshAppointments,
   } = useAppointmentFilterController();
 
   const { professionOptions, filteredProfessionals } = useAppointmentFilterOptions();

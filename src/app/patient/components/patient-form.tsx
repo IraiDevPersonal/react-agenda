@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
 
-import type { UpsertServiceFn } from "../models/patient-action-model";
+import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 
-import { usePatientMutation } from "../hooks/use-patient-mutation";
+import { useUpsertPatientMutation } from "../hooks/use-upsert-patient-mutation";
 
 type Props = {
-  upsertService: UpsertServiceFn;
+  upsertService: UpsertPatientServiceFn;
   patient?: PatientModel;
 };
 
@@ -21,7 +21,7 @@ function PatientForm({ patient, upsertService }: Props) {
   const {
     mutation,
     handleBack,
-  } = usePatientMutation({
+  } = useUpsertPatientMutation({
     patientUid: patient?.uid,
     upsertService,
   });

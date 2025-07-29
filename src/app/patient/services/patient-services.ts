@@ -9,6 +9,7 @@ import type { PatientFormValues } from "../models/patient-form-model";
 import { PatientAdapter } from "../adapters/patient-adapter";
 
 async function getAll(filters?: StringifyObject<PatientFilters>) {
+  await sleep();
   const { data } = await AgendaApi.get("/patients", { params: filters });
   return PatientAdapter.httpResponse(data);
 }
@@ -36,10 +37,10 @@ async function createPatient(
   return PatientAdapter.upsertPatientHttpResponse(data);
 }
 
-async function deletePatient(uid: string) {
+async function togglePatientStatus(uid: string) {
   await sleep();
-  const { data } = await AgendaApi.delete(`/patients/${uid}`);
-  return PatientAdapter.deletePatientHttpResponse(data);
+  const { data } = await AgendaApi.patch(`/patients/${uid}`);
+  return PatientAdapter.upsertPatientHttpResponse(data);
 }
 
 export const PatientServices = {
@@ -47,5 +48,5 @@ export const PatientServices = {
   getDetail,
   updatePatient,
   createPatient,
-  deletePatient,
+  togglePatientStatus,
 };

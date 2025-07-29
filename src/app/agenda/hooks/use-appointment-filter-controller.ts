@@ -16,7 +16,7 @@ export function useAppointmentFilterController() {
   const viewMode = useAppointmentUiStore(s => s.viewMode);
   const onViewModeChange = useAppointmentUiStore(s => s.onViewModeChange);
 
-  const { refetchQueries } = useQueryClient();
+  const { invalidateQueries } = useQueryClient();
   const { filters, onFilter } = useAppointmentFilters();
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -66,16 +66,16 @@ export function useAppointmentFilterController() {
     searchRef.current!.value = "";
   };
 
-  const handleRefreshAppointments = () => {
-    refetchQueries({
+  const handleRefresh = () => {
+    invalidateQueries({
       queryKey: [QUERY_KEYS.appointments],
     });
 
-    refetchQueries({
+    invalidateQueries({
       queryKey: [QUERY_KEYS.prefessionals],
     });
 
-    refetchQueries({
+    invalidateQueries({
       queryKey: [QUERY_KEYS.prefessions],
     });
   };
@@ -85,15 +85,13 @@ export function useAppointmentFilterController() {
     filters,
     viewMode,
     searchRef,
-    // searchValue: search,
     // methods
     onFilter,
     handelSearch,
-    handleSelectToday,
+    handleRefresh,
     handleClearSearch,
+    handleSelectToday,
     handleViewModeChange,
     handleClearAllFilters,
-    handleRefreshAppointments,
-    // handleSearchChange,
   };
 }

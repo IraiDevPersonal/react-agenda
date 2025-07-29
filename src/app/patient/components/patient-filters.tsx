@@ -15,7 +15,6 @@ function PatientFilters() {
     handleClearAllFilters,
   } = usePatientFilterController();
   const { filtersAsParams } = usePatientFilters();
-
   const { data } = useQuery(PatientQueryOptions.getPatientMetaData(filtersAsParams));
 
   return (

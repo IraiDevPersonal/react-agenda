@@ -1,3 +1,5 @@
+import type { UseMutationOptions } from "@tanstack/react-query";
+
 import { queryOptions } from "@tanstack/react-query";
 
 import type { StringifyObject } from "@/lib/types/global-types";
@@ -22,6 +24,14 @@ function getTotalPatients(filters?: StringifyObject<PatientFilters>) {
   });
 }
 
+function getPatientLoaderState(filters?: StringifyObject<PatientFilters>) {
+  return queryOptions({
+    ...getAll(filters),
+    select: () => null,
+
+  });
+}
+
 function getPatientMetaData(filters?: StringifyObject<PatientFilters>) {
   return queryOptions({
     ...getAll(filters),
@@ -37,17 +47,32 @@ function getPatientMetaData(filters?: StringifyObject<PatientFilters>) {
 
 function getDetail(uid: string) {
   return queryOptions({
-    retry: 0,
-    refetchOnWindowFocus: false,
     queryKey: [QUERY_KEYS.patients, QUERY_KEYS.generic.detail, uid],
     queryFn: () => PatientServices.getDetail(uid),
+    refetchOnWindowFocus: false,
     throwOnError: false,
+    retry: 0,
   });
 }
 
+function upsert(): Pick<UseMutationOptions, "mutationKey"> {
+  return {
+    mutationKey: [QUERY_KEYS.patients, QUERY_KEYS.generic.upsert],
+  };
+}
+
+function del(): Pick<UseMutationOptions, "mutationKey"> {
+  return {
+    mutationKey: [QUERY_KEYS.patients, QUERY_KEYS.generic.delete],
+  };
+}
+
 export const PatientQueryOptions = {
+  del,
+  upsert,
   getAll,
   getDetail,
   getTotalPatients,
   getPatientMetaData,
+  getPatientLoaderState,
 };

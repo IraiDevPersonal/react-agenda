@@ -9,7 +9,7 @@ import { usePatientFilters } from "./use-patient-filters";
 type FieldNames = "rut" | "name" | "email";
 
 export function usePatientFilterController() {
-  const { refetchQueries } = useQueryClient();
+  const queryClient = useQueryClient();
   const { filters, onFilter } = usePatientFilters();
   const rutRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -59,7 +59,7 @@ export function usePatientFilterController() {
   };
 
   const handleRefresh = () => {
-    refetchQueries({
+    queryClient.invalidateQueries({
       queryKey: [QUERY_KEYS.patients],
     });
   };
