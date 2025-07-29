@@ -69,6 +69,26 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   );
 }
 
+function TableHeaderRow({ className, ...props }: React.ComponentProps<"tr">) {
+  return (
+    <tr
+      data-slot="table-header-row"
+      className={cn("bg-muted border-b", className)}
+      {...props}
+    />
+  );
+}
+
+function TableHeaderFilterRow({ className, ...props }: React.ComponentProps<"tr">) {
+  return (
+    <tr
+      data-slot="table-header-row-filter"
+      className={cn("bg-transparent border-b *:p-0 *:h-full *:border-r *:last-of-type:border-r-0", className)}
+      {...props}
+    />
+  );
+}
+
 function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   return (
     <th
@@ -120,6 +140,8 @@ Table.Header = TableHeader;
 Table.Body = TableBody;
 Table.Footer = TableFooter;
 Table.Row = TableRow;
+Table.HeaderRow = TableHeaderRow;
+Table.HeaderFilterRow = TableHeaderFilterRow;
 Table.Head = TableHead;
 Table.Cell = TableCell;
 Table.Caption = TableCaption;

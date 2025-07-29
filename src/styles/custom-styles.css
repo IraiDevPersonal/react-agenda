@@ -1,0 +1,3 @@
+.table-filter-field {
+  @apply w-full border-transparent bg-transparent shadow-none focus-visible:ring-transparent focus-visible:border-transparent h-full pe-7 text-muted-foreground placeholder:text-muted-foreground font-normal placeholder:font-normal hover:placeholder:text-primary placeholder:transition-colors;
+}

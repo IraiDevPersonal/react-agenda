@@ -6,8 +6,6 @@ import { cn } from "@/lib/utils";
 import { usePatientFilterController } from "../hooks/use-patient-filter-controller";
 import { PatientStatus } from "../models";
 
-const INPUT_STYLES = "w-full border-transparent bg-transparent shadow-none focus-visible:ring-transparent focus-visible:border-transparent h-full pe-7 text-muted-foreground placeholder:text-muted-foreground font-normal placeholder:font-normal";
-
 function PatientTableHeader() {
   const {
     filters,
@@ -21,55 +19,53 @@ function PatientTableHeader() {
 
   return (
     <Table.Header>
-      <Table.Row className="!hover:bg-transparent bg-muted">
+      <Table.HeaderRow>
         <Table.Head>Nombre</Table.Head>
         <Table.Head>Rut</Table.Head>
         <Table.Head>Correo</Table.Head>
         <Table.Head>Dirección</Table.Head>
         <Table.Head align="center">Estado</Table.Head>
         <Table.Head></Table.Head>
-      </Table.Row>
+      </Table.HeaderRow>
 
-      <Table.Row
-        className="!hover:bg-transparent bg- font-bold *:h-full *:border-r *:last-of-type:border-r-0"
-      >
-        <Table.Head className="p-0">
+      <Table.HeaderFilterRow>
+        <Table.Head>
           <Search
             ref={nameRef}
             searchIconSize={16}
             placeholder="Buscar por nombre..."
-            classNames={{ input: INPUT_STYLES }}
+            classNames={{ input: "table-filter-field" }}
             defaultValue={filters.name ?? ""}
             onSearch={v => handelSearch(v, "name")}
             onClearValue={() => handleClearSearch("name")}
           />
         </Table.Head>
-        <Table.Head className="p-0">
+        <Table.Head>
           <Search
             ref={rutRef}
             searchIconSize={16}
             placeholder="Buscar por rut..."
-            classNames={{ input: INPUT_STYLES, root: "w-36" }}
+            classNames={{ input: "table-filter-field", root: "w-36" }}
             defaultValue={filters.rut ?? ""}
             onSearch={v => handelSearch(v, "rut")}
             onClearValue={() => handleClearSearch("rut")}
           />
         </Table.Head>
-        <Table.Head className="p-0">
+        <Table.Head>
           <Search
             ref={emailRef}
             searchIconSize={16}
             placeholder="Buscar por correo..."
-            classNames={{ input: INPUT_STYLES }}
+            classNames={{ input: "table-filter-field" }}
             defaultValue={filters.email ?? ""}
             onSearch={v => handelSearch(v, "email")}
             onClearValue={() => handleClearSearch("email")}
           />
         </Table.Head>
         <Table.Head></Table.Head>
-        <Table.Head className="p-0">
+        <Table.Head>
           <SelectNative
-            className={cn(INPUT_STYLES, "max-w-max")}
+            className={cn("table-filter-field", "max-w-max")}
             options={[
               { value: PatientStatus.ACTIVE, label: "Activo" },
               { value: PatientStatus.INACTIVE, label: "Inactivo" },
@@ -79,7 +75,7 @@ function PatientTableHeader() {
           />
         </Table.Head>
         <Table.Head></Table.Head>
-      </Table.Row>
+      </Table.HeaderFilterRow>
     </Table.Header>
   );
 }
