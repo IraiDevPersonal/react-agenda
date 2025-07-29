@@ -19,19 +19,15 @@ function PatientSkeletonData({ children }: PropsWithChildren) {
   return (
     <div className="flex flex-col items-center">
       {children}
-      <Skeleton className="h-8 w-64 mt-4 md:mt-8" />
-      <Skeleton className="h-4 w-56 mt-2" />
-      <Skeleton className="h-4 w-32 mt-2" />
+      <Skeleton className="h-9 w-64 mt-3 md:mt-7" />
+      <Skeleton className="h-8 w-52 mt-1" />
     </div>
   );
 }
 
 function PatientSkeletonImage() {
   return (
-    <div>
-      <Skeleton className="size-52 lg:size-72 rounded-full" />
-      <Skeleton className="h-4 w-40 mt-8 mx-auto" />
-    </div>
+    <Skeleton className="size-52 lg:size-72 rounded-full" />
   );
 }
 

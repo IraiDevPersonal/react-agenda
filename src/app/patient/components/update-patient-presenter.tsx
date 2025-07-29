@@ -10,6 +10,7 @@ function UpdatePatientPresenter() {
   const { patientUid = "" } = useParams();
   const {
     data: patient,
+    isFetching,
     isLoading,
     isError,
     error,
@@ -34,9 +35,19 @@ function UpdatePatientPresenter() {
         patient={patient?.data}
         upsertService={payload => PatientServices.updatePatient(patientUid, payload)}
       >
-        <Patient.Data>
-          <Patient.Image />
-        </Patient.Data>
+        {
+          isFetching
+            ? (
+                <PatientSkeleton.Data>
+                  <Patient.Image />
+                </PatientSkeleton.Data>
+              )
+            : (
+                <Patient.Data>
+                  <Patient.Image />
+                </Patient.Data>
+              )
+        }
       </Patient>
     </>
   );

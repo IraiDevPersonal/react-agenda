@@ -1,20 +1,22 @@
 import type { PropsWithChildren } from "react";
 
+import { useIsMutating } from "@tanstack/react-query";
 import { Loader2Icon, UserIcon } from "lucide-react";
 import { useMemo } from "react";
 
 import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
+import { QUERY_KEYS } from "@/constants/query-keys";
 
-import type { UpsertServiceModel } from "../models/patient-action-model";
+import type { UpsertServiceFn } from "../models/patient-action-model";
 import type { PatientModel } from "../models/patient-model";
 
 import { PatientCompoundContext, usePatientCompoundContext } from "../context/patient-compound-context";
 import { PatientForm } from "./patient-form";
 
 type Props = PropsWithChildren<{
-  upsertService: UpsertServiceModel;
+  upsertService: UpsertServiceFn;
   patient?: PatientModel | undefined;
 }>;
 
@@ -59,19 +61,16 @@ function PatientData({ children }: PropsWithChildren) {
           <CopyButton value={patient?.uid ?? ""} />
         </DefaultTooltip>
       </div>
-      <div className="flex items-center gap-1">
-        <span className="text-muted-foreground">{patient?.rut}</span>
-        <DefaultTooltip content="Copiar ID de usuario">
-          <CopyButton value={patient?.rut ?? ""} />
-        </DefaultTooltip>
-      </div>
     </div>
   );
 }
 
 function PatientImage({ showCaption }: { showCaption?: boolean }) {
   const { patient } = usePatientCompoundContext();
-  const isPending = false;
+  // TODO: para identificar cuando estoy realizando una mutacion en otro componente mediante el mutationKey
+  const isPending = useIsMutating({
+    mutationKey: [QUERY_KEYS.patients],
+  });
 
   return (
     <div>

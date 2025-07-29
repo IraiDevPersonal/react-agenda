@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
 
-import type { UpsertServiceModel } from "../models/patient-action-model";
+import type { UpsertServiceFn } from "../models/patient-action-model";
 
 import { usePatientMutation } from "../hooks/use-patient-mutation";
 
 type Props = {
-  upsertService: UpsertServiceModel;
+  upsertService: UpsertServiceFn;
   patient?: PatientModel;
 };
 

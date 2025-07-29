@@ -4,12 +4,12 @@ import { toast } from "sonner";
 
 import { QUERY_KEYS } from "@/constants/query-keys";
 
-import type { UpsertServiceModel } from "../models/patient-action-model";
+import type { UpsertServiceFn } from "../models/patient-action-model";
 
 import { PatientFormSchema } from "../models/patient-form-model";
 
 type Props = {
-  upsertService: UpsertServiceModel;
+  upsertService: UpsertServiceFn;
   patientUid?: string;
 };
 
@@ -22,6 +22,7 @@ export function usePatientMutation({ upsertService, patientUid }: Props) {
   };
 
   const mutation = useMutation({
+    mutationKey: [QUERY_KEYS.patients],
     mutationFn: (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
