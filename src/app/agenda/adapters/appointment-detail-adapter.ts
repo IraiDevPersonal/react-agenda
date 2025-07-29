@@ -18,7 +18,7 @@ function validate(item: any) {
       status: item.status ?? AppointmentStatus.INDETERMINATE,
       patient_history: PatientAdapter.patientHistoryToArray(item.patient_history ?? []),
       professional: ProfessionalAdapter.validateProfessionalForAppointmentDetail(item.professional),
-      patient: PatientAdapter.validatePatientForAppointmentDetail(item.patient),
+      patient: PatientAdapter.validate(item.patient),
       alert: item.alert,
     };
     return AppointmentDetailSchema.parse(data);

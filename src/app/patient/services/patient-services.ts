@@ -25,7 +25,7 @@ async function updatePatient(
 ) {
   await sleep();
   const { data } = await AgendaApi.put(`/patients/${uid}`, payload);
-  return PatientAdapter.upsertPatientResponse(data);
+  return PatientAdapter.upsertPatientHttpResponse(data);
 }
 
 async function createPatient(
@@ -33,7 +33,7 @@ async function createPatient(
 ) {
   await sleep();
   const { data } = await AgendaApi.post("/patients", payload);
-  return PatientAdapter.upsertPatientResponse(data);
+  return PatientAdapter.upsertPatientHttpResponse(data);
 }
 
 export const PatientServices = {
