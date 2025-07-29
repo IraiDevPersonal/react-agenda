@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 
 import { useNavigate } from "react-router";
 
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/lib/constants/routes";
 import { cn, getUrlData } from "@/lib/utils";
 
 import type { AppointmentModel } from "../models/appointment-model";

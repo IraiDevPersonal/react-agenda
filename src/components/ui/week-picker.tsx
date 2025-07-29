@@ -1,7 +1,7 @@
 import { CalendarIcon } from "lucide-react";
 import { useId } from "react";
 
-import type { DateWeekRange } from "@/types/global-types";
+import type { DateWeekRange } from "@/lib/types/global-types";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/lib/constants/routes";
 import { getUrlData } from "@/lib/utils";
 
 import { APPOINTMENT_DETAIL_FORM_ID } from "../../constants";

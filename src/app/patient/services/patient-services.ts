@@ -1,4 +1,4 @@
-import type { StringifyObject } from "@/types/global-types";
+import type { StringifyObject } from "@/lib/types/global-types";
 
 import { AgendaApi } from "@/api/agenda-api";
 import { sleep } from "@/lib/utils";
@@ -36,9 +36,16 @@ async function createPatient(
   return PatientAdapter.upsertPatientHttpResponse(data);
 }
 
+async function deletePatient(uid: string) {
+  await sleep();
+  const { data } = await AgendaApi.delete(`/patients/${uid}`);
+  return PatientAdapter.deletePatientHttpResponse(data);
+}
+
 export const PatientServices = {
   getAll,
   getDetail,
   updatePatient,
   createPatient,
+  deletePatient,
 };

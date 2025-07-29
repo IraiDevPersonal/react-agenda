@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
-import { QUERY_KEYS } from "@/constants/query-keys";
+import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
 import type { UpsertServiceFn } from "../models/patient-action-model";
 

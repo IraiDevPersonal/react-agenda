@@ -1,3 +1,4 @@
+import { validateDeleteHttpResponse } from "@/lib/adapters/delete-http-response-adapter";
 import { CustomError } from "@/lib/custom-error";
 import { safeArray } from "@/lib/utils";
 
@@ -57,5 +58,6 @@ export const PatientAdapter = {
   patientHistoryToArray,
   httpResponse: validatePatientResponse,
   upsertPatientHttpResponse: validateUpsertResponse,
+  deletePatientHttpResponse: validateDeleteHttpResponse,
   patientDetailHttpResponse: validatePatientDetailResponse,
 };

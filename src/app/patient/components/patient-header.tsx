@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 import { buttonVariants } from "@/components/ui/button";
 import { PageTitle } from "@/components/ui/page-title";
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/lib/constants/routes";
 
 import { usePatientFilters } from "../hooks/use-patient-filters";
 import { PatientQueryOptions } from "../queries/patient-queries";

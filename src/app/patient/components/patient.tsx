@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
-import { QUERY_KEYS } from "@/constants/query-keys";
+import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
 import type { UpsertServiceFn } from "../models/patient-action-model";
 import type { PatientModel } from "../models/patient-model";

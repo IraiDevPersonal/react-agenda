@@ -3,7 +3,7 @@ import type { ClassValue } from "clsx";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import type { StringifyObject } from "@/types/global-types";
+import type { StringifyObject } from "@/lib/types/global-types";
 
 import { dateFormat, dateHelper } from "./date-helper";
 

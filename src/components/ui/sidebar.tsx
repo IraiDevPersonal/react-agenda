@@ -2,7 +2,7 @@ import { CalendarIcon, FileIcon, UsersIcon } from "lucide-react";
 import { NavLink } from "react-router";
 
 import { NavUser } from "@/app/user/components/nav-user";
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/lib/constants/routes";
 import { cn } from "@/lib/utils";
 
 const Paths = [

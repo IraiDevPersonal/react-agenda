@@ -1,8 +1,8 @@
 import { queryOptions } from "@tanstack/react-query";
 
-import type { StringifyObject } from "@/types/global-types";
+import type { StringifyObject } from "@/lib/types/global-types";
 
-import { QUERY_KEYS } from "@/constants/query-keys";
+import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
 import type { AppointmentFilters, AppointmentModel } from "../models/appointment-model";
 

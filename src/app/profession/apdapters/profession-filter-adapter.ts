@@ -1,8 +1,8 @@
-import type { Option } from "@/types/global-types";
+import type { Option } from "@/lib/types/global-types";
 
 import { CustomError } from "@/lib/custom-error";
+import { OptionSchema } from "@/lib/schemas/global-schemas";
 import { safeArray } from "@/lib/utils";
-import { OptionSchema } from "@/schemas/global-schemas";
 
 function validate(item: any) {
   try {

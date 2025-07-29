@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { prettifyRut } from "react-rut-formatter";
 
-import { QUERY_KEYS } from "@/constants/query-keys";
+import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { dateHelper } from "@/lib/date-helper";
 
 import type { AppointmentViewMode } from "../models";
