@@ -37,9 +37,11 @@ function getPatientMetaData(filters?: StringifyObject<PatientFilters>) {
 
 function getDetail(uid: string) {
   return queryOptions({
+    retry: 0,
     refetchOnWindowFocus: false,
-    queryKey: [QUERY_KEYS.patients, "one", uid],
+    queryKey: [QUERY_KEYS.patients, QUERY_KEYS.generic.detail, uid],
     queryFn: () => PatientServices.getDetail(uid),
+    throwOnError: false,
   });
 }
 

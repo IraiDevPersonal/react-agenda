@@ -3,4 +3,8 @@ export const QUERY_KEYS = {
   prefessions: "professions",
   prefessionals: "professionals",
   patients: "patients",
-};
+  generic: {
+    detail: "detail",
+    list: "list",
+  },
+} as const;

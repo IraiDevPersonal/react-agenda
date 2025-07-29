@@ -20,7 +20,7 @@ function getAll(filters?: Filters) {
 
 function getDetail(uid: AppointmentModel["uid"]) {
   return queryOptions({
-    queryKey: [QUERY_KEYS.appointments, "one", uid],
+    queryKey: [QUERY_KEYS.appointments, QUERY_KEYS.generic.detail, uid],
     queryFn: () => AgendaServices.getAppointmentDetail(uid),
     enabled: !!uid,
   });
