@@ -13,26 +13,22 @@ import { PatientQueryOptions } from "../queries/patient-queries";
 
 function PatientTableHeader() {
   const {
-    filters,
-    emailRef,
-    nameRef,
     rutRef,
     onFilter,
     handelSearch,
-    handleClearSearch,
   } = usePatientFilterController();
-  const { filtersAsParams } = usePatientFilters();
+  const { filters, filtersAsParams } = usePatientFilters();
   const { isFetching } = useQuery(PatientQueryOptions.getPatientLoaderState(filtersAsParams));
 
   return (
     <Table.Header>
       <Table.HeaderRow>
-        <Table.Head>Nombre</Table.Head>
-        <Table.Head>Rut</Table.Head>
-        <Table.Head>Correo</Table.Head>
-        <Table.Head>Dirección</Table.Head>
-        <Table.Head align="center">Estado</Table.Head>
-        <Table.Head align="center">
+        <Table.Head className="w-[286px]">Nombre</Table.Head>
+        <Table.Head className="w-[147px]">Rut</Table.Head>
+        <Table.Head className="w-[229px]">Correo</Table.Head>
+        <Table.Head className="w-[206px]">Dirección</Table.Head>
+        <Table.Head className="w-[136px]">Estado</Table.Head>
+        <Table.Head className="w-[98px]">
           {isFetching && <Loader2Icon size={20} className="animate-spin" />}
         </Table.Head>
       </Table.HeaderRow>
@@ -40,47 +36,46 @@ function PatientTableHeader() {
       <Table.HeaderFilterRow>
         <Table.Head>
           <Search
-            ref={nameRef}
-            searchIconSize={16}
-            placeholder="Buscar por nombre..."
+            autoFocus
             classNames={{ input: "table-filter-field" }}
-            defaultValue={filters.name ?? ""}
             onSearch={v => handelSearch(v, "name")}
-            onClearValue={() => handleClearSearch("name")}
+            placeholder="Buscar por nombre..."
+            defaultValue={filters.name ?? ""}
+            searchIconSize={16}
+            key={filters.name}
           />
         </Table.Head>
         <Table.Head>
           <Search
-            ref={rutRef}
-            searchIconSize={16}
-            placeholder="Buscar por rut..."
             classNames={{ input: "table-filter-field", root: "w-36" }}
-            defaultValue={filters.rut ?? ""}
             onSearch={v => handelSearch(v, "rut")}
-            onClearValue={() => handleClearSearch("rut")}
+            defaultValue={filters.rut ?? ""}
+            placeholder="Buscar por rut..."
+            searchIconSize={16}
+            key={filters.rut}
+            ref={rutRef}
           />
         </Table.Head>
         <Table.Head>
           <Search
-            ref={emailRef}
-            searchIconSize={16}
-            placeholder="Buscar por correo..."
             classNames={{ input: "table-filter-field" }}
-            defaultValue={filters.email ?? ""}
             onSearch={v => handelSearch(v, "email")}
-            onClearValue={() => handleClearSearch("email")}
+            placeholder="Buscar por correo..."
+            defaultValue={filters.email ?? ""}
+            searchIconSize={16}
+            key={filters.email}
           />
         </Table.Head>
         <Table.Head></Table.Head>
         <Table.Head>
           <SelectNative
-            className={cn("table-filter-field", "max-w-max")}
             options={[
               { value: PatientStatus.ACTIVE, label: "Habilitados" },
               { value: PatientStatus.INACTIVE, label: "Deshabilitados" },
             ]}
-            value={filters.status ?? ""}
             onChange={e => onFilter({ status: e.target.value })}
+            className={cn("table-filter-field", "max-w-max")}
+            value={filters.status ?? ""}
           />
         </Table.Head>
         <Table.Head></Table.Head>

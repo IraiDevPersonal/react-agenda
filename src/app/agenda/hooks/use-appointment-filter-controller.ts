@@ -3,6 +3,7 @@ import type { ChangeEvent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { prettifyRut } from "react-rut-formatter";
+import { useDebouncedCallback } from "use-debounce";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { dateHelper } from "@/lib/date-helper";
@@ -43,16 +44,11 @@ export function useAppointmentFilterController() {
     onViewModeChange(viewMode);
   };
 
-  const handelSearch = (v: string) => {
+  const handelSearch = useDebouncedCallback((v: string) => {
     const rut = prettifyRut(v);
     searchRef.current!.value = rut;
     onFilter({ patient_rut: rut });
-  };
-
-  const handleClearSearch = () => {
-    searchRef.current!.value = "";
-    onFilter({ patient_rut: "" });
-  };
+  }, 1000, { leading: true });
 
   const handleClearAllFilters = () => {
     onFilter({
@@ -81,15 +77,11 @@ export function useAppointmentFilterController() {
   };
 
   return {
-    // states
-    filters,
     viewMode,
     searchRef,
-    // methods
     onFilter,
     handelSearch,
     handleRefresh,
-    handleClearSearch,
     handleSelectToday,
     handleViewModeChange,
     handleClearAllFilters,

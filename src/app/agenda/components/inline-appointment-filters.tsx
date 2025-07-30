@@ -12,22 +12,21 @@ import { dateHelper } from "@/lib/date-helper";
 
 import { useAppointmentFilterController } from "../hooks/use-appointment-filter-controller";
 import { useAppointmentFilterOptions } from "../hooks/use-appointment-filter-options";
+import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 
 function InlineAppointmentFilters() {
   const {
-    filters,
     viewMode,
     searchRef,
     onFilter,
     handelSearch,
     handleSelectToday,
-    handleClearSearch,
     handleViewModeChange,
     handleClearAllFilters,
     handleRefresh: handleRefreshAppointments,
   } = useAppointmentFilterController();
-
   const { professionOptions, filteredProfessionals } = useAppointmentFilterOptions();
+  const { filters } = useAppointmentFilters();
 
   return (
     <>
@@ -36,7 +35,6 @@ function InlineAppointmentFilters() {
         label="Rut paciente"
         onSearch={handelSearch}
         key={filters.patient_rut}
-        onClearValue={handleClearSearch}
         defaultValue={filters.patient_rut ?? ""}
       />
 

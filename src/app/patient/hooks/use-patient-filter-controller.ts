@@ -1,50 +1,32 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { prettifyRut } from "react-rut-formatter";
+import { useDebouncedCallback } from "use-debounce";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
 import { usePatientFilters } from "./use-patient-filters";
 
-type FieldNames = "rut" | "name" | "email";
+type FieldName = "rut" | "name" | "email";
 
 export function usePatientFilterController() {
   const queryClient = useQueryClient();
   const { filters, onFilter } = usePatientFilters();
   const rutRef = useRef<HTMLInputElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
 
-  const handelSearch = (v: string, fieldName: FieldNames) => {
+  const handelSearch = useDebouncedCallback((v: string, fieldName: FieldName) => {
     if (fieldName === "rut") {
+      if (!rutRef.current)
+        return;
+
       const rut = prettifyRut(v);
-      rutRef.current!.value = rut;
+      rutRef.current.value = rut;
       onFilter({ rut });
-    }
-    if (fieldName === "name") {
-      nameRef.current!.value = v;
-      onFilter({ name: v });
-    }
-    if (fieldName === "email") {
-      emailRef.current!.value = v;
-      onFilter({ email: v });
-    }
-  };
 
-  const handleClearSearch = (fieldName: FieldNames) => {
-    if (fieldName === "rut") {
-      rutRef.current!.value = "";
-      onFilter({ rut: "" });
+      return;
     }
-    if (fieldName === "name") {
-      nameRef.current!.value = "";
-      onFilter({ name: "" });
-    }
-    if (fieldName === "email") {
-      emailRef.current!.value = "";
-      onFilter({ email: "" });
-    }
-  };
+    onFilter({ [fieldName]: v });
+  }, 1000, { leading: true });
 
   const handleClearAllFilters = () => {
     onFilter({
@@ -53,9 +35,6 @@ export function usePatientFilterController() {
       name: null,
       status: null,
     });
-    rutRef.current!.value = "";
-    nameRef.current!.value = "";
-    emailRef.current!.value = "";
   };
 
   const handleRefresh = () => {
@@ -77,17 +56,11 @@ export function usePatientFilterController() {
   };
 
   return {
-    // states
-    filters,
     rutRef,
-    nameRef,
-    emailRef,
-    // methods
     onFilter,
     handelSearch,
-    handleClearSearch,
-    handleClearAllFilters,
     handleRefresh,
     handlePageChange,
+    handleClearAllFilters,
   };
 }

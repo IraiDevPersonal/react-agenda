@@ -7,26 +7,37 @@ import type { StringifyObject } from "@/lib/types/global-types";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
 import type { PatientFilters } from "../models";
+import type { PatientResponseModel } from "../models/patient-model";
 
 import { PatientServices } from "../services/patient-services";
 
-function getAll(filters?: StringifyObject<PatientFilters>) {
+function genericOptions(filters?: StringifyObject<PatientFilters>) {
   return queryOptions({
     queryKey: [QUERY_KEYS.patients, filters],
     queryFn: () => PatientServices.getAll(filters),
   });
 }
 
+function getAll(filters?: StringifyObject<PatientFilters>) {
+  return queryOptions({
+    ...genericOptions(filters),
+    staleTime({ state }) {
+      const data = state.data as PatientResponseModel | undefined;
+      return (data?.total ?? 0) > 0 ? (1 * 60 * 1000) : 0;
+    },
+  });
+}
+
 function getTotalPatients(filters?: StringifyObject<PatientFilters>) {
   return queryOptions({
-    ...getAll(filters),
+    ...genericOptions(filters),
     select: data => data.total,
   });
 }
 
 function getPatientLoaderState(filters?: StringifyObject<PatientFilters>) {
   return queryOptions({
-    ...getAll(filters),
+    ...genericOptions(filters),
     select: () => null,
 
   });
@@ -34,7 +45,7 @@ function getPatientLoaderState(filters?: StringifyObject<PatientFilters>) {
 
 function getPatientMetaData(filters?: StringifyObject<PatientFilters>) {
   return queryOptions({
-    ...getAll(filters),
+    ...genericOptions(filters),
     select: (data) => {
       return {
         limit: data.limit,

@@ -13,27 +13,26 @@ import { dateHelper } from "@/lib/date-helper";
 
 import { useAppointmentFilterController } from "../hooks/use-appointment-filter-controller";
 import { useAppointmentFilterOptions } from "../hooks/use-appointment-filter-options";
+import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 
 function ModalAppointmentFilters() {
   const {
-    filters,
     viewMode,
     searchRef,
     onFilter,
     handelSearch,
+    handleRefresh,
     handleSelectToday,
-    handleClearSearch,
     handleViewModeChange,
     handleClearAllFilters,
-    handleRefresh: handleRefreshAppointments,
   } = useAppointmentFilterController();
-
   const { professionOptions, filteredProfessionals } = useAppointmentFilterOptions();
+  const { filters } = useAppointmentFilters();
 
   return (
     <>
       <DefaultTooltip content="Refrescar datos">
-        <Button variant="outline" size="icon" onClick={handleRefreshAppointments}>
+        <Button variant="outline" size="icon" onClick={handleRefresh}>
           <RotateCcwIcon size={20} />
         </Button>
       </DefaultTooltip>
@@ -118,11 +117,10 @@ function ModalAppointmentFilters() {
 
             <Search
               ref={searchRef}
-              classNames={{ input: "w-full" }}
               label="Rut paciente"
               onSearch={handelSearch}
               key={filters.patient_rut}
-              onClearValue={handleClearSearch}
+              classNames={{ input: "w-full" }}
               defaultValue={filters.patient_rut ?? ""}
             />
 

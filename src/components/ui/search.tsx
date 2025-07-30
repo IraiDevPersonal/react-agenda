@@ -1,18 +1,14 @@
-import type { ComponentProps, PropsWithChildren, ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
-import { SearchIcon, XIcon } from "lucide-react";
-import { useState } from "react";
-import { useDebouncedCallback } from "use-debounce";
+import { SearchIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 import { FieldWrapperWithAccessory } from "./field-wrapper-with-accessory";
 import { Input } from "./input";
 
-type Props = PropsWithChildren<{
-  onClearValue?: () => void;
+type Props = {
   onSearch?: (v: string) => void;
-  // showClearButton?: boolean;
   searchIconSize?: number;
   deboundeDelay?: number;
   label?: ReactNode;
@@ -21,73 +17,35 @@ type Props = PropsWithChildren<{
     root: string;
     label: string;
   }>;
-}> & ComponentProps<"input">;
+} & ComponentProps<"input">;
 
 function Search({
-  deboundeDelay = 1000,
   searchIconSize = 20,
   classNames,
   label,
-  value,
-  onClearValue,
   onKeyDown,
   onSearch,
   onChange,
   ...props
 }: Props) {
-  const [isSubmited, setIsSubmited] = useState(false);
-  const debounced = useDebouncedCallback(
-    (value) => {
-      if (!isSubmited) {
-        onSearch?.(value);
-        setIsSubmited(true);
-      }
-    },
-    deboundeDelay,
-  );
+  const handleSearch = (v: string) => {
+    onSearch?.(v);
+  };
 
   return (
     <FieldWrapperWithAccessory
       label={label}
       classNames={classNames}
       endComponent={(
-        <>
-          {onClearValue && isSubmited
-            && (
-              <button
-                type="button"
-                onClick={() => {
-                  setIsSubmited(false);
-                  onClearValue();
-                }}
-                className="cursor-pointer hover:text-red-600 transition-colors"
-              >
-                <XIcon size={14} />
-              </button>
-            )}
-          <button
-            type="button"
-            className="cursor-pointer hover:text-primary transition-colors"
-            onClick={() => {
-              if (value) {
-                setIsSubmited(true);
-                onSearch?.(value.toString());
-              }
-            }}
-          >
-            <SearchIcon size={searchIconSize} />
-          </button>
-        </>
+        <SearchIcon size={searchIconSize} />
       )}
     >
       <Input
         className={cn("w-48 pe-14", classNames?.input)}
         placeholder="Buscar..."
-        value={value}
         onChange={(e) => {
-          setIsSubmited(false);
           onChange?.(e);
-          debounced(e.target.value);
+          handleSearch(e.target.value);
         }}
         onKeyDown={(e) => {
           onKeyDown?.(e);
@@ -95,9 +53,7 @@ function Search({
           if (e.code === "Enter") {
             e.preventDefault();
             e.stopPropagation();
-
-            setIsSubmited(true);
-            onSearch?.(e.currentTarget.value);
+            handleSearch(e.currentTarget.value);
           }
         }}
         {...props}

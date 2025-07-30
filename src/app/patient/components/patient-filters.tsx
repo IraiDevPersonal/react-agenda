@@ -16,22 +16,26 @@ function PatientFilters() {
   } = usePatientFilterController();
   const { filtersAsParams } = usePatientFilters();
   const { data } = useQuery(PatientQueryOptions.getPatientMetaData(filtersAsParams));
+  const { page, pages } = {
+    page: data?.page || 1,
+    pages: data?.pages || 1,
+  };
 
   return (
     <div className="flex items-center gap-2">
       <span className="font-semibold">
         Pagína:
         {" "}
-        {data?.page}
+        {page}
         {" de "}
-        {data?.pages}
+        {pages}
       </span>
 
       <DefaultTooltip content="Pagína anterior">
         <Button
           size="icon"
           variant="outline"
-          disabled={data?.page === 1}
+          disabled={page <= 1}
           onClick={() => handlePageChange("prev")}
         >
           <ChevronLeftIcon size={20} />
@@ -42,7 +46,7 @@ function PatientFilters() {
         <Button
           size="icon"
           variant="outline"
-          disabled={data?.page === data?.pages}
+          disabled={page >= pages}
           onClick={() => handlePageChange("next")}
         >
           <ChevronRightIcon size={20} />
