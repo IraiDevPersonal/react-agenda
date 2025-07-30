@@ -7,9 +7,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { ErrorMessage } from "@/components/ui/error-message";
-import {
-  Table,
-} from "@/components/ui/table";
+import { Table } from "@/components/ui/table";
 
 import { usePatientFilters } from "../hooks/use-patient-filters";
 import { PatientQueryOptions } from "../queries/patient-queries";
@@ -18,11 +16,11 @@ import { TogglePatientStatusButton } from "./toggle-patient-status-button";
 
 function PatientTable() {
   const { filtersAsParams } = usePatientFilters();
-  const { data, isFetching, isError, error, refetch } = useQuery(
+  const { data, isFetching, isLoadingError, error, refetch } = useQuery(
     PatientQueryOptions.getAll(filtersAsParams),
   );
 
-  if (isError) {
+  if (isLoadingError) {
     return <ErrorMessage onRetry={refetch}>{error.message}</ErrorMessage>;
   }
 

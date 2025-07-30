@@ -5,7 +5,9 @@ import { NavUser } from "@/app/user/components/nav-user";
 import { ROUTES } from "@/lib/constants/routes";
 import { cn } from "@/lib/utils";
 
-const Paths = [
+import { For } from "../for";
+
+const PATHS = [
   { href: ROUTES.agenda, label: "Mi agenda", icon: <CalendarIcon size={20} /> },
   { href: ROUTES.patients, label: "Pacientes", icon: <UsersIcon size={20} /> },
   { href: ROUTES.reports, label: "Informes", icon: <FileIcon size={20} /> },
@@ -13,16 +15,16 @@ const Paths = [
 
 export function Sidebar() {
   return (
-    <aside className="p-4 space-y-8 bg-sidebar min-w-64 w-64 flex flex-col">
-      <div>
-        <span className="text-3xl font-bold italic">Agenda</span>
-      </div>
+    <aside className="hidden md:flex p-4 space-y-8 bg-sidebar min-w-64 w-64 flex-col">
+      <header>
+        <h3 className="text-3xl font-bold italic">Agenda</h3>
+      </header>
 
       <div className="grow-[1] space-y-2">
-        <h5 className="text-muted-foreground">General</h5>
+        <span className="text-muted-foreground">General</span>
         <ul className="space-y-1">
-          {
-            Paths.map(path => (
+          <For items={PATHS}>
+            {path => (
               <li key={path.href} className="w-full">
                 <NavLink
                   to={path.href}
@@ -33,17 +35,17 @@ export function Sidebar() {
                   )}
                 >
                   {path.icon}
-                  {path.label}
+                  <span>{path.label}</span>
                 </NavLink>
               </li>
-            ))
-          }
+            )}
+          </For>
         </ul>
       </div>
 
-      <div>
+      <footer>
         <NavUser />
-      </div>
+      </footer>
     </aside>
   );
 }

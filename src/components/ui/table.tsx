@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { CustomError } from "@/lib/custom-error";
 import { cn } from "@/lib/utils";
 
 type TableProps = React.ComponentProps<"table"> & {
@@ -10,7 +11,13 @@ const Context = React.createContext<Pick<TableProps, "hovereable">>({
   hovereable: false,
 });
 
-const useTableContext = () => React.use(Context);
+function useTableContext() {
+  const context = React.use(Context);
+  if (!context) {
+    throw new CustomError("el useTableContext solo puede ser usado dentro de su provider");
+  }
+  return context;
+}
 
 function Table({ className, hovereable, ...props }: TableProps) {
   const value = React.useMemo(() => ({ hovereable }), [hovereable]);
@@ -24,6 +31,14 @@ function Table({ className, hovereable, ...props }: TableProps) {
         />
       </div>
     </Context>
+  );
+}
+
+function TableContainer({ children, className }: React.PropsWithChildren<{ className?: string }>) {
+  return (
+    <div className={cn("w-max mx-auto border rounded-lg overflow-hidden", className)}>
+      {children}
+    </div>
   );
 }
 
@@ -125,14 +140,6 @@ function TableCaption({
       className={cn("text-muted-foreground mt-4 text-sm", className)}
       {...props}
     />
-  );
-}
-
-function TableContainer({ children, className }: React.PropsWithChildren<{ className?: string }>) {
-  return (
-    <div className={cn("max-w-max mx-auto border rounded-lg overflow-hidden", className)}>
-      {children}
-    </div>
   );
 }
 

@@ -15,7 +15,7 @@ function PatientHeader() {
   const { data: totalPatients = 0 } = useQuery(PatientQueryOptions.getTotalPatients(filtersAsParams));
 
   return (
-    <header className="flex items-center justify-between w-full">
+    <header className="flex flex-col lg:flex-row items-center justify-between w-full">
       <PageTitle>
         {totalPatients}
         {" "}

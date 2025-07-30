@@ -56,8 +56,8 @@ function PatientFilters() {
       </DefaultTooltip>
 
       <DefaultTooltip content="Limpiar todos los filtros">
-        <Button variant="outline" onClick={handleClearAllFilters}>
-          <span>Limpiar</span>
+        <Button variant="outline" onClick={handleClearAllFilters} className="w-9 md:w-max">
+          <span className="hidden md:inline">Limpiar</span>
           <FunnelXIcon size={20} />
         </Button>
       </DefaultTooltip>

@@ -5,9 +5,12 @@ import { toast } from "sonner";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
 import type { UpsertPatientServiceFn } from "../models/patient-action-model";
+import type { PatientResponseModel } from "../models/patient-model";
 
 import { PatientFormSchema } from "../models/patient-form-model";
 import { PatientQueryOptions } from "../queries/patient-queries";
+import { setPatientQueryData } from "../utils";
+import { usePatientFilters } from "./use-patient-filters";
 
 type Props = {
   upsertService: UpsertPatientServiceFn;
@@ -17,6 +20,7 @@ type Props = {
 export function useUpsertPatientMutation({ upsertService, patientUid }: Props) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { filtersAsParams } = usePatientFilters();
 
   const handleBack = () => {
     navigate(-1);
@@ -32,15 +36,23 @@ export function useUpsertPatientMutation({ upsertService, patientUid }: Props) {
 
       return upsertService(payload);
     },
-    onSuccess: () => {
+    onSuccess: ({ data: patient }) => {
       let message = "Paciente actualizado correctamente";
 
       if (!patientUid) {
-        handleBack();
         message = "Paciente creado correctamente";
-      }
 
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.patients] });
+        queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.patients] });
+        handleBack();
+      }
+      else {
+        const patientQueryData = setPatientQueryData(filtersAsParams);
+
+        queryClient.setQueryData(
+          patientQueryData.querykey,
+          (old: PatientResponseModel) => patientQueryData.updateCache(old, patient),
+        );
+      }
       toast.success(message);
     },
   });
