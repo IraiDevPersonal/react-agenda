@@ -9,6 +9,7 @@ import { usePatientFilterController } from "../hooks/use-patient-filter-controll
 import { useQueryPatients } from "../hooks/use-query-patients";
 import { PatientStatus } from "../models";
 import { PatientQuery } from "../queries/patient-queries";
+import { SearchPatient } from "./search-patient";
 
 function PatientTableHeader() {
   const {
@@ -36,7 +37,7 @@ function PatientTableHeader() {
 
       <Table.HeaderFilterRow>
         <Table.Head>
-          <Search
+          <SearchPatient
             autoFocus
             classNames={{ input: "table-filter-field" }}
             onSearch={v => handelSearch(v, "name")}

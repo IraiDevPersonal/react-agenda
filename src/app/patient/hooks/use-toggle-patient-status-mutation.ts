@@ -1,14 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { parseAsParams } from "@/lib/utils";
+import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
 import type { TogglePatientStatusServiceFn } from "../models/patient-action-model";
-import type { PatientResponseModel } from "../models/patient-model";
 
 import { PatientQuery } from "../queries/patient-queries";
-import { setPatientQueryData } from "../utils";
-import { usePatientFilters } from "./use-patient-filters";
 
 type Props = {
   toggleStatusService: TogglePatientStatusServiceFn;
@@ -17,18 +14,12 @@ type Props = {
 
 export function useTogglePatientStatusMutation({ toggleStatusService, successFn }: Props) {
   const queryClient = useQueryClient();
-  const { filters } = usePatientFilters();
 
   return useMutation({
     ...PatientQuery.toggleStatus(),
     mutationFn: (uid: string) => toggleStatusService(uid),
-    onSuccess: ({ message, data: patient }) => {
-      const patientQueryData = setPatientQueryData(parseAsParams(filters));
-
-      queryClient.setQueryData(
-        patientQueryData.querykey,
-        (old: PatientResponseModel) => patientQueryData.updateCache(old, patient),
-      );
+    onSuccess: ({ message }) => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.patients] });
       toast.success(message);
       successFn();
     },

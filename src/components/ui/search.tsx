@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { FieldWrapperWithAccessory } from "./field-wrapper-with-accessory";
 import { Input } from "./input";
 
-type Props = {
+export type SearchProps = {
   onSearch: (v: string) => void;
   searchIconSize?: number;
   deboundeDelay?: number;
@@ -29,7 +29,7 @@ function Search({
   onSearch,
   onChange,
   ...props
-}: Props) {
+}: SearchProps) {
   const debounced = useDebouncedCallback((v: string) => {
     onSearch(v);
   }, deboundeDelay);

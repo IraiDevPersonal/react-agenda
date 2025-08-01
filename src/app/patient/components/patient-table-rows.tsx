@@ -2,14 +2,14 @@ import { PencilIcon, PhoneIcon } from "lucide-react";
 import { Link } from "react-router";
 
 import { For } from "@/components/for";
-import { Avatar } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";
 import { formatPhoneNumber } from "@/lib/utils";
 
 import { useQueryPatients } from "../hooks/use-query-patients";
 import { PatientQuery } from "../queries/patient-queries";
+import { PatientAvatar } from "./patient-avatar";
+import { PatientBadge } from "./patient-badge";
 import { TogglePatientStatusButton } from "./toggle-patient-status-button";
 
 function PatientTableRows() {
@@ -35,16 +35,11 @@ function PatientTableRows() {
         <Table.Row key={patient.uid}>
           <Table.Cell>
             <div className="flex items-center gap-3">
-              <Avatar className="size-9">
-                <Avatar.Image
-                  src={patient.avatar_image ?? ""}
-                  alt={`user-${patient.names}-${patient.last_names}`}
-                />
-                <Avatar.Fallback className="bg-neutral-300 text-primary uppercase">
-                  {patient.names.charAt(0)}
-                  {patient.last_names.charAt(0)}
-                </Avatar.Fallback>
-              </Avatar>
+              <PatientAvatar
+                avatarUrl={patient.avatar_image}
+                lastNames={patient.last_names}
+                names={patient.names}
+              />
               <div>
                 <span className="font-medium block capitalize">
                   {patient.names}
@@ -68,9 +63,7 @@ function PatientTableRows() {
           </Table.Cell>
           <Table.Cell>{patient.address}</Table.Cell>
           <Table.Cell align="center">
-            <Badge variant={patient.is_deleted ? "cancelled" : "confirmed"}>
-              {patient.is_deleted ? "Deshabilitado" : "Habilitado"}
-            </Badge>
+            <PatientBadge isDeleted={patient.is_deleted} />
           </Table.Cell>
           <Table.Cell>
             <div className="flex items-center justify-end">

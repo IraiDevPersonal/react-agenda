@@ -13,6 +13,7 @@ import type { PatientModel } from "../models/patient-model";
 
 import { PatientCompoundContext, usePatientCompoundContext } from "../context/patient-compound-context";
 import { PatientQuery } from "../queries/patient-queries";
+import { PatientBadge } from "./patient-badge";
 import { PatientForm } from "./patient-form";
 
 type Props = PropsWithChildren<{
@@ -61,6 +62,7 @@ function PatientData({ children }: PropsWithChildren) {
           <CopyButton value={patient?.uid ?? ""} />
         </DefaultTooltip>
       </div>
+      <PatientBadge isDeleted={patient?.is_deleted ?? false} />
     </div>
   );
 }
