@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
-import Grid from "./appointment-grid";
+import { AppointmentGrid as Grid } from "./appointment-grid";
 
 type Props = {
   className?: string;

@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { UserRoundCheckIcon, UserRoundXIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -6,9 +5,9 @@ import { ButtonWithAlertDialog } from "@/components/ui/button-with-alert-button"
 
 import type { PatientModel } from "../models/patient-model";
 
-import { usePatientFilters } from "../hooks/use-patient-filters";
+import { useQueryPatients } from "../hooks/use-query-patients";
 import { useTogglePatientStatusMutation } from "../hooks/use-toggle-patient-status-mutation";
-import { PatientQueryOptions } from "../queries/patient-queries";
+import { PatientQuery } from "../queries/patient-queries";
 import { PatientServices } from "../services/patient-services";
 
 type Props = {
@@ -18,13 +17,12 @@ type Props = {
 function TogglePatientStatusButton({ patient }: Props) {
   const [open, setOpen] = useState(false);
   const mutation = useTogglePatientStatusMutation({
-    deleteService: PatientServices.togglePatientStatus,
+    toggleStatusService: PatientServices.togglePatientStatus,
     successFn: () => setOpen(false),
   });
-  const { filtersAsParams } = usePatientFilters();
-  const { isFetching: isPatientFetching } = useQuery(
-    PatientQueryOptions.getPatientLoaderState(filtersAsParams),
-  );
+  const { isFetching: isPatientFetching } = useQueryPatients({
+    patientQueryOptions: PatientQuery.getPatientLoaderState,
+  });
 
   return (
     <ButtonWithAlertDialog

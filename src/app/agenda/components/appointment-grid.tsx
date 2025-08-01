@@ -51,4 +51,4 @@ AppointmentGrid.Row = (props: CustomRowProps) => <Row {...props} />;
 AppointmentGrid.TimeCol = TimeCol;
 AppointmentGrid.Col = Col;
 
-export default AppointmentGrid;
+export { AppointmentGrid };

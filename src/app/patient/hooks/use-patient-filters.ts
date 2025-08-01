@@ -1,8 +1,7 @@
 import type { UseQueryStatesKeysMap } from "nuqs";
 
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
-
-import { serializeQueryParams } from "@/lib/utils";
+import { useTransition } from "react";
 
 import type { PatientFilters } from "../models";
 
@@ -18,12 +17,10 @@ function parser(): UseQueryStatesKeysMap<PatientFilters> {
 }
 
 export function usePatientFilters() {
-  const [filters, onFilter] = useQueryStates(parser(), { history: "replace" });
-
-  const filtersAsParams = serializeQueryParams<PatientFilters>(filters);
+  const [, startTransition] = useTransition();
+  const [filters, onFilter] = useQueryStates(parser(), { history: "replace", startTransition });
 
   return {
-    filtersAsParams,
     filters,
     onFilter,
   };

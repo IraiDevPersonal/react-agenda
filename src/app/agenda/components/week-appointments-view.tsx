@@ -1,61 +1,31 @@
-import { useQuery } from "@tanstack/react-query";
-
 import { For } from "@/components/for";
 import { Show } from "@/components/show";
-import { dateHelper } from "@/lib/date-helper";
 
+import { WEEK_DAYS } from "../constants";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
-import { AppointmentQueryOptions } from "../queries/appointment-queries";
+import { useQueryAppointments } from "../hooks/use-query-appointments";
+import { AppointmentQuery } from "../queries/appointment-queries";
 import { showAppointmentInDay } from "../utils";
 import { AppointmentCard } from "./appointment-card";
-import Grid from "./appointment-grid";
+import { AppointmentGrid as Grid } from "./appointment-grid";
 import { AppointmentListFallback } from "./appointment-list-fallback";
-
-const { isSameMonth, format, getDay, eachDayOfInterval } = dateHelper;
-
-function daysInRange(dateFrom: Date | null, dateTo: Date | null) {
-  return eachDayOfInterval({
-    start: dateFrom!,
-    end: dateTo!,
-  });
-}
-
-const weekDays = [
-  { label: "Lunes", value: 1 },
-  { label: "Martes", value: 2 },
-  { label: "Miércoles", value: 3 },
-  { label: "Jueves", value: 4 },
-  { label: "Viernes", value: 5 },
-  { label: "Sábado", value: 6 },
-];
+import { WeekGridHeader } from "./week-grid-header";
 
 function WeekAppointmentsView() {
-  const { filtersAsParams: { date, date_from, ...params }, filters } = useAppointmentFilters();
-  const { data } = useQuery(AppointmentQueryOptions.getAll({ ...params, date: date_from }));
+  const { data } = useQueryAppointments({
+    appointmentQueryOptions: ({
+      date,
+      date_from,
+      ...filters
+    }) =>
+      AppointmentQuery.getAll({ ...filters, date: date_from }),
+  });
+  const { filters } = useAppointmentFilters();
 
   return (
     <Grid className="min-w-[1632px] w-full">
-      <Grid.Header className="grid-cols-[100px_1fr_1fr_1fr_1fr_1fr_1fr]">
-        <Grid.Col className="capitalize">
-          {isSameMonth(filters.date_from!, filters.date_to!)
-            ? (format(filters.date_from!, "MMMM"))
-            : (`${format(filters.date_from!, "MMM")} - ${format(filters.date_to!, "MMM")}`)}
-        </Grid.Col>
+      <WeekGridHeader />
 
-        <For items={weekDays}>
-          {({ label, value }) => {
-            const { date_from, date_to } = filters;
-            const match = daysInRange(date_from, date_to).find(d => getDay(d) === value);
-            const day = match ? format(match, "dd") : "--";
-
-            return (
-              <Grid.Col key={label}>
-                {`${label} ${day}`}
-              </Grid.Col>
-            );
-          }}
-        </For>
-      </Grid.Header>
       <For
         fallback={cls => <AppointmentListFallback className={cls} />}
         items={filters.profession_id ? data : []}
@@ -64,7 +34,7 @@ function WeekAppointmentsView() {
           <Grid.Row key={appointment.uid} className="grid-cols-[100px_1fr_1fr_1fr_1fr_1fr_1fr]">
             <Grid.TimeCol from={appointment.time_from} to={appointment.time_to} />
 
-            <For items={weekDays.map(el => el.value)}>
+            <For items={WEEK_DAYS.map(el => el.value)}>
               {weekday => (
                 <Grid.Col key={weekday}>
                   <Show when={showAppointmentInDay(appointment.date, weekday)}>

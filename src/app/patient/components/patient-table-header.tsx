@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { Loader2Icon } from "lucide-react";
 
 import { Search } from "@/components/ui/search";
@@ -7,18 +6,20 @@ import { Table } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
 import { usePatientFilterController } from "../hooks/use-patient-filter-controller";
-import { usePatientFilters } from "../hooks/use-patient-filters";
+import { useQueryPatients } from "../hooks/use-query-patients";
 import { PatientStatus } from "../models";
-import { PatientQueryOptions } from "../queries/patient-queries";
+import { PatientQuery } from "../queries/patient-queries";
 
 function PatientTableHeader() {
   const {
+    handelSearch,
+    filters,
     rutRef,
     onFilter,
-    handelSearch,
   } = usePatientFilterController();
-  const { filters, filtersAsParams } = usePatientFilters();
-  const { isFetching } = useQuery(PatientQueryOptions.getPatientLoaderState(filtersAsParams));
+  const { isFetching } = useQueryPatients({
+    patientQueryOptions: PatientQuery.getPatientLoaderState,
+  });
 
   return (
     <Table.Header>

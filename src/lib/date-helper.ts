@@ -16,7 +16,7 @@ function normalizeDate(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
-enum dateFormat {
+enum DateFormat {
   "dd LLL y" = "dd LLL y",
   "dd-MM-yyyy" = "dd-MM-yyyy",
   "yyyy-MM-dd" = "yyyy-MM-dd",
@@ -40,4 +40,4 @@ const dateHelper = {
   getDay,
 };
 
-export { dateFormat, dateHelper };
+export { DateFormat as DateFormat, dateHelper };

@@ -1,10 +1,10 @@
 import type { UseQueryStatesKeysMap } from "nuqs";
 
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
+import { useTransition } from "react";
 
 import { dateHelper } from "@/lib/date-helper";
 import { parseAsLocalDate } from "@/lib/nuqs-parser";
-import { serializeQueryParams } from "@/lib/utils";
 
 import type { AppointmentFilters } from "../models/appointment-model";
 
@@ -13,9 +13,9 @@ function parser(): UseQueryStatesKeysMap<AppointmentFilters> {
   const rangeDate = dateHelper.getWeekRange(currentDate);
 
   return {
-    professional_id: parseAsInteger.withDefault(0),
-    profession_id: parseAsInteger.withDefault(0),
-    patient_rut: parseAsString.withDefault(""),
+    professional_id: parseAsInteger,
+    profession_id: parseAsInteger,
+    patient_rut: parseAsString,
     date_from: parseAsLocalDate.withDefault(rangeDate.from),
     date_to: parseAsLocalDate.withDefault(rangeDate.to),
     date: parseAsLocalDate.withDefault(currentDate),
@@ -23,12 +23,10 @@ function parser(): UseQueryStatesKeysMap<AppointmentFilters> {
 }
 
 export function useAppointmentFilters() {
-  const [filters, onFilter] = useQueryStates(parser(), { history: "replace" });
-
-  const filtersAsParams = serializeQueryParams<AppointmentFilters>(filters);
+  const [, startTransition] = useTransition();
+  const [filters, onFilter] = useQueryStates(parser(), { history: "replace", startTransition });
 
   return {
-    filtersAsParams,
     filters,
     onFilter,
   };

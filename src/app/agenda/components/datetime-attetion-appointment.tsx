@@ -1,4 +1,4 @@
-import { dateFormat, dateHelper } from "@/lib/date-helper";
+import { DateFormat, dateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
 
 import type { AppointmentDetailModel } from "../models/appointment-detail-model";
@@ -25,7 +25,7 @@ function DatetimeAttetionAppointment({ status, datetime }: Props) {
         Horario de atención
       </span>
       <span>
-        {dateHelper.format(dateHelper.parseISO(datetime.date), dateFormat["dd-MM-yyyy"])}
+        {dateHelper.format(dateHelper.parseISO(datetime.date), DateFormat["dd-MM-yyyy"])}
       </span>
       <span>
         {datetime.time_from}

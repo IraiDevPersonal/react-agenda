@@ -10,7 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { dateFormat, dateHelper } from "@/lib/date-helper";
+import { DateFormat, dateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
 
 import { FieldWrapper } from "./field-wrapper";
@@ -55,11 +55,11 @@ function WeekPicker({ label, value, classNames, onValueChange }: Props) {
                 (value?.from && value.to)
                   ? (
                       <>
-                        {dateHelper.format(value.from, dateFormat["dd LLL y"])}
+                        {dateHelper.format(value.from, DateFormat["dd LLL y"])}
                         {" "}
                         -
                         {" "}
-                        {dateHelper.format(value.to, dateFormat["dd LLL y"])}
+                        {dateHelper.format(value.to, DateFormat["dd LLL y"])}
                       </>
                     )
                   : ("desde - hasta")

@@ -1,19 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
-
 import { For } from "@/components/for";
 import { Show } from "@/components/show";
-import { dateFormat, dateHelper } from "@/lib/date-helper";
+import { DateFormat, dateHelper } from "@/lib/date-helper";
 
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
-import { AppointmentQueryOptions } from "../queries/appointment-queries";
+import { useQueryAppointments } from "../hooks/use-query-appointments";
+import { AppointmentQuery } from "../queries/appointment-queries";
 import { showAppointmentInDay } from "../utils";
 import { AppointmentCard } from "./appointment-card";
-import Grid from "./appointment-grid";
+import { AppointmentGrid as Grid } from "./appointment-grid";
 import { AppointmentListFallback } from "./appointment-list-fallback";
 
 function DayAppointmentsView() {
-  const { filtersAsParams: { date_to, date_from, ...params }, filters } = useAppointmentFilters();
-  const { data } = useQuery(AppointmentQueryOptions.getAll(params));
+  const { data } = useQueryAppointments({
+    appointmentQueryOptions: ({
+      date_from,
+      date_to,
+      ...filters
+    }) =>
+      AppointmentQuery.getAll({ ...filters }),
+  });
+  const { filters } = useAppointmentFilters();
 
   return (
     <>
@@ -23,7 +29,7 @@ function DayAppointmentsView() {
           <Grid.Col className="text-left col-span-6 first-letter:uppercase">
             {dateHelper.format(
               dateHelper.createDate(filters.date),
-              dateFormat["EEEE dd 'de' MMMM 'de' yyyy"],
+              DateFormat["EEEE dd 'de' MMMM 'de' yyyy"],
             )}
           </Grid.Col>
         </Grid.Header>

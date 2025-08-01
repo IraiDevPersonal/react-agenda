@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { PlusIcon } from "lucide-react";
 import { Link } from "react-router";
 
@@ -6,13 +5,16 @@ import { buttonVariants } from "@/components/ui/button";
 import { PageTitle } from "@/components/ui/page-title";
 import { ROUTES } from "@/lib/constants/routes";
 
-import { usePatientFilters } from "../hooks/use-patient-filters";
-import { PatientQueryOptions } from "../queries/patient-queries";
+import { useQueryPatients } from "../hooks/use-query-patients";
+import { PatientQuery } from "../queries/patient-queries";
 import { PatientFilters } from "./patient-filters";
 
 function PatientHeader() {
-  const { filtersAsParams } = usePatientFilters();
-  const { data: totalPatients = 0 } = useQuery(PatientQueryOptions.getTotalPatients(filtersAsParams));
+  const {
+    data: totalPatients = 0,
+  } = useQueryPatients({
+    patientQueryOptions: PatientQuery.getTotalPatients,
+  });
 
   return (
     <header className="flex flex-col lg:flex-row items-center justify-between w-full">

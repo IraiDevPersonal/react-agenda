@@ -10,7 +10,7 @@ import { DefaultTooltip } from "@/components/ui/tooltip";
 import type { AppointmentModel } from "../../models/appointment-model";
 
 import { STATUS_NAMES } from "../../constants";
-import { AppointmentQueryOptions } from "../../queries/appointment-queries";
+import { AppointmentQuery } from "../../queries/appointment-queries";
 import { AppointmentStatusIcon } from "../appoinment-status-icon";
 import { DatetimeAttetionAppointment } from "../datetime-attetion-appointment";
 import { AppointmentDetailForm } from "./appointment-detail-form";
@@ -21,7 +21,7 @@ type Props = {
 };
 
 function AppointmentDetail({ appointmentUid }: Props) {
-  const { data, isError, error, isLoading } = useQuery(AppointmentQueryOptions.getDetail(appointmentUid));
+  const { data, isError, error, isLoading } = useQuery(AppointmentQuery.getDetail(appointmentUid));
 
   if (isLoading) {
     return null;

@@ -4,24 +4,24 @@ import { toast } from "sonner";
 import type { DeletePatientServiceFn } from "../models/patient-action-model";
 import type { PatientResponseModel } from "../models/patient-model";
 
-import { PatientQueryOptions } from "../queries/patient-queries";
+import { PatientQuery } from "../queries/patient-queries";
 import { setPatientQueryData } from "../utils";
 import { usePatientFilters } from "./use-patient-filters";
 
 type Props = {
-  deleteService: DeletePatientServiceFn;
+  toggleStatusService: DeletePatientServiceFn;
   successFn: () => void;
 };
 
-export function useTogglePatientStatusMutation({ deleteService, successFn }: Props) {
+export function useTogglePatientStatusMutation({ toggleStatusService, successFn }: Props) {
   const queryClient = useQueryClient();
-  const { filtersAsParams } = usePatientFilters();
+  const { params } = usePatientFilters();
 
   return useMutation({
-    ...PatientQueryOptions.del(),
-    mutationFn: (uid: string) => deleteService(uid),
+    ...PatientQuery.toggleStatus(),
+    mutationFn: (uid: string) => toggleStatusService(uid),
     onSuccess: ({ message, data: patient }) => {
-      const patientQueryData = setPatientQueryData(filtersAsParams);
+      const patientQueryData = setPatientQueryData(params);
 
       queryClient.setQueryData(
         patientQueryData.querykey,

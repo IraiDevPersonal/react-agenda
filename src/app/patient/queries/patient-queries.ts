@@ -2,7 +2,7 @@ import type { UseMutationOptions } from "@tanstack/react-query";
 
 import { queryOptions } from "@tanstack/react-query";
 
-import type { StringifyObject } from "@/lib/types/global-types";
+import type { StringifyObject, TQueryKey } from "@/lib/types/global-types";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
@@ -11,14 +11,14 @@ import type { PatientResponseModel } from "../models/patient-model";
 
 import { PatientServices } from "../services/patient-services";
 
-function genericOptions(filters?: StringifyObject<PatientFilters>) {
+function genericOptions(filters: StringifyObject<PatientFilters>) {
   return queryOptions({
-    queryKey: [QUERY_KEYS.patients, filters],
+    queryKey: [QUERY_KEYS.patients, filters] as TQueryKey,
     queryFn: () => PatientServices.getAll(filters),
   });
 }
 
-function getAll(filters?: StringifyObject<PatientFilters>) {
+function getAll(filters: StringifyObject<PatientFilters>) {
   return queryOptions({
     ...genericOptions(filters),
     staleTime({ state }) {
@@ -28,14 +28,14 @@ function getAll(filters?: StringifyObject<PatientFilters>) {
   });
 }
 
-function getTotalPatients(filters?: StringifyObject<PatientFilters>) {
+function getTotalPatients(filters: StringifyObject<PatientFilters>) {
   return queryOptions({
     ...genericOptions(filters),
     select: data => data.total,
   });
 }
 
-function getPatientLoaderState(filters?: StringifyObject<PatientFilters>) {
+function getPatientLoaderState(filters: StringifyObject<PatientFilters>) {
   return queryOptions({
     ...genericOptions(filters),
     select: () => null,
@@ -43,7 +43,7 @@ function getPatientLoaderState(filters?: StringifyObject<PatientFilters>) {
   });
 }
 
-function getPatientMetaData(filters?: StringifyObject<PatientFilters>) {
+function getPatientMetaData(filters: StringifyObject<PatientFilters>) {
   return queryOptions({
     ...genericOptions(filters),
     select: (data) => {
@@ -72,17 +72,17 @@ function upsert(): Pick<UseMutationOptions, "mutationKey"> {
   };
 }
 
-function del(): Pick<UseMutationOptions, "mutationKey"> {
+function toggleStatus(): Pick<UseMutationOptions, "mutationKey"> {
   return {
     mutationKey: [QUERY_KEYS.patients, QUERY_KEYS.generic.delete],
   };
 }
 
-export const PatientQueryOptions = {
-  del,
+export const PatientQuery = {
   upsert,
   getAll,
   getDetail,
+  toggleStatus,
   getTotalPatients,
   getPatientMetaData,
   getPatientLoaderState,

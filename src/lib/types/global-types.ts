@@ -1,3 +1,4 @@
+import type { UseQueryOptions } from "@tanstack/react-query";
 import type { DateRange as DayPickerDateRange } from "react-day-picker";
 import type z from "zod";
 
@@ -24,3 +25,17 @@ export type MakeRequired<T, K extends keyof T> = Partial<Omit<T, K>> &
 export type Option = z.infer<typeof OptionSchema>;
 
 export type DateWeekRange = StrictRequired<DayPickerDateRange>;
+
+export type TQueryKey = (string | object)[];
+
+export type GenericQueryOptions<
+  TKeyName extends string,
+  TFilters extends object,
+  TQueryFnData = unknown,
+  TError = unknown,
+  TData = TQueryFnData,
+> = {
+  [K in TKeyName]: (
+    filters: StringifyObject<TFilters>
+  ) => UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>;
+};

@@ -15,18 +15,18 @@ export function usePatientFilterController() {
   const rutRef = useRef<HTMLInputElement>(null);
 
   const handelSearch = useDebouncedCallback((v: string, fieldName: FieldName) => {
-    if (fieldName === "rut") {
-      if (!rutRef.current)
-        return;
-
-      const rut = prettifyRut(v);
-      rutRef.current.value = rut;
-      onFilter({ rut });
-
+    if (fieldName !== "rut") {
+      onFilter({ [fieldName]: v });
       return;
     }
-    onFilter({ [fieldName]: v });
-  }, 1000, { leading: true });
+
+    if (!rutRef.current)
+      return;
+
+    const rut = prettifyRut(v);
+    rutRef.current.value = rut;
+    onFilter({ rut });
+  }, 1000);
 
   const handleClearAllFilters = () => {
     onFilter({
@@ -56,9 +56,10 @@ export function usePatientFilterController() {
   };
 
   return {
+    handelSearch,
+    filters,
     rutRef,
     onFilter,
-    handelSearch,
     handleRefresh,
     handlePageChange,
     handleClearAllFilters,

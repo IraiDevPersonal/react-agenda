@@ -1,36 +1,18 @@
 import * as React from "react";
 
-import { CustomError } from "@/lib/custom-error";
 import { cn } from "@/lib/utils";
 
-type TableProps = React.ComponentProps<"table"> & {
-  hovereable?: boolean;
-};
+type TableProps = React.ComponentProps<"table">;
 
-const Context = React.createContext<Pick<TableProps, "hovereable">>({
-  hovereable: false,
-});
-
-function useTableContext() {
-  const context = React.use(Context);
-  if (!context) {
-    throw new CustomError("el useTableContext solo puede ser usado dentro de su provider");
-  }
-  return context;
-}
-
-function Table({ className, hovereable, ...props }: TableProps) {
-  const value = React.useMemo(() => ({ hovereable }), [hovereable]);
+function Table({ className, ...props }: TableProps) {
   return (
-    <Context value={value}>
-      <div className="relative w-full overflow-auto">
-        <table
-          data-slot="table"
-          className={cn("w-full caption-bottom text-sm", className)}
-          {...props}
-        />
-      </div>
-    </Context>
+    <div className="relative w-full overflow-auto">
+      <table
+        data-slot="table"
+        className={cn("w-full caption-bottom text-sm", className)}
+        {...props}
+      />
+    </div>
   );
 }
 
@@ -69,8 +51,11 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   );
 }
 
-function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
-  const { hovereable } = useTableContext();
+function TableRow({
+  className,
+  hovereable,
+  ...props
+}: React.ComponentProps<"tr"> & { hovereable?: boolean }) {
   return (
     <tr
       data-slot="table-row"

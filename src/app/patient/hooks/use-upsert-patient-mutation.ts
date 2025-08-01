@@ -8,7 +8,7 @@ import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 import type { PatientResponseModel } from "../models/patient-model";
 
 import { PatientFormSchema } from "../models/patient-form-model";
-import { PatientQueryOptions } from "../queries/patient-queries";
+import { PatientQuery } from "../queries/patient-queries";
 import { setPatientQueryData } from "../utils";
 import { usePatientFilters } from "./use-patient-filters";
 
@@ -20,14 +20,14 @@ type Props = {
 export function useUpsertPatientMutation({ upsertService, patientUid }: Props) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { filtersAsParams } = usePatientFilters();
+  const { params } = usePatientFilters();
 
   const handleBack = () => {
     navigate(-1);
   };
 
   const mutation = useMutation({
-    ...PatientQueryOptions.upsert(),
+    ...PatientQuery.upsert(),
     mutationFn: (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
@@ -46,7 +46,7 @@ export function useUpsertPatientMutation({ upsertService, patientUid }: Props) {
         handleBack();
       }
       else {
-        const patientQueryData = setPatientQueryData(filtersAsParams);
+        const patientQueryData = setPatientQueryData(params);
 
         queryClient.setQueryData(
           patientQueryData.querykey,

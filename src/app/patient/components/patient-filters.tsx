@@ -1,12 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
 import { ChevronLeftIcon, ChevronRightIcon, FunnelXIcon, RotateCcwIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
 import { usePatientFilterController } from "../hooks/use-patient-filter-controller";
-import { usePatientFilters } from "../hooks/use-patient-filters";
-import { PatientQueryOptions } from "../queries/patient-queries";
+import { useQueryPatients } from "../hooks/use-query-patients";
+import { PatientQuery } from "../queries/patient-queries";
 
 function PatientFilters() {
   const {
@@ -14,8 +13,7 @@ function PatientFilters() {
     handlePageChange,
     handleClearAllFilters,
   } = usePatientFilterController();
-  const { filtersAsParams } = usePatientFilters();
-  const { data } = useQuery(PatientQueryOptions.getPatientMetaData(filtersAsParams));
+  const { data } = useQueryPatients({ patientQueryOptions: PatientQuery.getPatientMetaData });
   const { page, pages } = {
     page: data?.page || 1,
     pages: data?.pages || 1,
@@ -60,7 +58,7 @@ function PatientFilters() {
       </DefaultTooltip>
 
       <DefaultTooltip content="Limpiar todos los filtros">
-        <Button variant="outline" onClick={handleClearAllFilters} className="w-9 md:w-max">
+        <Button variant="outline" className="w-9 md:w-max" onClick={handleClearAllFilters}>
           <span className="hidden md:inline">Limpiar</span>
           <FunnelXIcon size={20} />
         </Button>

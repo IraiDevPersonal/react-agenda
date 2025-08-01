@@ -8,7 +8,7 @@ import type { PatientFormValues } from "../models/patient-form-model";
 
 import { PatientAdapter } from "../adapters/patient-adapter";
 
-async function getAll(filters?: StringifyObject<PatientFilters>) {
+async function getAll(filters: StringifyObject<PatientFilters>) {
   await sleep();
   const { data } = await AgendaApi.get("/patients", { params: filters });
   return PatientAdapter.httpResponse(data);
