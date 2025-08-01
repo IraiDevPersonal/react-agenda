@@ -1,18 +1,11 @@
 import type { ClassValue } from "clsx";
 
 import { clsx } from "clsx";
+import phoneFormatter from "phone-formatter";
 import queryString from "query-string";
 import { twMerge } from "tailwind-merge";
 
 import { DateFormat, dateHelper } from "./date-helper";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-export function safeArray<T = any>(data: any): T[] {
-  return (Array.isArray(data) ? data : []) as T[];
-}
 
 function parseDateAsString<T extends object>(value: T) {
   return Object.entries(value).reduce((acc, [key, value]) => {
@@ -44,10 +37,22 @@ export function parseAsParams<T extends object>(value: T): Record<keyof T, strin
   return queryString.parse(query) as Record<keyof T, string>;
 }
 
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export function safeArray<T = any>(data: any): T[] {
+  return (Array.isArray(data) ? data : []) as T[];
+}
+
 export function getUrlData() {
   return {
     ...location,
   };
+}
+
+export function formatPhoneNumber(value: string, format?: string) {
+  return phoneFormatter.format(value, format ?? "NNN N NN NNN NNN", { normalize: true });
 }
 
 export function sleep(ms: number = 2000) {

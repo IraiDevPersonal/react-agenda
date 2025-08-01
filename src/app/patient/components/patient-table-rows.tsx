@@ -6,6 +6,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";
+import { formatPhoneNumber } from "@/lib/utils";
 
 import { useQueryPatients } from "../hooks/use-query-patients";
 import { PatientQuery } from "../queries/patient-queries";
@@ -61,7 +62,7 @@ function PatientTableRows() {
                 className="mt-1 text-muted-foreground text-xs flex items-baseline-last gap-x-1"
               >
                 <PhoneIcon size={12} />
-                <span>{patient.phone}</span>
+                <span>{formatPhoneNumber(patient.phone)}</span>
               </div>
             </div>
           </Table.Cell>
