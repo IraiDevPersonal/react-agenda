@@ -1,33 +1,21 @@
 import z from "zod";
 
-export enum AppointmentStatus {
-  AVAILABLE = "AVAILABLE",
-  TO_CONFIRM = "TO_CONFIRM",
-  CONFIRMED = "CONFIRMED",
-  CANCELLED = "CANCELLED",
-  INDETERMINATE = "INDETERMINATE",
-}
+import { UidScheme } from "@/lib/schemas/global-schemas";
+import { PersonSchemas } from "@/lib/schemas/person-schemas";
 
-export type AppointmentFilters = {
-  professional_id: number;
-  profession_id: number;
-  patient_rut: string;
-  date_from: Date;
-  date_to: Date;
-  date: Date;
-};
+import { AppointmentStatusScheme } from ".";
 
 export const AppointmentSchema = z.object({
-  uid: z.string(),
+  uid: UidScheme,
   date: z.string(),
   time_from: z.string(),
   time_to: z.string(),
-  patient_name: z.string(),
-  patient_rut: z.string(),
-  patient_phone: z.string(),
-  professional_name: z.string(),
+  patient_name: PersonSchemas.FullName,
+  patient_rut: PersonSchemas.Rut,
+  patient_phone: PersonSchemas.Phone,
+  professional_name: PersonSchemas.FullName,
   professions: z.string().array(),
-  appointment_status: z.enum(AppointmentStatus),
+  appointment_status: AppointmentStatusScheme,
 });
 
 export type AppointmentModel = z.infer<typeof AppointmentSchema>;

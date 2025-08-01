@@ -32,7 +32,7 @@ function UpdatePatientPresenter() {
     <>
       <Patient
         patient={patient?.data}
-        upsertService={payload => PatientServices.updatePatient(patientUid, payload)}
+        upsertService={payload => PatientServices.update(patientUid, payload)}
       >
         {
           isFetching

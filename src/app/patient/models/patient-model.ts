@@ -1,16 +1,18 @@
-import { checkRut } from "react-rut-formatter";
 import z from "zod";
 
+import { UidScheme } from "@/lib/schemas/global-schemas";
+import { PersonSchemas } from "@/lib/schemas/person-schemas";
+
 export const PatientSchema = z.object({
-  uid: z.uuid("UID invalido"),
-  rut: z.string().refine(checkRut, "rut invalido"),
-  names: z.string().min(1, "nombres obligatorios"),
-  last_names: z.string().min(1, "apellidos obligatorios"),
-  email: z.email("correo invalido"),
-  phone: z.string().min(1, "teléfono obligatorio"),
-  address: z.string().min(1, "dirección obligatoria").min(10, "dirección muy corta, minimo 10 caracteres"),
+  uid: UidScheme,
+  rut: PersonSchemas.Rut,
+  names: PersonSchemas.Names,
+  last_names: PersonSchemas.LastNames,
+  email: PersonSchemas.Email,
+  phone: PersonSchemas.Phone,
+  address: PersonSchemas.Address,
   is_deleted: z.boolean().optional().default(false),
-  avatar_image: z.string().optional().nullable(),
+  avatar_image: PersonSchemas.AvatarImage,
 });
 
 export const PatientResponseSchema = z.object({

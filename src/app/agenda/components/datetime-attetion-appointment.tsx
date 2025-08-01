@@ -1,8 +1,8 @@
 import { DateFormat, dateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
 
+import type { AppointmentStatus } from "../models";
 import type { AppointmentDetailModel } from "../models/appointment-detail-model";
-import type { AppointmentStatus } from "../models/appointment-model";
 
 type Props = {
   status: AppointmentStatus;

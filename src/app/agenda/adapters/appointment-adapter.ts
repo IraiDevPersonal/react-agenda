@@ -3,7 +3,8 @@ import { safeArray } from "@/lib/utils";
 
 import type { AppointmentModel } from "../models/appointment-model";
 
-import { AppointmentSchema, AppointmentStatus } from "../models/appointment-model";
+import { AppointmentStatus } from "../models";
+import { AppointmentSchema } from "../models/appointment-model";
 
 function validate(item: any): AppointmentModel {
   try {

@@ -26,7 +26,7 @@ function PatientTableRows() {
       fallback={(
         <Table.Row>
           <Table.Cell colSpan={6} align="center" className="italic text-muted-foreground">
-            No hay pacientes...
+            {isFetching ? "Cargando pacientes..." : "No hay pacientes"}
           </Table.Cell>
         </Table.Row>
       )}

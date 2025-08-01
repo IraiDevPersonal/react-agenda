@@ -4,7 +4,7 @@ import { Patient } from "./patient";
 function CreatePatientPresenter() {
   return (
     <>
-      <Patient upsertService={PatientServices.createPatient}>
+      <Patient upsertService={PatientServices.create}>
         <Patient.Image showCaption />
       </Patient>
     </>

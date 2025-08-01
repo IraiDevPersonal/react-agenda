@@ -20,7 +20,7 @@ async function getDetail(uid: string) {
   return PatientAdapter.patientDetailHttpResponse(data);
 }
 
-async function updatePatient(
+async function update(
   uid: string,
   payload: PatientFormValues,
 ) {
@@ -29,7 +29,7 @@ async function updatePatient(
   return PatientAdapter.upsertPatientHttpResponse(data);
 }
 
-async function createPatient(
+async function create(
   payload: PatientFormValues,
 ) {
   await sleep();
@@ -37,7 +37,7 @@ async function createPatient(
   return PatientAdapter.upsertPatientHttpResponse(data);
 }
 
-async function togglePatientStatus(uid: string) {
+async function toggleStatus(uid: string) {
   await sleep();
   const { data } = await AgendaApi.patch(`/patients/${uid}`);
   return PatientAdapter.upsertPatientHttpResponse(data);
@@ -46,7 +46,7 @@ async function togglePatientStatus(uid: string) {
 export const PatientServices = {
   getAll,
   getDetail,
-  updatePatient,
-  createPatient,
-  togglePatientStatus,
+  update,
+  create,
+  toggleStatus,
 };

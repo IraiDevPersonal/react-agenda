@@ -55,6 +55,15 @@ export function formatPhoneNumber(value: string, format?: string) {
   return phoneFormatter.format(value, format ?? "NNN N NN NNN NNN", { normalize: true });
 }
 
+export function isValidPhoneNumber(value: string) {
+  // por ahora solo valido para chile
+  if (!value.startsWith("+"))
+    return false;
+  if (value.length !== 12)
+    return false;
+  return true;
+}
+
 export function sleep(ms: number = 2000) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }

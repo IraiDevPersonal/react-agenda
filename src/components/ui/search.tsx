@@ -1,6 +1,7 @@
 import type { ComponentProps, ReactNode } from "react";
 
 import { SearchIcon } from "lucide-react";
+import { useDebouncedCallback } from "use-debounce";
 
 import { cn } from "@/lib/utils";
 
@@ -8,7 +9,7 @@ import { FieldWrapperWithAccessory } from "./field-wrapper-with-accessory";
 import { Input } from "./input";
 
 type Props = {
-  onSearch?: (v: string) => void;
+  onSearch: (v: string) => void;
   searchIconSize?: number;
   deboundeDelay?: number;
   label?: ReactNode;
@@ -20,6 +21,7 @@ type Props = {
 } & ComponentProps<"input">;
 
 function Search({
+  deboundeDelay = 600,
   searchIconSize = 20,
   classNames,
   label,
@@ -28,9 +30,9 @@ function Search({
   onChange,
   ...props
 }: Props) {
-  const handleSearch = (v: string) => {
-    onSearch?.(v);
-  };
+  const debounced = useDebouncedCallback((v: string) => {
+    onSearch(v);
+  }, deboundeDelay);
 
   return (
     <FieldWrapperWithAccessory
@@ -45,7 +47,7 @@ function Search({
         placeholder="Buscar..."
         onChange={(e) => {
           onChange?.(e);
-          handleSearch(e.target.value);
+          debounced(e.target.value);
         }}
         onKeyDown={(e) => {
           onKeyDown?.(e);
@@ -53,7 +55,7 @@ function Search({
           if (e.code === "Enter") {
             e.preventDefault();
             e.stopPropagation();
-            handleSearch(e.currentTarget.value);
+            onSearch(e.currentTarget.value);
           }
         }}
         {...props}

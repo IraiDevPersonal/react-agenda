@@ -7,7 +7,7 @@ import { cn, getUrlData } from "@/lib/utils";
 
 import type { AppointmentModel } from "../models/appointment-model";
 
-import { AppointmentStatus } from "../models/appointment-model";
+import { AppointmentStatus } from "../models";
 import { generateAppoinmentDatetimeText } from "../utils";
 import { AppointmentStatusIcon } from "./appoinment-status-icon";
 

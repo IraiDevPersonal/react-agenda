@@ -18,7 +18,7 @@ function For<T>({ children, items = DEFAULT_ITEMS, fallback }: Props<T>) {
         {!fallback
           ? (
               <span className={cn(DEFAULT_CLASSNAME)}>
-                No hay items...
+                No hay items
               </span>
             )
           : typeof fallback === "function" ? fallback(DEFAULT_CLASSNAME) : fallback}

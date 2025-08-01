@@ -17,7 +17,7 @@ type Props = {
 function TogglePatientStatusButton({ patient }: Props) {
   const [open, setOpen] = useState(false);
   const mutation = useTogglePatientStatusMutation({
-    toggleStatusService: PatientServices.togglePatientStatus,
+    toggleStatusService: PatientServices.toggleStatus,
     successFn: () => setOpen(false),
   });
   const { isFetching: isPatientFetching } = useQueryPatients({
@@ -34,7 +34,7 @@ function TogglePatientStatusButton({ patient }: Props) {
       onOpenChange={setOpen}
       open={open}
     >
-      El paciente
+      Paciente
       <strong className="font-semibold">
         {" "}
         {patient.names}
@@ -42,7 +42,7 @@ function TogglePatientStatusButton({ patient }: Props) {
         {patient.last_names}
         {" "}
       </strong>
-      quedara
+      sera
       {" "}
       <strong>{patient.is_deleted ? "habilitado" : "deshabilitado"}</strong>
       .

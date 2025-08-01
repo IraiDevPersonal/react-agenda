@@ -1,7 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { prettifyRut } from "react-rut-formatter";
-import { useDebouncedCallback } from "use-debounce";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
@@ -14,7 +13,7 @@ export function usePatientFilterController() {
   const { filters, onFilter } = usePatientFilters();
   const rutRef = useRef<HTMLInputElement>(null);
 
-  const handelSearch = useDebouncedCallback((v: string, fieldName: FieldName) => {
+  const handelSearch = (v: string, fieldName: FieldName) => {
     if (fieldName !== "rut") {
       onFilter({ [fieldName]: v });
       return;
@@ -26,7 +25,7 @@ export function usePatientFilterController() {
     const rut = prettifyRut(v);
     rutRef.current.value = rut;
     onFilter({ rut });
-  }, 1000);
+  };
 
   const handleClearAllFilters = () => {
     onFilter({

@@ -4,7 +4,7 @@ import { PatientHistorySchema } from "@/app/patient/models/patient-history-model
 import { PatientSchema } from "@/app/patient/models/patient-model";
 import { ProfessionalForAppointmentDetailSchema } from "@/app/professional/models/professional-model";
 
-import { AppointmentStatus } from "./appointment-model";
+import { AppointmentStatusScheme } from ".";
 
 export const AlertForAppointmentDetailSchema = z.object({
   message: z.string(),
@@ -17,7 +17,7 @@ export const AppointmentDetailSchema = z.object({
   time_from: z.string(),
   time_to: z.string(),
   is_enabled: z.boolean(),
-  status: z.enum(AppointmentStatus),
+  status: AppointmentStatusScheme,
   patient_history: z.array(PatientHistorySchema),
   professional: ProfessionalForAppointmentDetailSchema,
   patient: PatientSchema.omit({ is_deleted: true }).nullable(),

@@ -4,8 +4,8 @@ import { CustomError } from "@/lib/custom-error";
 
 import type { AppointmentDetailModel } from "../models/appointment-detail-model";
 
+import { AppointmentStatus } from "../models";
 import { AppointmentDetailSchema } from "../models/appointment-detail-model";
-import { AppointmentStatus } from "../models/appointment-model";
 
 function validate(item: any) {
   try {
