@@ -17,13 +17,13 @@ export function safeArray<T = any>(data: any): T[] {
 function parseDateAsString<T extends object>(value: T) {
   return Object.entries(value).reduce((acc, [key, value]) => {
     if (value instanceof Date) {
-      acc[key as keyof T] = dateHelper.format(value, DateFormat["yyyy-MM-dd"]) as any;
+      acc[key as keyof T] = dateHelper.format(value, DateFormat["yyyy-MM-dd"]);
     }
     else {
       acc[key as keyof T] = value;
     }
     return acc;
-  }, {} as T);
+  }, {} as Record<keyof T, any>);
 }
 
 export function parseAsParams<T extends object>(value: T): Record<keyof T, string> {
