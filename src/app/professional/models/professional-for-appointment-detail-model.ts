@@ -9,4 +9,4 @@ export const ProfessionalForAppointmentDetailSchema = z.object({
   confirm_methods: z.string().array(),
 });
 
-export type ProfessionalForAppointmentDetail = z.infer<typeof ProfessionalForAppointmentDetailSchema>;
+export type ProfessionalForAppointmentDetailModel = z.infer<typeof ProfessionalForAppointmentDetailSchema>;

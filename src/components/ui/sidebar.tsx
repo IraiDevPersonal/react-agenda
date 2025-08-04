@@ -1,4 +1,4 @@
-import { CalendarIcon, FileIcon, UsersIcon } from "lucide-react";
+import { BookUserIcon, CalendarIcon, UsersIcon } from "lucide-react";
 import { NavLink } from "react-router";
 
 import { NavUser } from "@/app/user/components/nav-user";
@@ -10,7 +10,7 @@ import { For } from "../for";
 const PATHS = [
   { href: ROUTES.agenda, label: "Mi agenda", icon: <CalendarIcon size={20} /> },
   { href: ROUTES.patients, label: "Pacientes", icon: <UsersIcon size={20} /> },
-  { href: ROUTES.reports, label: "Informes", icon: <FileIcon size={20} /> },
+  { href: ROUTES.professionals, label: "Profesionales", icon: <BookUserIcon size={20} /> },
 ];
 
 export function Sidebar() {

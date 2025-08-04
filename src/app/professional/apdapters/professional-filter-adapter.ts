@@ -15,7 +15,7 @@ function mapper(item: any): ProfessionalOption {
   };
 }
 
-function validate(item: any) {
+function validateProfessionalForFilters(item: any) {
   try {
     const data = mapper(item);
     return ProfessionalOptionSchema.parse(data);
@@ -25,6 +25,4 @@ function validate(item: any) {
   }
 }
 
-export const ProfessionalFilterAdapter = {
-  httpResponse: (data: any) => safeArray(data).map(validate),
-};
+export const professionalForFiltersHttpResponse = (data: any) => safeArray(data).map(validateProfessionalForFilters);

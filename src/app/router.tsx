@@ -7,6 +7,9 @@ import Layout from "./layout";
 import CreatePatientPage from "./patient/pages/create-patient-page";
 import PatientPage from "./patient/pages/patient-page";
 import UpdatePatientPage from "./patient/pages/update-patient-page";
+import CreateProfessionalPage from "./professional/pages/create-professional-page";
+import ProfessionalPage from "./professional/pages/professional-page";
+import UpdateProfessionalPage from "./professional/pages/update-professional-page";
 
 const router = createBrowserRouter([{
   path: ROUTES.root,
@@ -36,6 +39,23 @@ const router = createBrowserRouter([{
         {
           path: ":patientUid",
           element: <UpdatePatientPage />,
+        },
+      ],
+    },
+    {
+      path: ROUTES.professionals,
+      children: [
+        {
+          index: true,
+          element: <ProfessionalPage />,
+        },
+        {
+          path: ROUTES.actions.create,
+          element: <CreateProfessionalPage />,
+        },
+        {
+          path: ":professionalUid",
+          element: <UpdateProfessionalPage />,
         },
       ],
     },

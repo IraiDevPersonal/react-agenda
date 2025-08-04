@@ -1,9 +1,9 @@
 import { TextItem } from "@/components/ui/text-item";
 
-import type { ProfessionalForAppointmentDetail } from "../models/professional-model";
+import type { ProfessionalForAppointmentDetailModel } from "../models/professional-for-appointment-detail-model";
 
 type Props = {
-  professional: ProfessionalForAppointmentDetail;
+  professional: ProfessionalForAppointmentDetailModel;
 };
 
 function ProfessionalAppointmentInfo({ professional }: Props) {
