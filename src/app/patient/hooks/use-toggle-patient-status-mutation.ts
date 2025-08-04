@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import { notification } from "@/lib/notification";
 
 import type { TogglePatientStatusServiceFn } from "../models/patient-action-model";
 
@@ -20,7 +20,7 @@ export function useTogglePatientStatusMutation({ toggleStatusService, successFn 
     mutationFn: (uid: string) => toggleStatusService(uid),
     onSuccess: ({ message }) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.patients] });
-      toast.success(message);
+      notification.success(message);
       successFn();
     },
   });

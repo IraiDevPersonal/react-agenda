@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { checkRut, prettifyRut } from "react-rut-formatter";
-import { toast } from "sonner";
 
 import type { SearchProps } from "@/components/ui/search";
 
 import { Search } from "@/components/ui/search";
+import { notification } from "@/lib/notification";
 
 type Props = SearchProps;
 
@@ -21,7 +21,7 @@ function SearchPatient({ defaultValue, onSearch, ...props }: Props) {
       <Search
         onSearch={() => {
           if (!checkRut(value)) {
-            toast.warning("El rut ingresado es invalido");
+            notification.warning("El rut ingresado es invalido");
             return;
           }
 
