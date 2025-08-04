@@ -5,7 +5,7 @@ import { SelectNative } from "@/components/ui/select-native";
 import { Table } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
-import { usePatientFilterController } from "../hooks/use-patient-filter-controller";
+import { usePatientFiltersController } from "../hooks/use-patient-filters-controller";
 import { useQueryPatients } from "../hooks/use-query-patients";
 import { PatientStatus } from "../models";
 import { PatientQuery } from "../queries/patient-queries";
@@ -15,7 +15,7 @@ function PatientTableHeader() {
   const {
     filters,
     onFilter,
-  } = usePatientFilterController();
+  } = usePatientFiltersController();
   const { isFetching } = useQueryPatients({
     patientQueryOptions: PatientQuery.getPatientLoaderState,
   });

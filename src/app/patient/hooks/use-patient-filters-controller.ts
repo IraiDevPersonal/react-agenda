@@ -1,19 +1,25 @@
 import { useQueryClient } from "@tanstack/react-query";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import { pagination } from "@/lib/utils";
 
+import { PatientQuery } from "../queries/patient-queries";
 import { usePatientFilters } from "./use-patient-filters";
+import { useQueryPatients } from "./use-query-patients";
 
-export function usePatientFilterController() {
+export function usePatientFiltersController() {
   const queryClient = useQueryClient();
   const { filters, onFilter } = usePatientFilters();
+  const { data } = useQueryPatients({ patientQueryOptions: PatientQuery.getPatientMetaData });
 
   const handleClearAllFilters = () => {
     onFilter({
-      rut: null,
+      status: null,
       email: null,
       name: null,
-      status: null,
+      rut: null,
+      limit: 10,
+      page: 1,
     });
   };
 
@@ -24,15 +30,8 @@ export function usePatientFilterController() {
   };
 
   const handlePageChange = (action: "next" | "prev") => {
-    const currentPage = filters.page ?? 1;
-    if (currentPage === 1 && action === "prev")
-      return;
-    if (currentPage === 13 && action === "next")
-      return;
-
-    onFilter({
-      page: action === "next" ? currentPage + 1 : currentPage - 1,
-    });
+    const page = pagination(action, data?.page || 1, data?.pages || 1);
+    onFilter({ page });
   };
 
   return {

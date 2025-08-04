@@ -2,7 +2,7 @@ import type { UseMutationOptions } from "@tanstack/react-query";
 
 import { queryOptions } from "@tanstack/react-query";
 
-import type { StringifyObject, TQueryKey } from "@/lib/types/global-types";
+import type { TQueryKey } from "@/lib/types/global-types";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
@@ -11,14 +11,14 @@ import type { PatientResponseModel } from "../models/patient-model";
 
 import { PatientServices } from "../services/patient-services";
 
-function genericOptions(filters: StringifyObject<PatientFilters>) {
+function genericOptions(filters: PatientFilters) {
   return queryOptions({
     queryKey: [QUERY_KEYS.patients, filters] as TQueryKey,
     queryFn: () => PatientServices.getAll(filters),
   });
 }
 
-function getAll(filters: StringifyObject<PatientFilters>) {
+function getAll(filters: PatientFilters) {
   return queryOptions({
     ...genericOptions(filters),
     staleTime({ state }) {
@@ -28,22 +28,21 @@ function getAll(filters: StringifyObject<PatientFilters>) {
   });
 }
 
-function getTotalPatients(filters: StringifyObject<PatientFilters>) {
+function getTotalPatients(filters: PatientFilters) {
   return queryOptions({
     ...genericOptions(filters),
     select: data => data.total,
   });
 }
 
-function getPatientLoaderState(filters: StringifyObject<PatientFilters>) {
+function getPatientLoaderState(filters: PatientFilters) {
   return queryOptions({
     ...genericOptions(filters),
     select: () => null,
-
   });
 }
 
-function getPatientMetaData(filters: StringifyObject<PatientFilters>) {
+function getPatientMetaData(filters: PatientFilters) {
   return queryOptions({
     ...genericOptions(filters),
     select: (data) => {

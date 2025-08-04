@@ -36,6 +36,11 @@ export type GenericQueryOptions<
   TData = TQueryFnData,
 > = {
   [K in TKeyName]: (
-    filters: StringifyObject<TFilters>
+    filters: TFilters
   ) => UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>;
 };
+
+export type FiltersWithPagination<T extends object = object> = {
+  page: number;
+  limit: number;
+} & T;

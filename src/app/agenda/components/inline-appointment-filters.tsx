@@ -10,7 +10,7 @@ import { DefaultTooltip } from "@/components/ui/tooltip";
 import { WeekPicker } from "@/components/ui/week-picker";
 import { dateHelper } from "@/lib/date-helper";
 
-import { useAppointmentFilterController } from "../hooks/use-appointment-filter-controller";
+import { useAppointmentFiltersController } from "../hooks/use-appointment-filters-controller";
 import { useAppointmentFilterOptions } from "../hooks/use-appointment-filter-options";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 
@@ -22,7 +22,7 @@ function InlineAppointmentFilters() {
     handleSelectToday,
     handleViewModeChange,
     handleClearAllFilters,
-  } = useAppointmentFilterController();
+  } = useAppointmentFiltersController();
   const { professionOptions, filteredProfessionals } = useAppointmentFilterOptions();
   const { filters } = useAppointmentFilters();
 

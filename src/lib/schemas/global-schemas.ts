@@ -6,3 +6,16 @@ export const OptionSchema = z.object({
 });
 
 export const UidScheme = z.uuid("uid invalido");
+export const IdSchema = z.number("ID debe ser numerico")
+  .positive("ID debe ser positivo")
+  .int("ID debe ser un numero entero");
+
+export function ResponseWithPaginationSchema(data: z.ZodTypeAny) {
+  return z.object({
+    data: z.array(data),
+    total: z.number(),
+    page: z.number(),
+    pages: z.number(),
+    limit: z.number(),
+  });
+}

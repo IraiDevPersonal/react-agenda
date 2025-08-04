@@ -10,7 +10,7 @@ import type { AppointmentViewMode } from "../models";
 import { useAppointmentUiStore } from "../stores/appointment-ui-store";
 import { useAppointmentFilters } from "./use-appointment-filters";
 
-export function useAppointmentFilterController() {
+export function useAppointmentFiltersController() {
   const viewMode = useAppointmentUiStore(s => s.viewMode);
   const onViewModeChange = useAppointmentUiStore(s => s.onViewModeChange);
 

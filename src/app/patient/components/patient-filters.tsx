@@ -3,7 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon, FunnelXIcon, RotateCcwIcon } from "l
 import { Button } from "@/components/ui/button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import { usePatientFilterController } from "../hooks/use-patient-filter-controller";
+import { usePatientFiltersController } from "../hooks/use-patient-filters-controller";
 import { useQueryPatients } from "../hooks/use-query-patients";
 import { PatientQuery } from "../queries/patient-queries";
 
@@ -12,7 +12,7 @@ function PatientFilters() {
     handleRefresh,
     handlePageChange,
     handleClearAllFilters,
-  } = usePatientFilterController();
+  } = usePatientFiltersController();
   const { data } = useQueryPatients({ patientQueryOptions: PatientQuery.getPatientMetaData });
   const { page, pages } = {
     page: data?.page || 1,

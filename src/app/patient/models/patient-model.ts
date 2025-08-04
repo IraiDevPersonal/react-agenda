@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { UidScheme } from "@/lib/schemas/global-schemas";
+import { ResponseWithPaginationSchema, UidScheme } from "@/lib/schemas/global-schemas";
 import { PersonSchemas } from "@/lib/schemas/person-schemas";
 
 export const PatientSchema = z.object({
@@ -15,13 +15,7 @@ export const PatientSchema = z.object({
   avatar_image: PersonSchemas.AvatarImage,
 });
 
-export const PatientResponseSchema = z.object({
-  data: z.array(PatientSchema),
-  total: z.number(),
-  page: z.number(),
-  pages: z.number(),
-  limit: z.number(),
-});
+export const PatientResponseSchema = ResponseWithPaginationSchema(PatientSchema);
 
 export type PatientModel = z.infer<typeof PatientSchema>;
 export type PatientResponseModel = z.infer<typeof PatientResponseSchema>;

@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import type { GenericQueryOptions } from "@/lib/types/global-types";
 
-import { parseAsParams } from "@/lib/utils";
+import { parseQuery } from "@/lib/utils";
 
-import type { AppointmentFilters } from "../models/appointment-model";
+import type { AppointmentFilters } from "../models";
 
 import { useAppointmentFilters } from "./use-appointment-filters";
 
@@ -22,5 +22,5 @@ export function useQueryAppointments<
   TData
 >) {
   const { filters } = useAppointmentFilters();
-  return useQuery(appointmentQueryOptions(parseAsParams(filters)));
+  return useQuery(appointmentQueryOptions(parseQuery(filters)));
 }

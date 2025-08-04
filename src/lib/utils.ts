@@ -7,7 +7,7 @@ import { twMerge } from "tailwind-merge";
 
 import { DateFormat, dateHelper } from "./date-helper";
 
-function parseDateAsString<T extends object>(value: T) {
+function parseDateToString<T extends object>(value: T) {
   return Object.entries(value).reduce((acc, [key, value]) => {
     if (value instanceof Date) {
       acc[key as keyof T] = dateHelper.format(value, DateFormat["yyyy-MM-dd"]);
@@ -16,16 +16,16 @@ function parseDateAsString<T extends object>(value: T) {
       acc[key as keyof T] = value;
     }
     return acc;
-  }, {} as Record<keyof T, any>);
+  }, {} as Record<keyof T, string | number | boolean | null | undefined>);
 }
 
-export function parseAsParams<T extends object>(value: T): Record<keyof T, string> {
+export function parseQuery<T extends object>(value: T) {
   if (!value) {
-    return {} as Record<keyof T, string>;
+    return {} as Record<keyof T, any>;
   }
 
-  const query = queryString.stringify(
-    parseDateAsString(value),
+  const stringifyQuery = queryString.stringify(
+    parseDateToString(value),
     {
       arrayFormat: "bracket-separator",
       arrayFormatSeparator: ",",
@@ -34,7 +34,15 @@ export function parseAsParams<T extends object>(value: T): Record<keyof T, strin
     },
   );
 
-  return queryString.parse(query) as Record<keyof T, string>;
+  return queryString.parse(
+    stringifyQuery,
+    {
+      arrayFormat: "bracket-separator",
+      arrayFormatSeparator: ",",
+      parseBooleans: true,
+      parseNumbers: true,
+    },
+  ) as Record<keyof T, any>;
 }
 
 export function cn(...inputs: ClassValue[]) {
@@ -66,4 +74,11 @@ export function isValidPhoneNumber(value: string) {
 
 export function sleep(ms: number = 2000) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function pagination(action: "next" | "prev", currentPage: number, totalPages: number) {
+  if (currentPage >= 1 && action === "prev")
+    return currentPage - 1;
+  if (currentPage <= totalPages && action === "next")
+    return currentPage + 1;
 }
