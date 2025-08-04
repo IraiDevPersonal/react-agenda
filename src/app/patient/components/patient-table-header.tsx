@@ -13,9 +13,7 @@ import { SearchPatient } from "./search-patient";
 
 function PatientTableHeader() {
   const {
-    handelSearch,
     filters,
-    rutRef,
     onFilter,
   } = usePatientFilterController();
   const { isFetching } = useQueryPatients({
@@ -37,10 +35,10 @@ function PatientTableHeader() {
 
       <Table.HeaderFilterRow>
         <Table.Head>
-          <SearchPatient
+          <Search
             autoFocus
             classNames={{ input: "table-filter-field" }}
-            onSearch={v => handelSearch(v, "name")}
+            onSearch={v => onFilter({ name: v })}
             placeholder="Buscar por nombre..."
             defaultValue={filters.name ?? ""}
             searchIconSize={16}
@@ -48,20 +46,19 @@ function PatientTableHeader() {
           />
         </Table.Head>
         <Table.Head>
-          <Search
+          <SearchPatient
             classNames={{ input: "table-filter-field", root: "w-36" }}
-            onSearch={v => handelSearch(v, "rut")}
+            onSearch={v => onFilter({ rut: v })}
             defaultValue={filters.rut ?? ""}
             placeholder="Buscar por rut..."
             searchIconSize={16}
             key={filters.rut}
-            ref={rutRef}
           />
         </Table.Head>
         <Table.Head>
           <Search
             classNames={{ input: "table-filter-field" }}
-            onSearch={v => handelSearch(v, "email")}
+            onSearch={v => onFilter({ email: v })}
             placeholder="Buscar por correo..."
             defaultValue={filters.email ?? ""}
             searchIconSize={16}

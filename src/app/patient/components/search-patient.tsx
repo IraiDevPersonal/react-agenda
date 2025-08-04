@@ -1,26 +1,27 @@
-import type { SearchProps } from "@/components/ui/search";
-
-import { Search } from "@/components/ui/search";
 import { useState } from "react";
 import { prettifyRut } from "react-rut-formatter";
 
+import type { SearchProps } from "@/components/ui/search";
+
+import { Search } from "@/components/ui/search";
+
 type Props = SearchProps;
 
-function SearchPatient({ defaultValue, onSearch, ...props}: Props) {
-  const [rut, setRut] = useState<string>(defaultValue?.toString() ?? "")
+function SearchPatient({ defaultValue, onSearch, ...props }: Props) {
+  const [value, setValue] = useState<string>(defaultValue?.toString() ?? "");
 
-  const handleRutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setRut(value.length <= 3 ? value : prettifyRut(value));
+    setValue(value.length <= 3 ? value : prettifyRut(value));
   };
 
   return (
     <>
       <Search
-        value={rut}
+        onSearch={() => onSearch(value)}
         placeholder="Buscar por rut..."
-        onChange={handleRutChange}
-        onSearch={() => onSearch(rut)}
+        onChange={handleChange}
+        value={value}
         {...props}
       />
     </>

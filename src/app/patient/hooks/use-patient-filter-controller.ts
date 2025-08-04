@@ -1,31 +1,12 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useRef } from "react";
-import { prettifyRut } from "react-rut-formatter";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
 import { usePatientFilters } from "./use-patient-filters";
 
-type FieldName = "rut" | "name" | "email";
-
 export function usePatientFilterController() {
   const queryClient = useQueryClient();
   const { filters, onFilter } = usePatientFilters();
-  const rutRef = useRef<HTMLInputElement>(null);
-
-  const handelSearch = (v: string, fieldName: FieldName) => {
-    if (fieldName !== "rut") {
-      onFilter({ [fieldName]: v });
-      return;
-    }
-
-    if (!rutRef.current)
-      return;
-
-    const rut = prettifyRut(v);
-    rutRef.current.value = rut;
-    onFilter({ rut });
-  };
 
   const handleClearAllFilters = () => {
     onFilter({
@@ -55,9 +36,7 @@ export function usePatientFilterController() {
   };
 
   return {
-    handelSearch,
     filters,
-    rutRef,
     onFilter,
     handleRefresh,
     handlePageChange,
