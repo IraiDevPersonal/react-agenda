@@ -20,7 +20,7 @@ function SearchPatient({ defaultValue, onSearch, ...props }: Props) {
     <>
       <Search
         onSearch={() => {
-          if (!checkRut(value)) {
+          if (value.length > 0 && !checkRut(value)) {
             notification.warning("El rut ingresado es invalido");
             return;
           }
