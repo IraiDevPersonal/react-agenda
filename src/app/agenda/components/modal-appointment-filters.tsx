@@ -114,6 +114,7 @@ function ModalAppointmentFilters() {
             </FieldWrapper>
 
             <SearchPatient
+              autoFocus
               label="Rut paciente"
               key={filters.patient_rut}
               classNames={{ input: "w-full" }}

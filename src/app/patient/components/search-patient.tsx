@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { prettifyRut } from "react-rut-formatter";
+import { checkRut, prettifyRut } from "react-rut-formatter";
+import { toast } from "sonner";
 
 import type { SearchProps } from "@/components/ui/search";
 
@@ -18,7 +19,14 @@ function SearchPatient({ defaultValue, onSearch, ...props }: Props) {
   return (
     <>
       <Search
-        onSearch={() => onSearch(value)}
+        onSearch={() => {
+          if (!checkRut(value)) {
+            toast.warning("El rut ingresado es invalido");
+            return;
+          }
+
+          onSearch(value);
+        }}
         placeholder="Buscar por rut..."
         onChange={handleChange}
         value={value}

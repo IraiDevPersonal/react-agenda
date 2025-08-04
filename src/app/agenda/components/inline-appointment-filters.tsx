@@ -29,6 +29,7 @@ function InlineAppointmentFilters() {
   return (
     <>
       <SearchPatient
+        autoFocus
         label="Rut paciente"
         key={filters.patient_rut}
         defaultValue={filters.patient_rut ?? ""}
