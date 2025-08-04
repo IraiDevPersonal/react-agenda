@@ -1,10 +1,10 @@
 import { FunnelXIcon, RotateCcwIcon } from "lucide-react";
 
+import { SearchPatient } from "@/app/patient/components/search-patient";
 import { Show } from "@/components/show";
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/date-picker";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
-import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 import { WeekPicker } from "@/components/ui/week-picker";
@@ -17,25 +17,22 @@ import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 function InlineAppointmentFilters() {
   const {
     viewMode,
-    searchRef,
     onFilter,
-    handelSearch,
+    handleRefresh,
     handleSelectToday,
     handleViewModeChange,
     handleClearAllFilters,
-    handleRefresh: handleRefreshAppointments,
   } = useAppointmentFilterController();
   const { professionOptions, filteredProfessionals } = useAppointmentFilterOptions();
   const { filters } = useAppointmentFilters();
 
   return (
     <>
-      <Search
-        ref={searchRef}
+      <SearchPatient
         label="Rut paciente"
-        onSearch={handelSearch}
         key={filters.patient_rut}
         defaultValue={filters.patient_rut ?? ""}
+        onSearch={v => onFilter({ patient_rut: v })}
       />
 
       <FieldWrapper label="Profesión">
@@ -98,7 +95,7 @@ function InlineAppointmentFilters() {
       />
 
       <DefaultTooltip content="Refrescar datos">
-        <Button variant="outline" size="icon" onClick={handleRefreshAppointments}>
+        <Button variant="outline" size="icon" onClick={handleRefresh}>
           <RotateCcwIcon size={20} />
         </Button>
       </DefaultTooltip>

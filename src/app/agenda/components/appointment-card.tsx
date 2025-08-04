@@ -48,7 +48,7 @@ function AppointmentCard({ appointment }: Props) {
         isAvailable
           ? (
               <>
-                <span className="font-semibold text-center">Disponible</span>
+                <h6 className="font-semibold text-center">Disponible</h6>
                 <small className="text-center text-muted-foreground">
                   {generateAppoinmentDatetimeText(appointment)}
                 </small>
@@ -56,7 +56,7 @@ function AppointmentCard({ appointment }: Props) {
             )
           : (
               <>
-                <span className="font-semibold text-base capitalize">{appointment.patient_name}</span>
+                <h6 className="font-semibold text-base capitalize pe-7">{appointment.patient_name}</h6>
                 <span className="text-muted-foreground">{appointment.patient_rut}</span>
                 <span className="text-muted-foreground">{appointment.patient_phone}</span>
                 <small className="text-muted-foreground">

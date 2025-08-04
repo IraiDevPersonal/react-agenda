@@ -1,8 +1,6 @@
 import type { ChangeEvent } from "react";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { useRef } from "react";
-import { prettifyRut } from "react-rut-formatter";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { dateHelper } from "@/lib/date-helper";
@@ -18,7 +16,6 @@ export function useAppointmentFilterController() {
 
   const { invalidateQueries } = useQueryClient();
   const { filters, onFilter } = useAppointmentFilters();
-  const searchRef = useRef<HTMLInputElement>(null);
 
   const handleSelectToday = (viewMode: AppointmentViewMode) => {
     const currentDate = dateHelper.createDate(filters.date);
@@ -43,12 +40,6 @@ export function useAppointmentFilterController() {
     onViewModeChange(viewMode);
   };
 
-  const handelSearch = (v: string) => {
-    const rut = prettifyRut(v);
-    searchRef.current!.value = rut;
-    onFilter({ patient_rut: rut });
-  };
-
   const handleClearAllFilters = () => {
     onFilter({
       professional_id: null,
@@ -58,28 +49,19 @@ export function useAppointmentFilterController() {
       date_to: null,
       date: null,
     });
-    searchRef.current!.value = "";
   };
 
   const handleRefresh = () => {
-    invalidateQueries({
-      queryKey: [QUERY_KEYS.appointments],
-    });
-
-    invalidateQueries({
-      queryKey: [QUERY_KEYS.prefessionals],
-    });
-
-    invalidateQueries({
-      queryKey: [QUERY_KEYS.prefessions],
-    });
+    Promise.all([
+      invalidateQueries({ queryKey: [QUERY_KEYS.appointments] }),
+      invalidateQueries({ queryKey: [QUERY_KEYS.prefessionals] }),
+      invalidateQueries({ queryKey: [QUERY_KEYS.prefessions] }),
+    ]);
   };
 
   return {
     viewMode,
-    searchRef,
     onFilter,
-    handelSearch,
     handleRefresh,
     handleSelectToday,
     handleViewModeChange,
