@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import type { GenericQueryOptions } from "@/lib/types/global-types";
+import type { GenericUseQueryOptions } from "@/lib/types/global-types";
 
 import { parseQuery } from "@/lib/utils";
 
@@ -14,7 +14,7 @@ export function useQueryAppointments<
   TData = TQueryFnData,
 >({
   appointmentQueryOptions,
-}: GenericQueryOptions<
+}: GenericUseQueryOptions<
   "appointmentQueryOptions",
   Partial<AppointmentFilters>,
   TQueryFnData,

@@ -28,7 +28,7 @@ export type DateWeekRange = StrictRequired<DayPickerDateRange>;
 
 export type TQueryKey = (string | object)[];
 
-export type GenericQueryOptions<
+export type GenericUseQueryOptions<
   TKeyName extends string,
   TFilters extends object,
   TQueryFnData = unknown,
