@@ -8,7 +8,7 @@ import { PatientServices } from "../services/patient-services";
 import { Patient } from "./patient";
 import { PatientSkeleton } from "./patient-skeleton";
 
-function UpdatePatientPresenter() {
+function UpdatePatientView() {
   const { patientUid = "" } = useParams();
   const {
     refetch,
@@ -52,4 +52,4 @@ function UpdatePatientPresenter() {
   );
 }
 
-export { UpdatePatientPresenter };
+export { UpdatePatientView };

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import type { GenericQueryOptions } from "@/lib/types/global-types";
+import type { GenericUseQueryOptions } from "@/lib/types/global-types";
 
 import { parseQuery } from "@/lib/utils";
 
@@ -12,7 +12,7 @@ export function useQueryPatients<
   TQueryFnData = unknown,
   TError = unknown,
   TData = TQueryFnData,
->({ patientQueryOptions }: GenericQueryOptions<
+>({ patientQueryOptions }: GenericUseQueryOptions<
   "patientQueryOptions",
   PatientFilters,
   TQueryFnData,

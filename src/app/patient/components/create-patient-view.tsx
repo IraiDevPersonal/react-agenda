@@ -1,7 +1,7 @@
 import { PatientServices } from "../services/patient-services";
 import { Patient } from "./patient";
 
-function CreatePatientPresenter() {
+function CreatePatientView() {
   return (
     <>
       <Patient upsertService={PatientServices.create}>
@@ -11,4 +11,4 @@ function CreatePatientPresenter() {
   );
 }
 
-export { CreatePatientPresenter };
+export { CreatePatientView };

@@ -1,13 +1,13 @@
 import PageLayout from "@/components/page-layout";
 import { Main } from "@/components/ui/main";
 
-import { UpdatePatientPresenter } from "../components/update-patient-presenter";
+import { UpdatePatientView } from "../components/update-patient-view";
 
 function UpdatePatientPage() {
   return (
     <PageLayout title="Editar Paciente">
       <Main className="flex-col justify-center items-center">
-        <UpdatePatientPresenter />
+        <UpdatePatientView />
       </Main>
     </PageLayout>
   );
