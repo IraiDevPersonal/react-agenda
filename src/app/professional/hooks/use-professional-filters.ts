@@ -12,6 +12,7 @@ function parser(): UseQueryStatesKeysMap<ProfessionalFilters> {
     profession_id: parseAsInteger,
     last_names: parseAsString,
     names: parseAsString,
+    email: parseAsString,
     rut: parseAsString,
     id: parseAsInteger,
   };

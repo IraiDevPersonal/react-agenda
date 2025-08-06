@@ -29,13 +29,12 @@ export type DateWeekRange = StrictRequired<DayPickerDateRange>;
 export type TQueryKey = (string | object)[];
 
 export type GenericUseQueryOptions<
-  TKeyName extends string,
   TFilters extends object,
   TQueryFnData = unknown,
   TError = unknown,
   TData = TQueryFnData,
 > = {
-  [K in TKeyName]: (
+  queryOptions: (
     filters: TFilters
   ) => UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>;
 };

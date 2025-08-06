@@ -13,7 +13,7 @@ import { WeekGridHeader } from "./week-grid-header";
 
 function WeekAppointmentsView() {
   const { data } = useQueryAppointments({
-    appointmentQueryOptions: ({
+    queryOptions: ({
       date,
       date_from,
       ...filters

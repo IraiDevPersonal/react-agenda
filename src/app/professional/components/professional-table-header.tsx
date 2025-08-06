@@ -1,23 +1,23 @@
 import { Loader2Icon } from "lucide-react";
 
+import { SearchPatient } from "@/app/patient/components/search-patient";
+import { PatientStatus } from "@/app/patient/models";
 import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
 import { Table } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
-import { usePatientFiltersController } from "../hooks/use-patient-filters-controller";
-import { useQueryPatients } from "../hooks/use-query-patients";
-import { PatientStatus } from "../models";
-import { PatientQuery } from "../queries/patient-queries";
-import { SearchPatient } from "./search-patient";
+import { useProfessionalFiltersController } from "../hooks/use-professional-filters-controller";
+import { useQueryProfessionals } from "../hooks/use-query-professionals";
+import { ProfessionalQuery } from "../queries/professional-queries";
 
-function PatientTableHeader() {
+function ProfessionalTableHeader() {
   const {
     filters,
     onFilter,
-  } = usePatientFiltersController();
-  const { isFetching } = useQueryPatients({
-    queryOptions: PatientQuery.getPatientLoaderState,
+  } = useProfessionalFiltersController();
+  const { isFetching } = useQueryProfessionals({
+    queryOptions: ProfessionalQuery.getLoaderState,
   });
 
   return (
@@ -27,6 +27,7 @@ function PatientTableHeader() {
         <Table.Head className="w-[147px]">Rut</Table.Head>
         <Table.Head className="w-[229px]">Correo</Table.Head>
         <Table.Head className="w-[206px]">Dirección</Table.Head>
+        <Table.Head className="w-[136px]">Profesiones</Table.Head>
         <Table.Head className="w-[136px]">Estado</Table.Head>
         <Table.Head className="w-[98px]">
           {isFetching && <Loader2Icon size={20} className="animate-spin" />}
@@ -38,11 +39,11 @@ function PatientTableHeader() {
           <Search
             autoFocus
             classNames={{ input: "table-filter-field" }}
-            onSearch={v => onFilter({ name: v })}
+            onSearch={v => onFilter({ names: v })}
             placeholder="Buscar por nombre..."
-            defaultValue={filters.name ?? ""}
+            defaultValue={filters.names ?? ""}
             searchIconSize={16}
-            key={filters.name}
+            key={filters.names}
           />
         </Table.Head>
         <Table.Head>
@@ -66,15 +67,16 @@ function PatientTableHeader() {
           />
         </Table.Head>
         <Table.Head></Table.Head>
+        <Table.Head></Table.Head>
         <Table.Head>
           <SelectNative
             options={[
               { value: PatientStatus.ACTIVE, label: "Habilitados" },
               { value: PatientStatus.INACTIVE, label: "Deshabilitados" },
             ]}
-            onChange={e => onFilter({ status: e.target.value })}
+            // onChange={e => onFilter({ status: e.target.value })}
             className={cn("table-filter-field", "max-w-max")}
-            value={filters.status ?? ""}
+            // value={filters.status ?? ""}
           />
         </Table.Head>
         <Table.Head></Table.Head>
@@ -83,4 +85,4 @@ function PatientTableHeader() {
   );
 }
 
-export { PatientTableHeader };
+export { ProfessionalTableHeader };

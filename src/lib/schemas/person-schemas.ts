@@ -29,7 +29,8 @@ const AddressScheme = z.string()
 
 const AvatarImageScheme = z.url("url de avatar invalida")
   .optional()
-  .nullable();
+  .nullable()
+  .default(null);
 
 export const PersonSchemas = {
   AvatarImage: AvatarImageScheme,

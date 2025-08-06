@@ -24,13 +24,14 @@ function validateRoleOrProfession(item: any) {
 function validate(item: any) {
   try {
     const data: ProfessionalModel = {
-      user_id: item.user_id,
       uid: item.uid,
       rut: item.rut,
       names: item.names,
       last_names: item.last_names,
       phone: item.phone,
       email: item.email,
+      avatar_image: item.avatar_image,
+      address: item.address ?? "dirección indeterminada",
       role: validateRoleOrProfession(item.role),
       professions: safeArray(item.professions).map(validateRoleOrProfession),
     };

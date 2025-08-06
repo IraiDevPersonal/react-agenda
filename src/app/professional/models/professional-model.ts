@@ -9,7 +9,6 @@ export const ProfessionalRoleOrProfessionSchema = z.object({
 });
 
 export const ProfessionalSchema = z.object({
-  user_id: IdSchema,
   uid: UidScheme,
   rut: PersonSchemas.Rut,
   names: PersonSchemas.Names,
@@ -17,6 +16,8 @@ export const ProfessionalSchema = z.object({
   phone: PersonSchemas.Phone,
   email: PersonSchemas.Email,
   role: ProfessionalRoleOrProfessionSchema,
+  avatar_image: PersonSchemas.AvatarImage,
+  address: PersonSchemas.Address,
   professions: z.array(ProfessionalRoleOrProfessionSchema),
 });
 

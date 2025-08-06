@@ -21,7 +21,7 @@ function TogglePatientStatusButton({ patient }: Props) {
     successFn: () => setOpen(false),
   });
   const { isFetching: isPatientFetching } = useQueryPatients({
-    patientQueryOptions: PatientQuery.getPatientLoaderState,
+    queryOptions: PatientQuery.getPatientLoaderState,
   });
 
   return (

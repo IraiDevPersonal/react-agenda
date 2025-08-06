@@ -12,7 +12,7 @@ import { AppointmentListFallback } from "./appointment-list-fallback";
 
 function DayAppointmentsView() {
   const { data } = useQueryAppointments({
-    appointmentQueryOptions: ({
+    queryOptions: ({
       date_from,
       date_to,
       ...filters

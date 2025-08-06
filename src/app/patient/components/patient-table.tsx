@@ -12,7 +12,7 @@ function PatientTable() {
     error,
     refetch,
   } = useQueryPatients({
-    patientQueryOptions: PatientQuery.getPatientLoaderState,
+    queryOptions: PatientQuery.getPatientLoaderState,
   });
 
   if (isLoadingError) {

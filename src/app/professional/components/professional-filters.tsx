@@ -3,17 +3,17 @@ import { ChevronLeftIcon, ChevronRightIcon, FunnelXIcon, RotateCcwIcon } from "l
 import { Button } from "@/components/ui/button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import { usePatientFiltersController } from "../hooks/use-patient-filters-controller";
-import { useQueryPatients } from "../hooks/use-query-patients";
-import { PatientQuery } from "../queries/patient-queries";
+import { useProfessionalFiltersController } from "../hooks/use-professional-filters-controller";
+import { useQueryProfessionals } from "../hooks/use-query-professionals";
+import { ProfessionalQuery } from "../queries/professional-queries";
 
-function PatientFilters() {
+function ProfessionalFilters() {
   const {
     handleRefresh,
     handlePageChange,
     handleClearAllFilters,
-  } = usePatientFiltersController();
-  const { data } = useQueryPatients({ queryOptions: PatientQuery.getPatientMetaData });
+  } = useProfessionalFiltersController();
+  const { data } = useQueryProfessionals({ queryOptions: ProfessionalQuery.getMetaData });
   const { page, pages } = {
     page: data?.page || 1,
     pages: data?.pages || 1,
@@ -67,4 +67,4 @@ function PatientFilters() {
   );
 }
 
-export { PatientFilters };
+export { ProfessionalFilters };

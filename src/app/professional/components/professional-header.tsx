@@ -5,28 +5,28 @@ import { buttonVariants } from "@/components/ui/button";
 import { PageTitle } from "@/components/ui/page-title";
 import { ROUTES } from "@/lib/constants/routes";
 
-import { useQueryPatients } from "../hooks/use-query-patients";
-import { PatientQuery } from "../queries/patient-queries";
-import { PatientFilters } from "./patient-filters";
+import { useQueryProfessionals } from "../hooks/use-query-professionals";
+import { ProfessionalQuery } from "../queries/professional-queries";
+import { ProfessionalFilters } from "./professional-filters";
 
-function PatientHeader() {
+function ProfessionalHeader() {
   const {
-    data: totalPatients = 0,
-  } = useQueryPatients({
-    queryOptions: PatientQuery.getTotalPatients,
+    data: total = 0,
+  } = useQueryProfessionals({
+    queryOptions: ProfessionalQuery.getTotal,
   });
 
   return (
     <header className="flex flex-col lg:flex-row items-center justify-between w-full">
       <PageTitle>
-        {totalPatients}
+        {total}
         {" "}
-        Paciente
-        {totalPatients > 1 ? "s" : ""}
+        Profesional
+        {total > 1 ? "es" : ""}
       </PageTitle>
 
       <div className="flex items-center gap-2">
-        <PatientFilters />
+        <ProfessionalFilters />
 
         <Link
           to={{
@@ -34,7 +34,7 @@ function PatientHeader() {
           }}
           className={buttonVariants({ className: "w-9 lg:w-max" })}
         >
-          <span className="hidden lg:inline">Crear Paciente</span>
+          <span className="hidden lg:inline">Crear Profesional</span>
           <PlusIcon size={20} />
         </Link>
       </div>
@@ -42,4 +42,4 @@ function PatientHeader() {
   );
 }
 
-export { PatientHeader };
+export { ProfessionalHeader };

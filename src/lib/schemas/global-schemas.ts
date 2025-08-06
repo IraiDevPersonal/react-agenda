@@ -10,9 +10,9 @@ export const IdSchema = z.number("ID debe ser numerico")
   .positive("ID debe ser positivo")
   .int("ID debe ser un numero entero");
 
-export function ResponseWithPaginationSchema(data: z.ZodTypeAny) {
+export function ResponseWithPaginationSchema<T extends z.ZodType>(dataScheme: T) {
   return z.object({
-    data: z.array(data),
+    data: z.array(dataScheme),
     total: z.number(),
     page: z.number(),
     pages: z.number(),

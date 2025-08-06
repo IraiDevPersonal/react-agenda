@@ -1,22 +1,16 @@
-import type { Nullable } from "nuqs";
-
 import { useQueryClient } from "@tanstack/react-query";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { pagination } from "@/lib/utils";
 
-import type { ProfessionalFilters } from "../models";
-
 import { ProfessionalQuery } from "../queries/professional-queries";
-import { useQueryProfesionals } from "./use-query-professionals";
+import { useProfessionalFilters } from "./use-professional-filters";
+import { useQueryProfessionals } from "./use-query-professionals";
 
-type Props = {
-  onFilter: (values: Partial<Nullable<ProfessionalFilters>>) => void;
-};
-
-export function useProfessionalFiltersController({ onFilter }: Props) {
+export function useProfessionalFiltersController() {
   const queryClient = useQueryClient();
-  const { data } = useQueryProfesionals({ professionalQueryOptions: ProfessionalQuery.getMetaData });
+  const { filters, onFilter } = useProfessionalFilters();
+  const { data } = useQueryProfessionals({ queryOptions: ProfessionalQuery.getMetaData });
 
   const handleClearAllFilters = () => {
     onFilter({
@@ -42,6 +36,8 @@ export function useProfessionalFiltersController({ onFilter }: Props) {
   };
 
   return {
+    filters,
+    onFilter,
     handleRefresh,
     handlePageChange,
     handleClearAllFilters,

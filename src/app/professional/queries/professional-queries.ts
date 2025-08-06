@@ -39,6 +39,20 @@ function getProfessionalsMetaData(filters: ProfessionalFilters) {
   });
 }
 
+function getTotal(filters: ProfessionalFilters) {
+  return queryOptions({
+    ...genericOptions(filters),
+    select: data => data.total,
+  });
+}
+
+function getLoaderState(filters: ProfessionalFilters) {
+  return queryOptions({
+    ...genericOptions(filters),
+    select: () => null,
+  });
+}
+
 function getProfessionalForFilter() {
   return queryOptions({
     refetchOnWindowFocus: false,
@@ -49,6 +63,8 @@ function getProfessionalForFilter() {
 
 export const ProfessionalQuery = {
   getAll,
+  getTotal,
+  getLoaderState,
   forFitlers: getProfessionalForFilter,
   getMetaData: getProfessionalsMetaData,
 };

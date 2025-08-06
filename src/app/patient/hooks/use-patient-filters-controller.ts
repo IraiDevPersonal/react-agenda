@@ -10,7 +10,7 @@ import { useQueryPatients } from "./use-query-patients";
 export function usePatientFiltersController() {
   const queryClient = useQueryClient();
   const { filters, onFilter } = usePatientFilters();
-  const { data } = useQueryPatients({ patientQueryOptions: PatientQuery.getPatientMetaData });
+  const { data } = useQueryPatients({ queryOptions: PatientQuery.getPatientMetaData });
 
   const handleClearAllFilters = () => {
     onFilter({

@@ -13,14 +13,13 @@ export function useQueryAppointments<
   TError = unknown,
   TData = TQueryFnData,
 >({
-  appointmentQueryOptions,
+  queryOptions,
 }: GenericUseQueryOptions<
-  "appointmentQueryOptions",
   Partial<AppointmentFilters>,
   TQueryFnData,
   TError,
   TData
 >) {
   const { filters } = useAppointmentFilters();
-  return useQuery(appointmentQueryOptions(parseQuery(filters)));
+  return useQuery(queryOptions(parseQuery(filters)));
 }

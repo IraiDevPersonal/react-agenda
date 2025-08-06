@@ -1,23 +1,23 @@
 import { PencilIcon, PhoneIcon } from "lucide-react";
 import { Link } from "react-router";
 
+import { PatientAvatar } from "@/app/patient/components/patient-avatar";
+import { PatientBadge } from "@/app/patient/components/patient-badge";
 import { For } from "@/components/for";
 import { buttonVariants } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";
 import { formatPhoneNumber } from "@/lib/utils";
 
-import { useQueryPatients } from "../hooks/use-query-patients";
-import { PatientQuery } from "../queries/patient-queries";
-import { PatientAvatar } from "./patient-avatar";
-import { PatientBadge } from "./patient-badge";
-import { TogglePatientStatusButton } from "./toggle-patient-status-button";
+import { useQueryProfessionals } from "../hooks/use-query-professionals";
+import { ProfessionalQuery } from "../queries/professional-queries";
+import { ToggleProfessionalStatusButton } from "./toggle-patient-status-button";
 
-function PatientTableRows() {
+function ProfessionalTableRows() {
   const {
     isFetching,
     data,
-  } = useQueryPatients({
-    queryOptions: PatientQuery.getAll,
+  } = useQueryProfessionals({
+    queryOptions: ProfessionalQuery.getAll,
   });
 
   return (
@@ -26,49 +26,52 @@ function PatientTableRows() {
       fallback={(
         <Table.Row>
           <Table.Cell colSpan={6} align="center" className="italic text-muted-foreground">
-            {isFetching ? "Cargando pacientes..." : "No hay pacientes"}
+            {isFetching ? "Cargando professionales..." : "No hay professionales"}
           </Table.Cell>
         </Table.Row>
       )}
     >
-      {patient => (
-        <Table.Row key={patient.uid}>
+      {professional => (
+        <Table.Row key={professional.uid}>
           <Table.Cell>
             <div className="flex items-center gap-3">
               <PatientAvatar
-                avatarUrl={patient.avatar_image}
-                lastNames={patient.last_names}
-                names={patient.names}
+                avatarUrl={professional.avatar_image}
+                lastNames={professional.last_names}
+                names={professional.names}
               />
               <div>
                 <span className="font-medium block capitalize">
-                  {patient.names}
+                  {professional.names}
                   {" "}
-                  {patient.last_names}
+                  {professional.last_names}
                 </span>
               </div>
             </div>
           </Table.Cell>
-          <Table.Cell>{patient.rut}</Table.Cell>
+          <Table.Cell>{professional.rut}</Table.Cell>
           <Table.Cell>
             <div>
-              <span className="block font-semibold">{patient.email}</span>
+              <span className="block font-semibold">{professional.email}</span>
               <div
                 className="mt-1 text-muted-foreground text-xs flex items-baseline-last gap-x-1"
               >
                 <PhoneIcon size={12} />
-                <span>{formatPhoneNumber(patient.phone)}</span>
+                <span>{formatPhoneNumber(professional.phone)}</span>
               </div>
             </div>
           </Table.Cell>
-          <Table.Cell>{patient.address}</Table.Cell>
+          <Table.Cell>{professional.address}</Table.Cell>
+          <Table.Cell>
+            {professional.professions.map(p => p.name).join(", ")}
+          </Table.Cell>
           <Table.Cell align="center">
-            <PatientBadge isDeleted={patient.is_deleted} />
+            <PatientBadge isDeleted={false} />
           </Table.Cell>
           <Table.Cell>
             <div className="flex items-center justify-end">
               <Link
-                to={{ pathname: patient.uid }}
+                to={{ pathname: professional.uid }}
                 data-disabled={isFetching}
                 className={buttonVariants({
                   className: isFetching
@@ -80,7 +83,7 @@ function PatientTableRows() {
               >
                 <PencilIcon />
               </Link>
-              <TogglePatientStatusButton patient={patient} />
+              <ToggleProfessionalStatusButton professional={professional} />
             </div>
           </Table.Cell>
         </Table.Row>
@@ -89,4 +92,4 @@ function PatientTableRows() {
   );
 }
 
-export { PatientTableRows };
+export { ProfessionalTableRows };

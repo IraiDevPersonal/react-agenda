@@ -12,13 +12,12 @@ export function useQueryPatients<
   TQueryFnData = unknown,
   TError = unknown,
   TData = TQueryFnData,
->({ patientQueryOptions }: GenericUseQueryOptions<
-  "patientQueryOptions",
+>({ queryOptions }: GenericUseQueryOptions<
   PatientFilters,
   TQueryFnData,
   TError,
   TData
 >) {
   const { filters } = usePatientFilters();
-  return useQuery(patientQueryOptions(parseQuery(filters)));
+  return useQuery(queryOptions(parseQuery(filters)));
 }
