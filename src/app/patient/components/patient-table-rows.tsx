@@ -8,8 +8,8 @@ import { formatPhoneNumber } from "@/lib/utils";
 
 import { useQueryPatients } from "../hooks/use-query-patients";
 import { PatientQuery } from "../queries/patient-queries";
-import { PatientAvatar } from "./patient-avatar";
-import { PatientBadge } from "./patient-badge";
+import { UserAvatar } from "../../user/components/user-avatar";
+import { UserStatusBadge } from "../../user/components/user-status-badge";
 import { TogglePatientStatusButton } from "./toggle-patient-status-button";
 
 function PatientTableRows() {
@@ -35,7 +35,7 @@ function PatientTableRows() {
         <Table.Row key={patient.uid}>
           <Table.Cell>
             <div className="flex items-center gap-3">
-              <PatientAvatar
+              <UserAvatar
                 avatarUrl={patient.avatar_image}
                 lastNames={patient.last_names}
                 names={patient.names}
@@ -63,7 +63,7 @@ function PatientTableRows() {
           </Table.Cell>
           <Table.Cell>{patient.address}</Table.Cell>
           <Table.Cell align="center">
-            <PatientBadge isDeleted={patient.is_deleted} />
+            <UserStatusBadge isDeleted={patient.is_deleted} />
           </Table.Cell>
           <Table.Cell>
             <div className="flex items-center justify-end">

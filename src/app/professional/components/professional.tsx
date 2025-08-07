@@ -1,38 +1,41 @@
 import type { PropsWithChildren } from "react";
 
-import { useIsMutating } from "@tanstack/react-query";
 import { Loader2Icon, UserIcon } from "lucide-react";
 import { useMemo } from "react";
 
+import { UserStatusBadge } from "@/app/user/components/user-status-badge";
 import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import type { UpsertPatientServiceFn } from "../models/patient-action-model";
-import type { PatientModel } from "../models/patient-model";
+import type { ProfessionalModel } from "../models/professional-model";
 
-import { UserStatusBadge } from "../../user/components/user-status-badge";
-import { PatientCompoundContext, usePatientCompoundContext } from "../context/patient-compound-context";
-import { PatientQuery } from "../queries/patient-queries";
-import { PatientForm } from "./patient-form";
+import { ProfessionalCompoundContext, useProfessionalCompoundContext } from "../context/professional-compound-context";
+import { ProfessionalForm } from "./professional-form";
+import { ProfessionalProfessionsControl } from "./professional-professions-control";
 
 type Props = PropsWithChildren<{
-  upsertService: UpsertPatientServiceFn;
-  patient?: PatientModel | undefined;
+  // upsertService: UpsertProfessionalServiceFn;
+  professional?: ProfessionalModel | undefined;
 }>;
 
-function Patient({ children, patient, upsertService }: Props) {
-  const value = useMemo(() => ({ patient }), [patient]);
+function Professional({ children, professional }: Props) {
+  const value = useMemo(() => ({ professional }), [professional]);
 
   return (
-    <PatientCompoundContext value={value}>
-      <Patient.Wrapper>
+    <ProfessionalCompoundContext value={value}>
+      <Professional.Wrapper>
         {children}
-        <Patient.FormWrapper>
-          <PatientForm upsertService={upsertService} patient={patient} />
-        </Patient.FormWrapper>
-      </Patient.Wrapper>
-    </PatientCompoundContext>
+        <Professional.FormWrapper>
+          <ProfessionalForm
+          // upsertService={upsertService}
+            professional={professional}
+          >
+            <ProfessionalProfessionsControl />
+          </ProfessionalForm>
+        </Professional.FormWrapper>
+      </Professional.Wrapper>
+    </ProfessionalCompoundContext>
   );
 }
 
@@ -62,48 +65,48 @@ function ProfessionalFormWrapper({ children }: PropsWithChildren) {
   );
 }
 
-function PatientData({ children }: PropsWithChildren) {
-  const { patient } = usePatientCompoundContext();
+function ProfessionalData({ children }: PropsWithChildren) {
+  const { professional } = useProfessionalCompoundContext();
   return (
-    <Patient.DataWrapper>
+    <Professional.DataWrapper>
       {children}
       <h5
         className="text-2xl font-semibold capitalize text-center max-w-52 md:max-w-96 xl:max-w-full mt-4 md:mt-8"
       >
-        {patient?.names}
+        {professional?.names}
         {" "}
-        {patient?.last_names}
+        {professional?.last_names}
         .
       </h5>
       <div className="flex items-center gap-1">
         <span
           className="max-w-48 truncate block text-muted-foreground"
-          title={`id usuario: ${patient?.uid}`}
+          title="id usuario:"
         >
-          {patient?.uid}
+          {professional?.uid}
         </span>
         <DefaultTooltip content="Copiar ID de usuario">
-          <CopyButton value={patient?.uid ?? ""} />
+          <CopyButton value={professional?.uid ?? ""} />
         </DefaultTooltip>
       </div>
-      <UserStatusBadge isDeleted={patient?.is_deleted ?? false} />
-    </Patient.DataWrapper>
+      <UserStatusBadge isDeleted={false} />
+    </Professional.DataWrapper>
   );
 }
 
-function PatientImage({ showCaption }: { showCaption?: boolean }) {
-  const { patient } = usePatientCompoundContext();
-  // TODO: para identificar cuando estoy realizando una mutacion en otro componente mediante el mutationKey
-  const isPending = Boolean(useIsMutating({
-    ...PatientQuery.upsert(),
-  }));
+function ProfessionalImage({ showCaption }: { showCaption?: boolean }) {
+  const { professional } = useProfessionalCompoundContext();
+  const isPending = false;
+  // const isPending = Boolean(useIsMutating({
+  //   ...ProfessionalQuery.upsert(),
+  // }));
 
   return (
     <div>
       <Avatar className="size-52 lg:size-72">
         <Avatar.Image
-          src={patient?.avatar_image ?? ""}
-          alt="Patient Avatar"
+          src={professional?.avatar_image ?? ""}
+          alt="Professional Avatar"
         />
         <Avatar.Fallback className={isPending ? "animate-pulse" : ""}>
           <UserIcon size={80} className="text-muted-foreground" />
@@ -130,10 +133,10 @@ function PatientImage({ showCaption }: { showCaption?: boolean }) {
   );
 }
 
-Patient.Data = PatientData;
-Patient.Image = PatientImage;
-Patient.Wrapper = ProfessionalWrapper;
-Patient.DataWrapper = ProfessionalDataWrapper;
-Patient.FormWrapper = ProfessionalFormWrapper;
+Professional.Data = ProfessionalData;
+Professional.Image = ProfessionalImage;
+Professional.Wrapper = ProfessionalWrapper;
+Professional.DataWrapper = ProfessionalDataWrapper;
+Professional.FormWrapper = ProfessionalFormWrapper;
 
-export { Patient };
+export { Professional };

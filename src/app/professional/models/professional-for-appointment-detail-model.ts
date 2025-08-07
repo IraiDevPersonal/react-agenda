@@ -1,9 +1,9 @@
 import { z } from "zod";
 
-import { PersonSchemas } from "@/lib/schemas/person-schemas";
+import { PersonSchema } from "@/lib/schemas/person-schemas";
 
 export const ProfessionalForAppointmentDetailSchema = z.object({
-  fullname: PersonSchemas.FullName,
+  fullname: PersonSchema.FullName,
   professions: z.string().array(),
   pay_methods: z.string().array(),
   confirm_methods: z.string().array(),

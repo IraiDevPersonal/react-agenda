@@ -1,10 +1,10 @@
 import { AgendaApi } from "@/api/agenda-api";
 
-import { ProfessionFilterAdapter } from "../apdapters/profession-filter-adapter";
+import { ProfessionForFiltersAdapter } from "../apdapters/profession-for-filters-adapter";
 
 async function getProfessionForFilters() {
-  const { data } = await AgendaApi.get("/professions/to-filter");
-  return ProfessionFilterAdapter.httpResponse(data);
+  const { data } = await AgendaApi.get("/professions/for-filter");
+  return ProfessionForFiltersAdapter.httpResponse(data);
 }
 
 export const ProfessionServices = {

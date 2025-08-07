@@ -1,7 +1,7 @@
 import z from "zod";
 
 import { UidScheme } from "@/lib/schemas/global-schemas";
-import { PersonSchemas } from "@/lib/schemas/person-schemas";
+import { PersonSchema } from "@/lib/schemas/person-schemas";
 
 import { AppointmentStatusScheme } from ".";
 
@@ -10,10 +10,10 @@ export const AppointmentSchema = z.object({
   date: z.string(),
   time_from: z.string(),
   time_to: z.string(),
-  patient_name: PersonSchemas.FullName,
-  patient_rut: PersonSchemas.Rut,
-  patient_phone: PersonSchemas.Phone,
-  professional_name: PersonSchemas.FullName,
+  patient_name: PersonSchema.FullName,
+  patient_rut: PersonSchema.Rut,
+  patient_phone: PersonSchema.Phone,
+  professional_name: PersonSchema.FullName,
   professions: z.string().array(),
   appointment_status: AppointmentStatusScheme,
 });

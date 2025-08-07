@@ -4,7 +4,7 @@ type Props = {
   isDeleted: boolean;
 };
 
-function PatientBadge({ isDeleted }: Props) {
+function UserStatusBadge({ isDeleted }: Props) {
   return (
     <Badge variant={isDeleted ? "cancelled" : "confirmed"}>
       {isDeleted ? "Deshabilitado" : "Habilitado"}
@@ -12,4 +12,4 @@ function PatientBadge({ isDeleted }: Props) {
   );
 }
 
-export { PatientBadge };
+export { UserStatusBadge };

@@ -30,7 +30,7 @@ function PatientForm({ patient, upsertService }: Props) {
       className="grid grid-cols-2 gap-4 items-end w-full [&>div]:col-span-2"
       onSubmit={mutation.mutate}
     >
-      <h5 className="text-lg font-semibold col-span-2">Datos paciente:</h5>
+      <h5 className="text-lg font-semibold col-span-2">Datos del paciente:</h5>
 
       <FieldWrapper label="Rut" classNames={{ root: "!col-span-1" }}>
         <RutInput

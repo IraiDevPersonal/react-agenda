@@ -1,6 +1,6 @@
 import { Avatar } from "@/components/ui/avatar";
 
-import type { PatientModel } from "../models/patient-model";
+import type { PatientModel } from "../../patient/models/patient-model";
 
 type Props = {
   avatarUrl: PatientModel["avatar_image"];
@@ -8,7 +8,7 @@ type Props = {
   lastNames: PatientModel["last_names"];
 };
 
-function PatientAvatar({ avatarUrl, lastNames, names }: Props) {
+function UserAvatar({ avatarUrl, lastNames, names }: Props) {
   return (
     <>
       <Avatar className="size-9">
@@ -25,4 +25,4 @@ function PatientAvatar({ avatarUrl, lastNames, names }: Props) {
   );
 }
 
-export { PatientAvatar };
+export { UserAvatar };

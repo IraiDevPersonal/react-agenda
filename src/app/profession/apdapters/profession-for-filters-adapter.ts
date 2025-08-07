@@ -17,6 +17,6 @@ function validate(item: any) {
   }
 }
 
-export const ProfessionFilterAdapter = {
+export const ProfessionForFiltersAdapter = {
   httpResponse: (data: any) => safeArray(data).map(validate),
 };

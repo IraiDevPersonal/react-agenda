@@ -53,10 +53,20 @@ function getLoaderState(filters: ProfessionalFilters) {
   });
 }
 
+function getDetail(uid: string) {
+  return queryOptions({
+    queryKey: [QUERY_KEYS.prefessionals, QUERY_KEYS.generic.detail, uid] as TQueryKey,
+    queryFn: () => ProfessionalServices.getDetail(uid),
+    refetchOnWindowFocus: false,
+    throwOnError: false,
+    retry: 0,
+  });
+}
+
 function getProfessionalForFilter() {
   return queryOptions({
     refetchOnWindowFocus: false,
-    queryKey: [QUERY_KEYS.prefessionals, "to-filter"] as TQueryKey,
+    queryKey: [QUERY_KEYS.prefessionals, "for-filter"] as TQueryKey,
     queryFn: () => ProfessionalServices.getProfessionalForFilters(),
   });
 }
@@ -64,6 +74,7 @@ function getProfessionalForFilter() {
 export const ProfessionalQuery = {
   getAll,
   getTotal,
+  getDetail,
   getLoaderState,
   forFitlers: getProfessionalForFilter,
   getMetaData: getProfessionalsMetaData,

@@ -4,6 +4,7 @@ import { safeArray } from "@/lib/utils";
 import type { ProfessionalModel, ProfessionalProfessionModel, ProfessionalResponseModel } from "../models/professional-model";
 
 import { ProfessionalResponseSchema, ProfessionalRoleOrProfessionSchema, ProfessionalSchema } from "../models/professional-model";
+import { validateProfessionalDetailResponse } from "./professional-detail-adapter";
 import { professionalForFiltersHttpResponse } from "./professional-filter-adapter";
 import { validateProfessionalForAppointmentDetail } from "./professional-for-appointment-detail-adapter";
 
@@ -31,7 +32,7 @@ function validate(item: any) {
       phone: item.phone,
       email: item.email,
       avatar_image: item.avatar_image,
-      address: item.address ?? "dirección indeterminada",
+      address: item.address,
       role: validateRoleOrProfession(item.role),
       professions: safeArray(item.professions).map(validateRoleOrProfession),
     };
@@ -65,4 +66,5 @@ export const ProfessionalAdapter = {
   professionalForFiltersHttpResponse,
   validateProfessionalForAppointmentDetail,
   httpResponse: validateProfessionalRepsonse,
+  detailHttpResponse: validateProfessionalDetailResponse,
 };

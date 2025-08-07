@@ -1,8 +1,8 @@
 import { PencilIcon, PhoneIcon } from "lucide-react";
 import { Link } from "react-router";
 
-import { PatientAvatar } from "@/app/patient/components/patient-avatar";
-import { PatientBadge } from "@/app/patient/components/patient-badge";
+import { UserAvatar } from "@/app/user/components/user-avatar";
+import { UserStatusBadge } from "@/app/user/components/user-status-badge";
 import { For } from "@/components/for";
 import { buttonVariants } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";
@@ -35,7 +35,7 @@ function ProfessionalTableRows() {
         <Table.Row key={professional.uid}>
           <Table.Cell>
             <div className="flex items-center gap-3">
-              <PatientAvatar
+              <UserAvatar
                 avatarUrl={professional.avatar_image}
                 lastNames={professional.last_names}
                 names={professional.names}
@@ -66,7 +66,7 @@ function ProfessionalTableRows() {
             {professional.professions.map(p => p.name).join(", ")}
           </Table.Cell>
           <Table.Cell align="center">
-            <PatientBadge isDeleted={false} />
+            <UserStatusBadge isDeleted={false} />
           </Table.Cell>
           <Table.Cell>
             <div className="flex items-center justify-end">

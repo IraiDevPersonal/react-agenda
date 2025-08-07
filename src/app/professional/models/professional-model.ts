@@ -1,7 +1,7 @@
 import z from "zod";
 
 import { IdSchema, ResponseWithPaginationSchema, UidScheme } from "@/lib/schemas/global-schemas";
-import { PersonSchemas } from "@/lib/schemas/person-schemas";
+import { PersonSchema } from "@/lib/schemas/person-schemas";
 
 export const ProfessionalRoleOrProfessionSchema = z.object({
   id: IdSchema,
@@ -10,14 +10,14 @@ export const ProfessionalRoleOrProfessionSchema = z.object({
 
 export const ProfessionalSchema = z.object({
   uid: UidScheme,
-  rut: PersonSchemas.Rut,
-  names: PersonSchemas.Names,
-  last_names: PersonSchemas.FullName,
-  phone: PersonSchemas.Phone,
-  email: PersonSchemas.Email,
+  rut: PersonSchema.Rut,
+  names: PersonSchema.Names,
+  last_names: PersonSchema.FullName,
+  phone: PersonSchema.Phone,
+  email: PersonSchema.Email,
   role: ProfessionalRoleOrProfessionSchema,
-  avatar_image: PersonSchemas.AvatarImage,
-  address: PersonSchemas.Address,
+  avatar_image: PersonSchema.AvatarImage,
+  address: PersonSchema.Address,
   professions: z.array(ProfessionalRoleOrProfessionSchema),
 });
 

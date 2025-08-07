@@ -1,18 +1,18 @@
 import z from "zod";
 
 import { ResponseWithPaginationSchema, UidScheme } from "@/lib/schemas/global-schemas";
-import { PersonSchemas } from "@/lib/schemas/person-schemas";
+import { PersonSchema } from "@/lib/schemas/person-schemas";
 
 export const PatientSchema = z.object({
   uid: UidScheme,
-  rut: PersonSchemas.Rut,
-  names: PersonSchemas.Names,
-  last_names: PersonSchemas.LastNames,
-  email: PersonSchemas.Email,
-  phone: PersonSchemas.Phone,
-  address: PersonSchemas.Address,
+  rut: PersonSchema.Rut,
+  names: PersonSchema.Names,
+  last_names: PersonSchema.LastNames,
+  email: PersonSchema.Email,
+  phone: PersonSchema.Phone,
+  address: PersonSchema.Address,
   is_deleted: z.boolean().optional().default(false),
-  avatar_image: PersonSchemas.AvatarImage,
+  avatar_image: PersonSchema.AvatarImage,
 });
 
 export const PatientResponseSchema = ResponseWithPaginationSchema(PatientSchema);
