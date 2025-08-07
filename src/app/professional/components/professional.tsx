@@ -13,6 +13,7 @@ import type { ProfessionalModel } from "../models/professional-model";
 import { ProfessionalCompoundContext, useProfessionalCompoundContext } from "../context/professional-compound-context";
 import { ProfessionalForm } from "./professional-form";
 import { ProfessionalProfessionsControl } from "./professional-professions-control";
+import { ProfessionalRolesControl } from "./professional-roles-control";
 
 type Props = PropsWithChildren<{
   // upsertService: UpsertProfessionalServiceFn;
@@ -31,6 +32,7 @@ function Professional({ children, professional }: Props) {
           // upsertService={upsertService}
             professional={professional}
           >
+            <ProfessionalRolesControl />
             <ProfessionalProfessionsControl />
           </ProfessionalForm>
         </Professional.FormWrapper>

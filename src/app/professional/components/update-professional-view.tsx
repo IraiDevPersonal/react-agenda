@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 
 import { ErrorMessage } from "@/components/ui/error-message";
 
-import { ProfessionalQuery } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries/professional-queries";
 import { Professional } from "./professional";
 import { ProfessionalSkeleton } from "./professional-skeleton";
 
@@ -17,7 +17,7 @@ function UpdateProfessionalView() {
     isError,
     error,
   }
-  = useQuery(ProfessionalQuery.getDetail(professionalUid));
+  = useQuery(ProfessionalQueries.getDetail(professionalUid));
 
   if (isError) {
     return <ErrorMessage onRetry={refetch}>{error.message}</ErrorMessage>;

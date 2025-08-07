@@ -6,14 +6,14 @@ import { PageTitle } from "@/components/ui/page-title";
 import { ROUTES } from "@/lib/constants/routes";
 
 import { useQueryPatients } from "../hooks/use-query-patients";
-import { PatientQuery } from "../queries/patient-queries";
+import { PatientQueries } from "../queries/patient-queries";
 import { PatientFilters } from "./patient-filters";
 
 function PatientHeader() {
   const {
     data: totalPatients = 0,
   } = useQueryPatients({
-    queryOptions: PatientQuery.getTotalPatients,
+    queryOptions: PatientQueries.getTotalPatients,
   });
 
   return (

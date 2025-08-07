@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 
 import { ErrorMessage } from "@/components/ui/error-message";
 
-import { PatientQuery } from "../queries/patient-queries";
+import { PatientQueries } from "../queries/patient-queries";
 import { PatientServices } from "../services/patient-services";
 import { Patient } from "./patient";
 import { PatientSkeleton } from "./patient-skeleton";
@@ -18,7 +18,7 @@ function UpdatePatientView() {
     isError,
     error,
   }
-  = useQuery(PatientQuery.getDetail(patientUid));
+  = useQuery(PatientQueries.getDetail(patientUid));
 
   if (isError) {
     return <ErrorMessage onRetry={refetch}>{error.message}</ErrorMessage>;

@@ -5,7 +5,7 @@ import { ButtonWithAlertDialog } from "@/components/ui/button-with-alert-button"
 import type { ProfessionalModel } from "../models/professional-model";
 
 import { useQueryProfessionals } from "../hooks/use-query-professionals";
-import { ProfessionalQuery } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries/professional-queries";
 
 type Props = {
   professional: ProfessionalModel;
@@ -18,7 +18,7 @@ function ToggleProfessionalStatusButton({ professional }: Props) {
   //   successFn: () => setOpen(false),
   // });
   const { isFetching: isPatientFetching } = useQueryProfessionals({
-    queryOptions: ProfessionalQuery.getLoaderState,
+    queryOptions: ProfessionalQueries.getLoaderState,
   });
 
   return (

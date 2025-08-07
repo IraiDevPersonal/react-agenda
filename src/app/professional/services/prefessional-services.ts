@@ -6,6 +6,7 @@ import type { ProfessionalFilters } from "../models";
 import { ProfessionalAdapter } from "../apdapters/professional-adapter";
 
 async function getAll(filters: ProfessionalFilters) {
+  await sleep();
   const { data } = await AgendaApi.get("/professionals", { params: filters });
   return ProfessionalAdapter.httpResponse(data);
 }

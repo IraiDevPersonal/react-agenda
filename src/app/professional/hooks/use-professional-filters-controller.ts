@@ -3,14 +3,14 @@ import { useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { pagination } from "@/lib/utils";
 
-import { ProfessionalQuery } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries/professional-queries";
 import { useProfessionalFilters } from "./use-professional-filters";
 import { useQueryProfessionals } from "./use-query-professionals";
 
 export function useProfessionalFiltersController() {
   const queryClient = useQueryClient();
   const { filters, onFilter } = useProfessionalFilters();
-  const { data } = useQueryProfessionals({ queryOptions: ProfessionalQuery.getMetaData });
+  const { data } = useQueryProfessionals({ queryOptions: ProfessionalQueries.getMetaData });
 
   const handleClearAllFilters = () => {
     onFilter({

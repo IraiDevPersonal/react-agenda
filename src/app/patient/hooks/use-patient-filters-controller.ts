@@ -3,14 +3,14 @@ import { useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { pagination } from "@/lib/utils";
 
-import { PatientQuery } from "../queries/patient-queries";
+import { PatientQueries } from "../queries/patient-queries";
 import { usePatientFilters } from "./use-patient-filters";
 import { useQueryPatients } from "./use-query-patients";
 
 export function usePatientFiltersController() {
   const queryClient = useQueryClient();
   const { filters, onFilter } = usePatientFilters();
-  const { data } = useQueryPatients({ queryOptions: PatientQuery.getPatientMetaData });
+  const { data } = useQueryPatients({ queryOptions: PatientQueries.getPatientMetaData });
 
   const handleClearAllFilters = () => {
     onFilter({

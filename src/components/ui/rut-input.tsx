@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { prettifyRut } from "react-rut-formatter";
 
-import type { InputProps } from "./ui/input";
+import type { InputProps } from "./input";
 
-import { Input } from "./ui/input";
+import { Input } from "./input";
 
 function RutInput({ disabled, defaultValue, ...props }: InputProps) {
   const [rutValue, setRutValue] = useState(defaultValue ?? "");

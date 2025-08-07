@@ -4,7 +4,7 @@ import { DateFormat, dateHelper } from "@/lib/date-helper";
 
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 import { useQueryAppointments } from "../hooks/use-query-appointments";
-import { AppointmentQuery } from "../queries/appointment-queries";
+import { AppointmentQueries } from "../queries/appointment-queries";
 import { showAppointmentInDay } from "../utils";
 import { AppointmentCard } from "./appointment-card";
 import { AppointmentGrid as Grid } from "./appointment-grid";
@@ -17,7 +17,7 @@ function DayAppointmentsView() {
       date_to,
       ...filters
     }) =>
-      AppointmentQuery.getAll({ ...filters }),
+      AppointmentQueries.getAll({ ...filters }),
   });
   const { filters } = useAppointmentFilters();
 

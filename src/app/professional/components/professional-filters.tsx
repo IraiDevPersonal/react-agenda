@@ -5,7 +5,7 @@ import { DefaultTooltip } from "@/components/ui/tooltip";
 
 import { useProfessionalFiltersController } from "../hooks/use-professional-filters-controller";
 import { useQueryProfessionals } from "../hooks/use-query-professionals";
-import { ProfessionalQuery } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries/professional-queries";
 
 function ProfessionalFilters() {
   const {
@@ -13,7 +13,7 @@ function ProfessionalFilters() {
     handlePageChange,
     handleClearAllFilters,
   } = useProfessionalFiltersController();
-  const { data } = useQueryProfessionals({ queryOptions: ProfessionalQuery.getMetaData });
+  const { data } = useQueryProfessionals({ queryOptions: ProfessionalQueries.getMetaData });
   const { page, pages } = {
     page: data?.page || 1,
     pages: data?.pages || 1,

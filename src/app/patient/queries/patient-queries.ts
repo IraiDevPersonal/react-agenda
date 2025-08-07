@@ -77,7 +77,7 @@ function toggleStatus(): Pick<UseMutationOptions, "mutationKey"> {
   };
 }
 
-export const PatientQuery = {
+export const PatientQueries = {
   upsert,
   getAll,
   getDetail,

@@ -6,14 +6,14 @@ import { PageTitle } from "@/components/ui/page-title";
 import { ROUTES } from "@/lib/constants/routes";
 
 import { useQueryProfessionals } from "../hooks/use-query-professionals";
-import { ProfessionalQuery } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries/professional-queries";
 import { ProfessionalFilters } from "./professional-filters";
 
 function ProfessionalHeader() {
   const {
     data: total = 0,
   } = useQueryProfessionals({
-    queryOptions: ProfessionalQuery.getTotal,
+    queryOptions: ProfessionalQueries.getTotal,
   });
 
   return (

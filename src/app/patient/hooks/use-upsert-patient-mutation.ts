@@ -7,7 +7,7 @@ import { notification } from "@/lib/notification";
 import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 
 import { PatientFormSchema } from "../models/patient-form-model";
-import { PatientQuery } from "../queries/patient-queries";
+import { PatientQueries } from "../queries/patient-queries";
 
 type Props = {
   upsertService: UpsertPatientServiceFn;
@@ -23,7 +23,7 @@ export function useUpsertPatientMutation({ upsertService, patientUid }: Props) {
   };
 
   const mutation = useMutation({
-    ...PatientQuery.upsert(),
+    ...PatientQueries.upsert(),
     mutationFn: (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 

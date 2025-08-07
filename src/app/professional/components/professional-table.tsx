@@ -2,7 +2,7 @@ import { ErrorMessage } from "@/components/ui/error-message";
 import { Table } from "@/components/ui/table";
 
 import { useQueryProfessionals } from "../hooks/use-query-professionals";
-import { ProfessionalQuery } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries/professional-queries";
 import { ProfessionalTableHeader } from "./professional-table-header";
 import { ProfessionalTableRows } from "./professional-table-rows";
 
@@ -12,7 +12,7 @@ function ProfessionalTable() {
     error,
     refetch,
   } = useQueryProfessionals({
-    queryOptions: ProfessionalQuery.getLoaderState,
+    queryOptions: ProfessionalQueries.getLoaderState,
   });
 
   if (isLoadingError) {

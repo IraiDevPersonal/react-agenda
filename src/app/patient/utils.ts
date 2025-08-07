@@ -3,7 +3,7 @@ import type { StringifyObject } from "@/lib/types/global-types";
 import type { PatientFilters } from "./models";
 import type { PatientModel, PatientResponseModel } from "./models/patient-model";
 
-import { PatientQuery } from "./queries/patient-queries";
+import { PatientQueries } from "./queries/patient-queries";
 
 function updatePatientCache(old: PatientResponseModel, patient: PatientModel) {
   return {
@@ -14,7 +14,7 @@ function updatePatientCache(old: PatientResponseModel, patient: PatientModel) {
 
 export function setPatientQueryData(params: StringifyObject<PatientFilters>) {
   return {
-    querykey: [...PatientQuery.getAll(params).queryKey],
+    querykey: [...PatientQueries.getAll(params).queryKey],
     updateCache: updatePatientCache,
   };
 }

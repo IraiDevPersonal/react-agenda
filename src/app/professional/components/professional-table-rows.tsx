@@ -6,10 +6,10 @@ import { UserStatusBadge } from "@/app/user/components/user-status-badge";
 import { For } from "@/components/for";
 import { buttonVariants } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";
-import { formatPhoneNumber } from "@/lib/utils";
+import { cn, formatPhoneNumber } from "@/lib/utils";
 
 import { useQueryProfessionals } from "../hooks/use-query-professionals";
-import { ProfessionalQuery } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries/professional-queries";
 import { ToggleProfessionalStatusButton } from "./toggle-patient-status-button";
 
 function ProfessionalTableRows() {
@@ -17,7 +17,7 @@ function ProfessionalTableRows() {
     isFetching,
     data,
   } = useQueryProfessionals({
-    queryOptions: ProfessionalQuery.getAll,
+    queryOptions: ProfessionalQueries.getAll,
   });
 
   return (
@@ -25,7 +25,11 @@ function ProfessionalTableRows() {
       items={(data?.data ?? [])}
       fallback={(
         <Table.Row>
-          <Table.Cell colSpan={6} align="center" className="italic text-muted-foreground">
+          <Table.Cell
+            colSpan={6}
+            align="center"
+            className={cn("italic text-muted-foreground", isFetching && "animate-pulse")}
+          >
             {isFetching ? "Cargando professionales..." : "No hay professionales"}
           </Table.Cell>
         </Table.Row>

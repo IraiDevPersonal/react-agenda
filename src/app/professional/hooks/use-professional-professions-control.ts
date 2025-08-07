@@ -2,7 +2,7 @@ import { useQueryProfessions } from "@/app/profession/hooks/use-query-profession
 import { ProfessionQueries } from "@/app/profession/queries/profession-queries";
 
 import { useProfessionStore } from "../stores/use-professions-store";
-import { useProfessionalProfessionsObserver } from "./use-professional-professions-observer";
+import { useProfessionalObserver } from "./use-professional-observer";
 
 export function useProfessionalProfessionsControl() {
   const professions = useProfessionStore(s => s.professions);
@@ -10,8 +10,9 @@ export function useProfessionalProfessionsControl() {
   const onRemoveProfession = useProfessionStore(s => s.onRemoveProfession);
   const setProfessions = useProfessionStore(s => s.setProfessions);
 
+  useProfessionalObserver({ onSave: ({ professions }) => setProfessions(professions) });
+
   const { data: options = [] } = useQueryProfessions({ queryOptions: ProfessionQueries.forFitlers });
-  useProfessionalProfessionsObserver({ onSave: setProfessions });
 
   const filteredOptions = options.filter(p => !professions.map(sp => sp.id).includes(Number(p.value)));
 

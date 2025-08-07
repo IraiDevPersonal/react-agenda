@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 import { useProfessionalFiltersController } from "../hooks/use-professional-filters-controller";
 import { useQueryProfessionals } from "../hooks/use-query-professionals";
-import { ProfessionalQuery } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries/professional-queries";
 
 function ProfessionalTableHeader() {
   const {
@@ -17,7 +17,7 @@ function ProfessionalTableHeader() {
     onFilter,
   } = useProfessionalFiltersController();
   const { isFetching } = useQueryProfessionals({
-    queryOptions: ProfessionalQuery.getLoaderState,
+    queryOptions: ProfessionalQueries.getLoaderState,
   });
 
   return (

@@ -21,7 +21,7 @@ function ProfessionalSkeletonData({ children }: PropsWithChildren) {
   return (
     <Professional.DataWrapper>
       {children}
-      <Skeleton className="h-9 w-64 mt-3 md:mt-7" />
+      <Skeleton className="h-9 w-52 md:w-96 xl:w-full mt-3 md:mt-7" />
       <Skeleton className="h-8 w-52 mt-1" />
       <Skeleton className="h-8 w-24 mt-1" />
     </Professional.DataWrapper>
@@ -75,6 +75,12 @@ function ProfessionalSkeletonForm() {
         <Skeleton className="h-4 w-16" />
       </div>
 
+      <div className="col-span-2 space-y-2">
+        <Skeleton className="h-4 w-16" />
+        <Skeleton className="h-9 w-full" />
+        <Skeleton className="h-4 w-16" />
+      </div>
+
       <Skeleton className="!col-span-1 h-10 w-full" />
       <Skeleton className="!col-span-1 h-10 w-full" />
     </div>
@@ -86,3 +92,4 @@ ProfessionalSkeleton.Image = ProfessionalSkeletonImage;
 ProfessionalSkeleton.Form = ProfessionalSkeletonForm;
 
 export { ProfessionalSkeleton };
+

@@ -5,7 +5,7 @@ import { DefaultTooltip } from "@/components/ui/tooltip";
 
 import { usePatientFiltersController } from "../hooks/use-patient-filters-controller";
 import { useQueryPatients } from "../hooks/use-query-patients";
-import { PatientQuery } from "../queries/patient-queries";
+import { PatientQueries } from "../queries/patient-queries";
 
 function PatientFilters() {
   const {
@@ -13,7 +13,7 @@ function PatientFilters() {
     handlePageChange,
     handleClearAllFilters,
   } = usePatientFiltersController();
-  const { data } = useQueryPatients({ queryOptions: PatientQuery.getPatientMetaData });
+  const { data } = useQueryPatients({ queryOptions: PatientQueries.getPatientMetaData });
   const { page, pages } = {
     page: data?.page || 1,
     pages: data?.pages || 1,

@@ -4,12 +4,12 @@ import { Link } from "react-router";
 import { For } from "@/components/for";
 import { buttonVariants } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";
-import { formatPhoneNumber } from "@/lib/utils";
+import { cn, formatPhoneNumber } from "@/lib/utils";
 
-import { useQueryPatients } from "../hooks/use-query-patients";
-import { PatientQuery } from "../queries/patient-queries";
 import { UserAvatar } from "../../user/components/user-avatar";
 import { UserStatusBadge } from "../../user/components/user-status-badge";
+import { useQueryPatients } from "../hooks/use-query-patients";
+import { PatientQueries } from "../queries/patient-queries";
 import { TogglePatientStatusButton } from "./toggle-patient-status-button";
 
 function PatientTableRows() {
@@ -17,7 +17,7 @@ function PatientTableRows() {
     isFetching,
     data,
   } = useQueryPatients({
-    queryOptions: PatientQuery.getAll,
+    queryOptions: PatientQueries.getAll,
   });
 
   return (
@@ -25,7 +25,11 @@ function PatientTableRows() {
       items={(data?.data ?? [])}
       fallback={(
         <Table.Row>
-          <Table.Cell colSpan={6} align="center" className="italic text-muted-foreground">
+          <Table.Cell
+            colSpan={6}
+            align="center"
+            className={cn("italic text-muted-foreground", isFetching && "animate-pulse")}
+          >
             {isFetching ? "Cargando pacientes..." : "No hay pacientes"}
           </Table.Cell>
         </Table.Row>

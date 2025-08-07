@@ -4,7 +4,7 @@ import { Show } from "@/components/show";
 import { WEEK_DAYS } from "../constants";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 import { useQueryAppointments } from "../hooks/use-query-appointments";
-import { AppointmentQuery } from "../queries/appointment-queries";
+import { AppointmentQueries } from "../queries/appointment-queries";
 import { showAppointmentInDay } from "../utils";
 import { AppointmentCard } from "./appointment-card";
 import { AppointmentGrid as Grid } from "./appointment-grid";
@@ -18,7 +18,7 @@ function WeekAppointmentsView() {
       date_from,
       ...filters
     }) =>
-      AppointmentQuery.getAll({ ...filters, date: date_from }),
+      AppointmentQueries.getAll({ ...filters, date: date_from }),
   });
   const { filters } = useAppointmentFilters();
 

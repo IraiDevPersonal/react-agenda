@@ -5,7 +5,7 @@ import { notification } from "@/lib/notification";
 
 import type { TogglePatientStatusServiceFn } from "../models/patient-action-model";
 
-import { PatientQuery } from "../queries/patient-queries";
+import { PatientQueries } from "../queries/patient-queries";
 
 type Props = {
   toggleStatusService: TogglePatientStatusServiceFn;
@@ -16,7 +16,7 @@ export function useTogglePatientStatusMutation({ toggleStatusService, successFn 
   const queryClient = useQueryClient();
 
   return useMutation({
-    ...PatientQuery.toggleStatus(),
+    ...PatientQueries.toggleStatus(),
     mutationFn: (uid: string) => toggleStatusService(uid),
     onSuccess: ({ message }) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.patients] });

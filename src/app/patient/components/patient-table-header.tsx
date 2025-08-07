@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { usePatientFiltersController } from "../hooks/use-patient-filters-controller";
 import { useQueryPatients } from "../hooks/use-query-patients";
 import { PatientStatus } from "../models";
-import { PatientQuery } from "../queries/patient-queries";
+import { PatientQueries } from "../queries/patient-queries";
 import { SearchPatient } from "./search-patient";
 
 function PatientTableHeader() {
@@ -17,7 +17,7 @@ function PatientTableHeader() {
     onFilter,
   } = usePatientFiltersController();
   const { isFetching } = useQueryPatients({
-    queryOptions: PatientQuery.getPatientLoaderState,
+    queryOptions: PatientQueries.getPatientLoaderState,
   });
 
   return (

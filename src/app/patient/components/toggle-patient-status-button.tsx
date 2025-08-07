@@ -7,7 +7,7 @@ import type { PatientModel } from "../models/patient-model";
 
 import { useQueryPatients } from "../hooks/use-query-patients";
 import { useTogglePatientStatusMutation } from "../hooks/use-toggle-patient-status-mutation";
-import { PatientQuery } from "../queries/patient-queries";
+import { PatientQueries } from "../queries/patient-queries";
 import { PatientServices } from "../services/patient-services";
 
 type Props = {
@@ -21,7 +21,7 @@ function TogglePatientStatusButton({ patient }: Props) {
     successFn: () => setOpen(false),
   });
   const { isFetching: isPatientFetching } = useQueryPatients({
-    queryOptions: PatientQuery.getPatientLoaderState,
+    queryOptions: PatientQueries.getPatientLoaderState,
   });
 
   return (

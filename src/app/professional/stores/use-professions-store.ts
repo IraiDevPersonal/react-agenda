@@ -3,10 +3,10 @@ import { create } from "zustand";
 import type { ProfessionalProfessionModel } from "../models/professional-model";
 
 type Store = {
-  professions: ProfessionalProfessionModel[];
   setProfessions: (professions: ProfessionalProfessionModel[]) => void;
   onAddProfession: (profession: ProfessionalProfessionModel) => void;
   onRemoveProfession: (id: number) => void;
+  professions: ProfessionalProfessionModel[];
 };
 
 export const useProfessionStore = create<Store>(set => ({

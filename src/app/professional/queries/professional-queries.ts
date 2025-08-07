@@ -71,7 +71,7 @@ function getProfessionalForFilter() {
   });
 }
 
-export const ProfessionalQuery = {
+export const ProfessionalQueries = {
   getAll,
   getTotal,
   getDetail,

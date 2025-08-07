@@ -13,7 +13,7 @@ import type { PatientModel } from "../models/patient-model";
 
 import { UserStatusBadge } from "../../user/components/user-status-badge";
 import { PatientCompoundContext, usePatientCompoundContext } from "../context/patient-compound-context";
-import { PatientQuery } from "../queries/patient-queries";
+import { PatientQueries } from "../queries/patient-queries";
 import { PatientForm } from "./patient-form";
 
 type Props = PropsWithChildren<{
@@ -95,7 +95,7 @@ function PatientImage({ showCaption }: { showCaption?: boolean }) {
   const { patient } = usePatientCompoundContext();
   // TODO: para identificar cuando estoy realizando una mutacion en otro componente mediante el mutationKey
   const isPending = Boolean(useIsMutating({
-    ...PatientQuery.upsert(),
+    ...PatientQueries.upsert(),
   }));
 
   return (
