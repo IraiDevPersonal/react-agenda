@@ -1,6 +1,5 @@
-
-
 import { OptionSelectorControl } from "@/components/ui/option-selector-control";
+
 import { useProfessionalProfessionsControl } from "../hooks/use-professional-professions-control";
 
 function ProfessionalProfessionsControl() {
@@ -24,4 +23,3 @@ function ProfessionalProfessionsControl() {
 }
 
 export { ProfessionalProfessionsControl };
-

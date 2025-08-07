@@ -1,6 +1,6 @@
 import type { Option } from "@/lib/types/global-types";
 
-import { useRolesStore } from "../stores/use-roles-store";
+import { useRolesStore } from "../stores/roles-store";
 import { useProfessionalObserver } from "./use-professional-observer";
 
 export function useProfessionalRolesControl() {

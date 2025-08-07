@@ -1,6 +1,5 @@
-
-
 import { OptionSelectorControl } from "@/components/ui/option-selector-control";
+
 import { useProfessionalRolesControl } from "../hooks/use-professional-roles-control";
 
 function ProfessionalRolesControl() {
@@ -24,4 +23,3 @@ function ProfessionalRolesControl() {
 }
 
 export { ProfessionalRolesControl };
-

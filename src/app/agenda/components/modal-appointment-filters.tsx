@@ -11,9 +11,9 @@ import { DefaultTooltip } from "@/components/ui/tooltip";
 import { WeekPicker } from "@/components/ui/week-picker";
 import { dateHelper } from "@/lib/date-helper";
 
-import { useAppointmentFiltersController } from "../hooks/use-appointment-filters-controller";
 import { useAppointmentFilterOptions } from "../hooks/use-appointment-filter-options";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
+import { useAppointmentFiltersController } from "../hooks/use-appointment-filters-controller";
 
 function ModalAppointmentFilters() {
   const {

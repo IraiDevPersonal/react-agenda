@@ -2,10 +2,10 @@ import type { PropsWithChildren } from "react";
 
 import { useNavigate } from "react-router";
 
-import { RutInput } from "@/components/ui/rut-input";
 import { Button } from "@/components/ui/button";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
+import { RutInput } from "@/components/ui/rut-input";
 
 import type { ProfessionalModel } from "../models/professional-model";
 

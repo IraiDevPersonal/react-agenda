@@ -1,20 +1,22 @@
+import { XIcon } from "lucide-react";
 
-import { Option } from '@/lib/types/global-types'
-import { cn } from '@/lib/utils'
-import { XIcon } from 'lucide-react'
-import { For } from '../for'
-import { Badge } from './badge'
-import { FieldWrapper } from './field-wrapper'
-import { SelectNative } from './select-native'
+import type { Option } from "@/lib/types/global-types";
+
+import { cn } from "@/lib/utils";
+
+import { For } from "../for";
+import { Badge } from "./badge";
+import { FieldWrapper } from "./field-wrapper";
+import { SelectNative } from "./select-native";
 
 type Props = {
-  onAdd: React.ChangeEventHandler<HTMLSelectElement>
-  onRemove: (id: number) => void
-  items: { id: number, name: string }[]
-  emptyPlaceholder: string
-  options: Option[]
-  label: string
-}
+  onAdd: React.ChangeEventHandler<HTMLSelectElement>;
+  onRemove: (id: number) => void;
+  items: { id: number; name: string }[];
+  emptyPlaceholder: string;
+  options: Option[];
+  label: string;
+};
 
 function OptionSelectorControl({
   emptyPlaceholder,
@@ -55,7 +57,7 @@ function OptionSelectorControl({
         </For>
       </ul>
     </div>
-  )
+  );
 }
 
-export { OptionSelectorControl }
+export { OptionSelectorControl };

@@ -1,5 +1,5 @@
 import { PatientAdapter } from "@/app/patient/adapters/patient-adapter";
-import { ProfessionalAdapter } from "@/app/professional/apdapters/professional-adapter";
+import { ProfessionalAdapter } from "@/app/professional/adapters/professional-adapter";
 import { CustomError } from "@/lib/custom-error";
 
 import type { AppointmentDetailModel } from "../models/appointment-detail-model";

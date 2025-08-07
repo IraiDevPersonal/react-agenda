@@ -3,7 +3,7 @@ import { sleep } from "@/lib/utils";
 
 import type { ProfessionalFilters } from "../models";
 
-import { ProfessionalAdapter } from "../apdapters/professional-adapter";
+import { ProfessionalAdapter } from "../adapters/professional-adapter";
 
 async function getAll(filters: ProfessionalFilters) {
   await sleep();

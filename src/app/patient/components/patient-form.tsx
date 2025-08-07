@@ -2,10 +2,10 @@ import { Loader2Icon } from "lucide-react";
 
 import type { PatientModel } from "@/app/patient/models/patient-model";
 
-import { RutInput } from "@/components/ui/rut-input";
 import { Button } from "@/components/ui/button";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
+import { RutInput } from "@/components/ui/rut-input";
 
 import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 

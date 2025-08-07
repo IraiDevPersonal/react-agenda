@@ -92,4 +92,3 @@ ProfessionalSkeleton.Image = ProfessionalSkeletonImage;
 ProfessionalSkeleton.Form = ProfessionalSkeletonForm;
 
 export { ProfessionalSkeleton };
-

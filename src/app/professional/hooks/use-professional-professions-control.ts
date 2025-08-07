@@ -1,7 +1,7 @@
 import { useQueryProfessions } from "@/app/profession/hooks/use-query-professions";
 import { ProfessionQueries } from "@/app/profession/queries/profession-queries";
 
-import { useProfessionStore } from "../stores/use-professions-store";
+import { useProfessionStore } from "../stores/professions-store";
 import { useProfessionalObserver } from "./use-professional-observer";
 
 export function useProfessionalProfessionsControl() {

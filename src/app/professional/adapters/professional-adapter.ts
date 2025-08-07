@@ -44,7 +44,7 @@ function validate(item: any) {
   }
 }
 
-function validateProfessionalRepsonse(response: any) {
+function validateProfessionalResponse(response: any) {
   try {
     const data: ProfessionalResponseModel = {
       data: safeArray(response.data).map(validate),
@@ -65,6 +65,6 @@ export const ProfessionalAdapter = {
   validate,
   professionalForFiltersHttpResponse,
   validateProfessionalForAppointmentDetail,
-  httpResponse: validateProfessionalRepsonse,
+  httpResponse: validateProfessionalResponse,
   detailHttpResponse: validateProfessionalDetailResponse,
 };

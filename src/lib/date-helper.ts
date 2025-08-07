@@ -40,4 +40,4 @@ const dateHelper = {
   getDay,
 };
 
-export { DateFormat as DateFormat, dateHelper };
+export { DateFormat, dateHelper };
