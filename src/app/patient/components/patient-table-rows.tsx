@@ -6,8 +6,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";
 import { cn, formatPhoneNumber } from "@/lib/utils";
 
-import { UserAvatar } from "../../user/components/user-avatar";
-import { UserStatusBadge } from "../../user/components/user-status-badge";
+import { UserAvatar } from "../../profile/components/user-avatar";
+import { UserStatusBadge } from "../../profile/components/user-status-badge";
 import { useQueryPatients } from "../hooks/use-query-patients";
 import { PatientQueries } from "../queries/patient-queries";
 import { TogglePatientStatusButton } from "./toggle-patient-status-button";

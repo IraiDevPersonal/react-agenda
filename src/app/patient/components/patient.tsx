@@ -11,7 +11,7 @@ import { DefaultTooltip } from "@/components/ui/tooltip";
 import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 import type { PatientModel } from "../models/patient-model";
 
-import { UserStatusBadge } from "../../user/components/user-status-badge";
+import { UserStatusBadge } from "../../profile/components/user-status-badge";
 import { PatientCompoundContext, usePatientCompoundContext } from "../context/patient-compound-context";
 import { PatientQueries } from "../queries/patient-queries";
 import { PatientForm } from "./patient-form";

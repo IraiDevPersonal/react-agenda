@@ -1,8 +1,8 @@
 import { PencilIcon, PhoneIcon } from "lucide-react";
 import { Link } from "react-router";
 
-import { UserAvatar } from "@/app/user/components/user-avatar";
-import { UserStatusBadge } from "@/app/user/components/user-status-badge";
+import { UserAvatar } from "@/app/profile/components/user-avatar";
+import { UserStatusBadge } from "@/app/profile/components/user-status-badge";
 import { For } from "@/components/for";
 import { buttonVariants } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";

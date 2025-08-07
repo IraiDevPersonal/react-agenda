@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import { Loader2Icon, UserIcon } from "lucide-react";
 import { useMemo } from "react";
 
-import { UserStatusBadge } from "@/app/user/components/user-status-badge";
+import { UserStatusBadge } from "@/app/profile/components/user-status-badge";
 import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
