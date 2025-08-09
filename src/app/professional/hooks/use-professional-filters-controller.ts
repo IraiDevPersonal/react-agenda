@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { pagination } from "@/lib/utils";
 
-import { ProfessionalQueries } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries";
 import { useProfessionalFilters } from "./use-professional-filters";
 import { useQueryProfessionals } from "./use-query-professionals";
 

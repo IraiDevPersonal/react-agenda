@@ -2,7 +2,7 @@ import z from "zod";
 
 import { PatientHistorySchema } from "@/app/patient/models/patient-history-model";
 import { PatientSchema } from "@/app/patient/models/patient-model";
-import { ProfessionalForAppointmentDetailSchema } from "@/app/professional/models/professional-for-appointment-detail-model";
+import { ApiProfessionalForAppointmentDetailSchema } from "@/app/professional/domain/schemas/professional-for-appointment-detail-schema";
 
 import { AppointmentStatusScheme } from ".";
 
@@ -19,7 +19,7 @@ export const AppointmentDetailSchema = z.object({
   is_enabled: z.boolean(),
   status: AppointmentStatusScheme,
   patient_history: z.array(PatientHistorySchema),
-  professional: ProfessionalForAppointmentDetailSchema,
+  professional: ApiProfessionalForAppointmentDetailSchema,
   patient: PatientSchema.omit({ is_deleted: true }).nullable(),
   alert: AlertForAppointmentDetailSchema,
 });

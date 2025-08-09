@@ -5,7 +5,7 @@ import { DefaultTooltip } from "@/components/ui/tooltip";
 
 import { useProfessionalFiltersController } from "../hooks/use-professional-filters-controller";
 import { useQueryProfessionals } from "../hooks/use-query-professionals";
-import { ProfessionalQueries } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries";
 
 function ProfessionalFilters() {
   const {

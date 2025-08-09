@@ -9,7 +9,7 @@ import { Table } from "@/components/ui/table";
 import { cn, formatPhoneNumber } from "@/lib/utils";
 
 import { useQueryProfessionals } from "../hooks/use-query-professionals";
-import { ProfessionalQueries } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries";
 import { ToggleProfessionalStatusButton } from "./toggle-patient-status-button";
 
 function ProfessionalTableRows() {

@@ -3,7 +3,7 @@ import type { UseQueryStatesKeysMap } from "nuqs";
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 import { useTransition } from "react";
 
-import type { ProfessionalFilters } from "../models";
+import type { ProfessionalFilters } from "../domain/models/types";
 
 function parser(): UseQueryStatesKeysMap<ProfessionalFilters> {
   return {

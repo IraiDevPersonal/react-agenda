@@ -1,6 +1,6 @@
 import { TextItem } from "@/components/ui/text-item";
 
-import type { ProfessionalForAppointmentDetailModel } from "../models/professional-for-appointment-detail-model";
+import type { ProfessionalForAppointmentDetailModel } from "../domain/models/professional-for-appointment-detail-model";
 
 type Props = {
   professional: ProfessionalForAppointmentDetailModel;

@@ -1,5 +1,5 @@
 import { isAxiosError } from "axios";
-import { ZodError } from "zod";
+import { treeifyError, ZodError } from "zod";
 
 export class CustomError extends Error {
   constructor(
@@ -7,6 +7,11 @@ export class CustomError extends Error {
   ) {
     super(message);
   }
+
+  static mapperError = (error: ZodError, options?: { loggerMessage?: string; errorMessage?: string }) => {
+    console.warn(`Error en Mapper: ${options?.loggerMessage ?? "indeterminado"}`, treeifyError(error));
+    throw new CustomError(options?.errorMessage ?? "Datos de API invalidos");
+  };
 
   static handleError = (error: unknown, options?: { showLog: boolean }) => {
     const { message, stack } = this.getError(error);

@@ -4,7 +4,7 @@ import type { GenericUseQueryOptions } from "@/lib/types/global-types";
 
 import { parseQuery } from "@/lib/utils";
 
-import type { ProfessionalFilters } from "../models";
+import type { ProfessionalFilters } from "../domain/models/types";
 
 import { useProfessionalFilters } from "./use-professional-filters";
 

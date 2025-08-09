@@ -1,5 +1,5 @@
 import { PatientAdapter } from "@/app/patient/adapters/patient-adapter";
-import { ProfessionalAdapter } from "@/app/professional/adapters/professional-adapter";
+import { ProfessionalForAppointmentDetailMapper } from "@/app/professional/mappers/professional-for-appointment-detail-mapper";
 import { CustomError } from "@/lib/custom-error";
 
 import type { AppointmentDetailModel } from "../models/appointment-detail-model";
@@ -17,7 +17,7 @@ function validate(item: any) {
       is_enabled: item.is_enabled,
       status: item.status ?? AppointmentStatus.INDETERMINATE,
       patient_history: PatientAdapter.patientHistoryToArray(item.patient_history ?? []),
-      professional: ProfessionalAdapter.validateProfessionalForAppointmentDetail(item.professional),
+      professional: ProfessionalForAppointmentDetailMapper.map(item.professional),
       patient: PatientAdapter.validate(item.patient),
       alert: item.alert,
     };

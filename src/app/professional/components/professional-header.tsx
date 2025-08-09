@@ -6,7 +6,7 @@ import { PageTitle } from "@/components/ui/page-title";
 import { ROUTES } from "@/lib/constants/routes";
 
 import { useQueryProfessionals } from "../hooks/use-query-professionals";
-import { ProfessionalQueries } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries";
 import { ProfessionalFilters } from "./professional-filters";
 
 function ProfessionalHeader() {

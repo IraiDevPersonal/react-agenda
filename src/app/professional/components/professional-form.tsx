@@ -7,7 +7,7 @@ import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
 import { RutInput } from "@/components/ui/rut-input";
 
-import type { ProfessionalModel } from "../models/professional-model";
+import type { ProfessionalModel } from "../domain/models/professional-model";
 
 type Props = PropsWithChildren<{
   // upsertService: UpsertPatientServiceFn;

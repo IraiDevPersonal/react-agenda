@@ -2,10 +2,10 @@ import { useState } from "react";
 
 import { ButtonWithAlertDialog } from "@/components/ui/button-with-alert-button";
 
-import type { ProfessionalModel } from "../models/professional-model";
+import type { ProfessionalModel } from "../domain/models/professional-model";
 
 import { useQueryProfessionals } from "../hooks/use-query-professionals";
-import { ProfessionalQueries } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries";
 
 type Props = {
   professional: ProfessionalModel;

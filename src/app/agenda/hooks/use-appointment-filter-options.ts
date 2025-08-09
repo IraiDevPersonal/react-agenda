@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { ProfessionQueries } from "@/app/profession/queries/profession-queries";
-import { ProfessionalQueries } from "@/app/professional/queries/professional-queries";
+import { ProfessionalQueries } from "@/app/professional/queries";
 
 import { useAppointmentFilters } from "./use-appointment-filters";
 

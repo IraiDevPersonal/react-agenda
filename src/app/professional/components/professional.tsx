@@ -8,7 +8,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import type { ProfessionalModel } from "../models/professional-model";
+import type { ProfessionalModel } from "../domain/models/professional-model";
 
 import { ProfessionalCompoundContext, useProfessionalCompoundContext } from "../context/professional-compound-context";
 import { ProfessionalForm } from "./professional-form";

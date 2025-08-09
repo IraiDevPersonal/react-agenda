@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 
 import { ErrorMessage } from "@/components/ui/error-message";
 
-import { ProfessionalQueries } from "../queries/professional-queries";
+import { ProfessionalQueries } from "../queries";
 import { Professional } from "./professional";
 import { ProfessionalSkeleton } from "./professional-skeleton";
 
