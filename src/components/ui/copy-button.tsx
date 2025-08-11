@@ -1,6 +1,6 @@
 import { CheckCheckIcon, CopyIcon } from "lucide-react";
 
-import { useClipboard } from "@/lib/hooks/use-clipboard";
+import { useClipboard } from "@/hooks/use-clipboard";
 
 import { Button } from "./button";
 

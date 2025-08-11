@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { ProfessionalAppointmentInfo } from "@/app/professional/components/professional-appointment-info";
+import { ProfessionalAppointmentInfo } from "@/app/professionals/components/professional-appointment-info";
 import { Show } from "@/components/show";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";

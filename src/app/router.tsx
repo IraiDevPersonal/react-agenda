@@ -7,9 +7,9 @@ import Layout from "./layout";
 import CreatePatientPage from "./patient/pages/create-patient-page";
 import PatientPage from "./patient/pages/patient-page";
 import UpdatePatientPage from "./patient/pages/update-patient-page";
-import CreateProfessionalPage from "./professional/pages/create-professional-page";
-import ProfessionalPage from "./professional/pages/professional-page";
-import UpdateProfessionalPage from "./professional/pages/update-professional-page";
+import CreateProfessionalPage from "./professionals/pages/create-professional-page";
+import ProfessionalsPage from "./professionals/pages/professionals-page";
+import UpdateProfessionalPage from "./professionals/pages/update-professional-page";
 
 const router = createBrowserRouter([{
   path: ROUTES.root,
@@ -47,7 +47,7 @@ const router = createBrowserRouter([{
       children: [
         {
           index: true,
-          element: <ProfessionalPage />,
+          element: <ProfessionalsPage />,
         },
         {
           path: ROUTES.actions.create,

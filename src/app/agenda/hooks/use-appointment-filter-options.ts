@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { ProfessionQueries } from "@/app/profession/queries/profession-queries";
-import { ProfessionalQueries } from "@/app/professional/queries";
+import { ProfessionalQuery } from "@/app/professionals/query";
 
 import { useAppointmentFilters } from "./use-appointment-filters";
 
@@ -14,7 +14,7 @@ export function useAppointmentFilterOptions() {
 
   const { data: professionalOptions = [] } = useQuery({
     enabled: true,
-    ...ProfessionalQueries.forFitlers(),
+    ...ProfessionalQuery.forFitlers(),
   });
 
   const filteredProfessionals = professionalOptions.filter(opt =>

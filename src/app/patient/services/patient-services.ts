@@ -1,4 +1,4 @@
-import { AgendaApi } from "@/api/agenda-api";
+import { agendaService } from "@/services/agenda-service";
 import { sleep } from "@/lib/utils";
 
 import type { PatientFilters } from "../models";
@@ -8,13 +8,13 @@ import { PatientAdapter } from "../adapters/patient-adapter";
 
 async function getAll(filters: PatientFilters) {
   await sleep();
-  const { data } = await AgendaApi.get("/patients", { params: filters });
+  const { data } = await agendaService.get("/patients", { params: filters });
   return PatientAdapter.httpResponse(data);
 }
 
 async function getDetail(uid: string) {
   await sleep();
-  const { data } = await AgendaApi.get(`/patients/${uid}`);
+  const { data } = await agendaService.get(`/patients/${uid}`);
   return PatientAdapter.patientDetailHttpResponse(data);
 }
 
@@ -23,7 +23,7 @@ async function update(
   payload: PatientFormValues,
 ) {
   await sleep();
-  const { data } = await AgendaApi.put(`/patients/${uid}`, payload);
+  const { data } = await agendaService.put(`/patients/${uid}`, payload);
   return PatientAdapter.upsertPatientHttpResponse(data);
 }
 
@@ -31,13 +31,13 @@ async function create(
   payload: PatientFormValues,
 ) {
   await sleep();
-  const { data } = await AgendaApi.post("/patients", payload);
+  const { data } = await agendaService.post("/patients", payload);
   return PatientAdapter.upsertPatientHttpResponse(data);
 }
 
 async function toggleStatus(uid: string) {
   await sleep();
-  const { data } = await AgendaApi.patch(`/patients/${uid}`);
+  const { data } = await agendaService.patch(`/patients/${uid}`);
   return PatientAdapter.upsertPatientHttpResponse(data);
 }
 

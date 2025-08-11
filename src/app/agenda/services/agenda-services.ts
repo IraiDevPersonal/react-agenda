@@ -1,4 +1,4 @@
-import { AgendaApi } from "@/api/agenda-api";
+import { agendaService } from "@/services/agenda-service";
 
 import type { AppointmentFilters } from "../models";
 
@@ -7,13 +7,13 @@ import { AppointmentDetailAdapter } from "../adapters/appointment-detail-adapter
 
 async function getAppointments(filters?: AppointmentFilters) {
   // agendaService.useAuthInterceptor();
-  const { data } = await AgendaApi.get(`/appointments`, { params: filters });
+  const { data } = await agendaService.get(`/appointments`, { params: filters });
   return AppointmentAdapter.httpResponse(data);
 }
 
 async function getAppointmentDetail(uid: string) {
   // agendaService.useAuthInterceptor();
-  const { data } = await AgendaApi.get(`/appointments/${uid}`);
+  const { data } = await agendaService.get(`/appointments/${uid}`);
   return AppointmentDetailAdapter.httpResponse(data);
 }
 

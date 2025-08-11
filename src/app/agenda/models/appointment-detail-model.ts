@@ -2,7 +2,7 @@ import z from "zod";
 
 import { PatientHistorySchema } from "@/app/patient/models/patient-history-model";
 import { PatientSchema } from "@/app/patient/models/patient-model";
-import { ApiProfessionalForAppointmentDetailSchema } from "@/app/professional/domain/schemas/professional-for-appointment-detail-schema";
+import { ApiProfessionalForAppointmentDetailSchema } from "@/app/professionals/domain/schemas/professional-for-appointment-detail-schema";
 
 import { AppointmentStatusScheme } from ".";
 

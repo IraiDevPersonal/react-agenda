@@ -21,7 +21,7 @@ function parseDateToString<T extends object>(value: T) {
 
 export function parseQuery<T extends object>(value: T) {
   if (!value) {
-    return {} as Record<keyof T, any>;
+    return {};
   }
 
   const stringifyQuery = queryString.stringify(
@@ -42,7 +42,7 @@ export function parseQuery<T extends object>(value: T) {
       parseBooleans: true,
       parseNumbers: true,
     },
-  ) as Record<keyof T, any>;
+  );
 }
 
 export function cn(...inputs: ClassValue[]) {

@@ -1,4 +1,4 @@
-import { useBreakpoints } from "@/lib/hooks/use-breakpoints";
+import { useBreakpoints } from "@/hooks/use-breakpoints";
 
 import { InlineAppointmentFilters } from "./inline-appointment-filters";
 import { ModalAppointmentFilters } from "./modal-appointment-filters";
