@@ -1,4 +1,4 @@
-import type { AppointmentStatus } from "./models";
+import type { AppointmentStatus } from "../domain/models/type";
 
 export const STATUS_NAMES: Record<AppointmentStatus, string> = {
   TO_CONFIRM: "Por confirmar",

@@ -4,25 +4,20 @@ import { PatientHistorySchema } from "@/app/patient/models/patient-history-model
 import { PatientSchema } from "@/app/patient/models/patient-model";
 import { ApiProfessionalForAppointmentDetailSchema } from "@/app/professionals/domain/schemas/professional-for-appointment-detail-schema";
 
-import { AppointmentStatusScheme } from ".";
+import { AppointmentStatusSchema } from "./schema";
 
-export const AlertForAppointmentDetailSchema = z.object({
-  message: z.string(),
-  is_required: z.boolean(),
-});
-
-export const AppointmentDetailSchema = z.object({
+export const ApiAppointmentDetailSchema = z.object({
   uid: z.string(),
   date: z.string(),
-  time_from: z.string(),
   time_to: z.string(),
+  time_from: z.string(),
   is_enabled: z.boolean(),
-  status: AppointmentStatusScheme,
+  status: AppointmentStatusSchema,
+  alert: z.object({
+    message: z.string(),
+    is_required: z.boolean(),
+  }),
   patient_history: z.array(PatientHistorySchema),
   professional: ApiProfessionalForAppointmentDetailSchema,
   patient: PatientSchema.omit({ is_deleted: true }).nullable(),
-  alert: AlertForAppointmentDetailSchema,
 });
-
-export type AppointmentDetailModel = z.infer<typeof AppointmentDetailSchema>;
-export type AlertForAppointmentDetailModel = z.infer<typeof AlertForAppointmentDetailSchema>;

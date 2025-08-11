@@ -1,7 +1,7 @@
 import { For } from "@/components/for";
 import { dateHelper } from "@/lib/date-helper";
 
-import { WEEK_DAYS } from "../constants";
+import { WEEK_DAYS } from "../lib/constants";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 import { AppointmentGrid as Grid } from "./appointment-grid";
 

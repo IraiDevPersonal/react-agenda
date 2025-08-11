@@ -47,7 +47,7 @@ type ProfessionalQueryImpl = {
     ProfessionalDetailResponseModel,
     TQueryKey
   >;
-  forFilter: () => UseQueryOptions<
+  forFilters: () => UseQueryOptions<
     ProfessionalOption[],
     Error,
     ProfessionalOption[],
@@ -120,7 +120,7 @@ export class ProfessionalQuery implements ProfessionalQueryImpl {
     });
   };
 
-  forFilter = () => {
+  forFilters = () => {
     return queryOptions({
       refetchOnWindowFocus: false,
       queryKey: [QUERY_KEYS.prefessionals, "for-filter"] as TQueryKey,

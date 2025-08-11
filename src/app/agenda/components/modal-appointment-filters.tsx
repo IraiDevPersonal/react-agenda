@@ -13,19 +13,18 @@ import { dateHelper } from "@/lib/date-helper";
 
 import { useAppointmentFilterOptions } from "../hooks/use-appointment-filter-options";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
-import { useAppointmentFiltersController } from "../hooks/use-appointment-filters-controller";
 
 function ModalAppointmentFilters() {
   const {
+    filters,
     viewMode,
     onFilter,
     handleRefresh,
     handleSelectToday,
     handleViewModeChange,
     handleClearAllFilters,
-  } = useAppointmentFiltersController();
+  } = useAppointmentFilters();
   const { professionOptions, filteredProfessionals } = useAppointmentFilterOptions();
-  const { filters } = useAppointmentFilters();
 
   return (
     <>

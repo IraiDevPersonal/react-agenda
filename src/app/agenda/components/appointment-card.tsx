@@ -5,10 +5,10 @@ import { useNavigate } from "react-router";
 import { ROUTES } from "@/lib/constants/routes";
 import { cn, getUrlData } from "@/lib/utils";
 
-import type { AppointmentModel } from "../models/appointment-model";
+import type { AppointmentModel } from "../domain/models/appointment-model";
 
-import { AppointmentStatus } from "../models";
-import { generateAppoinmentDatetimeText } from "../utils";
+import { AppointmentStatus } from "../domain/models/type";
+import { generateAppoinmentDatetimeText } from "../lib/utils";
 import { AppointmentStatusIcon } from "./appoinment-status-icon";
 
 type Props = PropsWithChildren<{

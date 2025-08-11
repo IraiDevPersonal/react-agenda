@@ -1,4 +1,4 @@
-import z from "zod";
+import type { UseQueryStatesKeysMap } from "nuqs";
 
 export type AppointmentViewMode = "week" | "day";
 
@@ -10,13 +10,11 @@ export enum AppointmentStatus {
   INDETERMINATE = "INDETERMINATE",
 }
 
-export type AppointmentFilters = {
+export type AppointmentFilters = UseQueryStatesKeysMap<{
   professional_id: number;
   profession_id: number;
   patient_rut: string;
   date_from: Date;
   date_to: Date;
   date: Date;
-};
-
-export const AppointmentStatusScheme = z.enum(AppointmentStatus, { error: "estado de cita invalido" });
+}>;

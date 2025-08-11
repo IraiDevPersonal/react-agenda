@@ -1,7 +1,7 @@
 import type { PatientModel } from "@/app/patient/models/patient-model";
 
 type Props = {
-  patient?: PatientModel;
+  patient?: Omit<PatientModel, "is_deleted"> | null;
 };
 
 function AppointmentDetailForm({ patient }: Props) {

@@ -1,26 +1,24 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { For } from "@/components/for";
 import { Show } from "@/components/show";
 
-import { WEEK_DAYS } from "../constants";
+import { appointmentQuery } from "../container";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
-import { useQueryAppointments } from "../hooks/use-query-appointments";
-import { AppointmentQueries } from "../queries/appointment-queries";
-import { showAppointmentInDay } from "../utils";
+import { WEEK_DAYS } from "../lib/constants";
+import { showAppointmentInDay } from "../lib/utils";
 import { AppointmentCard } from "./appointment-card";
 import { AppointmentGrid as Grid } from "./appointment-grid";
 import { AppointmentListFallback } from "./appointment-list-fallback";
 import { WeekGridHeader } from "./week-grid-header";
 
 function WeekAppointmentsView() {
-  const { data } = useQueryAppointments({
-    queryOptions: ({
-      date,
-      date_from,
-      ...filters
-    }) =>
-      AppointmentQueries.getAll({ ...filters, date: date_from }),
-  });
-  const { filters } = useAppointmentFilters();
+  const { filters: {
+    date,
+    date_from,
+    ...filters
+  } } = useAppointmentFilters();
+  const { data } = useQuery(appointmentQuery.list({ ...filters, date: date_from }));
 
   return (
     <Grid className="min-w-[1632px] w-full">

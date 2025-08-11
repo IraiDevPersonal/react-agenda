@@ -3,19 +3,17 @@ import z from "zod";
 import { UidScheme } from "@/lib/schemas/global-schemas";
 import { PersonSchema } from "@/lib/schemas/person-schemas";
 
-import { AppointmentStatusScheme } from ".";
+import { AppointmentStatusSchema } from "./schema";
 
 export const AppointmentSchema = z.object({
   uid: UidScheme,
   date: z.string(),
-  time_from: z.string(),
   time_to: z.string(),
-  patient_name: PersonSchema.FullName,
+  time_from: z.string(),
   patient_rut: PersonSchema.Rut,
-  patient_phone: PersonSchema.Phone,
-  professional_name: PersonSchema.FullName,
   professions: z.string().array(),
-  appointment_status: AppointmentStatusScheme,
+  patient_phone: PersonSchema.Phone,
+  patient_name: PersonSchema.FullName,
+  professional_name: PersonSchema.FullName,
+  appointment_status: AppointmentStatusSchema,
 });
-
-export type AppointmentModel = z.infer<typeof AppointmentSchema>;

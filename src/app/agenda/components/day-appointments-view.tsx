@@ -1,25 +1,23 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { For } from "@/components/for";
 import { Show } from "@/components/show";
 import { DateFormat, dateHelper } from "@/lib/date-helper";
 
+import { appointmentQuery } from "../container";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
-import { useQueryAppointments } from "../hooks/use-query-appointments";
-import { AppointmentQueries } from "../queries/appointment-queries";
-import { showAppointmentInDay } from "../utils";
+import { showAppointmentInDay } from "../lib/utils";
 import { AppointmentCard } from "./appointment-card";
 import { AppointmentGrid as Grid } from "./appointment-grid";
 import { AppointmentListFallback } from "./appointment-list-fallback";
 
 function DayAppointmentsView() {
-  const { data } = useQueryAppointments({
-    queryOptions: ({
-      date_from,
-      date_to,
-      ...filters
-    }) =>
-      AppointmentQueries.getAll({ ...filters }),
-  });
-  const { filters } = useAppointmentFilters();
+  const { filters: {
+    date_from,
+    date_to,
+    ...filters
+  } } = useAppointmentFilters();
+  const { data } = useQuery(appointmentQuery.list({ ...filters }));
 
   return (
     <>

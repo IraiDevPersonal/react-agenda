@@ -1,4 +1,4 @@
-import { AppointmentStatus } from "@/app/agenda/models";
+import { AppointmentStatus } from "@/app/agenda/domain/models/type";
 import { CustomError } from "@/lib/custom-error";
 import { safeArray } from "@/lib/utils";
 

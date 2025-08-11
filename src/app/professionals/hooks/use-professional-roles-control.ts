@@ -11,7 +11,7 @@ export function useProfessionalRolesControl() {
 
   useProfessionalObserver({ onSave: ({ roles }) => setRoles(roles) });
 
-  // TODO: desde aqui se deberian obtener los roles const { data: options = [] } = useQueryRoles({ queryOptions: ProfessionQueries.forFitlers });
+  // TODO: desde aqui se deberian obtener los roles const { data: options = [] } = useQueryRoles({ queryOptions: roleQuery.forFitlers });
   const options: Option[] = [
     { label: "Administrador", value: "1" },
     { label: "Professional", value: "2" },

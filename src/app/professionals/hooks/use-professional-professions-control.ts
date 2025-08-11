@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { ProfessionQueries } from "@/app/profession/queries/profession-queries";
+import { professionQuery } from "@/app/profession/container";
 
 import { useProfessionStore } from "../stores/professions-store";
 import { useProfessionalObserver } from "./use-professional-observer";
@@ -13,7 +13,7 @@ export function useProfessionalProfessionsControl() {
 
   useProfessionalObserver({ onSave: ({ professions }) => setProfessions(professions) });
 
-  const { data: options = [] } = useQuery(ProfessionQueries.forFitlers());
+  const { data: options = [] } = useQuery(professionQuery.forFitlers());
 
   const filteredOptions = options.filter(p => !professions.map(sp => sp.id).includes(Number(p.value)));
 

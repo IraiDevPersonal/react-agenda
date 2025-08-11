@@ -7,10 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import type { AppointmentModel } from "../../models/appointment-model";
+import type { AppointmentModel } from "../../domain/models/appointment-model";
 
-import { STATUS_NAMES } from "../../constants";
-import { AppointmentQueries } from "../../queries/appointment-queries";
+import { appointmentQuery } from "../../container";
+import { STATUS_NAMES } from "../../lib/constants";
 import { AppointmentStatusIcon } from "../appoinment-status-icon";
 import { DatetimeAttetionAppointment } from "../datetime-attetion-appointment";
 import { AppointmentDetailForm } from "./appointment-detail-form";
@@ -21,7 +21,12 @@ type Props = {
 };
 
 function AppointmentDetail({ appointmentUid }: Props) {
-  const { data, isError, error, isLoading } = useQuery(AppointmentQueries.getDetail(appointmentUid));
+  const {
+    data,
+    isError,
+    error,
+    isLoading,
+  } = useQuery(appointmentQuery.detail(appointmentUid));
 
   if (isLoading) {
     return null;

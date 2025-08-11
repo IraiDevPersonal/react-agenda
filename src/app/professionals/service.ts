@@ -1,4 +1,4 @@
-import type { HttpClient } from "@/lib/http-client";
+import type { HttpClientImpl } from "@/lib/http-client";
 
 import type { ProfessionalDetailResponseModel } from "./domain/models/professional-detail-model";
 import type { ProfessionalOption } from "./domain/models/professional-for-filters-model";
@@ -16,9 +16,9 @@ export type ProfessionalServiceImpl = {
 
 export class ProfessionalService implements ProfessionalServiceImpl {
   private readonly endpoint: string;
-  private readonly client: HttpClient;
+  private readonly client: HttpClientImpl;
 
-  constructor({ endpoint, client }: { endpoint: string; client: HttpClient }) {
+  constructor({ endpoint, client }: { endpoint: string; client: HttpClientImpl }) {
     this.endpoint = endpoint;
     this.client = client;
   }

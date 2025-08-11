@@ -1,6 +1,6 @@
 import { CircleAlertIcon, CircleCheck, CirclePlus, CircleX } from "lucide-react";
 
-import { AppointmentStatus } from "../models";
+import { AppointmentStatus } from "../domain/models/type";
 
 function AppointmentStatusIcon({ status }: { status: AppointmentStatus }) {
   switch (status) {

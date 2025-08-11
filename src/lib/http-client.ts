@@ -10,7 +10,7 @@ export const HttpHelper = {
   },
 };
 
-export type HttpClient = {
+export type HttpClientImpl = {
   get: <T>(url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse<T>>;
   post: <T, D>(url: string, data: D, config?: AxiosRequestConfig) => Promise<AxiosResponse<T, D>>;
   put: <T, D>(url: string, data: D, config?: AxiosRequestConfig) => Promise<AxiosResponse<T, D>>;
@@ -25,7 +25,7 @@ export type ClientConfig = {
   delay?: number;
 };
 
-export class HttpClientService implements HttpClient {
+export class HttpClientService implements HttpClientImpl {
   private client: AxiosInstance;
   private config: ClientConfig;
   private tokenName: string;

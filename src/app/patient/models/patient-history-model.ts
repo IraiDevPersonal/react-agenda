@@ -1,12 +1,12 @@
 import z from "zod";
 
-import { AppointmentStatusScheme } from "@/app/agenda/models";
+import { AppointmentStatusSchema } from "@/app/agenda/domain/schemas/schema";
 import { UidScheme } from "@/lib/schemas/global-schemas";
 
 export const PatientHistorySchema = z.object({
   uid: UidScheme,
   date_time: z.string(),
-  status: AppointmentStatusScheme,
+  status: AppointmentStatusSchema,
 });
 
 export type PatientHistoryModel = z.infer<typeof PatientHistorySchema>;
