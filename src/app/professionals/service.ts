@@ -23,6 +23,14 @@ export class ProfessionalService implements ProfessionalServiceImpl {
     this.client = client;
   }
 
+  private withUid = (uid: string) => {
+    return `${this.endpoint}/${uid}`;
+  };
+
+  private forFilter = () => {
+    return `${this.endpoint}/for-filter`;
+  };
+
   getProfessionals = async (filters: object) => {
     // this.client.useAuthentication() TODO: para endpoint que requieran autenticacion
     const { data } = await this.client.get(this.endpoint, { params: filters });
@@ -30,12 +38,12 @@ export class ProfessionalService implements ProfessionalServiceImpl {
   };
 
   getProfessionalByUid = async (uid: string) => {
-    const { data } = await this.client.get(`${this.endpoint}/${uid}`);
+    const { data } = await this.client.get(this.withUid(uid));
     return ProfessionalDetailMapper.fromApiToDomain(data);
   };
 
   getProfessionalsForFilters = async () => {
-    const { data } = await this.client.get(`${this.endpoint}/for-filter`);
+    const { data } = await this.client.get(this.forFilter());
     return ProfessionalForFiltersMapper.fromApiToDomain(data);
   };
 }

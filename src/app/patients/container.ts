@@ -1,10 +1,10 @@
-import { agendaService } from "@/services/agenda-service";
+import { agendaClient } from "@/api/agenda-client";
 
 import { PatientQuery } from "./query";
 import { PatientService } from "./service";
 
 export const patientService = new PatientService({
-  client: agendaService,
+  client: agendaClient,
   endpoint: "/patients",
 });
 

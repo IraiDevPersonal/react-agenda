@@ -20,13 +20,17 @@ export class AppointmentService implements AppointmentServiceImpl {
     this.endpoint = endpoint;
   }
 
+  private withUid = (uid: string) => {
+    return `${this.endpoint}/${uid}`;
+  };
+
   getAppointments = async (filters: object) => {
     const { data } = await this.client.get(this.endpoint, { params: filters });
     return AppointmentMapper.fromApiToDomain(data);
   };
 
   getAppointmentByUid = async (uid: string) => {
-    const { data } = await this.client.get(`${this.endpoint}/${uid}`);
+    const { data } = await this.client.get(this.withUid(uid));
     return AppointmentDetailMapper.fromApiToDomain(data);
   };
 }

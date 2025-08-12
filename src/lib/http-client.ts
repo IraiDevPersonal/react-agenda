@@ -25,7 +25,7 @@ export type ClientConfig = {
   delay?: number;
 };
 
-export class HttpClientService implements HttpClientImpl {
+export class HttpClient implements HttpClientImpl {
   private client: AxiosInstance;
   private config: ClientConfig;
   private tokenName: string;

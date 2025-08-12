@@ -25,9 +25,9 @@ export class PatientService implements PatientServiceImpl {
     this.endpoint = endpoint;
   }
 
-  private withUid(uid: string) {
+  private withUid = (uid: string) => {
     return `${this.endpoint}/${uid}`;
-  }
+  };
 
   getPatients = async (filters: object) => {
     const { data } = await this.client.get(this.endpoint, { params: filters });

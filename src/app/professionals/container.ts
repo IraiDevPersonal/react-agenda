@@ -1,10 +1,10 @@
-import { agendaService } from "@/services/agenda-service";
+import { agendaClient } from "@/api/agenda-client";
 
 import { ProfessionalQuery } from "./query";
 import { ProfessionalService } from "./service";
 
 const professionalService = new ProfessionalService({
-  client: agendaService,
+  client: agendaClient,
   endpoint: "/professionals",
 });
 

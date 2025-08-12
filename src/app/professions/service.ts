@@ -17,8 +17,12 @@ export class ProfessionService implements ProfessionServiceImpl {
     this.endpoint = endpoint;
   }
 
+  private forFilter = () => {
+    return `${this.endpoint}/for-filter`;
+  };
+
   getProfessionsForFilters = async () => {
-    const { data } = await this.client.get(`${this.endpoint}/for-filter`);
+    const { data } = await this.client.get(this.forFilter());
     return ProfessionalForFiltersMapper.fromApiToDomain(data);
   };
 }
