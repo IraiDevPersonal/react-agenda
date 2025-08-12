@@ -6,10 +6,10 @@ import { queryOptions } from "@tanstack/react-query";
 import type { TQueryKey } from "@/lib/types/global-types";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
-import { parseQuery } from "@/lib/utils";
+import { queryParser } from "@/lib/utils";
 
 import type { ProfessionalDetailResponseModel } from "./domain/models/professional-detail-model";
-import type { ProfessionalOption } from "./domain/models/professional-for-filters-model";
+import type { ProfessionalForFilterModel } from "./domain/models/professional-for-filters-model";
 import type { ProfessionalResponseModel } from "./domain/models/professional-model";
 import type { ProfessionalFilters } from "./domain/models/types";
 import type { ProfessionalServiceImpl } from "./service";
@@ -48,9 +48,9 @@ type ProfessionalQueryImpl = {
     TQueryKey
   >;
   forFilters: () => UseQueryOptions<
-    ProfessionalOption[],
+    ProfessionalForFilterModel[],
     Error,
-    ProfessionalOption[],
+    ProfessionalForFilterModel[],
     TQueryKey
   >;
 };
@@ -65,7 +65,7 @@ export class ProfessionalQuery implements ProfessionalQueryImpl {
   private defaultListOptions = (filters: Filters) => {
     return queryOptions({
       queryKey: [QUERY_KEYS.prefessionals, filters] as TQueryKey,
-      queryFn: () => this.service.getProfessionals(parseQuery(filters)),
+      queryFn: () => this.service.getProfessionals(queryParser(filters)),
     });
   };
 

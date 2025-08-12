@@ -19,7 +19,7 @@ function parseDateToString<T extends object>(value: T) {
   }, {} as Record<keyof T, string | number | boolean | null | undefined>);
 }
 
-export function parseQuery<T extends object>(value: T) {
+export function queryParser<T extends object>(value: T) {
   if (!value) {
     return {};
   }
@@ -72,13 +72,23 @@ export function isValidPhoneNumber(value: string) {
   return true;
 }
 
-export function sleep(ms: number = 2000) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export function pagination(action: "next" | "prev", currentPage: number, totalPages: number) {
   if (currentPage >= 1 && action === "prev")
     return currentPage - 1;
   if (currentPage <= totalPages && action === "next")
     return currentPage + 1;
+}
+
+export function stringToNullableNumber(value: string): number | null {
+  if (!value || value === "0") {
+    return null;
+  }
+
+  const numericValue = Number(value);
+
+  if (Number.isNaN(numericValue)) {
+    return null;
+  }
+
+  return numericValue;
 }

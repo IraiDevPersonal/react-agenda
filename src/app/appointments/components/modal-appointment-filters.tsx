@@ -1,0 +1,144 @@
+import { FunnelIcon, FunnelXIcon, RotateCcwIcon } from "lucide-react";
+
+import { SearchPatient } from "@/app/patients/components/search-patient";
+import { Show } from "@/components/show";
+import { Button } from "@/components/ui/button";
+import { DatePicker } from "@/components/ui/date-picker";
+import { Dialog } from "@/components/ui/dialog";
+import { FieldWrapper } from "@/components/ui/field-wrapper";
+import { SelectNative } from "@/components/ui/select-native";
+import { DefaultTooltip } from "@/components/ui/tooltip";
+import { WeekPicker } from "@/components/ui/week-picker";
+import { dateHelper } from "@/lib/date-helper";
+import { stringToNullableNumber } from "@/lib/utils";
+
+import { useAppointmentFilterOptions } from "../hooks/use-appointment-filter-options";
+import { useAppointmentFilters } from "../hooks/use-appointment-filters";
+
+function ModalAppointmentFilters() {
+  const {
+    filters,
+    viewMode,
+    onFilter,
+    handleRefresh,
+    handleSelectToday,
+    handleViewModeChange,
+    handleClearAllFilters,
+  } = useAppointmentFilters();
+  const {
+    professionOptions,
+    filteredProfessionalOptions,
+  } = useAppointmentFilterOptions();
+
+  return (
+    <>
+      <DefaultTooltip content="Refrescar datos">
+        <Button variant="outline" size="icon" onClick={handleRefresh}>
+          <RotateCcwIcon size={20} />
+        </Button>
+      </DefaultTooltip>
+
+      <Dialog>
+        <Dialog.Trigger asChild>
+          <Button variant="outline">
+            Filtros
+            <FunnelIcon size={20} />
+          </Button>
+        </Dialog.Trigger>
+
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>Filtrar citas</Dialog.Title>
+            <Dialog.Description hidden>
+            </Dialog.Description>
+          </Dialog.Header>
+
+          <div className="space-y-4 *:w-full">
+            <FieldWrapper label="Modo de vista">
+              <SelectNative
+                value={viewMode}
+                withEmptyOption={false}
+                onChange={handleViewModeChange}
+                options={[
+                  { label: "Día", value: "day" },
+                  { label: "Semana", value: "week" },
+                ]}
+              />
+            </FieldWrapper>
+
+            <Show when={viewMode === "week"}>
+              <WeekPicker
+                label="Semana"
+                classNames={{ trigger: "w-full" }}
+                value={
+                  filters.date_from && filters.date_to
+                    ? {
+                        from: filters.date_from,
+                        to: filters.date_to,
+                      }
+                    : undefined
+                }
+                onValueChange={v => onFilter({
+                  date_from: v?.from,
+                  date_to: v?.to,
+                })}
+              />
+            </Show>
+
+            <Show when={viewMode === "day"}>
+              <DatePicker
+                label="Fecha"
+                classNames={{
+                  trigger: "w-full",
+                }}
+                value={filters.date ?? undefined}
+                onValueChange={v => onFilter({ date: dateHelper.normalizeDate(v) })}
+              />
+            </Show>
+
+            <Button variant="outline" onClick={() => handleSelectToday(viewMode)}>
+              Hoy
+            </Button>
+
+            <FieldWrapper label="Profesión">
+              <SelectNative
+                options={professionOptions}
+                value={filters.profession_id ?? ""}
+                onChange={e => onFilter({
+                  profession_id: stringToNullableNumber(e.target.value),
+                  professional_id: null,
+                })}
+              />
+            </FieldWrapper>
+
+            <FieldWrapper label="Profesional">
+              <SelectNative
+                options={filteredProfessionalOptions}
+                value={filters.professional_id ?? ""}
+                onChange={e => onFilter({
+                  professional_id: stringToNullableNumber(e.target.value),
+                })}
+              />
+            </FieldWrapper>
+
+            <SearchPatient
+              autoFocus
+              label="Rut paciente"
+              key={filters.patient_rut}
+              classNames={{ input: "w-full" }}
+              defaultValue={filters.patient_rut ?? ""}
+              onSearch={v => onFilter({ patient_rut: v })}
+            />
+
+            <Button variant="outline" onClick={handleClearAllFilters}>
+              <span>Limpiar filtros</span>
+              <FunnelXIcon size={20} />
+            </Button>
+          </div>
+        </Dialog.Content>
+      </Dialog>
+    </>
+  );
+}
+
+export { ModalAppointmentFilters };

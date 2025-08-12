@@ -1,12 +1,12 @@
 import { CustomError } from "@/lib/custom-error";
 
-import type { ProfessionalOption } from "../domain/models/professional-for-filters-model";
+import type { ProfessionalForFilterModel } from "../domain/models/professional-for-filters-model";
 
-import { ApiProfessionalOptionSchema } from "../domain/schemas/professional-option-schema";
+import { ApiProfessionalForFiltersSchema } from "../domain/schemas/professional-for-filters-schema";
 
 export class ProfessionalForFiltersMapper {
-  static map(raw: unknown): ProfessionalOption {
-    const { success, error, data } = ApiProfessionalOptionSchema.safeParse(raw);
+  static map(raw: unknown): ProfessionalForFilterModel {
+    const { success, error, data } = ApiProfessionalForFiltersSchema.safeParse(raw);
 
     if (!success) {
       throw CustomError.mapperError(error, {
@@ -21,8 +21,8 @@ export class ProfessionalForFiltersMapper {
     };
   }
 
-  static fromApiToDomain(raw: unknown): ProfessionalOption[] {
-    const { success, error, data } = ApiProfessionalOptionSchema.array().safeParse(raw);
+  static fromApiToDomain(raw: unknown): ProfessionalForFilterModel[] {
+    const { success, error, data } = ApiProfessionalForFiltersSchema.array().safeParse(raw);
 
     if (!success) {
       throw CustomError.mapperError(error, {

@@ -9,8 +9,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";
 import { cn, formatPhoneNumber } from "@/lib/utils";
 
-import { useProfessionalFilters } from "../hooks/use-professional-filters";
 import { professionalQuery } from "../container";
+import { useProfessionalFilters } from "../hooks/use-professional-filters";
 import { ToggleProfessionalStatusButton } from "./toggle-patient-status-button";
 
 function ProfessionalTableRows() {

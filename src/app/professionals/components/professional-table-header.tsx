@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { Loader2Icon } from "lucide-react";
 
-import { SearchPatient } from "@/app/patient/components/search-patient";
-import { PatientStatus } from "@/app/patient/models";
+import { SearchPatient } from "@/app/patients/components/search-patient";
+import { PatientStatus } from "@/app/patients/domain/models/type";
 import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
 import { Table } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
-import { useProfessionalFilters } from "../hooks/use-professional-filters";
 import { professionalQuery } from "../container";
+import { useProfessionalFilters } from "../hooks/use-professional-filters";
 
 function ProfessionalTableHeader() {
   const {

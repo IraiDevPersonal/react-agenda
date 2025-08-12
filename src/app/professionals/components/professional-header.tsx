@@ -6,8 +6,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { PageTitle } from "@/components/ui/page-title";
 import { ROUTES } from "@/lib/constants/routes";
 
-import { useProfessionalFilters } from "../hooks/use-professional-filters";
 import { professionalQuery } from "../container";
+import { useProfessionalFilters } from "../hooks/use-professional-filters";
 import { ProfessionalFilters } from "./professional-filters";
 
 function ProfessionalHeader() {

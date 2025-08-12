@@ -41,3 +41,11 @@ export type FiltersWithPagination<T extends object = object> = {
   page: number;
   limit: number;
 } & T;
+
+export type ResponseWithPagination<T> = {
+  data: T[];
+  total: number;
+  page: number;
+  pages: number;
+  limit: number;
+};

@@ -1,7 +1,7 @@
 import type { HttpClientImpl } from "@/lib/http-client";
 
 import type { ProfessionalDetailResponseModel } from "./domain/models/professional-detail-model";
-import type { ProfessionalOption } from "./domain/models/professional-for-filters-model";
+import type { ProfessionalForFilterModel } from "./domain/models/professional-for-filters-model";
 import type { ProfessionalResponseModel } from "./domain/models/professional-model";
 
 import { ProfessionalDetailMapper } from "./mappers/professional-detail-mapper";
@@ -11,7 +11,7 @@ import { ProfessionalMapper } from "./mappers/professional-mapper";
 export type ProfessionalServiceImpl = {
   getProfessionals: (filters: object) => Promise<ProfessionalResponseModel>;
   getProfessionalByUid: (uid: string) => Promise<ProfessionalDetailResponseModel>;
-  getProfessionalsForFilters: () => Promise<ProfessionalOption[]>;
+  getProfessionalsForFilters: () => Promise<ProfessionalForFilterModel[]>;
 };
 
 export class ProfessionalService implements ProfessionalServiceImpl {

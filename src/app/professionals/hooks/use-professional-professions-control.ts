@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { professionQuery } from "@/app/profession/container";
+import { professionQuery } from "@/app/professions/container";
 
 import { useProfessionStore } from "../stores/professions-store";
 import { useProfessionalObserver } from "./use-professional-observer";

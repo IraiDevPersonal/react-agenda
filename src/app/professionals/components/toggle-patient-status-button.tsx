@@ -5,8 +5,8 @@ import { ButtonWithAlertDialog } from "@/components/ui/button-with-alert-button"
 
 import type { ProfessionalModel } from "../domain/models/professional-model";
 
-import { useProfessionalFilters } from "../hooks/use-professional-filters";
 import { professionalQuery } from "../container";
+import { useProfessionalFilters } from "../hooks/use-professional-filters";
 
 type Props = {
   professional: ProfessionalModel;

@@ -8,5 +8,7 @@ export const QUERY_KEYS = {
     list: "list",
     delete: "delete",
     upsert: "upsert",
+    create: "create",
+    update: "update",
   },
 } as const;
