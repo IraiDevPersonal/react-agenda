@@ -11,11 +11,17 @@ type Store = {
 
 export const useRolesStore = create<Store>(set => ({
   roles: [],
-  onAddRole: role => set(state => ({
-    roles: [...state.roles, role],
-  })),
-  onRemoveRole: id => set(state => ({
-    roles: state.roles.filter(role => role.id !== id),
-  })),
-  setRoles: roles => set({ roles }),
+  onAddRole(role) {
+    set(state => ({
+      roles: [...state.roles, role],
+    }));
+  },
+  onRemoveRole(id) {
+    set(state => ({
+      roles: state.roles.filter(role => role.id !== id),
+    }));
+  },
+  setRoles(roles) {
+    set({ roles });
+  },
 }));

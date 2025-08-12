@@ -10,7 +10,7 @@ import { parseAsLocalDate } from "@/lib/nuqs-parser";
 
 import type { AppointmentFilters, AppointmentViewMode } from "../domain/models/type";
 
-import { useAppointmentUiStore } from "../stores/appointment-ui-store";
+import { useViewModeStore } from "../stores/view-mode-store";
 
 function parser(): AppointmentFilters {
   const currentDate = dateHelper.createDate();
@@ -30,8 +30,8 @@ export function useAppointmentFilters() {
   const [, startTransition] = useTransition();
   const [filters, onFilter] = useQueryStates(parser(), { history: "replace", startTransition });
 
-  const viewMode = useAppointmentUiStore(s => s.viewMode);
-  const onViewModeChange = useAppointmentUiStore(s => s.onViewModeChange);
+  const viewMode = useViewModeStore(s => s.viewMode);
+  const setViewMode = useViewModeStore(s => s.setViewMode);
 
   const { invalidateQueries } = useQueryClient();
 
@@ -55,7 +55,7 @@ export function useAppointmentFilters() {
     const viewMode = e.target.value as AppointmentViewMode;
 
     handleSelectToday(viewMode);
-    onViewModeChange(viewMode);
+    setViewMode(viewMode);
   };
 
   const handleClearAllFilters = () => {

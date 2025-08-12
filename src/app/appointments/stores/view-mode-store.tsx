@@ -3,13 +3,13 @@ import { create } from "zustand";
 import type { AppointmentViewMode } from "../domain/models/type";
 
 type Store = {
-  onViewModeChange: (v: AppointmentViewMode) => void;
+  setViewMode: (v: AppointmentViewMode) => void;
   viewMode: AppointmentViewMode;
 };
 
-export const useAppointmentUiStore = create<Store>(set => ({
+export const useViewModeStore = create<Store>(set => ({
   viewMode: "week",
-  onViewModeChange(v) {
+  setViewMode(v) {
     set({ viewMode: v });
   },
 }));
