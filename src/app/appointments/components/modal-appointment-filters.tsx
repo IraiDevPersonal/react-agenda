@@ -1,28 +1,25 @@
 import { FunnelIcon, FunnelXIcon, RotateCcwIcon } from "lucide-react";
 
 import { SearchPatient } from "@/app/patients/components/search-patient";
-import { Show } from "@/components/show";
 import { Button } from "@/components/ui/button";
-import { DatePicker } from "@/components/ui/date-picker";
 import { Dialog } from "@/components/ui/dialog";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { SelectNative } from "@/components/ui/select-native";
 import { DefaultTooltip } from "@/components/ui/tooltip";
-import { WeekPicker } from "@/components/ui/week-picker";
-import { dateHelper } from "@/lib/date-helper";
 import { stringToNullableNumber } from "@/lib/utils";
 
 import { useAppointmentFilterOptions } from "../hooks/use-appointment-filter-options";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
+import { AppointmentDateSelector } from "./appointment-date-selector";
+import { AppointmentStatusSelector } from "./appointment-status-selector";
+import { AppointmentViewModeSelector } from "./appointment-view-mode-selector";
 
 function ModalAppointmentFilters() {
   const {
     filters,
-    viewMode,
     onFilter,
     handleRefresh,
     handleSelectToday,
-    handleViewModeChange,
     handleClearAllFilters,
   } = useAppointmentFilters();
   const {
@@ -54,51 +51,9 @@ function ModalAppointmentFilters() {
           </Dialog.Header>
 
           <div className="space-y-4 *:w-full">
-            <FieldWrapper label="Modo de vista">
-              <SelectNative
-                value={viewMode}
-                withEmptyOption={false}
-                onChange={handleViewModeChange}
-                options={[
-                  { label: "Día", value: "day" },
-                  { label: "Semana", value: "week" },
-                ]}
-              />
-            </FieldWrapper>
+            <AppointmentViewModeSelector />
 
-            <Show when={viewMode === "week"}>
-              <WeekPicker
-                label="Semana"
-                classNames={{ trigger: "w-full" }}
-                value={
-                  filters.date_from && filters.date_to
-                    ? {
-                        from: filters.date_from,
-                        to: filters.date_to,
-                      }
-                    : undefined
-                }
-                onValueChange={v => onFilter({
-                  date_from: v?.from,
-                  date_to: v?.to,
-                })}
-              />
-            </Show>
-
-            <Show when={viewMode === "day"}>
-              <DatePicker
-                label="Fecha"
-                classNames={{
-                  trigger: "w-full",
-                }}
-                value={filters.date ?? undefined}
-                onValueChange={v => onFilter({ date: dateHelper.normalizeDate(v) })}
-              />
-            </Show>
-
-            <Button variant="outline" onClick={() => handleSelectToday(viewMode)}>
-              Hoy
-            </Button>
+            <AppointmentStatusSelector fullwidth />
 
             <FieldWrapper label="Profesión">
               <SelectNative
@@ -129,6 +84,12 @@ function ModalAppointmentFilters() {
               defaultValue={filters.patient_rut ?? ""}
               onSearch={v => onFilter({ patient_rut: v })}
             />
+
+            <AppointmentDateSelector fullwidth />
+
+            <Button variant="outline" onClick={handleSelectToday}>
+              Hoy
+            </Button>
 
             <Button variant="outline" onClick={handleClearAllFilters}>
               <span>Limpiar filtros</span>

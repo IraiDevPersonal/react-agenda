@@ -21,7 +21,7 @@ export function Sidebar() {
       </header>
 
       <div className="grow-[1] space-y-2">
-        <span className="text-muted-foreground">General</span>
+        <span className="text-muted-foreground">Menú</span>
         <ul className="space-y-1">
           <For items={PATHS}>
             {path => (

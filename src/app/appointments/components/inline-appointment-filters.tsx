@@ -1,27 +1,24 @@
 import { FunnelXIcon, RotateCcwIcon } from "lucide-react";
 
 import { SearchPatient } from "@/app/patients/components/search-patient";
-import { Show } from "@/components/show";
 import { Button } from "@/components/ui/button";
-import { DatePicker } from "@/components/ui/date-picker";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { SelectNative } from "@/components/ui/select-native";
 import { DefaultTooltip } from "@/components/ui/tooltip";
-import { WeekPicker } from "@/components/ui/week-picker";
-import { dateHelper } from "@/lib/date-helper";
 import { stringToNullableNumber } from "@/lib/utils";
 
 import { useAppointmentFilterOptions } from "../hooks/use-appointment-filter-options";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
+import { AppointmentDateSelector } from "./appointment-date-selector";
+import { AppointmentStatusSelector } from "./appointment-status-selector";
+import { AppointmentViewModeSelector } from "./appointment-view-mode-selector";
 
 function InlineAppointmentFilters() {
   const {
     filters,
-    viewMode,
     onFilter,
     handleRefresh,
     handleSelectToday,
-    handleViewModeChange,
     handleClearAllFilters,
   } = useAppointmentFilters();
   const { professionOptions, filteredProfessionalOptions } = useAppointmentFilterOptions();
@@ -59,46 +56,15 @@ function InlineAppointmentFilters() {
         />
       </FieldWrapper>
 
-      <Show when={viewMode === "week"}>
-        <WeekPicker
-          label="Semana"
-          value={
-            filters.date_from && filters.date_to
-              ? {
-                  from: filters.date_from,
-                  to: filters.date_to,
-                }
-              : undefined
-          }
-          onValueChange={v => onFilter({
-            date_from: v?.from,
-            date_to: v?.to,
-          })}
-        />
-      </Show>
+      <AppointmentStatusSelector />
 
-      <Show when={viewMode === "day"}>
-        <DatePicker
-          showControls
-          label="Fecha"
-          value={filters.date ?? undefined}
-          onValueChange={v => onFilter({ date: dateHelper.normalizeDate(v) })}
-        />
-      </Show>
+      <AppointmentDateSelector />
 
-      <Button variant="outline" onClick={() => handleSelectToday(viewMode)}>
+      <Button variant="outline" onClick={handleSelectToday}>
         Hoy
       </Button>
 
-      <SelectNative
-        value={viewMode}
-        withEmptyOption={false}
-        onChange={handleViewModeChange}
-        options={[
-          { label: "Día", value: "day" },
-          { label: "Semana", value: "week" },
-        ]}
-      />
+      <AppointmentViewModeSelector />
 
       <DefaultTooltip content="Refrescar datos">
         <Button variant="outline" size="icon" onClick={handleRefresh}>

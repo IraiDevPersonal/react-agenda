@@ -30,13 +30,14 @@ export function useAppointmentFilters() {
   const [, startTransition] = useTransition();
   const [filters, onFilter] = useQueryStates(parser(), { history: "replace", startTransition });
 
-  const viewMode = useViewModeStore(s => s.viewMode);
   const setViewMode = useViewModeStore(s => s.setViewMode);
 
   const { invalidateQueries } = useQueryClient();
 
-  const handleSelectToday = (viewMode: AppointmentViewMode) => {
+  const handleSelectToday = () => {
     const currentDate = dateHelper.createDate(filters.date);
+    const viewMode = useViewModeStore.getState().viewMode;
+
     if (viewMode === "day") {
       onFilter({ date: currentDate, date_to: null, date_from: null });
     }
@@ -52,10 +53,10 @@ export function useAppointmentFilters() {
   };
 
   const handleViewModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const viewMode = e.target.value as AppointmentViewMode;
+    const value = e.target.value as AppointmentViewMode;
 
-    handleSelectToday(viewMode);
-    setViewMode(viewMode);
+    handleSelectToday();
+    setViewMode(value);
   };
 
   const handleClearAllFilters = () => {
@@ -78,7 +79,6 @@ export function useAppointmentFilters() {
   };
 
   return {
-    viewMode,
     filters,
     onFilter,
     handleRefresh,

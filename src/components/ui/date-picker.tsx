@@ -38,7 +38,7 @@ function DatePicker({ value, label, classNames, dateViewStyle = "PPP", showContr
   };
 
   return (
-    <div className="flex items-end gap-x-1">
+    <div className={cn("flex items-end gap-x-1", classNames?.root)}>
       {showControls && (
         <Button variant="outline" size="icon" onClick={handlePrevChange}>
           <ChevronLeftIcon />

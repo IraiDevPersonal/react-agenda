@@ -1,6 +1,9 @@
 import type { UseQueryStatesKeysMap } from "nuqs";
 
-export type AppointmentViewMode = "week" | "day";
+export enum AppointmentViewMode {
+  week = "week",
+  day = "day",
+}
 
 export enum AppointmentStatus {
   AVAILABLE = "AVAILABLE",
