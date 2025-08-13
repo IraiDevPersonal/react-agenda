@@ -13,22 +13,21 @@ function WeekGridHeader() {
 
   return (
     <Grid.Header className="grid-cols-[100px_1fr_1fr_1fr_1fr_1fr_1fr]">
-      <Grid.Col className="capitalize">
+      <Grid.HeaderCell className="capitalize text-right">
         {isSameMonth(filters.date_from!, filters.date_to!)
           ? (format(filters.date_from!, "MMMM"))
           : (`${format(filters.date_from!, "MMM")} - ${format(filters.date_to!, "MMM")}`)}
-      </Grid.Col>
+      </Grid.HeaderCell>
 
       <For items={WEEK_DAYS}>
         {({ label, value }) => {
-          const { date_from, date_to } = filters;
-          const match = getAllDaysInDateRange(date_from, date_to).find(d => getDay(d) === value);
+          const match = getAllDaysInDateRange(filters.date_from, filters.date_to).find(d => getDay(d) === value);
           const day = match ? format(match, "dd") : "--";
 
           return (
-            <Grid.Col key={label}>
+            <Grid.HeaderCell key={label}>
               {`${label} ${day}`}
-            </Grid.Col>
+            </Grid.HeaderCell>
           );
         }}
       </For>

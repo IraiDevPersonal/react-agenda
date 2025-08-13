@@ -10,11 +10,11 @@ type Props = {
 function AppointmentListFallback({ className }: Props) {
   const { filters } = useAppointmentFilters();
   return (
-    <Grid.Col className={cn(className, "h-96 grid place-content-center")}>
+    <Grid.Cell className={cn(className, "h-96 grid place-content-center")}>
       {
         filters.profession_id ? "Sin Agenda para fecha seleccionada..." : "Seleccione profesión..."
       }
-    </Grid.Col>
+    </Grid.Cell>
   );
 }
 

@@ -30,15 +30,15 @@ function WeekAppointmentsView() {
       >
         {appointment => (
           <Grid.Row key={appointment.uid} className="grid-cols-[100px_1fr_1fr_1fr_1fr_1fr_1fr]">
-            <Grid.TimeCol from={appointment.time_from} to={appointment.time_to} />
+            <Grid.TimeCell from={appointment.time_from} to={appointment.time_to} />
 
             <For items={WEEK_DAYS.map(el => el.value)}>
               {weekday => (
-                <Grid.Col key={weekday}>
+                <Grid.Cell key={weekday}>
                   <Show when={isAppointmentOnDay(appointment.date, weekday)}>
                     <AppointmentCard appointment={appointment} />
                   </Show>
-                </Grid.Col>
+                </Grid.Cell>
               )}
             </For>
           </Grid.Row>

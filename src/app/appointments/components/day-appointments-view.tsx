@@ -23,13 +23,13 @@ function DayAppointmentsView() {
     <>
       <Grid className="max-w-xl">
         <Grid.Header>
-          <Grid.Col></Grid.Col>
-          <Grid.Col className="text-left col-span-6 first-letter:uppercase">
+          <Grid.Cell></Grid.Cell>
+          <Grid.Cell className="text-left col-span-6 first-letter:uppercase">
             {dateHelper.format(
               dateHelper.createDate(filters.date),
               DateFormat["EEEE dd 'de' MMMM 'de' yyyy"],
             )}
-          </Grid.Col>
+          </Grid.Cell>
         </Grid.Header>
         <For
           fallback={cls => <AppointmentListFallback className={cls} />}
@@ -37,8 +37,8 @@ function DayAppointmentsView() {
         >
           {appointment => (
             <Grid.Row key={appointment.uid}>
-              <Grid.TimeCol from={appointment.time_from} to={appointment.time_to} />
-              <Grid.Col className="col-span-6">
+              <Grid.TimeCell from={appointment.time_from} to={appointment.time_to} />
+              <Grid.Cell className="col-span-6">
                 <Show
                   when={
                     isAppointmentOnDay(
@@ -49,7 +49,7 @@ function DayAppointmentsView() {
                 >
                   <AppointmentCard appointment={appointment} />
                 </Show>
-              </Grid.Col>
+              </Grid.Cell>
             </Grid.Row>
           )}
         </For>

@@ -15,7 +15,7 @@ type RowProps = PropsWithChildren<{ asHeader?: boolean; className?: string }>;
 function Row({ children, asHeader, className }: RowProps) {
   return (
     <div className={cn(
-      "grid grid-cols-[50px_1fr_1fr_1fr_1fr_1fr_1fr] border-b last:border-b-0",
+      "grid grid-cols-[50px_1fr_1fr_1fr_1fr_1fr_1fr]",
       asHeader && "font-semibold text-center bg-sidebar sticky top-0 z-20",
       className,
     )}
@@ -25,30 +25,52 @@ function Row({ children, asHeader, className }: RowProps) {
   );
 }
 
-type ColProps = PropsWithChildren<{ className?: string }>;
+type CellProps = PropsWithChildren<{ className?: string }>;
 
-function Col({ children, className }: ColProps) {
+function Cell({ children, className }: CellProps) {
   return (
-    <div className={cn("p-2 border-r last:border-0 first:bg-sidebar w-full", className)}>
+    <div className={cn("p-2 w-full", className)}>
       {children}
     </div>
   );
 }
 
-function TimeCol({ from, to }: { to: string; from: string }) {
+function HeaderCell({ className, ...props }: CellProps) {
   return (
-    <AppointmentGrid.Col className="text-right text-sm text-muted-foreground flex flex-col gap-y-4 justify-between">
+    <AppointmentGrid.Cell
+      {...props}
+      className={cn("border-r last:border-r-0", className)}
+    />
+  );
+}
+
+function TimeCell({ from, to }: { to: string; from: string }) {
+  return (
+    <AppointmentGrid.Cell className="bg-sidebar text-right text-sm text-muted-foreground flex flex-col gap-y-4 justify-between border-r">
       <span>{from}</span>
       <span>{to}</span>
-    </AppointmentGrid.Col>
+    </AppointmentGrid.Cell>
   );
 }
 
 type CustomRowProps = Omit<RowProps, "asHeader">;
 
-AppointmentGrid.Header = (props: CustomRowProps) => <Row asHeader {...props} />;
-AppointmentGrid.Row = (props: CustomRowProps) => <Row {...props} />;
-AppointmentGrid.TimeCol = TimeCol;
-AppointmentGrid.Col = Col;
+function HeaderRow({ className, ...props }: CustomRowProps) {
+  return (
+    <Row asHeader {...props} className={cn("border-b", className)} />
+  );
+}
+
+function BodyRow({ className, ...props }: CustomRowProps) {
+  return (
+    <Row {...props} className={cn("border-b last:border-0", className)} />
+  );
+}
+
+AppointmentGrid.HeaderCell = HeaderCell;
+AppointmentGrid.TimeCell = TimeCell;
+AppointmentGrid.Header = HeaderRow;
+AppointmentGrid.Row = BodyRow;
+AppointmentGrid.Cell = Cell;
 
 export { AppointmentGrid };
