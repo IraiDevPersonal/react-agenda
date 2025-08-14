@@ -68,7 +68,13 @@ function DatePicker({ value, label, classNames, dateViewStyle = "PPP", showContr
           </PopoverTrigger>
 
           <PopoverContent className="w-auto p-2" align="start">
-            <Calendar required mode="single" selected={value} onSelect={onValueChange} />
+            <Calendar
+              required
+              mode="single"
+              selected={value}
+              defaultMonth={value ?? dateHelper.createDate()}
+              onSelect={onValueChange}
+            />
           </PopoverContent>
         </Popover>
       </FieldWrapper>

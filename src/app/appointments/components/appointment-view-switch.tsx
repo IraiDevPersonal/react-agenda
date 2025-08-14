@@ -4,7 +4,7 @@ import { useViewModeStore } from "../stores/view-mode-store";
 import { DayAppointmentsView } from "./day-appointments-view";
 import { WeekAppointmentsView } from "./week-appointments-view";
 
-function AppointmentViewSelector() {
+function AppointmentViewSwitch() {
   const viewMode = useViewModeStore(s => s.viewMode);
   return (
     <div className="overflow-x-auto">
@@ -19,4 +19,4 @@ function AppointmentViewSelector() {
   );
 }
 
-export { AppointmentViewSelector };
+export { AppointmentViewSwitch };

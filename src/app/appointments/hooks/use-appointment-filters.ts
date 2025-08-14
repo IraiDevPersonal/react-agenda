@@ -34,15 +34,16 @@ export function useAppointmentFilters() {
 
   const { invalidateQueries } = useQueryClient();
 
-  const handleSelectToday = () => {
-    const currentDate = dateHelper.createDate(filters.date);
-    const viewMode = useViewModeStore.getState().viewMode;
+  const handleSelectToday = (currentViewMode?: AppointmentViewMode) => {
+    const viewMode = currentViewMode ?? useViewModeStore.getState().viewMode;
 
     if (viewMode === "day") {
+      const currentDate = filters.date_from ?? dateHelper.createDate();
       onFilter({ date: currentDate, date_to: null, date_from: null });
     }
 
     if (viewMode === "week") {
+      const currentDate = filters.date ?? dateHelper.createDate();
       const newDate = dateHelper.getWeekRange(currentDate);
       onFilter({
         date: null,
@@ -55,7 +56,7 @@ export function useAppointmentFilters() {
   const handleViewModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as AppointmentViewMode;
 
-    handleSelectToday();
+    handleSelectToday(value);
     setViewMode(value);
   };
 

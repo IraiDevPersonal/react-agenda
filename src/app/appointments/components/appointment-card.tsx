@@ -1,5 +1,7 @@
 import type { PropsWithChildren } from "react";
 
+import { HeartHandshakeIcon, PhoneIcon, UserIcon } from "lucide-react";
+
 import { cn, formatPhoneNumber } from "@/lib/utils";
 
 import type { AppointmentModel } from "../domain/models/appointment-model";
@@ -42,22 +44,24 @@ function AppointmentCard({ appointment }: Props) {
       {
         isAvailable
           ? (
-              <>
-                <h6 className="font-semibold text-center text-sm">Disponible</h6>
-              </>
+              <h6 className="font-semibold text-center text-sm">Disponible</h6>
             )
           : (
               <>
                 <h6 className="font-medium text-sm capitalize">{appointment.professional_name}</h6>
-                <span>{appointment.professions.join(", ")}</span>
+                <div>
+                  <HeartHandshakeIcon size={14} className="inline-block mr-1" />
+                  <span className="italic">{appointment.professions.join(", ")}</span>
+                </div>
                 <h6 className="font-medium text-sm capitalize mt-2">{appointment.patient_name}</h6>
-                <span>
-                  {appointment.patient_rut}
-                  {" "}
-                  /
-                  {" "}
-                  {formatPhoneNumber(appointment.patient_phone)}
-                </span>
+                <div>
+                  <UserIcon size={14} className="inline-block mr-1" />
+                  <span>{appointment.patient_rut}</span>
+                </div>
+                <div>
+                  <PhoneIcon size={12} className="inline-block ms-0.5 mr-1" />
+                  <span>{formatPhoneNumber(appointment.patient_phone)}</span>
+                </div>
               </>
             )
       }

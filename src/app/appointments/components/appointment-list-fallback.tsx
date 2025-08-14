@@ -1,20 +1,24 @@
+import { Table } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
-import { AppointmentGrid as Grid } from "./appointment-grid";
 
 type Props = {
   className?: string;
+  colSpan?: number;
 };
 
-function AppointmentListFallback({ className }: Props) {
+function AppointmentListFallback({ className, colSpan }: Props) {
   const { filters } = useAppointmentFilters();
+
   return (
-    <Grid.Cell className={cn(className, "h-96 grid place-content-center")}>
-      {
-        filters.profession_id ? "Sin Agenda para fecha seleccionada..." : "Seleccione profesión..."
-      }
-    </Grid.Cell>
+    <Table.Row>
+      <Table.Cell colSpan={colSpan} className={cn("h-96 align-middle text-center", className)}>
+        {
+          filters.profession_id ? "Sin Agenda para fecha seleccionada..." : "Seleccione profesión..."
+        }
+      </Table.Cell>
+    </Table.Row>
   );
 }
 
