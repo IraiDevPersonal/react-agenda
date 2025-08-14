@@ -48,7 +48,7 @@ function HeaderRow() {
             const day = match ? format(match, "dd") : "--";
 
             return (
-              <Table.Head key={label} className="border-l w-72">
+              <Table.Head key={label} className="border-l w-[278px]">
                 {`${label} ${day}`}
               </Table.Head>
             );

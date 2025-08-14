@@ -4,7 +4,7 @@ type Props = PropsWithChildren;
 
 function AppointmentDetailWrapper(props: Props) {
   return (
-    <aside className="pl-4 min-w-lg max-w-lg w-full space-y-4 ml-4 border-l flex flex-col">
+    <aside className="w-lg space-y-4 flex flex-col h-full">
       {props.children}
     </aside>
   );

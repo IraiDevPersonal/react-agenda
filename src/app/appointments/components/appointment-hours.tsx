@@ -2,17 +2,14 @@ import { DateFormat, dateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
 
 import type { AppointmentDetailModel } from "../domain/models/appointment-detail-model";
-import type { AppointmentStatus } from "../domain/models/type";
 
 type Props = {
-  status: AppointmentStatus;
   datetime: Pick<AppointmentDetailModel, "date" | "time_from" | "time_to">;
 };
 
-function DatetimeAttetionAppointment({ status, datetime }: Props) {
+function AppointmentHours({ datetime }: Props) {
   return (
     <div
-      data-status={status.toLocaleLowerCase().replace("_", "")}
       className={cn(
         "w-full rounded-lg overflow-hidden grid grid-cols-2",
         "*:p-1.5 text-center *:odd:border-r border bg-sidebar",
@@ -36,4 +33,4 @@ function DatetimeAttetionAppointment({ status, datetime }: Props) {
   );
 }
 
-export { DatetimeAttetionAppointment };
+export { AppointmentHours };

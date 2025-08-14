@@ -25,6 +25,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.513.0",
+    "motion": "^12.23.12",
     "nuqs": "^2.4.3",
     "phone-formatter": "^0.0.2",
     "query-string": "^9.2.2",

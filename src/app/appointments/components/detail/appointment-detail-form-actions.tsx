@@ -1,28 +1,21 @@
-import { useNavigate } from "react-router";
-
 import { Button } from "@/components/ui/button";
-import { ROUTES } from "@/lib/constants/routes";
-import { getUrlData } from "@/lib/utils";
+import { Sheet } from "@/components/ui/sheet";
 
 import { APPOINTMENT_DETAIL_FORM_ID } from "../../lib/constants";
 
 function AppointmentDetailFormActions() {
-  const navigate = useNavigate();
-
-  const handleCloseDetail = () => {
-    const { search } = getUrlData();
-    navigate(`${ROUTES.agenda}${search}`, { replace: true });
-  };
   return (
-    <div className="flex justify-end gap-2">
-      <Button variant="secondary" onClick={handleCloseDetail}>
-        Cerrar
-      </Button>
+    <Sheet.Footer>
+      <Sheet.Close asChild>
+        <Button variant="secondary">
+          Cerrar
+        </Button>
+      </Sheet.Close>
 
       <Button form={APPOINTMENT_DETAIL_FORM_ID} type="submit">
         Agendar
       </Button>
-    </div>
+    </Sheet.Footer>
   );
 }
 

@@ -4,7 +4,7 @@ import { useMount } from "@/hooks/use-mount";
 
 import { AppointmentHeader } from "./components/appointment-header";
 import { AppointmentViewSwitch } from "./components/appointment-view-switch";
-import { AppoinmentDetailView } from "./components/detail/appoinment-detail-view";
+import { SheetAppointmentDetail } from "./components/detail/sheet-appointment-detail";
 import { useStatusStore } from "./stores/status-store";
 import { useViewModeStore } from "./stores/view-mode-store";
 
@@ -19,8 +19,8 @@ function AgendaPage() {
       <AppointmentHeader />
       <Main className="justify-between">
         <AppointmentViewSwitch />
-        <AppoinmentDetailView />
       </Main>
+      <SheetAppointmentDetail />
     </PageLayout>
   );
 }

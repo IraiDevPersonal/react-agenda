@@ -6,7 +6,7 @@ type Props = {
   professional: ProfessionalForAppointmentDetailModel;
 };
 
-function ProfessionalAppointmentInfo({ professional }: Props) {
+function ProfessionalInfoForAppointment({ professional }: Props) {
   return (
     <div>
       <h5 className="text-lg font-semibold">Datos profesional:</h5>
@@ -38,4 +38,4 @@ function ProfessionalAppointmentInfo({ professional }: Props) {
   );
 }
 
-export { ProfessionalAppointmentInfo };
+export { ProfessionalInfoForAppointment };
