@@ -60,7 +60,7 @@ function InlineAppointmentFilters() {
 
       <AppointmentDateSelector />
 
-      <Button variant="outline" onClick={handleSelectToday}>
+      <Button variant="outline" onClick={() => handleSelectToday()}>
         Hoy
       </Button>
 

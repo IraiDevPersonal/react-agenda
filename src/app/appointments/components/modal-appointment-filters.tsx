@@ -87,7 +87,7 @@ function ModalAppointmentFilters() {
 
             <AppointmentDateSelector fullwidth />
 
-            <Button variant="outline" onClick={handleSelectToday}>
+            <Button variant="outline" onClick={() => handleSelectToday()}>
               Hoy
             </Button>
 
