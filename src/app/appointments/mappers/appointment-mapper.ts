@@ -33,7 +33,7 @@ export class AppointmentMapper {
 
     if (!success) {
       throw CustomError.mapperError(error, {
-        loggerMessage: "AppointmentMapper.map",
+        loggerMessage: "AppointmentMapper.fromApiToDomain",
       });
     }
 

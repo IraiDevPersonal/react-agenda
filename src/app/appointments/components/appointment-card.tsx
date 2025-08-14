@@ -60,7 +60,7 @@ function AppointmentCard({ appointment }: Props) {
                 </div>
                 <div>
                   <PhoneIcon size={12} className="inline-block ms-0.5 mr-1" />
-                  <span>{formatPhoneNumber(appointment.patient_phone)}</span>
+                  <span>{formatPhoneNumber(appointment?.patient_phone ?? "")}</span>
                 </div>
               </>
             )

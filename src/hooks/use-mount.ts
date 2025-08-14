@@ -5,7 +5,6 @@ export function useMount(callback: () => void) {
 
   if (!isMounted.current) {
     callback();
-    console.log("mondado por unica vez");
     isMounted.current = true;
   }
 }

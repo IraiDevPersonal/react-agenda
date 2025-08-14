@@ -10,10 +10,10 @@ export const AppointmentSchema = z.object({
   date: z.string(),
   time_to: z.string(),
   time_from: z.string(),
-  patient_rut: PersonSchema.Rut,
   professions: z.string().array(),
-  patient_phone: PersonSchema.Phone,
-  patient_name: PersonSchema.FullName,
   professional_name: PersonSchema.FullName,
+  patient_rut: PersonSchema.Rut.nullable(),
   appointment_status: AppointmentStatusSchema,
+  patient_phone: PersonSchema.Phone.nullable(),
+  patient_name: PersonSchema.FullName.nullable(),
 });
