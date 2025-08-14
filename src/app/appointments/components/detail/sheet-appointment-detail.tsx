@@ -17,7 +17,7 @@ function SheetAppointmentDetail() {
           <Sheet.Title className="text-3xl leading-none mb-4">Agendar cita</Sheet.Title>
         </Sheet.Header>
 
-        <AppointmentDetail key={appointmentUid} appointmentUid={appointmentUid} />
+        <AppointmentDetail key={appointmentUid} uid={appointmentUid} />
       </Sheet.Content>
     </Sheet>
   );

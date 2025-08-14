@@ -14,17 +14,17 @@ import { AppointmentDetailSkeleton } from "./appointment-detail-skeleton";
 import { AppointmentDetailWrapper } from "./appointment-detail-wrapper";
 
 type Props = {
-  appointmentUid: string;
+  uid: string;
 };
 
-function AppointmentDetail({ appointmentUid }: Props) {
+function AppointmentDetail({ uid }: Props) {
   const {
     data,
     error,
     isError,
     isLoading,
     refetch,
-  } = useQuery(appointmentQuery.detail(appointmentUid));
+  } = useQuery(appointmentQuery.detail(uid));
 
   if (isLoading) {
     return <AppointmentDetailSkeleton />;
@@ -42,7 +42,7 @@ function AppointmentDetail({ appointmentUid }: Props) {
 
   return (
     <AppointmentDetailWrapper>
-      <AppointmentDetailInfo uid={appointmentUid} status={status} />
+      <AppointmentDetailInfo uid={uid} status={status} />
 
       <AppointmentHours datetime={{ time_from, time_to, date }} />
 
