@@ -8,17 +8,17 @@ import { CopyButton } from "@/components/ui/copy-button";
 import { ErrorMessage } from "@/components/ui/error-message";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import type { AppointmentModel } from "../../domain/models/appointment-model";
-
 import { appointmentQuery } from "../../container";
 import { STATUS_NAMES } from "../../lib/constants";
 import { AppointmentStatusIcon } from "../appoinment-status-icon";
 import { DatetimeAttetionAppointment } from "../datetime-attetion-appointment";
 import { AppointmentDetailForm } from "./appointment-detail-form";
 import { AppointmentDetailFormActions } from "./appointment-detail-form-actions";
+import { AppointmentDetailSkeleton } from "./appointment-detail-skeleton";
+import { AppointmentDetailWrapper } from "./appointment-detail-wrapper";
 
 type Props = {
-  appointmentUid: AppointmentModel["uid"];
+  appointmentUid: string;
 };
 
 function AppointmentDetail({ appointmentUid }: Props) {
@@ -31,17 +31,21 @@ function AppointmentDetail({ appointmentUid }: Props) {
   } = useQuery(appointmentQuery.detail(appointmentUid));
 
   if (isLoading) {
-    return <div>cargando...</div>;
+    return <AppointmentDetailSkeleton />;
   }
 
   if (isError) {
     return <ErrorMessage onRetry={refetch}>{error.message}</ErrorMessage>;
   }
 
-  const { alert, patient, professional, status, date, time_from, time_to } = data!;
+  if (!data) {
+    return <ErrorMessage onRetry={refetch}>No se obtuvieron datos</ErrorMessage>;
+  }
+
+  const { alert, patient, professional, status, date, time_from, time_to } = data;
 
   return (
-    <aside className="pl-4 min-w-lg max-w-lg w-full space-y-4 ml-4 border-l flex flex-col">
+    <AppointmentDetailWrapper>
       <div className="flex items-center w-full">
         <h3 className="text-xl w-72 truncate">
           <span className="min-w-max font-semibold mr-1.5">Cita ID:</span>
@@ -82,7 +86,7 @@ function AppointmentDetail({ appointmentUid }: Props) {
       <AppointmentDetailForm patient={patient} />
 
       <AppointmentDetailFormActions />
-    </aside>
+    </AppointmentDetailWrapper>
   );
 }
 

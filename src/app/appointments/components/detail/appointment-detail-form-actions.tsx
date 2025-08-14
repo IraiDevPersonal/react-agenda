@@ -20,7 +20,7 @@ function AppointmentDetailFormActions() {
       </Button>
 
       <Button form={APPOINTMENT_DETAIL_FORM_ID} type="submit">
-        Agendar Paciente
+        Agendar
       </Button>
     </div>
   );
