@@ -10,9 +10,9 @@ import type {
 import {
   PatientResponseSchema,
 } from "../models/patient-model";
-import { ApiPatientHistorySchema } from "../schemas/patient-history-schema";
-import { ApiPatientSchema } from "../schemas/patient-schema";
-import { ApiUpsertPatientResponseSchema } from "../schemas/upsert-patient-response-schema";
+import { ApiPatientHistorySchema } from "../schemas/api/patient-history-schema";
+import { ApiPatientSchema } from "../schemas/api/patient-schema";
+import { ApiUpsertPatientResponseSchema } from "../schemas/api/upsert-patient-response-schema";
 
 export class PatientMapper {
   private static mapHistory(raw: unknown): PatientHistoryModel {

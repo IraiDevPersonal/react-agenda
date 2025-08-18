@@ -3,7 +3,7 @@ import type { PatientModel } from "@/app/patient/models/patient-model";
 
 import type { ProfessionalForAppointmentDetailModel } from "@/app/professionals/models/professional-for-appointment-detail-model";
 
-import type { AppointmentStatus } from "./type";
+import type { AppointmentStatus } from "./shared-model";
 
 export type AppointmentDetailModel = {
   uid: string;

@@ -3,7 +3,7 @@ import { DefaultTooltip } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 import { STATUS_NAMES } from "../lib/constants";
-import { AppointmentStatus } from "../models/type";
+import { AppointmentStatus } from "../models/shared-model";
 import { AppointmentStatusIcon } from "./appoinment-status-icon";
 import { AppointmentFilters } from "./appointment-filters";
 

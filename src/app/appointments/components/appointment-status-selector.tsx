@@ -2,7 +2,7 @@ import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { SelectNative } from "@/components/ui/select-native";
 import { cn } from "@/lib/utils";
 
-import { AppointmentStatus } from "../models/type";
+import { AppointmentStatus } from "../models/shared-model";
 import { useStatusStore } from "../stores/status-store";
 
 type Props = {

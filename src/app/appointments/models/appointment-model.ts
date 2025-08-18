@@ -1,4 +1,4 @@
-import type { AppointmentStatus } from "./type";
+import type { AppointmentStatus } from "./shared-model";
 
 export type AppointmentModel = {
   uid: string;

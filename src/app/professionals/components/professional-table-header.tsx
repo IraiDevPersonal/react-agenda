@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Loader2Icon } from "lucide-react";
 
 import { SearchPatient } from "@/app/patients/components/search-patient";
-import { PatientStatus } from "@/app/patients/models/type";
+import { PatientStatus } from "@/app/patients/models/shared-model";
 import { Search } from "@/components/ui/search";
 import { SelectNative } from "@/components/ui/select-native";
 import { Table } from "@/components/ui/table";

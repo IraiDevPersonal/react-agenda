@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 import { patientQuery } from "../container";
 import { usePatientFilters } from "../hooks/use-patient-filters";
-import { PatientStatus } from "../models/type";
+import { PatientStatus } from "../models/shared-model";
 import { SearchPatient } from "./search-patient";
 
 function PatientTableHeader() {

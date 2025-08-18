@@ -10,7 +10,7 @@ import { queryParser } from "@/lib/utils";
 
 import type { PatientDetailResponseModel } from "./models/patient-detail-model";
 import type { PatientResponseModel } from "./models/patient-model";
-import type { PatientFilters } from "./models/type";
+import type { PatientFilters } from "./models/shared-model";
 import type { PatientServiceImpl } from "./service";
 
 type Filters = Values<PatientFilters>;

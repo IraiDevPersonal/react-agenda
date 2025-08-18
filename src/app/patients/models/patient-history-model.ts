@@ -1,4 +1,4 @@
-import type { AppointmentStatus } from "@/app/appointments/models/type";
+import type { AppointmentStatus } from "@/app/appointments/models/shared-model";
 
 export type PatientHistoryModel = {
   uid: string;

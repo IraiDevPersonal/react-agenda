@@ -3,7 +3,11 @@ import z from "zod";
 import { UidScheme } from "@/lib/schemas/global-schemas";
 import { PersonSchema } from "@/lib/schemas/person-schemas";
 
-import { AppointmentStatusSchema } from "./schema";
+import { AppointmentStatus } from "../../models/shared-model";
+
+export const AppointmentStatusSchema = z.enum(AppointmentStatus, {
+  error: "estado de cita invalido",
+});
 
 export const AppointmentSchema = z.object({
   uid: UidScheme,

@@ -2,7 +2,7 @@ import type { ResponseWithPagination } from "@/lib/types/global-types";
 
 import { ResponseWithPaginationSchema as ApiResponseWithPaginationSchema } from "@/lib/schemas/global-schemas";
 
-import { ApiPatientSchema } from "../schemas/patient-schema";
+import { ApiPatientSchema } from "../schemas/api/patient-schema";
 
 export const PatientResponseSchema = ApiResponseWithPaginationSchema(ApiPatientSchema);
 

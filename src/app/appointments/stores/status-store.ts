@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import type { AppointmentStatus } from "../models/type";
+import type { AppointmentStatus } from "../models/shared-model";
 
 type Store = {
   status: AppointmentStatus | "ALL";

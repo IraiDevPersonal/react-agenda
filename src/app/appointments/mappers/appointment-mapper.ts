@@ -2,7 +2,7 @@ import { CustomError } from "@/lib/custom-error";
 
 import type { AppointmentModel } from "../models/appointment-model";
 
-import { AppointmentSchema } from "../schemas/appointment-schema";
+import { AppointmentSchema } from "../schemas/api/appointment-schema";
 
 export class AppointmentMapper {
   static map(raw: unknown): AppointmentModel {

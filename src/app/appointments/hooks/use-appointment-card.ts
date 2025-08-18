@@ -5,7 +5,7 @@ import { getUrlData } from "@/lib/utils";
 
 import type { AppointmentModel } from "../models/appointment-model";
 
-import { AppointmentStatus } from "../models/type";
+import { AppointmentStatus } from "../models/shared-model";
 
 export function useAppointmentCard({ appointment_status, uid }: Pick<AppointmentModel, "appointment_status" | "uid">) {
   const navigate = useNavigate();

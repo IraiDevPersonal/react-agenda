@@ -7,7 +7,7 @@ import { notification } from "@/lib/notification";
 import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 
 import { patientQuery } from "../container";
-import { PatientFormSchema } from "../schemas/patient-form-schema";
+import { PatientFormSchema } from "../schemas/form/patient-form-schema";
 
 type Props = {
   upsertService: UpsertPatientServiceFn;

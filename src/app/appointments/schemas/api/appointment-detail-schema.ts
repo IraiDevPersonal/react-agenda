@@ -1,10 +1,10 @@
 import z from "zod";
 
-import { ApiPatientHistorySchema } from "@/app/patients/schemas/patient-history-schema";
-import { ApiPatientSchema } from "@/app/patients/schemas/patient-schema";
-import { ApiProfessionalForAppointmentDetailSchema } from "@/app/professionals/schemas/professional-for-appointment-detail-schema";
+import { ApiPatientHistorySchema } from "@/app/patients/schemas/api/patient-history-schema";
+import { ApiPatientSchema } from "@/app/patients/schemas/api/patient-schema";
+import { ApiProfessionalForAppointmentDetailSchema } from "@/app/professionals/schemas/api/professional-for-appointment-detail-schema";
 
-import { AppointmentStatusSchema } from "./schema";
+import { AppointmentStatusSchema } from "./appointment-schema";
 
 export const ApiAppointmentDetailSchema = z.object({
   uid: z.string(),

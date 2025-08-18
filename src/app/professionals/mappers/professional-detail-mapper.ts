@@ -2,7 +2,7 @@ import { CustomError } from "@/lib/custom-error";
 
 import type { ProfessionalDetailResponseModel } from "../models/professional-detail-model";
 
-import { ProfessionalDetailResponseSchema } from "../schemas/professional-detail-response-schema";
+import { ProfessionalDetailResponseSchema } from "../schemas/api/professional-detail-response-schema";
 import { ProfessionalMapper } from "./professional-mapper";
 
 export class ProfessionalDetailMapper {

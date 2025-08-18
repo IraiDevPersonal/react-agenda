@@ -10,7 +10,7 @@ import { queryParser } from "@/lib/utils";
 
 import type { AppointmentDetailModel } from "./models/appointment-detail-model";
 import type { AppointmentModel } from "./models/appointment-model";
-import type { AppointmentFilters } from "./models/type";
+import type { AppointmentFilters } from "./models/shared-model";
 import type { AppointmentServiceImpl } from "./service";
 
 type Filters = Partial<Values<AppointmentFilters>>;

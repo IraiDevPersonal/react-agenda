@@ -1,7 +1,7 @@
 import { SelectNative } from "@/components/ui/select-native";
 
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
-import { AppointmentViewMode } from "../models/type";
+import { AppointmentViewMode } from "../models/shared-model";
 import { useViewModeStore } from "../stores/view-mode-store";
 
 function AppointmentViewModeSelector() {
