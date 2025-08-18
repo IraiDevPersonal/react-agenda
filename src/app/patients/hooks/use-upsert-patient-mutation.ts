@@ -4,10 +4,10 @@ import { useNavigate } from "react-router";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { notification } from "@/lib/notification";
 
-import type { UpsertPatientServiceFn } from "../domain/models/patient-action-model";
+import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 
 import { patientQuery } from "../container";
-import { PatientFormSchema } from "../domain/schemas/patient-form-schema";
+import { PatientFormSchema } from "../schemas/patient-form-schema";
 
 type Props = {
   upsertService: UpsertPatientServiceFn;

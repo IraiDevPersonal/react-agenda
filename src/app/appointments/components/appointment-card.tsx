@@ -4,7 +4,7 @@ import { HeartHandshakeIcon, PhoneIcon, UserIcon } from "lucide-react";
 
 import { cn, formatPhoneNumber } from "@/lib/utils";
 
-import type { AppointmentModel } from "../domain/models/appointment-model";
+import type { AppointmentModel } from "../models/appointment-model";
 
 import { useAppointmentCard } from "../hooks/use-appointment-card";
 import { formatAppointmentDateTime } from "../lib/utils";

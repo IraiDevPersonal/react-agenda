@@ -1,8 +1,8 @@
 import { CustomError } from "@/lib/custom-error";
 
-import type { AppointmentModel } from "../domain/models/appointment-model";
+import type { AppointmentModel } from "../models/appointment-model";
 
-import { AppointmentSchema } from "../domain/schemas/appointment-schema";
+import { AppointmentSchema } from "../schemas/appointment-schema";
 
 export class AppointmentMapper {
   static map(raw: unknown): AppointmentModel {

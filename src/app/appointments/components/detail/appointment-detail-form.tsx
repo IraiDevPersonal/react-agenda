@@ -1,4 +1,4 @@
-import type { PatientModel } from "@/app/patients/domain/models/patient-model";
+import type { PatientModel } from "@/app/patients/models/patient-model";
 
 type Props = {
   patient?: Omit<PatientModel, "is_deleted"> | null;

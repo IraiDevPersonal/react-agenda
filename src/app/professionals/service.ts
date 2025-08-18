@@ -1,8 +1,8 @@
 import type { HttpClientImpl } from "@/lib/http-client";
 
-import type { ProfessionalDetailResponseModel } from "./domain/models/professional-detail-model";
-import type { ProfessionalForFilterModel } from "./domain/models/professional-for-filters-model";
-import type { ProfessionalResponseModel } from "./domain/models/professional-model";
+import type { ProfessionalDetailResponseModel } from "./models/professional-detail-model";
+import type { ProfessionalForFilterModel } from "./models/professional-for-filters-model";
+import type { ProfessionalResponseModel } from "./models/professional-model";
 
 import { ProfessionalDetailMapper } from "./mappers/professional-detail-mapper";
 import { ProfessionalForFiltersMapper } from "./mappers/professional-for-filters-mapper";

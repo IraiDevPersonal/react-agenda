@@ -1,8 +1,8 @@
 import { CustomError } from "@/lib/custom-error";
 
-import type { AppointmentDetailModel } from "../domain/models/appointment-detail-model";
+import type { AppointmentDetailModel } from "../models/appointment-detail-model";
 
-import { ApiAppointmentDetailSchema } from "../domain/schemas/appointment-detail-schema";
+import { ApiAppointmentDetailSchema } from "../schemas/appointment-detail-schema";
 
 export class AppointmentDetailMapper {
   static map(raw: unknown): AppointmentDetailModel {

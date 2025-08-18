@@ -1,8 +1,8 @@
 import z from "zod";
 
-import { ApiPatientHistorySchema } from "@/app/patients/domain/schemas/patient-history-schema";
-import { ApiPatientSchema } from "@/app/patients/domain/schemas/patient-schema";
-import { ApiProfessionalForAppointmentDetailSchema } from "@/app/professionals/domain/schemas/professional-for-appointment-detail-schema";
+import { ApiPatientHistorySchema } from "@/app/patients/schemas/patient-history-schema";
+import { ApiPatientSchema } from "@/app/patients/schemas/patient-schema";
+import { ApiProfessionalForAppointmentDetailSchema } from "@/app/professionals/schemas/professional-for-appointment-detail-schema";
 
 import { AppointmentStatusSchema } from "./schema";
 

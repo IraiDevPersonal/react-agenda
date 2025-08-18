@@ -7,8 +7,8 @@ import { Table } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
 import { patientQuery } from "../container";
-import { PatientStatus } from "../domain/models/type";
 import { usePatientFilters } from "../hooks/use-patient-filters";
+import { PatientStatus } from "../models/type";
 import { SearchPatient } from "./search-patient";
 
 function PatientTableHeader() {

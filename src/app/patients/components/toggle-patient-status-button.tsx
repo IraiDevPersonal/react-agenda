@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { ButtonWithAlertDialog } from "@/components/ui/button-with-alert-button";
 
-import type { PatientModel } from "../domain/models/patient-model";
+import type { PatientModel } from "../models/patient-model";
 
 import { patientQuery, patientService } from "../container";
 import { usePatientFilters } from "../hooks/use-patient-filters";

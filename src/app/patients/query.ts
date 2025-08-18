@@ -8,9 +8,9 @@ import type { TQueryKey } from "@/lib/types/global-types";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { queryParser } from "@/lib/utils";
 
-import type { PatientDetailResponseModel } from "./domain/models/patient-detail-model";
-import type { PatientResponseModel } from "./domain/models/patient-model";
-import type { PatientFilters } from "./domain/models/type";
+import type { PatientDetailResponseModel } from "./models/patient-detail-model";
+import type { PatientResponseModel } from "./models/patient-model";
+import type { PatientFilters } from "./models/type";
 import type { PatientServiceImpl } from "./service";
 
 type Filters = Values<PatientFilters>;

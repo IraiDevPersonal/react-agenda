@@ -1,7 +1,7 @@
 import type { HttpClientImpl } from "@/lib/http-client";
 
-import type { AppointmentDetailModel } from "./domain/models/appointment-detail-model";
-import type { AppointmentModel } from "./domain/models/appointment-model";
+import type { AppointmentDetailModel } from "./models/appointment-detail-model";
+import type { AppointmentModel } from "./models/appointment-model";
 
 import { AppointmentDetailMapper } from "./mappers/appointment-detail-mapper";
 import { AppointmentMapper } from "./mappers/appointment-mapper";

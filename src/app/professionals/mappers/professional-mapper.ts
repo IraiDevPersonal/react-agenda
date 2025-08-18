@@ -1,9 +1,9 @@
 import { CustomError } from "@/lib/custom-error";
 
-import type { ProfessionalModel, ProfessionalResponseModel } from "../domain/models/professional-model";
+import type { ProfessionalModel, ProfessionalResponseModel } from "../models/professional-model";
 
-import { ApiProfessionalResponseSchema } from "../domain/schemas/professional-response-schema";
-import { ApiProfessionalSchema } from "../domain/schemas/professional-schema";
+import { ApiProfessionalResponseSchema } from "../schemas/professional-response-schema";
+import { ApiProfessionalSchema } from "../schemas/professional-schema";
 
 export class ProfessionalMapper {
   static map(raw: unknown): ProfessionalModel {

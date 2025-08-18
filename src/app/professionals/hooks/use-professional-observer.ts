@@ -2,7 +2,7 @@ import { QueryObserver, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 
-import type { ProfessionalProfessionModel, ProfessionalRoleModel } from "../domain/models/professional-model";
+import type { ProfessionalProfessionModel, ProfessionalRoleModel } from "../models/professional-model";
 
 import { professionalQuery } from "../container";
 

@@ -2,7 +2,7 @@ import React, { use } from "react";
 
 import { CustomError } from "@/lib/custom-error";
 
-import type { ProfessionalModel } from "../domain/models/professional-model";
+import type { ProfessionalModel } from "../models/professional-model";
 
 type ContextProps = {
   professional: ProfessionalModel | undefined;

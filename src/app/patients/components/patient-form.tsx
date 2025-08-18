@@ -1,13 +1,13 @@
 import { Loader2Icon } from "lucide-react";
 
-import type { PatientModel } from "@/app/patients/domain/models/patient-model";
+import type { PatientModel } from "@/app/patients/models/patient-model";
 
 import { Button } from "@/components/ui/button";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
 import { RutInput } from "@/components/ui/rut-input";
 
-import type { UpsertPatientServiceFn } from "../domain/models/patient-action-model";
+import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 
 import { useUpsertPatientMutation } from "../hooks/use-upsert-patient-mutation";
 

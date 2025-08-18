@@ -1,8 +1,8 @@
 import { CustomError } from "@/lib/custom-error";
 
-import type { ProfessionalForAppointmentDetailModel } from "../domain/models/professional-for-appointment-detail-model";
+import type { ProfessionalForAppointmentDetailModel } from "../models/professional-for-appointment-detail-model";
 
-import { ApiProfessionalForAppointmentDetailSchema } from "../domain/schemas/professional-for-appointment-detail-schema";
+import { ApiProfessionalForAppointmentDetailSchema } from "../schemas/professional-for-appointment-detail-schema";
 
 export class ProfessionalForAppointmentDetailMapper {
   static map(raw: unknown): ProfessionalForAppointmentDetailModel {

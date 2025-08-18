@@ -2,7 +2,7 @@ import React, { use } from "react";
 
 import { CustomError } from "@/lib/custom-error";
 
-import type { PatientModel } from "../domain/models/patient-model";
+import type { PatientModel } from "../models/patient-model";
 
 type ContextProps = {
   patient: PatientModel | undefined;

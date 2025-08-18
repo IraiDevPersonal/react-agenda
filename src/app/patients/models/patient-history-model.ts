@@ -1,4 +1,4 @@
-import type { AppointmentStatus } from "@/app/appointments/domain/models/type";
+import type { AppointmentStatus } from "@/app/appointments/models/type";
 
 export type PatientHistoryModel = {
   uid: string;

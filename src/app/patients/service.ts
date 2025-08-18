@@ -1,9 +1,9 @@
 import type { HttpClientImpl } from "@/lib/http-client";
 
-import type { UpsertPatientResponseModel } from "./domain/models/patient-action-model";
-import type { PatientDetailResponseModel } from "./domain/models/patient-detail-model";
-import type { PatientFormValues } from "./domain/models/patient-form-model";
-import type { PatientResponseModel } from "./domain/models/patient-model";
+import type { UpsertPatientResponseModel } from "./models/patient-action-model";
+import type { PatientDetailResponseModel } from "./models/patient-detail-model";
+import type { PatientFormValues } from "./models/patient-form-model";
+import type { PatientResponseModel } from "./models/patient-model";
 
 import { PatientDetailMapper } from "./mappers/patient-detail-adapter";
 import { PatientMapper } from "./mappers/patient-mapper";

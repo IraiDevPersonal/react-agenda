@@ -6,7 +6,7 @@ import type { TQueryKey } from "@/lib/types/global-types";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 
-import type { ProfessionForFilterModel } from "./domain/models/profession-for-filters-model";
+import type { ProfessionForFilterModel } from "./models/profession-for-filters-model";
 import type { ProfessionServiceImpl } from "./service";
 
 export type ProfessionQueryImpl = {

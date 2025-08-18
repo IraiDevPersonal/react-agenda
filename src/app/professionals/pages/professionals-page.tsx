@@ -1,11 +1,11 @@
+import { useStatusStore } from "@/app/appointments/stores/status-store";
+import { useViewModeStore } from "@/app/appointments/stores/view-mode-store";
 import PageLayout from "@/components/page-layout";
 import { Main } from "@/components/ui/main";
+import { useMount } from "@/hooks/use-mount";
 
 import { ProfessionalHeader } from "../components/professional-header";
 import { ProfessionalTable } from "../components/professional-table";
-import { useMount } from "@/hooks/use-mount";
-import { useStatusStore } from "@/app/appointments/stores/status-store";
-import { useViewModeStore } from "@/app/appointments/stores/view-mode-store";
 
 function ProfessionalsPage() {
   useMount(() => {

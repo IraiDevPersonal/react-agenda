@@ -8,10 +8,10 @@ import type { TQueryKey } from "@/lib/types/global-types";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { queryParser } from "@/lib/utils";
 
-import type { ProfessionalDetailResponseModel } from "./domain/models/professional-detail-model";
-import type { ProfessionalForFilterModel } from "./domain/models/professional-for-filters-model";
-import type { ProfessionalResponseModel } from "./domain/models/professional-model";
-import type { ProfessionalFilters } from "./domain/models/types";
+import type { ProfessionalDetailResponseModel } from "./models/professional-detail-model";
+import type { ProfessionalForFilterModel } from "./models/professional-for-filters-model";
+import type { ProfessionalResponseModel } from "./models/professional-model";
+import type { ProfessionalFilters } from "./models/types";
 import type { ProfessionalServiceImpl } from "./service";
 
 type Filters = Values<ProfessionalFilters>;

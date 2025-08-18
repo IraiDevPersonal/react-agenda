@@ -1,8 +1,8 @@
 import { CustomError } from "@/lib/custom-error";
 
-import type { PatientDetailResponseModel } from "../domain/models/patient-detail-model";
+import type { PatientDetailResponseModel } from "../models/patient-detail-model";
 
-import { ApiPatientDetailResponseSchema } from "../domain/schemas/patient-detail-response-schema";
+import { ApiPatientDetailResponseSchema } from "../schemas/patient-detail-response-schema";
 import { PatientMapper } from "./patient-mapper";
 
 export class PatientDetailMapper {

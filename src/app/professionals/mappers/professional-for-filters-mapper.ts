@@ -1,8 +1,8 @@
 import { CustomError } from "@/lib/custom-error";
 
-import type { ProfessionalForFilterModel } from "../domain/models/professional-for-filters-model";
+import type { ProfessionalForFilterModel } from "../models/professional-for-filters-model";
 
-import { ApiProfessionalForFiltersSchema } from "../domain/schemas/professional-for-filters-schema";
+import { ApiProfessionalForFiltersSchema } from "../schemas/professional-for-filters-schema";
 
 export class ProfessionalForFiltersMapper {
   static map(raw: unknown): ProfessionalForFilterModel {

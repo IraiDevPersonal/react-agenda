@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import type { ProfessionalProfessionModel } from "../domain/models/professional-model";
+import type { ProfessionalProfessionModel } from "../models/professional-model";
 
 type Store = {
   setProfessions: (professions: ProfessionalProfessionModel[]) => void;

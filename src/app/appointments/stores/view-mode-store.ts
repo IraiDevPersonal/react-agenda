@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import type { AppointmentViewMode } from "../domain/models/type";
+import type { AppointmentViewMode } from "../models/type";
 
 type Store = {
   setViewMode: (v: Store["viewMode"]) => void;

@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import type { AppointmentStatus } from "../../domain/models/type";
+import type { AppointmentStatus } from "../../models/type";
 
 import { STATUS_NAMES } from "../../lib/constants";
 import { AppointmentStatusIcon } from "../appoinment-status-icon";

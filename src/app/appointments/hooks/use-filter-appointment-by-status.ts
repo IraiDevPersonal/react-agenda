@@ -1,4 +1,4 @@
-import type { AppointmentModel } from "../domain/models/appointment-model";
+import type { AppointmentModel } from "../models/appointment-model";
 
 import { useStatusStore } from "../stores/status-store";
 

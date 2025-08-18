@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import type { AppointmentStatus } from "../domain/models/type";
+import type { AppointmentStatus } from "../models/type";
 
 type Store = {
   status: AppointmentStatus | "ALL";

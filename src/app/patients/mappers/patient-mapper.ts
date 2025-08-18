@@ -1,18 +1,18 @@
 import { CustomError } from "@/lib/custom-error";
 
-import type { UpsertPatientResponseModel } from "../domain/models/patient-action-model";
-import type { PatientHistoryModel } from "../domain/models/patient-history-model";
+import type { UpsertPatientResponseModel } from "../models/patient-action-model";
+import type { PatientHistoryModel } from "../models/patient-history-model";
 import type {
   PatientModel,
   PatientResponseModel,
-} from "../domain/models/patient-model";
+} from "../models/patient-model";
 
 import {
   PatientResponseSchema,
-} from "../domain/models/patient-model";
-import { ApiPatientHistorySchema } from "../domain/schemas/patient-history-schema";
-import { ApiPatientSchema } from "../domain/schemas/patient-schema";
-import { ApiUpsertPatientResponseSchema } from "../domain/schemas/upsert-patient-response-schema";
+} from "../models/patient-model";
+import { ApiPatientHistorySchema } from "../schemas/patient-history-schema";
+import { ApiPatientSchema } from "../schemas/patient-schema";
+import { ApiUpsertPatientResponseSchema } from "../schemas/upsert-patient-response-schema";
 
 export class PatientMapper {
   private static mapHistory(raw: unknown): PatientHistoryModel {

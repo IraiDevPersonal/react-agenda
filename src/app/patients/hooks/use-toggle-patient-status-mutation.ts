@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { notification } from "@/lib/notification";
 
-import type { TogglePatientStatusServiceFn } from "../domain/models/patient-action-model";
+import type { TogglePatientStatusServiceFn } from "../models/patient-action-model";
 
 import { patientQuery } from "../container";
 

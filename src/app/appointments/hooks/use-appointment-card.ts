@@ -3,9 +3,9 @@ import { useNavigate } from "react-router";
 import { ROUTES } from "@/lib/constants/routes";
 import { getUrlData } from "@/lib/utils";
 
-import type { AppointmentModel } from "../domain/models/appointment-model";
+import type { AppointmentModel } from "../models/appointment-model";
 
-import { AppointmentStatus } from "../domain/models/type";
+import { AppointmentStatus } from "../models/type";
 
 export function useAppointmentCard({ appointment_status, uid }: Pick<AppointmentModel, "appointment_status" | "uid">) {
   const navigate = useNavigate();

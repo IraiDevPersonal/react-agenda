@@ -1,8 +1,8 @@
 import { CustomError } from "@/lib/custom-error";
 
-import type { ProfessionalDetailResponseModel } from "../domain/models/professional-detail-model";
+import type { ProfessionalDetailResponseModel } from "../models/professional-detail-model";
 
-import { ProfessionalDetailResponseSchema } from "../domain/schemas/professional-detail-response-schema";
+import { ProfessionalDetailResponseSchema } from "../schemas/professional-detail-response-schema";
 import { ProfessionalMapper } from "./professional-mapper";
 
 export class ProfessionalDetailMapper {

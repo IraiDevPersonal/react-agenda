@@ -8,7 +8,7 @@ import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { dateHelper } from "@/lib/date-helper";
 import { parseAsLocalDate } from "@/lib/nuqs-parser";
 
-import type { AppointmentFilters, AppointmentViewMode } from "../domain/models/type";
+import type { AppointmentFilters, AppointmentViewMode } from "../models/type";
 
 import { useViewModeStore } from "../stores/view-mode-store";
 

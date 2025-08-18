@@ -8,8 +8,8 @@ import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import type { UpsertPatientServiceFn } from "../domain/models/patient-action-model";
-import type { PatientModel } from "../domain/models/patient-model";
+import type { UpsertPatientServiceFn } from "../models/patient-action-model";
+import type { PatientModel } from "../models/patient-model";
 
 import { UserStatusBadge } from "../../profile/components/user-status-badge";
 import { patientQuery } from "../container";

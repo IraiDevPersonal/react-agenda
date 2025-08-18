@@ -8,9 +8,9 @@ import type { TQueryKey } from "@/lib/types/global-types";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { queryParser } from "@/lib/utils";
 
-import type { AppointmentDetailModel } from "./domain/models/appointment-detail-model";
-import type { AppointmentModel } from "./domain/models/appointment-model";
-import type { AppointmentFilters } from "./domain/models/type";
+import type { AppointmentDetailModel } from "./models/appointment-detail-model";
+import type { AppointmentModel } from "./models/appointment-model";
+import type { AppointmentFilters } from "./models/type";
 import type { AppointmentServiceImpl } from "./service";
 
 type Filters = Partial<Values<AppointmentFilters>>;

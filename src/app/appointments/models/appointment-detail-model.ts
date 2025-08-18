@@ -1,7 +1,7 @@
 import type { PatientHistoryModel } from "@/app/patient/models/patient-history-model";
 import type { PatientModel } from "@/app/patient/models/patient-model";
 
-import type { ProfessionalForAppointmentDetailModel } from "@/app/professionals/domain/models/professional-for-appointment-detail-model";
+import type { ProfessionalForAppointmentDetailModel } from "@/app/professionals/models/professional-for-appointment-detail-model";
 
 import type { AppointmentStatus } from "./type";
 

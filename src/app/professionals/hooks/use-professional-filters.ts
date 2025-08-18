@@ -5,7 +5,7 @@ import { useTransition } from "react";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { pagination } from "@/lib/utils";
 
-import type { ProfessionalFilters } from "../domain/models/types";
+import type { ProfessionalFilters } from "../models/types";
 
 import { professionalQuery } from "../container";
 

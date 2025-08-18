@@ -1,6 +1,6 @@
 import { DateFormat, dateHelper } from "@/lib/date-helper";
 
-import type { AppointmentModel } from "../domain/models/appointment-model";
+import type { AppointmentModel } from "../models/appointment-model";
 
 type Value = Pick<AppointmentModel, "date" | "time_from" | "time_to">;
 

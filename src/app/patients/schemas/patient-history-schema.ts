@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { AppointmentStatusSchema } from "@/app/appointments/domain/schemas/schema";
+import { AppointmentStatusSchema } from "@/app/appointments/schemas/schema";
 import { UidScheme } from "@/lib/schemas/global-schemas";
 
 export const ApiPatientHistorySchema = z.object({

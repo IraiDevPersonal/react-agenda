@@ -1,7 +1,7 @@
 import { DateFormat, dateHelper } from "@/lib/date-helper";
 import { cn } from "@/lib/utils";
 
-import type { AppointmentDetailModel } from "../domain/models/appointment-detail-model";
+import type { AppointmentDetailModel } from "../models/appointment-detail-model";
 
 type Props = {
   datetime: Pick<AppointmentDetailModel, "date" | "time_from" | "time_to">;

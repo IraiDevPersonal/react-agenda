@@ -1,6 +1,6 @@
 import { Avatar } from "@/components/ui/avatar";
 
-import type { PatientModel } from "../../patients/domain/models/patient-model";
+import type { PatientModel } from "../../patients/models/patient-model";
 
 type Props = {
   avatarUrl: PatientModel["avatar_image"];

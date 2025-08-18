@@ -1,6 +1,6 @@
 import type { HttpClientImpl } from "@/lib/http-client";
 
-import type { ProfessionForFilterModel } from "./domain/models/profession-for-filters-model";
+import type { ProfessionForFilterModel } from "./models/profession-for-filters-model";
 
 import { ProfessionalForFiltersMapper } from "./mappers/profession-for-filters-mapper";
 

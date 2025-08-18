@@ -2,8 +2,8 @@ import { PageTitle } from "@/components/ui/page-title";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-import { AppointmentStatus } from "../domain/models/type";
 import { STATUS_NAMES } from "../lib/constants";
+import { AppointmentStatus } from "../models/type";
 import { AppointmentStatusIcon } from "./appoinment-status-icon";
 import { AppointmentFilters } from "./appointment-filters";
 
