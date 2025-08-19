@@ -14,9 +14,9 @@ type Props = PropsWithChildren<{
 }>;
 
 function AppointmentCard({ appointment }: Props) {
-  const { date, time_from, time_to } = appointment;
+  const { date, time_from, time_to, patient, professional } = appointment;
   const { isAvailable, handleNavigate } = useAppointmentCard({
-    appointment_status: appointment.appointment_status,
+    status: appointment.appointment_status,
     uid: appointment.uid,
   });
 
@@ -48,20 +48,26 @@ function AppointmentCard({ appointment }: Props) {
             )
           : (
               <>
-                <h6 className="font-medium text-sm capitalize">{appointment.professional_name}</h6>
+                <h6 className="font-medium text-sm capitalize">{professional.professional_name}</h6>
                 <div>
                   <HeartHandshakeIcon size={14} className="inline-block mr-1" />
-                  <span className="italic">{appointment.professions.join(", ")}</span>
+                  <span className="italic">{professional.professions.join(", ")}</span>
                 </div>
-                <h6 className="font-medium text-sm capitalize mt-2">{appointment.patient_name}</h6>
-                <div>
-                  <UserIcon size={14} className="inline-block mr-1" />
-                  <span>{appointment.patient_rut}</span>
-                </div>
-                <div>
-                  <PhoneIcon size={12} className="inline-block ms-0.5 mr-1" />
-                  <span>{formatPhoneNumber(appointment?.patient_phone ?? "")}</span>
-                </div>
+                {
+                  patient && (
+                    <>
+                      <h6 className="font-medium text-sm capitalize mt-2">{patient.patient_name}</h6>
+                      <div>
+                        <UserIcon size={14} className="inline-block mr-1" />
+                        <span>{patient.patient_rut}</span>
+                      </div>
+                      <div>
+                        <PhoneIcon size={12} className="inline-block ms-0.5 mr-1" />
+                        <span>{formatPhoneNumber(patient.patient_phone)}</span>
+                      </div>
+                    </>
+                  )
+                }
               </>
             )
       }

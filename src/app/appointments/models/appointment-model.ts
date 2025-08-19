@@ -5,10 +5,18 @@ export type AppointmentModel = {
   date: string;
   time_to: string;
   time_from: string;
+  appointment_status: AppointmentStatus;
+  professional: ProfessionalForAppointment;
+  patient: PatientForAppointmentModel | null;
+};
+
+export type PatientForAppointmentModel = {
+  patient_rut: string;
+  patient_name: string;
+  patient_phone: string;
+};
+
+export type ProfessionalForAppointment = {
   professions: string[];
   professional_name: string;
-  patient_rut: string | null;
-  patient_name: string | null;
-  patient_phone: string | null;
-  appointment_status: AppointmentStatus;
 };

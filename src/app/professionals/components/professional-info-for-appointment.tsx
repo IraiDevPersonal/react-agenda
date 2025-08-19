@@ -9,7 +9,7 @@ type Props = {
 function ProfessionalInfoForAppointment({ professional }: Props) {
   return (
     <div>
-      <h5 className="text-lg font-semibold">Datos profesional:</h5>
+      <h5 className="text-lg font-semibold">Datos del profesional:</h5>
 
       <TextItem>
         <TextItem.Label>Nombre:</TextItem.Label>

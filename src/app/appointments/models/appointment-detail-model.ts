@@ -1,6 +1,5 @@
-import type { PatientHistoryModel } from "@/app/patient/models/patient-history-model";
-import type { PatientModel } from "@/app/patient/models/patient-model";
-
+import type { PatientForAppointmentDetailModel } from "@/app/patients/models/patient-for-appointment-detail-model";
+import type { PatientHistoryModel } from "@/app/patients/models/patient-history-model";
 import type { ProfessionalForAppointmentDetailModel } from "@/app/professionals/models/professional-for-appointment-detail-model";
 
 import type { AppointmentStatus } from "./shared-model";
@@ -14,7 +13,7 @@ export type AppointmentDetailModel = {
   status: AppointmentStatus;
   alert: AlertForAppointmentDetailModel;
   patient_history: PatientHistoryModel[];
-  patient: Omit<PatientModel, "is_deleted"> | null;
+  patient: PatientForAppointmentDetailModel | null;
   professional: ProfessionalForAppointmentDetailModel;
 };
 

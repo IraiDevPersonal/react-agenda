@@ -1,17 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { PatientInfoForAppointment } from "@/app/patients/components/patient-info-for-appointment";
 import { ProfessionalInfoForAppointment } from "@/app/professionals/components/professional-info-for-appointment";
 import { Show } from "@/components/show";
 import { Alert } from "@/components/ui/alert";
 import { ErrorMessage } from "@/components/ui/error-message";
 
 import { appointmentQuery } from "../../container";
+import { AppointmentStatus } from "../../models/shared-model";
 import { AppointmentHours } from "../appointment-hours";
-import { AppointmentDetailForm } from "./appointment-detail-form";
 import { AppointmentDetailFormActions } from "./appointment-detail-form-actions";
 import { AppointmentDetailInfo } from "./appointment-detail-info";
 import { AppointmentDetailSkeleton } from "./appointment-detail-skeleton";
 import { AppointmentDetailWrapper } from "./appointment-detail-wrapper";
+import { AvailableAppointmentDetailForm } from "./available-appointment-detail-form";
+import { ToConfirmAppointmentDetailForm } from "./to-confirm-appointment-detail-form";
 
 type Props = {
   uid: string;
@@ -54,9 +57,19 @@ function AppointmentDetail({ uid }: Props) {
         </Alert>
       </Show>
 
-      <AppointmentDetailForm patient={patient} />
+      <Show when={status === AppointmentStatus.AVAILABLE}>
+        <AvailableAppointmentDetailForm patient={patient} />
+      </Show>
 
-      <AppointmentDetailFormActions />
+      <Show when={status !== AppointmentStatus.AVAILABLE}>
+        <PatientInfoForAppointment patient={patient} />
+      </Show>
+
+      <Show when={status === AppointmentStatus.TO_CONFIRM}>
+        <ToConfirmAppointmentDetailForm pay_method="" />
+      </Show>
+
+      <AppointmentDetailFormActions uid={uid} />
     </AppointmentDetailWrapper>
   );
 }

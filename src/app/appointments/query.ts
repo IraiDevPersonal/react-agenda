@@ -10,7 +10,7 @@ import { queryParser } from "@/lib/utils";
 
 import type { AppointmentDetailModel } from "./models/appointment-detail-model";
 import type { AppointmentModel } from "./models/appointment-model";
-import type { AppointmentFilters } from "./models/shared-model";
+import type { AppointmentFilters, AppointmentStatus } from "./models/shared-model";
 import type { AppointmentServiceImpl } from "./service";
 
 type Filters = Partial<Values<AppointmentFilters>>;
@@ -28,6 +28,12 @@ export type AppointmentQueryImpl = {
     AppointmentDetailModel,
     TQueryKey
   >;
+  detailStatus: (uid: string) => UseQueryOptions<
+    AppointmentDetailModel,
+    Error,
+    AppointmentStatus,
+    TQueryKey
+  >;
 };
 
 export class AppointmentQuery implements AppointmentQueryImpl {
@@ -35,6 +41,14 @@ export class AppointmentQuery implements AppointmentQueryImpl {
 
   constructor(service: AppointmentServiceImpl) {
     this.service = service;
+  }
+
+  private detailDefaultOptions(uid: string) {
+    return queryOptions({
+      queryKey: [QUERY_KEYS.appointments, QUERY_KEYS.generic.detail, uid] as TQueryKey,
+      queryFn: () => this.service.getAppointmentByUid(uid),
+      enabled: !!uid,
+    });
   }
 
   list = (filters: Filters) => {
@@ -47,9 +61,14 @@ export class AppointmentQuery implements AppointmentQueryImpl {
 
   detail = (uid: string) => {
     return queryOptions({
-      queryKey: [QUERY_KEYS.appointments, QUERY_KEYS.generic.detail, uid] as TQueryKey,
-      queryFn: () => this.service.getAppointmentByUid(uid),
-      enabled: !!uid,
+      ...this.detailDefaultOptions(uid),
+    });
+  };
+
+  detailStatus = (uid: string) => {
+    return queryOptions({
+      ...this.detailDefaultOptions(uid),
+      select: data => data.status,
     });
   };
 }

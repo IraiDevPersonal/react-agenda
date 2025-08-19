@@ -15,7 +15,7 @@ const PATHS = [
 
 export function Sidebar() {
   return (
-    <aside className="hidden md:flex p-4 space-y-8 bg-sidebar min-w-64 w-64 flex-col">
+    <aside className="fixed top-0 left-0 lg:static flex p-4 space-y-8 bg-sidebar min-w-64 w-64 flex-col h-dvh">
       <header>
         <h3 className="text-3xl font-bold italic">Agenda</h3>
       </header>
