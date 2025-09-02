@@ -1,3 +1,4 @@
+import { ProfessionModel } from "@/app/professions/models/profession-model";
 import type { UserStatus } from "./shared-model";
 
 export type UserModel = {
@@ -11,15 +12,10 @@ export type UserModel = {
   status: UserStatus;
   roles: UserRoleModel[];
   avatar_image: string | null;
-  professions?: UserProfessionModel[];
+  professions?: ProfessionModel[];
 };
 
 export type UserRoleModel = {
-  id: number;
-  name: string;
-};
-
-export type UserProfessionModel = {
   id: number;
   name: string;
 };

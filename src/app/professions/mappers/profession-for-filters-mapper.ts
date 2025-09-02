@@ -2,7 +2,7 @@ import { CustomError } from "@/lib/custom-error";
 
 import type { ProfessionForFilterModel } from "../models/profession-for-filters-model";
 
-import { ProfessionForFiltersSchema } from "../schemas/profession-for-filters-schema";
+import { ProfessionForFiltersSchema } from "../schemas/api/profession-for-filters-schema";
 
 export class ProfessionForFiltersMapper {
   static map(raw: unknown): ProfessionForFilterModel {

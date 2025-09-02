@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { UserGender, UserStatus } from "../models/shared-model";
+import { UserGender, UserStatus } from "../../models/shared-model";
 
 export const UserGenericSchema = {
   GENDER: z.enum(UserGender, { error: "genero invalido" }),

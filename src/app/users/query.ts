@@ -123,7 +123,7 @@ export class UserQuery implements UserQueryImpl {
   forFilters = () => {
     return queryOptions({
       refetchOnWindowFocus: false,
-      queryKey: [QUERY_KEYS.users, "for-filter"] as TQueryKey,
+      queryKey: [QUERY_KEYS.users, QUERY_KEYS.generic.forFilters] as TQueryKey,
       queryFn: () => this.service.getUsersForFilters(),
     });
   };

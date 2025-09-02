@@ -3,8 +3,8 @@ import z from "zod";
 import { UidScheme } from "@/lib/schemas/global-schemas";
 import { PersonSchema } from "@/lib/schemas/person-schemas";
 
-import { UserGenericSchema } from "../user-generic-schema";
-import { UserProfessionSchema } from "./user-profession-schema";
+import { ApiProfessionSchema } from "@/app/professions/schemas/api/profession-schema";
+import { UserGenericSchema } from "./user-generic-schema";
 import { UserRoleSchema } from "./user-role-schema";
 
 export const ApiUserSchema = z.object({
@@ -18,5 +18,5 @@ export const ApiUserSchema = z.object({
   status: UserGenericSchema.STATUS,
   last_names: PersonSchema.LastNames,
   avatar_image: PersonSchema.AvatarImage,
-  professions: z.array(UserProfessionSchema).optional(),
+  professions: z.array(ApiProfessionSchema).optional(),
 });

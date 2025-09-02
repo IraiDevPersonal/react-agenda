@@ -10,5 +10,6 @@ export const QUERY_KEYS = {
     upsert: "upsert",
     create: "create",
     update: "update",
+    forFilters: "for-filters"
   },
 } as const;

@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { UserGenericSchema } from "@/app/users/schemas/user-generic-schema";
+import { UserGenericSchema } from "@/app/users/schemas/api/user-generic-schema";
 import { PersonSchema } from "@/lib/schemas/person-schemas";
 
 export const PatientFormSchema = z.object({
