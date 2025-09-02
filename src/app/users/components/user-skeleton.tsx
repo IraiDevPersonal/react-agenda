@@ -29,9 +29,7 @@ function UserSkeletonData({ children }: PropsWithChildren) {
 }
 
 function UserSkeletonImage() {
-  return (
-    <Skeleton className="size-52 lg:size-72 rounded-full" />
-  );
+  return <Skeleton className="size-52 lg:size-72 rounded-full" />;
 }
 
 function UserSkeletonForm() {

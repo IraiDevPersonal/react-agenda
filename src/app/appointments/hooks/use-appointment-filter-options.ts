@@ -17,7 +17,7 @@ export function useAppointmentFilterOptions() {
     enabled: !!filters.profession_id,
   });
 
-  const filteredUserOptions = userOptions.filter(opt =>
+  const filteredUserOptions = userOptions.filter((opt) =>
     opt.professions.includes(filters.profession_id?.toString() ?? ""),
   );
 

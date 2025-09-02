@@ -1,11 +1,11 @@
-import type { UseMutationOptions, UseQueryOptions } from "@tanstack/react-query";
-import type { Values } from "nuqs";
-
+import type {
+  UseMutationOptions,
+  UseQueryOptions,
+} from "@tanstack/react-query";
 import { queryOptions } from "@tanstack/react-query";
-
-import type { TQueryKey } from "@/lib/types/global-types";
-
+import type { Values } from "nuqs";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import type { TQueryKey } from "@/lib/types/global-types";
 import { queryParser } from "@/lib/utils";
 
 import type { PatientDetailResponseModel } from "./models/patient-detail-response-model";
@@ -16,36 +16,36 @@ import type { PatientServiceImpl } from "./service";
 type Filters = Values<PatientFilters>;
 
 export type PatientQueryImpl = {
-  list: (filters: Filters) => UseQueryOptions<
+  list: (
+    filters: Filters,
+  ) => UseQueryOptions<
     PatientResponseModel,
     Error,
     PatientResponseModel,
     TQueryKey
   >;
-  total: (filters: Filters) => UseQueryOptions<
-    PatientResponseModel,
-    Error,
-    number,
-    TQueryKey
-  >;
-  pagination: (filters: Filters) => UseQueryOptions<
+  total: (
+    filters: Filters,
+  ) => UseQueryOptions<PatientResponseModel, Error, number, TQueryKey>;
+  pagination: (
+    filters: Filters,
+  ) => UseQueryOptions<
     PatientResponseModel,
     Error,
     Omit<PatientResponseModel, "data">,
     TQueryKey
   >;
-  detail: (uid: string) => UseQueryOptions<
+  detail: (
+    uid: string,
+  ) => UseQueryOptions<
     PatientDetailResponseModel,
     Error,
     PatientDetailResponseModel,
     TQueryKey
   >;
-  forLoader: (filters: Filters) => UseQueryOptions<
-    PatientResponseModel,
-    Error,
-    null,
-    TQueryKey
-  >;
+  forLoader: (
+    filters: Filters,
+  ) => UseQueryOptions<PatientResponseModel, Error, null, TQueryKey>;
   upsertMutation: () => Pick<UseMutationOptions, "mutationKey">;
   toggleStatusMutation: () => Pick<UseMutationOptions, "mutationKey">;
 };
@@ -69,7 +69,7 @@ export class PatientQuery implements PatientQueryImpl {
       ...this.defaultQueryOptions(filters),
       staleTime({ state }) {
         const data = state.data as PatientResponseModel | undefined;
-        return (data?.total ?? 0) > 0 ? (1 * 60 * 1000) : 0;
+        return (data?.total ?? 0) > 0 ? 1 * 60 * 1000 : 0;
       },
     });
   };
@@ -77,7 +77,7 @@ export class PatientQuery implements PatientQueryImpl {
   total = (filters: Filters) => {
     return queryOptions({
       ...this.defaultQueryOptions(filters),
-      select: data => data.total,
+      select: (data) => data.total,
     });
   };
 
@@ -104,7 +104,11 @@ export class PatientQuery implements PatientQueryImpl {
 
   detail = (uid: string) => {
     return queryOptions({
-      queryKey: [QUERY_KEYS.patients, QUERY_KEYS.generic.detail, uid] as TQueryKey,
+      queryKey: [
+        QUERY_KEYS.patients,
+        QUERY_KEYS.generic.detail,
+        uid,
+      ] as TQueryKey,
       queryFn: () => this.service.getPatientByUid(uid),
       refetchOnWindowFocus: false,
       throwOnError: false,
@@ -114,13 +118,19 @@ export class PatientQuery implements PatientQueryImpl {
 
   upsertMutation = (): Pick<UseMutationOptions, "mutationKey"> => {
     return {
-      mutationKey: [QUERY_KEYS.patients, QUERY_KEYS.generic.upsert] as TQueryKey,
+      mutationKey: [
+        QUERY_KEYS.patients,
+        QUERY_KEYS.generic.upsert,
+      ] as TQueryKey,
     };
   };
 
   toggleStatusMutation = (): Pick<UseMutationOptions, "mutationKey"> => {
     return {
-      mutationKey: [QUERY_KEYS.patients, QUERY_KEYS.generic.delete] as TQueryKey,
+      mutationKey: [
+        QUERY_KEYS.patients,
+        QUERY_KEYS.generic.delete,
+      ] as TQueryKey,
     };
   };
 }

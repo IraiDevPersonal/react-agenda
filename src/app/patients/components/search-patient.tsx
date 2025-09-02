@@ -17,22 +17,20 @@ function SearchPatient({ defaultValue, onSearch, ...props }: Props) {
   };
 
   return (
-    <>
-      <Search
-        onSearch={() => {
-          if (value.length > 0 && !checkRut(value)) {
-            notification.warning("El rut ingresado es invalido");
-            return;
-          }
+    <Search
+      onSearch={() => {
+        if (value.length > 0 && !checkRut(value)) {
+          notification.warning("El rut ingresado es invalido");
+          return;
+        }
 
-          onSearch(value);
-        }}
-        placeholder="Buscar por rut..."
-        onChange={handleChange}
-        value={value}
-        {...props}
-      />
-    </>
+        onSearch(value);
+      }}
+      placeholder="Buscar por rut..."
+      onChange={handleChange}
+      value={value}
+      {...props}
+    />
   );
 }
 

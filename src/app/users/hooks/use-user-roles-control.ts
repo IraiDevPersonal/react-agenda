@@ -4,10 +4,10 @@ import { useRolesStore } from "../stores/roles-store";
 import { useUserObserver } from "./use-user-observer";
 
 export function useUserRolesControl() {
-  const roles = useRolesStore(s => s.roles);
-  const setRoles = useRolesStore(s => s.setRoles);
-  const onAddRole = useRolesStore(s => s.onAddRole);
-  const onRemoveRole = useRolesStore(s => s.onRemoveRole);
+  const roles = useRolesStore((s) => s.roles);
+  const setRoles = useRolesStore((s) => s.setRoles);
+  const onAddRole = useRolesStore((s) => s.onAddRole);
+  const onRemoveRole = useRolesStore((s) => s.onRemoveRole);
 
   useUserObserver({ setData: ({ roles }) => setRoles(roles) });
 
@@ -19,11 +19,13 @@ export function useUserRolesControl() {
     { label: "Paciente", value: "4" },
   ];
 
-  const filteredOptions = options.filter(p => !roles.map(sp => sp.id).includes(Number(p.value)));
+  const filteredOptions = options.filter(
+    (p) => !roles.map((sp) => sp.id).includes(Number(p.value)),
+  );
 
   const handleAddRole = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    const role = options.find(o => o.value === value);
+    const role = options.find((o) => o.value === value);
 
     if (role) {
       onAddRole({

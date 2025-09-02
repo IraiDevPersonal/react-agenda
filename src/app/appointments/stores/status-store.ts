@@ -11,7 +11,7 @@ type Store = {
 
 const DEFAULT_STATUS: Store["status"] = "ALL";
 
-export const useStatusStore = create<Store>(set => ({
+export const useStatusStore = create<Store>((set) => ({
   status: DEFAULT_STATUS,
   setStatus(v) {
     set({ status: v });

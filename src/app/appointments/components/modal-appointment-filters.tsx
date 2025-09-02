@@ -22,10 +22,8 @@ function ModalAppointmentFilters() {
     handleSelectToday,
     handleClearAllFilters,
   } = useAppointmentFilters();
-  const {
-    professionOptions,
-    filteredUserOptions,
-  } = useAppointmentFilterOptions();
+  const { professionOptions, filteredUserOptions } =
+    useAppointmentFilterOptions();
 
   return (
     <>
@@ -46,8 +44,7 @@ function ModalAppointmentFilters() {
         <Dialog.Content>
           <Dialog.Header>
             <Dialog.Title>Filtrar citas</Dialog.Title>
-            <Dialog.Description hidden>
-            </Dialog.Description>
+            <Dialog.Description hidden></Dialog.Description>
           </Dialog.Header>
 
           <div className="space-y-4 *:w-full">
@@ -59,10 +56,12 @@ function ModalAppointmentFilters() {
               <SelectNative
                 options={professionOptions}
                 value={filters.profession_id ?? ""}
-                onChange={e => onFilter({
-                  profession_id: stringToNullableNumber(e.target.value),
-                  user_id: null,
-                })}
+                onChange={(e) =>
+                  onFilter({
+                    profession_id: stringToNullableNumber(e.target.value),
+                    user_id: null,
+                  })
+                }
               />
             </FieldWrapper>
 
@@ -70,9 +69,11 @@ function ModalAppointmentFilters() {
               <SelectNative
                 options={filteredUserOptions}
                 value={filters.user_id ?? ""}
-                onChange={e => onFilter({
-                  user_id: stringToNullableNumber(e.target.value),
-                })}
+                onChange={(e) =>
+                  onFilter({
+                    user_id: stringToNullableNumber(e.target.value),
+                  })
+                }
               />
             </FieldWrapper>
 
@@ -82,7 +83,7 @@ function ModalAppointmentFilters() {
               key={filters.patient_rut}
               classNames={{ input: "w-full" }}
               defaultValue={filters.patient_rut ?? ""}
-              onSearch={v => onFilter({ patient_rut: v })}
+              onSearch={(v) => onFilter({ patient_rut: v })}
             />
 
             <AppointmentDateSelector fullwidth />

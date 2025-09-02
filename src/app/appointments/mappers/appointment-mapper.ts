@@ -46,6 +46,6 @@ export class AppointmentMapper {
       });
     }
 
-    return data.map(this.map);
+    return data.map(AppointmentMapper.map);
   }
 }

@@ -22,7 +22,7 @@ export function useClipboard(props?: Props): [CopiedValue, CopyFn] {
     }
 
     return () => clearInterval(timer);
-  }, [copiedText, props?.clearCopyDelay]);
+  }, [props?.clearCopyDelay]);
 
   const copy: CopyFn = async (text) => {
     if (!navigator?.clipboard) {
@@ -35,8 +35,7 @@ export function useClipboard(props?: Props): [CopiedValue, CopyFn] {
       await navigator.clipboard.writeText(text);
       props?.withState && setCopiedText(text);
       return true;
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Copy failed", error);
       props?.withState && setCopiedText(null);
       return false;

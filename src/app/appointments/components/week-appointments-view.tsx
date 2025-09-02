@@ -9,7 +9,11 @@ import { appointmentQuery } from "../container";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 import { useFilterAppointmentByStatus } from "../hooks/use-filter-appointment-by-status";
 import { WEEK_DAYS } from "../utils/constants";
-import { formatDateRange, getAllDaysInDateRange, isAppointmentOnDay } from "../utils/utils";
+import {
+  formatDateRange,
+  getAllDaysInDateRange,
+  isAppointmentOnDay,
+} from "../utils/utils";
 import { AppointmentCard } from "./appointment-card";
 import { AppointmentListFallback } from "./appointment-list-fallback";
 import { AppointmentTimeRangeCell } from "./appointment-time-range-cell";
@@ -30,10 +34,9 @@ function WeekAppointmentsView() {
 }
 
 function HeaderRow() {
-  const { filters: {
-    date_to,
-    date_from,
-  } } = useAppointmentFilters();
+  const {
+    filters: { date_to, date_from },
+  } = useAppointmentFilters();
 
   return (
     <Table.Header>
@@ -44,7 +47,9 @@ function HeaderRow() {
 
         <For items={WEEK_DAYS}>
           {({ label, value }) => {
-            const match = getAllDaysInDateRange(date_from, date_to).find(d => getDay(d) === value);
+            const match = getAllDaysInDateRange(date_from, date_to).find(
+              (d) => getDay(d) === value,
+            );
             const day = match ? format(match, "dd") : "--";
 
             return (
@@ -60,23 +65,30 @@ function HeaderRow() {
 }
 
 function AppointmentRows() {
-  const { filters: {
-    date,
-    date_to,
-    date_from,
-    ...filters
-  } } = useAppointmentFilters();
-  const { data } = useQuery(appointmentQuery.list({ ...filters, date_to, date: date_from }));
+  const {
+    filters: { date: _, date_to, date_from, ...filters },
+  } = useAppointmentFilters();
+  const { data } = useQuery(
+    appointmentQuery.list({ ...filters, date_to, date: date_from }),
+  );
   const appointments = useFilterAppointmentByStatus({ appointments: data });
 
   return (
     <For
-      fallback={cls => <AppointmentListFallback colSpan={WEEK_DAYS.length + 1} className={cls} />}
+      fallback={(cls) => (
+        <AppointmentListFallback
+          colSpan={WEEK_DAYS.length + 1}
+          className={cls}
+        />
+      )}
       items={filters.profession_id ? appointments : []}
     >
-      {appointment => (
+      {(appointment) => (
         <Table.Row key={appointment.uid}>
-          <AppointmentTimeRangeCell timeFrom={appointment.time_from} timeTo={appointment.time_to} />
+          <AppointmentTimeRangeCell
+            timeFrom={appointment.time_from}
+            timeTo={appointment.time_to}
+          />
 
           <For items={WEEK_DAYS}>
             {({ value }) => (

@@ -12,16 +12,12 @@ import { UserFilters } from "./user-filters";
 
 function UserHeader() {
   const { filters } = useUserFilters();
-  const {
-    data: total = 0,
-  } = useQuery(userQuery.total(filters));
+  const { data: total = 0 } = useQuery(userQuery.total(filters));
 
   return (
     <header className="flex flex-col lg:flex-row items-center justify-between w-full">
       <PageTitle>
-        {total}
-        {" "}
-        User
+        {total} User
         {total > 1 ? "s" : ""}
       </PageTitle>
 

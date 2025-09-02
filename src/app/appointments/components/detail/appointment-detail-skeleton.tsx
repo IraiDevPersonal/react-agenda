@@ -16,7 +16,7 @@ export function AppointmentDetailSkeleton() {
       <div className="space-y-2 pt-1">
         <Skeleton className="h-6 w-44" />
         <For items={[1, 2, 3, 4]}>
-          {n => (
+          {(n) => (
             <div key={n} className="space-y-1">
               <Skeleton className="h-5 w-36" />
               <Skeleton className="h-4 w-2/3" />

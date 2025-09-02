@@ -17,27 +17,27 @@ import { TogglePatientStatusButton } from "./toggle-patient-status-button";
 
 function PatientTableRows() {
   const { filters } = usePatientFilters();
-  const {
-    data,
-    isFetching,
-  } = useQuery(patientQuery.list(filters));
+  const { data, isFetching } = useQuery(patientQuery.list(filters));
 
   return (
     <For
-      items={(data?.data ?? [])}
-      fallback={(
+      items={data?.data ?? []}
+      fallback={
         <Table.Row>
           <Table.Cell
             colSpan={6}
             align="center"
-            className={cn("italic text-muted-foreground", isFetching && "animate-pulse")}
+            className={cn(
+              "italic text-muted-foreground",
+              isFetching && "animate-pulse",
+            )}
           >
             {isFetching ? "Cargando pacientes..." : "No hay pacientes"}
           </Table.Cell>
         </Table.Row>
-      )}
+      }
     >
-      {patient => (
+      {(patient) => (
         <Table.Row key={patient.uid}>
           <Table.Cell>
             <div className="flex items-center gap-3">
@@ -48,21 +48,19 @@ function PatientTableRows() {
               />
               <div>
                 <span className="font-medium block capitalize">
-                  {patient.names}
-                  {" "}
-                  {patient.last_names}
+                  {patient.names} {patient.last_names}
                 </span>
               </div>
             </div>
           </Table.Cell>
           <Table.Cell>{patient.rut}</Table.Cell>
-          <Table.Cell align="center">{dateHelper.format(patient.birth_date, DateFormat["dd-MM-yyyy"])}</Table.Cell>
+          <Table.Cell align="center">
+            {dateHelper.format(patient.birth_date, DateFormat["dd-MM-yyyy"])}
+          </Table.Cell>
           <Table.Cell>
             <div>
               <span className="block font-semibold">{patient.email}</span>
-              <div
-                className="mt-1 text-muted-foreground text-xs flex items-baseline-last gap-x-1"
-              >
+              <div className="mt-1 text-muted-foreground text-xs flex items-baseline-last gap-x-1">
                 <PhoneIcon size={12} />
                 <span>{formatPhoneNumber(patient.phone)}</span>
               </div>

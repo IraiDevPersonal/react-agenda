@@ -6,11 +6,7 @@ type Props = PropsWithChildren<{
 }>;
 
 function Show({ when, children, fallback }: Props) {
-  return (
-    <>
-      {when ? children : fallback}
-    </>
-  );
+  return <>{when ? children : fallback}</>;
 }
 
 export { Show };

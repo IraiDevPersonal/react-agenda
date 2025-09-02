@@ -1,4 +1,9 @@
-import { CircleAlertIcon, CircleCheck, CirclePlus, CircleX } from "lucide-react";
+import {
+  CircleAlertIcon,
+  CircleCheck,
+  CirclePlus,
+  CircleX,
+} from "lucide-react";
 
 import { AppointmentStatus } from "../models/shared-model";
 

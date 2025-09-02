@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
 const breakpoints = {
-  "sm": 640, // 40rem
-  "md": 768, // 48rem
-  "lg": 1024, // 64rem
-  "xl": 1280, // 80rem
+  sm: 640, // 40rem
+  md: 768, // 48rem
+  lg: 1024, // 64rem
+  xl: 1280, // 80rem
   "2xl": 1536, // 96rem
   "3xl": 1720, // 96rem
 };

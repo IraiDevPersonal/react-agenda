@@ -15,27 +15,27 @@ import { ToggleUserStatusButton } from "./toggle-user-status-button";
 
 function UserTableRows() {
   const { filters } = useUserFilters();
-  const {
-    isFetching,
-    data,
-  } = useQuery(userQuery.list(filters));
+  const { isFetching, data } = useQuery(userQuery.list(filters));
 
   return (
     <For
-      items={(data?.data ?? [])}
-      fallback={(
+      items={data?.data ?? []}
+      fallback={
         <Table.Row>
           <Table.Cell
             colSpan={6}
             align="center"
-            className={cn("italic text-muted-foreground", isFetching && "animate-pulse")}
+            className={cn(
+              "italic text-muted-foreground",
+              isFetching && "animate-pulse",
+            )}
           >
             {isFetching ? "Cargando users..." : "No hay users"}
           </Table.Cell>
         </Table.Row>
-      )}
+      }
     >
-      {user => (
+      {(user) => (
         <Table.Row key={user.uid}>
           <Table.Cell>
             <div className="flex items-center gap-3">
@@ -46,9 +46,7 @@ function UserTableRows() {
               />
               <div>
                 <span className="font-medium block capitalize">
-                  {user.names}
-                  {" "}
-                  {user.last_names}
+                  {user.names} {user.last_names}
                 </span>
               </div>
             </div>
@@ -57,9 +55,7 @@ function UserTableRows() {
           <Table.Cell>
             <div>
               <span className="block font-semibold">{user.email}</span>
-              <div
-                className="mt-1 text-muted-foreground text-xs flex items-baseline-last gap-x-1"
-              >
+              <div className="mt-1 text-muted-foreground text-xs flex items-baseline-last gap-x-1">
                 <PhoneIcon size={12} />
                 <span>{formatPhoneNumber(user.phone)}</span>
               </div>

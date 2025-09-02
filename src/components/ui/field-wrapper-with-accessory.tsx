@@ -12,7 +12,13 @@ type Props = PropsWithChildren<{
   label?: ReactNode;
 }>;
 
-function FieldWrapperWithAccessory({ children, label, classNames, endComponent, startComponent }: Props) {
+function FieldWrapperWithAccessory({
+  children,
+  label,
+  classNames,
+  endComponent,
+  startComponent,
+}: Props) {
   return (
     <FieldWrapper classNames={classNames} label={label}>
       <div className="relative w-full">

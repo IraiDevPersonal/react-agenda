@@ -8,16 +8,19 @@ type Props = PropsWithChildren<{
 
 function TextItem({ children, className }: Props) {
   return (
-    <dl className={cn("grid grid-cols-[max-content,1fr] gap-x-2 w-full", className)}>
+    <dl
+      className={cn(
+        "grid grid-cols-[max-content,1fr] gap-x-2 w-full",
+        className,
+      )}
+    >
       {children}
     </dl>
   );
 }
 
 function Label({ children }: Props) {
-  return (
-    <dt className="font-semibold first-letter:capitalize">{children}</dt>
-  );
+  return <dt className="font-semibold first-letter:capitalize">{children}</dt>;
 }
 
 type ValueProps = PropsWithChildren<{
@@ -27,7 +30,9 @@ type ValueProps = PropsWithChildren<{
 
 function Value({ children, className, capitalize }: ValueProps) {
   return (
-    <dd className={cn("opacity-70", className, capitalize && "capitalize")}>{children}</dd>
+    <dd className={cn("opacity-70", className, capitalize && "capitalize")}>
+      {children}
+    </dd>
   );
 }
 

@@ -10,11 +10,9 @@ import { UserTableRows } from "./user-table-rows";
 
 function UserTable() {
   const { filters } = useUserFilters();
-  const {
-    isLoadingError,
-    error,
-    refetch,
-  } = useQuery(userQuery.forLoader(filters));
+  const { isLoadingError, error, refetch } = useQuery(
+    userQuery.forLoader(filters),
+  );
 
   if (isLoadingError) {
     return <ErrorMessage onRetry={refetch}>{error.message}</ErrorMessage>;

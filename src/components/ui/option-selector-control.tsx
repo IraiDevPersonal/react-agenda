@@ -29,18 +29,17 @@ function OptionSelectorControl({
   return (
     <div className="col-span-2 w-full flex flex-col gap-2">
       <FieldWrapper label={label}>
-        <SelectNative
-          options={options}
-          onChange={onAdd}
-        />
+        <SelectNative options={options} onChange={onAdd} />
       </FieldWrapper>
 
       <ul className="flex gap-1 flex-wrap">
         <For
           items={items}
-          fallback={cls => <span className={cn(cls, "text-xs ms-3")}>{emptyPlaceholder}</span>}
+          fallback={(cls) => (
+            <span className={cn(cls, "text-xs ms-3")}>{emptyPlaceholder}</span>
+          )}
         >
-          {profession => (
+          {(profession) => (
             <li key={profession.id}>
               <Badge variant="outline" className="text-sm py-1 px-3 capitalize">
                 {profession.name}

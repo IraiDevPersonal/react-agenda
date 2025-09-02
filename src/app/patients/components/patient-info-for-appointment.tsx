@@ -14,38 +14,28 @@ function PatientInfoForAppointment({ patient }: Props) {
       <TextItem>
         <TextItem.Label>Nombre:</TextItem.Label>
         <TextItem.Value capitalize>
-          {patient?.names}
-          {" "}
-          {patient?.last_names}
+          {patient?.names} {patient?.last_names}
         </TextItem.Value>
       </TextItem>
 
       <TextItem>
         <TextItem.Label>Rut:</TextItem.Label>
-        <TextItem.Value capitalize>
-          {patient?.rut}
-        </TextItem.Value>
+        <TextItem.Value capitalize>{patient?.rut}</TextItem.Value>
       </TextItem>
 
       <TextItem>
         <TextItem.Label>Teléfono:</TextItem.Label>
-        <TextItem.Value capitalize>
-          {patient?.phone}
-        </TextItem.Value>
+        <TextItem.Value capitalize>{patient?.phone}</TextItem.Value>
       </TextItem>
 
       <TextItem>
         <TextItem.Label>Correo:</TextItem.Label>
-        <TextItem.Value capitalize>
-          {patient?.email}
-        </TextItem.Value>
+        <TextItem.Value capitalize>{patient?.email}</TextItem.Value>
       </TextItem>
 
       <TextItem>
         <TextItem.Label>Dirección:</TextItem.Label>
-        <TextItem.Value capitalize>
-          {patient?.address}
-        </TextItem.Value>
+        <TextItem.Value capitalize>{patient?.address}</TextItem.Value>
       </TextItem>
     </div>
   );

@@ -1,14 +1,13 @@
 import { QueryObserver, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-
-import type { UserProfessionModel, UserRoleModel } from "../models/user-model";
-
+import type { ProfessionModel } from "@/app/professions/models/profession-model";
 import { userQuery } from "../container";
+import type { UserRoleModel } from "../models/user-model";
 
 type Props = {
   setData: (data: {
-    professions: UserProfessionModel[];
+    professions: ProfessionModel[];
     roles: UserRoleModel[];
   }) => void;
 };

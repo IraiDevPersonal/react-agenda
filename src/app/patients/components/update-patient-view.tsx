@@ -16,8 +16,7 @@ function UpdatePatientView() {
     isLoading,
     isError,
     error,
-  }
-  = useQuery(patientQuery.detail(patientUid));
+  } = useQuery(patientQuery.detail(patientUid));
 
   if (isError) {
     return <ErrorMessage onRetry={refetch}>{error.message}</ErrorMessage>;
@@ -28,26 +27,22 @@ function UpdatePatientView() {
   }
 
   return (
-    <>
-      <Patient
-        patient={patient?.data}
-        upsertService={payload => patientService.updatePatient(patientUid, payload)}
-      >
-        {
-          isFetching
-            ? (
-                <PatientSkeleton.Data>
-                  <Patient.Image />
-                </PatientSkeleton.Data>
-              )
-            : (
-                <Patient.Data>
-                  <Patient.Image />
-                </Patient.Data>
-              )
-        }
-      </Patient>
-    </>
+    <Patient
+      patient={patient?.data}
+      upsertService={(payload) =>
+        patientService.updatePatient(patientUid, payload)
+      }
+    >
+      {isFetching ? (
+        <PatientSkeleton.Data>
+          <Patient.Image />
+        </PatientSkeleton.Data>
+      ) : (
+        <Patient.Data>
+          <Patient.Image />
+        </Patient.Data>
+      )}
+    </Patient>
   );
 }
 

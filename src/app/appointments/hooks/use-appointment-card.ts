@@ -18,9 +18,11 @@ export function useAppointmentCard({ status, uid }: Props) {
   const handleNavigate = () => {
     const { pathname, search } = getUrlData();
 
-    if (pathname.includes(uid))
-      return;
-    navigate(`${ROUTES.agenda}/${uid}${search}`, { preventScrollReset: true, replace: true });
+    if (pathname.includes(uid)) return;
+    navigate(`${ROUTES.agenda}/${uid}${search}`, {
+      preventScrollReset: true,
+      replace: true,
+    });
   };
 
   return {

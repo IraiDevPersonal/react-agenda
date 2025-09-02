@@ -6,7 +6,14 @@ type GridProps = PropsWithChildren<{ className?: string }>;
 
 function AppointmentGrid({ children, className }: GridProps) {
   return (
-    <div className={cn("border rounded-lg overflow-hidden w-full h-max", className)}>{children}</div>
+    <div
+      className={cn(
+        "border rounded-lg overflow-hidden w-full h-max",
+        className,
+      )}
+    >
+      {children}
+    </div>
   );
 }
 
@@ -14,11 +21,12 @@ type RowProps = PropsWithChildren<{ asHeader?: boolean; className?: string }>;
 
 function Row({ children, asHeader, className }: RowProps) {
   return (
-    <div className={cn(
-      "grid grid-cols-[50px_1fr_1fr_1fr_1fr_1fr_1fr]",
-      asHeader && "font-semibold text-center bg-sidebar sticky top-0 z-20",
-      className,
-    )}
+    <div
+      className={cn(
+        "grid grid-cols-[50px_1fr_1fr_1fr_1fr_1fr_1fr]",
+        asHeader && "font-semibold text-center bg-sidebar sticky top-0 z-20",
+        className,
+      )}
     >
       {children}
     </div>
@@ -28,11 +36,7 @@ function Row({ children, asHeader, className }: RowProps) {
 type CellProps = PropsWithChildren<{ className?: string }>;
 
 function Cell({ children, className }: CellProps) {
-  return (
-    <div className={cn("p-2 w-full", className)}>
-      {children}
-    </div>
-  );
+  return <div className={cn("p-2 w-full", className)}>{children}</div>;
 }
 
 function HeaderCell({ className, ...props }: CellProps) {
@@ -56,15 +60,11 @@ function TimeCell({ from, to }: { to: string; from: string }) {
 type CustomRowProps = Omit<RowProps, "asHeader">;
 
 function HeaderRow({ className, ...props }: CustomRowProps) {
-  return (
-    <Row asHeader {...props} className={cn("border-b", className)} />
-  );
+  return <Row asHeader {...props} className={cn("border-b", className)} />;
 }
 
 function BodyRow({ className, ...props }: CustomRowProps) {
-  return (
-    <Row {...props} className={cn("border-b last:border-0", className)} />
-  );
+  return <Row {...props} className={cn("border-b last:border-0", className)} />;
 }
 
 AppointmentGrid.HeaderCell = HeaderCell;

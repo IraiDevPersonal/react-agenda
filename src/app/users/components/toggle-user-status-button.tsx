@@ -2,11 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { ButtonWithAlertDialog } from "@/components/ui/button-with-alert-button";
-
-import type { UserModel } from "../models/user-model";
-
 import { userQuery } from "../container";
 import { useUserFilters } from "../hooks/use-user-filters";
+import type { UserModel } from "../models/user-model";
 
 type Props = {
   user: UserModel;
@@ -19,7 +17,9 @@ function ToggleUserStatusButton({ user }: Props) {
   //   successFn: () => setOpen(false),
   // });
   const { filters } = useUserFilters();
-  const { isFetching: isPatientFetching } = useQuery(userQuery.forLoader(filters));
+  const { isFetching: isPatientFetching } = useQuery(
+    userQuery.forLoader(filters),
+  );
 
   return (
     <ButtonWithAlertDialog
@@ -36,13 +36,9 @@ function ToggleUserStatusButton({ user }: Props) {
       User
       <strong className="font-semibold">
         {" "}
-        {user.names}
-        {" "}
-        {user.last_names}
-        {" "}
+        {user.names} {user.last_names}{" "}
       </strong>
-      sera
-      {" "}
+      sera{" "}
       {/* <strong>{user.is_deleted ? "habilitado" : "deshabilitado"}</strong> */}
       .
     </ButtonWithAlertDialog>

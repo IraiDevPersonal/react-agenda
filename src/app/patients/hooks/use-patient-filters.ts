@@ -4,10 +4,8 @@ import { useTransition } from "react";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { pagination } from "@/lib/utils";
-
-import type { PatientFilters } from "../models/shared-model";
-
 import { patientQuery } from "../container";
+import type { PatientFilters } from "../models/shared-model";
 
 function parser(): PatientFilters {
   return {
@@ -22,7 +20,10 @@ function parser(): PatientFilters {
 
 export function usePatientFilters() {
   const [, startTransition] = useTransition();
-  const [filters, onFilter] = useQueryStates(parser(), { history: "replace", startTransition });
+  const [filters, onFilter] = useQueryStates(parser(), {
+    history: "replace",
+    startTransition,
+  });
 
   const queryClient = useQueryClient();
   const { data } = useQuery(patientQuery.pagination(filters));

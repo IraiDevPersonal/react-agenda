@@ -1,4 +1,4 @@
-import { ProfessionModel } from "@/app/professions/models/profession-model";
+import type { ProfessionModel } from "@/app/professions/models/profession-model";
 import type { UserStatus } from "./shared-model";
 
 export type UserModel = {

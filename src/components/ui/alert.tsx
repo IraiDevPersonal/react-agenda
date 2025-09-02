@@ -1,6 +1,10 @@
+import {
+  CircleAlertIcon,
+  CircleCheckIcon,
+  InfoIcon,
+  TriangleAlertIcon,
+} from "lucide-react";
 import type { PropsWithChildren } from "react";
-
-import { CircleAlertIcon, CircleCheckIcon, InfoIcon, TriangleAlertIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -32,28 +36,14 @@ function Icon({ severity }: Pick<Props, "severity">) {
   switch (severity) {
     case "error":
       return (
-        <CircleAlertIcon
-          className="inline-flex"
-          size={20}
-          aria-hidden="true"
-        />
+        <CircleAlertIcon className="inline-flex" size={20} aria-hidden="true" />
       );
     case "info":
-      return (
-        <InfoIcon
-          className="inline-flex"
-          size={20}
-          aria-hidden="true"
-        />
-      );
+      return <InfoIcon className="inline-flex" size={20} aria-hidden="true" />;
 
     case "success":
       return (
-        <CircleCheckIcon
-          className="inline-flex"
-          size={20}
-          aria-hidden="true"
-        />
+        <CircleCheckIcon className="inline-flex" size={20} aria-hidden="true" />
       );
 
     case "warn":

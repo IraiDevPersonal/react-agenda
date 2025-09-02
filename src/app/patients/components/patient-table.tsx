@@ -10,11 +10,9 @@ import { PatientTableRows } from "./patient-table-rows";
 
 function PatientTable() {
   const { filters } = usePatientFilters();
-  const {
-    isLoadingError,
-    error,
-    refetch,
-  } = useQuery(patientQuery.forLoader(filters));
+  const { isLoadingError, error, refetch } = useQuery(
+    patientQuery.forLoader(filters),
+  );
 
   if (isLoadingError) {
     return <ErrorMessage onRetry={refetch}>{error.message}</ErrorMessage>;

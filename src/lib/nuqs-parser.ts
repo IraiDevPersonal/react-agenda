@@ -4,8 +4,7 @@ import { createParser } from "nuqs";
 export const parseAsLocalDate = createParser<Date>({
   parse(query) {
     // Verificamos formato rápido
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(query))
-      return null;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(query)) return null;
 
     // Extraemos partes y creamos Date local
     const [y, m, d] = query.split("-").map(Number);

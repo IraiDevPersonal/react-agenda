@@ -15,19 +15,16 @@ function AppointmentHours({ datetime }: Props) {
         "*:p-1.5 text-center *:odd:border-r border bg-sidebar",
       )}
     >
-      <span className="font-semibold border-b">
-        Fecha atención
-      </span>
-      <span className="font-semibold border-b">
-        Horario de atención
+      <span className="font-semibold border-b">Fecha atención</span>
+      <span className="font-semibold border-b">Horario de atención</span>
+      <span>
+        {dateHelper.format(
+          dateHelper.parseISO(datetime.date),
+          DateFormat["dd-MM-yyyy"],
+        )}
       </span>
       <span>
-        {dateHelper.format(dateHelper.parseISO(datetime.date), DateFormat["dd-MM-yyyy"])}
-      </span>
-      <span>
-        {datetime.time_from}
-        -
-        {datetime.time_to}
+        {datetime.time_from}-{datetime.time_to}
       </span>
     </div>
   );

@@ -16,7 +16,9 @@ export function usePatientContext() {
   const context = use(PatientContext);
 
   if (!context) {
-    throw new CustomError("el usePatientContext solo puede ser usado dentro de su Provider");
+    throw new CustomError(
+      "el usePatientContext solo puede ser usado dentro de su Provider",
+    );
   }
 
   return context;

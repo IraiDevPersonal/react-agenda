@@ -1,12 +1,10 @@
 import type { HttpClientImpl } from "@/lib/http-client";
-
-import type { UserDetailResponseModel } from "./models/user-detail-response-model";
-import type { UserForFilterModel } from "./models/user-for-filters-model";
-import type { UserResponseModel } from "./models/user-response-model";
-
 import { UserDetailMapper } from "./mappers/user-detail-mapper";
 import { UserForFiltersMapper } from "./mappers/user-for-filters-mapper";
 import { UserMapper } from "./mappers/user-mapper";
+import type { UserDetailResponseModel } from "./models/user-detail-response-model";
+import type { UserForFilterModel } from "./models/user-for-filters-model";
+import type { UserResponseModel } from "./models/user-response-model";
 
 export type UserServiceImpl = {
   getUsers: (filters: object) => Promise<UserResponseModel>;
@@ -18,7 +16,10 @@ export class UserService implements UserServiceImpl {
   private readonly endpoint: string;
   private readonly client: HttpClientImpl;
 
-  constructor({ endpoint, client }: { endpoint: string; client: HttpClientImpl }) {
+  constructor({
+    endpoint,
+    client,
+  }: { endpoint: string; client: HttpClientImpl }) {
     this.endpoint = endpoint;
     this.client = client;
   }

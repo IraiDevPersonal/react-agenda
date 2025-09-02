@@ -6,20 +6,18 @@ import { useViewModeStore } from "../stores/view-mode-store";
 
 function AppointmentViewModeSelector() {
   const { handleViewModeChange } = useAppointmentFilters();
-  const viewMode = useViewModeStore(s => s.viewMode);
+  const viewMode = useViewModeStore((s) => s.viewMode);
 
   return (
-    <>
-      <SelectNative
-        value={viewMode}
-        withEmptyOption={false}
-        onChange={handleViewModeChange}
-        options={[
-          { label: "Día", value: AppointmentViewMode.day },
-          { label: "Semana", value: AppointmentViewMode.week },
-        ]}
-      />
-    </>
+    <SelectNative
+      value={viewMode}
+      withEmptyOption={false}
+      onChange={handleViewModeChange}
+      options={[
+        { label: "Día", value: AppointmentViewMode.day },
+        { label: "Semana", value: AppointmentViewMode.week },
+      ]}
+    />
   );
 }
 

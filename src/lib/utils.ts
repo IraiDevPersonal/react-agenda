@@ -8,15 +8,20 @@ import { twMerge } from "tailwind-merge";
 import { DateFormat, dateHelper } from "./date-helper";
 
 function parseDateToString<T extends object>(value: T) {
-  return Object.entries(value).reduce((acc, [key, value]) => {
-    if (value instanceof Date) {
-      acc[key as keyof T] = dateHelper.format(value, DateFormat["yyyy-MM-dd"]);
-    }
-    else {
-      acc[key as keyof T] = value;
-    }
-    return acc;
-  }, {} as Record<keyof T, string | number | boolean | null | undefined>);
+  return Object.entries(value).reduce(
+    (acc, [key, value]) => {
+      if (value instanceof Date) {
+        acc[key as keyof T] = dateHelper.format(
+          value,
+          DateFormat["yyyy-MM-dd"],
+        );
+      } else {
+        acc[key as keyof T] = value;
+      }
+      return acc;
+    },
+    {} as Record<keyof T, string | number | boolean | null | undefined>,
+  );
 }
 
 export function queryParser<T extends object>(value: T) {
@@ -24,33 +29,23 @@ export function queryParser<T extends object>(value: T) {
     return {};
   }
 
-  const stringifyQuery = queryString.stringify(
-    parseDateToString(value),
-    {
-      arrayFormat: "bracket-separator",
-      arrayFormatSeparator: ",",
-      skipEmptyString: true,
-      skipNull: true,
-    },
-  );
+  const stringifyQuery = queryString.stringify(parseDateToString(value), {
+    arrayFormat: "bracket-separator",
+    arrayFormatSeparator: ",",
+    skipEmptyString: true,
+    skipNull: true,
+  });
 
-  return queryString.parse(
-    stringifyQuery,
-    {
-      arrayFormat: "bracket-separator",
-      arrayFormatSeparator: ",",
-      parseBooleans: true,
-      parseNumbers: true,
-    },
-  );
+  return queryString.parse(stringifyQuery, {
+    arrayFormat: "bracket-separator",
+    arrayFormatSeparator: ",",
+    parseBooleans: true,
+    parseNumbers: true,
+  });
 }
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
-}
-
-export function safeArray<T = any>(data: any): T[] {
-  return (Array.isArray(data) ? data : []) as T[];
 }
 
 export function getUrlData() {
@@ -60,23 +55,25 @@ export function getUrlData() {
 }
 
 export function formatPhoneNumber(value: string, format?: string) {
-  return phoneFormatter.format(value, format ?? "NNN N NN NNN NNN", { normalize: true });
+  return phoneFormatter.format(value, format ?? "NNN N NN NNN NNN", {
+    normalize: true,
+  });
 }
 
 export function isValidPhoneNumber(value: string) {
   // por ahora solo valido para chile
-  if (!value.startsWith("+"))
-    return false;
-  if (value.length !== 12)
-    return false;
+  if (!value.startsWith("+")) return false;
+  if (value.length !== 12) return false;
   return true;
 }
 
-export function pagination(action: "next" | "prev", currentPage: number, totalPages: number) {
-  if (currentPage >= 1 && action === "prev")
-    return currentPage - 1;
-  if (currentPage <= totalPages && action === "next")
-    return currentPage + 1;
+export function pagination(
+  action: "next" | "prev",
+  currentPage: number,
+  totalPages: number,
+) {
+  if (currentPage >= 1 && action === "prev") return currentPage - 1;
+  if (currentPage <= totalPages && action === "next") return currentPage + 1;
 }
 
 export function stringToNullableNumber(value: string): number | null {

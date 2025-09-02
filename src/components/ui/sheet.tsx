@@ -1,16 +1,8 @@
-"use client";
-
 import type { VariantProps } from "class-variance-authority";
-import type { HTMLMotionProps, Transition } from "motion/react";
-
 import { cva } from "class-variance-authority";
 import { X } from "lucide-react";
-import {
-  AnimatePresence,
-
-  motion,
-
-} from "motion/react";
+import type { HTMLMotionProps, Transition } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { Dialog as SheetPrimitive } from "radix-ui";
 import * as React from "react";
 
@@ -42,8 +34,7 @@ function Sheet({ children, hideCloseButton = false, ...props }: SheetProps) {
   );
 
   React.useEffect(() => {
-    if (props?.open !== undefined)
-      setIsOpen(props.open);
+    if (props?.open !== undefined) setIsOpen(props.open);
   }, [props?.open]);
 
   const handleOpenChange = React.useCallback(
@@ -51,7 +42,7 @@ function Sheet({ children, hideCloseButton = false, ...props }: SheetProps) {
       setIsOpen(open);
       props.onOpenChange?.(open);
     },
-    [props],
+    [props.onOpenChange],
   );
 
   return (
@@ -97,19 +88,22 @@ function SheetOverlay({ className, ...props }: SheetOverlayProps) {
   );
 }
 
-const sheetVariants = cva("flex flex-col fixed z-50 gap-4 bg-background py-4 px-6 shadow-lg", {
-  variants: {
-    side: {
-      top: "inset-x-0 top-0 border-b",
-      bottom: "inset-x-0 bottom-0 border-t",
-      left: "inset-y-0 left-0 h-svh w-max border-r",
-      right: "inset-y-0 right-0 h-svh w-max border-l",
+const sheetVariants = cva(
+  "flex flex-col fixed z-50 gap-4 bg-background py-4 px-6 shadow-lg",
+  {
+    variants: {
+      side: {
+        top: "inset-x-0 top-0 border-b",
+        bottom: "inset-x-0 bottom-0 border-t",
+        left: "inset-y-0 left-0 h-svh w-max border-r",
+        right: "inset-y-0 right-0 h-svh w-max border-l",
+      },
+    },
+    defaultVariants: {
+      side: "right",
     },
   },
-  defaultVariants: {
-    side: "right",
-  },
-});
+);
 
 type SheetContentProps = React.ComponentProps<typeof SheetPrimitive.Content> &
   VariantProps<typeof sheetVariants> &
@@ -118,7 +112,11 @@ type SheetContentProps = React.ComponentProps<typeof SheetPrimitive.Content> &
     overlay?: boolean;
   };
 
-const DEFAULT_TRANSITION: Transition = { type: "spring", stiffness: 150, damping: 25 };
+const DEFAULT_TRANSITION: Transition = {
+  type: "spring",
+  stiffness: 150,
+  damping: 25,
+};
 
 function SheetContent({
   transition = DEFAULT_TRANSITION,

@@ -1,6 +1,5 @@
-import type { ComponentProps, ReactNode } from "react";
-
 import { SearchIcon } from "lucide-react";
+import type { ComponentProps, ReactNode } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 import { cn } from "@/lib/utils";
@@ -38,9 +37,7 @@ function Search({
     <FieldWrapperWithAccessory
       label={label}
       classNames={classNames}
-      endComponent={(
-        <SearchIcon size={searchIconSize} />
-      )}
+      endComponent={<SearchIcon size={searchIconSize} />}
     >
       <Input
         className={cn("w-48 pe-14", classNames?.input)}

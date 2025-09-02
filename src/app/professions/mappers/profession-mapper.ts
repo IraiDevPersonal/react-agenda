@@ -1,6 +1,6 @@
 import { CustomError } from "@/lib/custom-error";
 
-import { ProfessionModel } from "../models/profession-model";
+import type { ProfessionModel } from "../models/profession-model";
 import { ApiProfessionSchema } from "../schemas/api/profession-schema";
 
 export class ProfessionMapper {
@@ -28,6 +28,6 @@ export class ProfessionMapper {
       });
     }
 
-    return data.map(this.map);
+    return data.map(ProfessionMapper.map);
   }
 }

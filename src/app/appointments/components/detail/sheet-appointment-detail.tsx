@@ -7,11 +7,7 @@ function SheetAppointmentDetail() {
   const { appointmentUid, handleClose } = useAppointmentDetailControl();
 
   return (
-    <Sheet
-      hideCloseButton
-      open={!!appointmentUid}
-      onOpenChange={handleClose}
-    >
+    <Sheet hideCloseButton open={!!appointmentUid} onOpenChange={handleClose}>
       <Sheet.Content side="right">
         <Sheet.Header>
           <Sheet.Title className="text-3xl leading-none mb-4">

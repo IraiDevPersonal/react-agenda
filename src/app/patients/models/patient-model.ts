@@ -4,7 +4,8 @@ import { ResponseWithPaginationSchema as ApiResponseWithPaginationSchema } from 
 
 import { ApiPatientSchema } from "../schemas/api/patient-schema";
 
-export const PatientResponseSchema = ApiResponseWithPaginationSchema(ApiPatientSchema);
+export const PatientResponseSchema =
+  ApiResponseWithPaginationSchema(ApiPatientSchema);
 
 export type PatientModel = {
   uid: string;

@@ -18,7 +18,9 @@ function UserInfoForAppointment({ user }: Props) {
 
       <TextItem>
         <TextItem.Label>Profesión(es):</TextItem.Label>
-        <TextItem.Value capitalize>{user.professions.join(", ")}</TextItem.Value>
+        <TextItem.Value capitalize>
+          {user.professions.join(", ")}
+        </TextItem.Value>
       </TextItem>
 
       <TextItem>

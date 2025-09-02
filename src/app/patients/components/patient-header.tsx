@@ -12,16 +12,12 @@ import { PatientFilters } from "./patient-filters";
 
 function PatientHeader() {
   const { filters } = usePatientFilters();
-  const {
-    data: totalPatients = 0,
-  } = useQuery(patientQuery.total(filters));
+  const { data: totalPatients = 0 } = useQuery(patientQuery.total(filters));
 
   return (
     <header className="flex flex-col lg:flex-row items-center justify-between w-full">
       <PageTitle>
-        {totalPatients}
-        {" "}
-        Paciente
+        {totalPatients} Paciente
         {totalPatients > 1 ? "s" : ""}
       </PageTitle>
 

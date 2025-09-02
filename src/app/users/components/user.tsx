@@ -1,16 +1,13 @@
-import type { PropsWithChildren } from "react";
-
 import { Loader2Icon, UserIcon } from "lucide-react";
+import type { PropsWithChildren } from "react";
 import { useMemo } from "react";
 
 import { UserStatusBadge } from "@/app/profile/components/user-status-badge";
 import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
-
-import type { UserDetailModel } from "../models/user-detail-model";
-
 import { UserContext, useUserContext } from "../context/user-context";
+import type { UserDetailModel } from "../models/user-detail-model";
 import { UserForm } from "./user-form";
 import { UserRolesControl } from "./user-roles-control";
 
@@ -28,7 +25,7 @@ function User({ children, user }: Props) {
         {children}
         <User.FormWrapper>
           <UserForm
-          // upsertService={upsertService}
+            // upsertService={upsertService}
             user={user}
           >
             <UserRolesControl />
@@ -42,9 +39,7 @@ function User({ children, user }: Props) {
 
 function UserWrapper({ children }: PropsWithChildren) {
   return (
-    <div
-      className="flex flex-col xl:flex-row items-center justify-center h-full gap-x-4 lg:gap-x-8"
-    >
+    <div className="flex flex-col xl:flex-row items-center justify-center h-full gap-x-4 lg:gap-x-8">
       {children}
     </div>
   );
@@ -52,9 +47,7 @@ function UserWrapper({ children }: PropsWithChildren) {
 
 function UserDataWrapper({ children }: PropsWithChildren) {
   return (
-    <div className="flex flex-col items-center mb-8 xl:mb-0">
-      {children}
-    </div>
+    <div className="flex flex-col items-center mb-8 xl:mb-0">{children}</div>
   );
 }
 
@@ -71,13 +64,8 @@ function UserData({ children }: PropsWithChildren) {
   return (
     <User.DataWrapper>
       {children}
-      <h5
-        className="text-2xl font-semibold capitalize text-center max-w-52 md:max-w-96 xl:max-w-full mt-4 md:mt-8"
-      >
-        {user?.names}
-        {" "}
-        {user?.last_names}
-        .
+      <h5 className="text-2xl font-semibold capitalize text-center max-w-52 md:max-w-96 xl:max-w-full mt-4 md:mt-8">
+        {user?.names} {user?.last_names}.
       </h5>
       <div className="flex items-center gap-1">
         <span
@@ -105,10 +93,7 @@ function UserImage({ showCaption }: { showCaption?: boolean }) {
   return (
     <div>
       <Avatar className="size-52 lg:size-72">
-        <Avatar.Image
-          src={user?.avatar_image ?? ""}
-          alt="User Avatar"
-        />
+        <Avatar.Image src={user?.avatar_image ?? ""} alt="User Avatar" />
         <Avatar.Fallback className={isPending ? "animate-pulse" : ""}>
           <UserIcon size={80} className="text-muted-foreground" />
         </Avatar.Fallback>
@@ -123,11 +108,9 @@ function UserImage({ showCaption }: { showCaption?: boolean }) {
       </Avatar>
       {showCaption && (
         <span className="italic text-muted-foreground text-center block mt-8">
-          {
-            isPending
-              ? "Cargando foto de perfil..."
-              : "Seleccionar foto de perfil."
-          }
+          {isPending
+            ? "Cargando foto de perfil..."
+            : "Seleccionar foto de perfil."}
         </span>
       )}
     </div>

@@ -11,11 +11,8 @@ type Props = {
 };
 
 function AppointmentDateSelector({ fullwidth }: Props) {
-  const {
-    filters,
-    onFilter,
-  } = useAppointmentFilters();
-  const viewMode = useViewModeStore(s => s.viewMode);
+  const { filters, onFilter } = useAppointmentFilters();
+  const viewMode = useViewModeStore((s) => s.viewMode);
 
   return (
     <>
@@ -33,10 +30,12 @@ function AppointmentDateSelector({ fullwidth }: Props) {
                 }
               : undefined
           }
-          onValueChange={v => onFilter({
-            date_from: v?.from,
-            date_to: v?.to,
-          })}
+          onValueChange={(v) =>
+            onFilter({
+              date_from: v?.from,
+              date_to: v?.to,
+            })
+          }
         />
       </Show>
 
@@ -50,7 +49,7 @@ function AppointmentDateSelector({ fullwidth }: Props) {
             root: fullwidth ? "w-full" : undefined,
           }}
           value={filters.date ?? undefined}
-          onValueChange={v => onFilter({ date: dateHelper.normalizeDate(v) })}
+          onValueChange={(v) => onFilter({ date: dateHelper.normalizeDate(v) })}
         />
       </Show>
     </>

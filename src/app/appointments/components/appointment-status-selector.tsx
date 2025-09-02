@@ -10,8 +10,8 @@ type Props = {
 };
 
 function AppointmentStatusSelector({ fullwidth }: Props) {
-  const status = useStatusStore(s => s.status);
-  const onChangeStatus = useStatusStore(s => s.onChangeStatus);
+  const status = useStatusStore((s) => s.status);
+  const onChangeStatus = useStatusStore((s) => s.onChangeStatus);
 
   return (
     <FieldWrapper label="Estado">

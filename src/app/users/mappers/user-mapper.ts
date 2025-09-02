@@ -33,7 +33,9 @@ export class UserMapper {
     const { success, error, data } = ApiUserResponseSchema.safeParse(raw);
 
     if (!success) {
-      throw CustomError.mapperError(error, { loggerMessage: "UserMapper.fromApiToDomain" });
+      throw CustomError.mapperError(error, {
+        loggerMessage: "UserMapper.fromApiToDomain",
+      });
     }
 
     return {
@@ -41,7 +43,7 @@ export class UserMapper {
       total: data.total,
       limit: data.limit,
       pages: data.pages,
-      data: data.data.map(this.map),
+      data: data.data.map(UserMapper.map),
     };
   }
 }

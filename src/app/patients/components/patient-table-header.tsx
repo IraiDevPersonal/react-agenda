@@ -12,10 +12,7 @@ import { PatientStatus } from "../models/shared-model";
 import { SearchPatient } from "./search-patient";
 
 function PatientTableHeader() {
-  const {
-    filters,
-    onFilter,
-  } = usePatientFilters();
+  const { filters, onFilter } = usePatientFilters();
   const { isFetching } = useQuery(patientQuery.forLoader(filters));
 
   return (
@@ -37,7 +34,7 @@ function PatientTableHeader() {
           <Search
             autoFocus
             classNames={{ input: "table-filter-field" }}
-            onSearch={v => onFilter({ name: v })}
+            onSearch={(v) => onFilter({ name: v })}
             placeholder="Buscar por nombre..."
             defaultValue={filters.name ?? ""}
             searchIconSize={16}
@@ -47,7 +44,7 @@ function PatientTableHeader() {
         <Table.Head>
           <SearchPatient
             classNames={{ input: "table-filter-field", root: "w-36" }}
-            onSearch={v => onFilter({ rut: v })}
+            onSearch={(v) => onFilter({ rut: v })}
             defaultValue={filters.rut ?? ""}
             placeholder="Buscar por rut..."
             searchIconSize={16}
@@ -58,7 +55,7 @@ function PatientTableHeader() {
         <Table.Head>
           <Search
             classNames={{ input: "table-filter-field" }}
-            onSearch={v => onFilter({ email: v })}
+            onSearch={(v) => onFilter({ email: v })}
             placeholder="Buscar por correo..."
             defaultValue={filters.email ?? ""}
             searchIconSize={16}
@@ -72,7 +69,7 @@ function PatientTableHeader() {
               { value: PatientStatus.ACTIVE, label: "Habilitados" },
               { value: PatientStatus.INACTIVE, label: "Deshabilitados" },
             ]}
-            onChange={e => onFilter({ status: e.target.value })}
+            onChange={(e) => onFilter({ status: e.target.value })}
             className={cn("table-filter-field", "max-w-max")}
             value={filters.status ?? ""}
           />

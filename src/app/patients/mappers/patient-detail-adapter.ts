@@ -32,7 +32,8 @@ export class PatientDetailMapper {
   }
 
   static fromApiToDomain(raw: unknown): PatientDetailResponseModel {
-    const { success, error, data } = ApiPatientDetailResponseSchema.safeParse(raw);
+    const { success, error, data } =
+      ApiPatientDetailResponseSchema.safeParse(raw);
 
     if (!success) {
       throw CustomError.mapperError(error, {
@@ -41,7 +42,7 @@ export class PatientDetailMapper {
     }
 
     return {
-      data: this.map(data.data),
+      data: PatientDetailMapper.map(data.data),
       appointment_history: data.appointment_history,
     };
   }

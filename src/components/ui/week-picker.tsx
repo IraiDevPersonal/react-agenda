@@ -1,8 +1,5 @@
 import { CalendarIcon } from "lucide-react";
 import { useId } from "react";
-
-import type { DateWeekRange } from "@/lib/types/global-types";
-
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -11,6 +8,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { DateFormat, dateHelper } from "@/lib/date-helper";
+import type { DateWeekRange } from "@/lib/types/global-types";
 import { cn } from "@/lib/utils";
 
 import { FieldWrapper } from "./field-wrapper";
@@ -46,24 +44,20 @@ function WeekPicker({ label, value, classNames, onValueChange }: Props) {
           <Button
             id={id}
             variant="outline"
-            className={cn("group bg-background hover:bg-background border-input w-52 justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]", classNames?.trigger)}
+            className={cn(
+              "group bg-background hover:bg-background border-input w-52 justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]",
+              classNames?.trigger,
+            )}
           >
-            <span
-              className={cn("truncate", !value && "text-muted-foreground")}
-            >
-              {
-                (value?.from && value.to)
-                  ? (
-                      <>
-                        {dateHelper.format(value.from, DateFormat["dd LLL y"])}
-                        {" "}
-                        -
-                        {" "}
-                        {dateHelper.format(value.to, DateFormat["dd LLL y"])}
-                      </>
-                    )
-                  : ("desde - hasta")
-              }
+            <span className={cn("truncate", !value && "text-muted-foreground")}>
+              {value?.from && value.to ? (
+                <>
+                  {dateHelper.format(value.from, DateFormat["dd LLL y"])} -{" "}
+                  {dateHelper.format(value.to, DateFormat["dd LLL y"])}
+                </>
+              ) : (
+                "desde - hasta"
+              )}
             </span>
             <CalendarIcon
               size={16}
@@ -81,12 +75,14 @@ function WeekPicker({ label, value, classNames, onValueChange }: Props) {
             numberOfMonths={1}
             modifiers={{
               selected: value ? [value.from!, value.to!] : undefined,
-              selectedRange: value?.from && value?.to
-                ? { from: value.from, to: value.to }
-                : undefined,
+              selectedRange:
+                value?.from && value?.to
+                  ? { from: value.from, to: value.to }
+                  : undefined,
             }}
             modifiersClassNames={{
-              selected: "bg-primary text-primary-foreground first:rounded-s-md last:rounded-e-md",
+              selected:
+                "bg-primary text-primary-foreground first:rounded-s-md last:rounded-e-md",
               selectedRange: "bg-muted",
             }}
           />

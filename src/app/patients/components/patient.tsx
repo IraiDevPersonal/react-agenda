@@ -1,24 +1,21 @@
-import type { PropsWithChildren } from "react";
-
 import { useIsMutating } from "@tanstack/react-query";
 import { Loader2Icon, UserIcon } from "lucide-react";
+import type { PropsWithChildren } from "react";
 import { useMemo } from "react";
-
+import { UserStatus } from "@/app/users/models/shared-model";
 import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
-
-import type { UpsertPatientServiceFn } from "../models/patient-action-model";
-import type { PatientModel } from "../models/patient-model";
-
 import { UserStatusBadge } from "../../profile/components/user-status-badge";
 import { patientQuery } from "../container";
 import { PatientContext, usePatientContext } from "../context/patient-context";
+import type { UpsertPatientServiceFn } from "../models/patient-action-model";
+import type { PatientDetailModel } from "../models/patient-detail-model";
 import { PatientForm } from "./patient-form";
 
 type Props = PropsWithChildren<{
   upsertService: UpsertPatientServiceFn;
-  patient?: PatientModel | undefined;
+  patient?: PatientDetailModel | undefined;
 }>;
 
 function Patient({ children, patient, upsertService }: Props) {
@@ -38,9 +35,7 @@ function Patient({ children, patient, upsertService }: Props) {
 
 function PatientWrapper({ children }: PropsWithChildren) {
   return (
-    <div
-      className="flex flex-col xl:flex-row items-center justify-center h-full gap-x-4 lg:gap-x-8"
-    >
+    <div className="flex flex-col xl:flex-row items-center justify-center h-full gap-x-4 lg:gap-x-8">
       {children}
     </div>
   );
@@ -48,9 +43,7 @@ function PatientWrapper({ children }: PropsWithChildren) {
 
 function PatientDataWrapper({ children }: PropsWithChildren) {
   return (
-    <div className="flex flex-col items-center mb-8 xl:mb-0">
-      {children}
-    </div>
+    <div className="flex flex-col items-center mb-8 xl:mb-0">{children}</div>
   );
 }
 
@@ -67,13 +60,8 @@ function PatientData({ children }: PropsWithChildren) {
   return (
     <Patient.DataWrapper>
       {children}
-      <h5
-        className="text-2xl font-semibold capitalize text-center max-w-52 md:max-w-96 xl:max-w-full mt-4 md:mt-8"
-      >
-        {patient?.names}
-        {" "}
-        {patient?.last_names}
-        .
+      <h5 className="text-2xl font-semibold capitalize text-center max-w-52 md:max-w-96 xl:max-w-full mt-4 md:mt-8">
+        {patient?.names} {patient?.last_names}.
       </h5>
       <div className="flex items-center gap-1">
         <span
@@ -86,7 +74,7 @@ function PatientData({ children }: PropsWithChildren) {
           <CopyButton value={patient?.uid ?? ""} />
         </DefaultTooltip>
       </div>
-      <UserStatusBadge isDeleted={patient?.is_deleted ?? false} />
+      <UserStatusBadge isDeleted={patient?.status !== UserStatus.ACTIVE} />
     </Patient.DataWrapper>
   );
 }
@@ -99,10 +87,7 @@ function PatientImage({ showCaption }: { showCaption?: boolean }) {
   return (
     <div>
       <Avatar className="size-52 lg:size-72">
-        <Avatar.Image
-          src={patient?.avatar_image ?? ""}
-          alt="Patient Avatar"
-        />
+        <Avatar.Image src={patient?.avatar_image ?? ""} alt="Patient Avatar" />
         <Avatar.Fallback className={isPending ? "animate-pulse" : ""}>
           <UserIcon size={80} className="text-muted-foreground" />
         </Avatar.Fallback>
@@ -117,11 +102,9 @@ function PatientImage({ showCaption }: { showCaption?: boolean }) {
       </Avatar>
       {showCaption && (
         <span className="italic text-muted-foreground text-center block mt-8">
-          {
-            isPending
-              ? "Cargando foto de perfil..."
-              : "Seleccionar foto de perfil."
-          }
+          {isPending
+            ? "Cargando foto de perfil..."
+            : "Seleccionar foto de perfil."}
         </span>
       )}
     </div>

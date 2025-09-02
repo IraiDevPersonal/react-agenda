@@ -1,34 +1,40 @@
 import type { UseQueryOptions } from "@tanstack/react-query";
-import type { Values } from "nuqs";
-
 import { queryOptions } from "@tanstack/react-query";
-
-import type { TQueryKey } from "@/lib/types/global-types";
-
+import type { Values } from "nuqs";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import type { TQueryKey } from "@/lib/types/global-types";
 import { queryParser } from "@/lib/utils";
 
 import type { AppointmentDetailModel } from "./models/appointment-detail-model";
 import type { AppointmentModel } from "./models/appointment-model";
-import type { AppointmentFilters, AppointmentStatus } from "./models/shared-model";
+import type {
+  AppointmentFilters,
+  AppointmentStatus,
+} from "./models/shared-model";
 import type { AppointmentServiceImpl } from "./service";
 
 type Filters = Partial<Values<AppointmentFilters>>;
 
 export type AppointmentQueryImpl = {
-  list: (filters: Filters) => UseQueryOptions<
+  list: (
+    filters: Filters,
+  ) => UseQueryOptions<
     AppointmentModel[],
     Error,
     AppointmentModel[],
     TQueryKey
   >;
-  detail: (uid: string) => UseQueryOptions<
+  detail: (
+    uid: string,
+  ) => UseQueryOptions<
     AppointmentDetailModel,
     Error,
     AppointmentDetailModel,
     TQueryKey
   >;
-  detailStatus: (uid: string) => UseQueryOptions<
+  detailStatus: (
+    uid: string,
+  ) => UseQueryOptions<
     AppointmentDetailModel,
     Error,
     AppointmentStatus,
@@ -45,7 +51,11 @@ export class AppointmentQuery implements AppointmentQueryImpl {
 
   private detailDefaultOptions(uid: string) {
     return queryOptions({
-      queryKey: [QUERY_KEYS.appointments, QUERY_KEYS.generic.detail, uid] as TQueryKey,
+      queryKey: [
+        QUERY_KEYS.appointments,
+        QUERY_KEYS.generic.detail,
+        uid,
+      ] as TQueryKey,
       queryFn: () => this.service.getAppointmentByUid(uid),
       enabled: !!uid,
     });
@@ -68,7 +78,7 @@ export class AppointmentQuery implements AppointmentQueryImpl {
   detailStatus = (uid: string) => {
     return queryOptions({
       ...this.detailDefaultOptions(uid),
-      select: data => data.status,
+      select: (data) => data.status,
     });
   };
 }

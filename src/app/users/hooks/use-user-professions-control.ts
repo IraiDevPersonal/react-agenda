@@ -6,20 +6,24 @@ import { useProfessionStore } from "../stores/professions-store";
 import { useUserObserver } from "./use-user-observer";
 
 export function useUserProfessionsControl() {
-  const professions = useProfessionStore(s => s.professions);
-  const setProfessions = useProfessionStore(s => s.setProfessions);
-  const onAddProfession = useProfessionStore(s => s.onAddProfession);
-  const onRemoveProfession = useProfessionStore(s => s.onRemoveProfession);
+  const professions = useProfessionStore((s) => s.professions);
+  const setProfessions = useProfessionStore((s) => s.setProfessions);
+  const onAddProfession = useProfessionStore((s) => s.onAddProfession);
+  const onRemoveProfession = useProfessionStore((s) => s.onRemoveProfession);
 
-  useUserObserver({ setData: ({ professions }) => setProfessions(professions) });
+  useUserObserver({
+    setData: ({ professions }) => setProfessions(professions),
+  });
 
   const { data: options = [] } = useQuery(professionQuery.forFitlers());
 
-  const filteredOptions = options.filter(p => !professions.map(sp => sp.id).includes(Number(p.value)));
+  const filteredOptions = options.filter(
+    (p) => !professions.map((sp) => sp.id).includes(Number(p.value)),
+  );
 
   const handleAddProfession = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    const profession = options.find(o => o.value === value);
+    const profession = options.find((o) => o.value === value);
 
     if (profession) {
       onAddProfession({

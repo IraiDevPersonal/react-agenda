@@ -16,7 +16,11 @@ type Props = PropsWithChildren<{
 function FieldWrapper({ children, labelId, label, classNames }: Props) {
   return (
     <div className={cn("flex flex-col space-y-1", classNames?.root)}>
-      {label && <Label htmlFor={labelId} className={classNames?.label}>{label}</Label>}
+      {label && (
+        <Label htmlFor={labelId} className={classNames?.label}>
+          {label}
+        </Label>
+      )}
       {children}
     </div>
   );

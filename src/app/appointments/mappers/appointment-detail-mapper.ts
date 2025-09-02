@@ -35,7 +35,7 @@ export class AppointmentDetailMapper {
   }
 
   static fromApiToDomain(raw: unknown): AppointmentDetailModel {
-    const data = this.map(raw);
+    const data = AppointmentDetailMapper.map(raw);
     return data;
   }
 }

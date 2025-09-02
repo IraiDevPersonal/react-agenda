@@ -3,11 +3,9 @@ import { Patient } from "./patient";
 
 function CreatePatientView() {
   return (
-    <>
-      <Patient upsertService={patientService.createPatient}>
-        <Patient.Image showCaption />
-      </Patient>
-    </>
+    <Patient upsertService={patientService.createPatient}>
+      <Patient.Image showCaption />
+    </Patient>
   );
 }
 

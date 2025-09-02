@@ -8,7 +8,9 @@ type Props = PropsWithChildren<{
 
 function Main({ children, className }: Props) {
   return (
-    <main className={cn("space-y-4 h-full overflow-y-auto flex w-full", className)}>
+    <main
+      className={cn("space-y-4 h-full overflow-y-auto flex w-full", className)}
+    >
       {children}
     </main>
   );

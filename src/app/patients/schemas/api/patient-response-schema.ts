@@ -2,4 +2,5 @@ import { ResponseWithPaginationSchema as ApiResponseWithPaginationSchema } from 
 
 import { ApiPatientSchema } from "./patient-schema";
 
-export const PatientResponseSchema = ApiResponseWithPaginationSchema(ApiPatientSchema);
+export const PatientResponseSchema =
+  ApiResponseWithPaginationSchema(ApiPatientSchema);

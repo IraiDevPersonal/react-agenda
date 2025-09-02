@@ -3,12 +3,8 @@ import { OptionSelectorControl } from "@/components/ui/option-selector-control";
 import { useUserRolesControl } from "../hooks/use-user-roles-control";
 
 function UserRolesControl() {
-  const {
-    options,
-    roles,
-    handleAddRole,
-    handleRemoveRole,
-  } = useUserRolesControl();
+  const { options, roles, handleAddRole, handleRemoveRole } =
+    useUserRolesControl();
 
   return (
     <OptionSelectorControl

@@ -21,13 +21,9 @@ type Props = {
 };
 
 function AppointmentDetail({ uid }: Props) {
-  const {
-    data,
-    error,
-    isError,
-    isLoading,
-    refetch,
-  } = useQuery(appointmentQuery.detail(uid));
+  const { data, error, isError, isLoading, refetch } = useQuery(
+    appointmentQuery.detail(uid),
+  );
 
   if (isLoading) {
     return <AppointmentDetailSkeleton />;
@@ -38,10 +34,20 @@ function AppointmentDetail({ uid }: Props) {
   }
 
   if (!data) {
-    return <ErrorMessage onRetry={refetch}>No se obtuvieron datos</ErrorMessage>;
+    return (
+      <ErrorMessage onRetry={refetch}>No se obtuvieron datos</ErrorMessage>
+    );
   }
 
-  const { alert, patient, professional: user, status, date, time_from, time_to } = data;
+  const {
+    alert,
+    patient,
+    professional: user,
+    status,
+    date,
+    time_from,
+    time_to,
+  } = data;
 
   return (
     <AppointmentDetailWrapper>
@@ -52,9 +58,7 @@ function AppointmentDetail({ uid }: Props) {
       <UserInfoForAppointment user={user} />
 
       <Show when={alert.is_required}>
-        <Alert>
-          {alert.message}
-        </Alert>
+        <Alert>{alert.message}</Alert>
       </Show>
 
       <Show when={status === AppointmentStatus.AVAILABLE}>

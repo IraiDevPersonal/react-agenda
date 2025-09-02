@@ -4,10 +4,8 @@ import { useTransition } from "react";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { pagination } from "@/lib/utils";
-
-import type { UserFilters } from "../models/shared-model";
-
 import { userQuery } from "../container";
+import type { UserFilters } from "../models/shared-model";
 
 function parser(): UserFilters {
   return {
@@ -24,7 +22,10 @@ function parser(): UserFilters {
 
 export function useUserFilters() {
   const [, startTransition] = useTransition();
-  const [filters, onFilter] = useQueryStates(parser(), { history: "replace", startTransition });
+  const [filters, onFilter] = useQueryStates(parser(), {
+    history: "replace",
+    startTransition,
+  });
 
   const queryClient = useQueryClient();
   const { data } = useQuery(userQuery.pagination(filters));

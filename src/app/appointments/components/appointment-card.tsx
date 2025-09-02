@@ -1,12 +1,9 @@
+import { HeartHandshakeIcon, PhoneIcon, UserIcon } from "lucide-react";
 import type { PropsWithChildren } from "react";
 
-import { HeartHandshakeIcon, PhoneIcon, UserIcon } from "lucide-react";
-
 import { cn, formatPhoneNumber } from "@/lib/utils";
-
-import type { AppointmentModel } from "../models/appointment-model";
-
 import { useAppointmentCard } from "../hooks/use-appointment-card";
+import type { AppointmentModel } from "../models/appointment-model";
 import { formatAppointmentDateTime } from "../utils/utils";
 
 type Props = PropsWithChildren<{
@@ -22,7 +19,7 @@ function AppointmentCard({ appointment }: Props) {
 
   return (
     <div
-      onClick={handleNavigate}
+      onClick={() => handleNavigate()}
       data-status={appointment.status.toLocaleLowerCase().replace("_", "")}
       className={cn(
         "relative py-2 px-4 text-xs flex flex-col rounded-lg overflow-hidden shadow w-full h-full justify-center cursor-pointer transition-colors",
@@ -41,36 +38,32 @@ function AppointmentCard({ appointment }: Props) {
         "data-[status=confirmed]:text-green-800",
       )}
     >
-      {
-        isAvailable
-          ? (
-              <h6 className="font-semibold text-center text-sm">Disponible</h6>
-            )
-          : (
-              <>
-                <h6 className="font-medium text-sm capitalize">{user.name}</h6>
-                <div>
-                  <HeartHandshakeIcon size={14} className="inline-block mr-1" />
-                  <span className="italic">{user.professions.join(", ")}</span>
-                </div>
-                {
-                  patient && (
-                    <>
-                      <h6 className="font-medium text-sm capitalize mt-2">{patient.name}</h6>
-                      <div>
-                        <UserIcon size={14} className="inline-block mr-1" />
-                        <span>{patient.rut}</span>
-                      </div>
-                      <div>
-                        <PhoneIcon size={12} className="inline-block ms-0.5 mr-1" />
-                        <span>{formatPhoneNumber(patient.phone)}</span>
-                      </div>
-                    </>
-                  )
-                }
-              </>
-            )
-      }
+      {isAvailable ? (
+        <h6 className="font-semibold text-center text-sm">Disponible</h6>
+      ) : (
+        <>
+          <h6 className="font-medium text-sm capitalize">{user.name}</h6>
+          <div>
+            <HeartHandshakeIcon size={14} className="inline-block mr-1" />
+            <span className="italic">{user.professions.join(", ")}</span>
+          </div>
+          {patient && (
+            <>
+              <h6 className="font-medium text-sm capitalize mt-2">
+                {patient.name}
+              </h6>
+              <div>
+                <UserIcon size={14} className="inline-block mr-1" />
+                <span>{patient.rut}</span>
+              </div>
+              <div>
+                <PhoneIcon size={12} className="inline-block ms-0.5 mr-1" />
+                <span>{formatPhoneNumber(patient.phone)}</span>
+              </div>
+            </>
+          )}
+        </>
+      )}
       <small className="text-center mt-2">
         {formatAppointmentDateTime({ time_from, time_to, date })}
       </small>

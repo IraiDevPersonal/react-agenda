@@ -34,7 +34,7 @@ export type GenericUseQueryOptions<
   TError = unknown,
   TData = TQueryFnData,
 > = (
-  filters: TFilters
+  filters: TFilters,
 ) => UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>;
 
 export type FiltersWithPagination<T extends object = object> = {

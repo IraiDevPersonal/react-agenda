@@ -21,7 +21,8 @@ export class ProfessionForFiltersMapper {
   }
 
   static fromApiToDomain(raw: unknown): ProfessionForFilterModel[] {
-    const { success, error, data } = ProfessionForFiltersSchema.array().safeParse(raw);
+    const { success, error, data } =
+      ProfessionForFiltersSchema.array().safeParse(raw);
 
     if (!success) {
       throw CustomError.mapperError(error, {
@@ -29,6 +30,6 @@ export class ProfessionForFiltersMapper {
       });
     }
 
-    return data.map(this.map);
+    return data.map(ProfessionForFiltersMapper.map);
   }
 }

@@ -1,5 +1,3 @@
-"use client";
-
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { CameraIcon } from "lucide-react";
 import * as React from "react";

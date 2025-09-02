@@ -21,8 +21,10 @@ function ToConfirmAppointmentDetailForm({ pay_method }: Props) {
       onSubmit={onSubmit}
       // onSubmit={mutation.mutate}
     >
-
-      <FieldWrapper label="Forma de pago seleccionada" classNames={{ root: "col-span-2" }}>
+      <FieldWrapper
+        label="Forma de pago seleccionada"
+        classNames={{ root: "col-span-2" }}
+      >
         <SelectNative
           name="pay_method"
           options={[

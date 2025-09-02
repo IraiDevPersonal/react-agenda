@@ -1,6 +1,5 @@
-import type { PropsWithChildren } from "react";
-
 import { RefreshCcwIcon } from "lucide-react";
+import type { PropsWithChildren } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -16,9 +15,17 @@ type Props = PropsWithChildren<{
 
 function ErrorMessage({ children, classNames, onRetry }: Props) {
   return (
-    <div className={cn("flex flex-col items-center justify-center gap-2", classNames?.root)}>
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center gap-2",
+        classNames?.root,
+      )}
+    >
       <p
-        className={cn("text-muted-foreground italic text-center max-w-lg", classNames?.message)}
+        className={cn(
+          "text-muted-foreground italic text-center max-w-lg",
+          classNames?.message,
+        )}
       >
         {children}
       </p>

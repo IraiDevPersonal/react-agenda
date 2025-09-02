@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -16,16 +16,26 @@ function Table({ className, ...props }: TableProps) {
   );
 }
 
-function TableContainer({ children, className }: React.PropsWithChildren<{ className?: string }>) {
+function TableContainer({
+  children,
+  className,
+}: React.PropsWithChildren<{ className?: string }>) {
   return (
-    <div className={cn("w-max mx-auto border rounded-lg overflow-hidden", className)}>
+    <div
+      className={cn(
+        "w-max mx-auto border rounded-lg overflow-hidden",
+        className,
+      )}
+    >
       {children}
     </div>
   );
 }
 
 function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
-  return <thead data-slot="table-header" className={cn(className)} {...props} />;
+  return (
+    <thead data-slot="table-header" className={cn(className)} {...props} />
+  );
 }
 
 function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
@@ -79,11 +89,17 @@ function TableHeaderRow({ className, ...props }: React.ComponentProps<"tr">) {
   );
 }
 
-function TableHeaderFilterRow({ className, ...props }: React.ComponentProps<"tr">) {
+function TableHeaderFilterRow({
+  className,
+  ...props
+}: React.ComponentProps<"tr">) {
   return (
     <tr
       data-slot="table-header-row-filter"
-      className={cn("bg-transparent border-b *:p-0 *:h-full *:border-r *:last-of-type:border-r-0", className)}
+      className={cn(
+        "bg-transparent border-b *:p-0 *:h-full *:border-r *:last-of-type:border-r-0",
+        className,
+      )}
       {...props}
     />
   );
@@ -140,6 +156,4 @@ Table.Cell = TableCell;
 Table.Caption = TableCaption;
 Table.Container = TableContainer;
 
-export {
-  Table,
-};
+export { Table };

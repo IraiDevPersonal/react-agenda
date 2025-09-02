@@ -1,26 +1,32 @@
 import type { HttpClientImpl } from "@/lib/http-client";
-
+import { PatientDetailMapper } from "./mappers/patient-detail-adapter";
+import { PatientMapper } from "./mappers/patient-mapper";
 import type { UpsertPatientResponseModel } from "./models/patient-action-model";
 import type { PatientDetailResponseModel } from "./models/patient-detail-response-model";
 import type { PatientFormValues } from "./models/patient-form-model";
 import type { PatientResponseModel } from "./models/patient-response-model";
 
-import { PatientDetailMapper } from "./mappers/patient-detail-adapter";
-import { PatientMapper } from "./mappers/patient-mapper";
-
 export type PatientServiceImpl = {
   getPatients: (filters: object) => Promise<PatientResponseModel>;
   getPatientByUid: (uid: string) => Promise<PatientDetailResponseModel>;
   togglePatientStatus: (uid: string) => Promise<UpsertPatientResponseModel>;
-  createPatient: (payload: PatientFormValues) => Promise<UpsertPatientResponseModel>;
-  updatePatient: (uid: string, payload: PatientFormValues) => Promise<UpsertPatientResponseModel>;
+  createPatient: (
+    payload: PatientFormValues,
+  ) => Promise<UpsertPatientResponseModel>;
+  updatePatient: (
+    uid: string,
+    payload: PatientFormValues,
+  ) => Promise<UpsertPatientResponseModel>;
 };
 
 export class PatientService implements PatientServiceImpl {
   private readonly client: HttpClientImpl;
   private readonly endpoint: string;
 
-  constructor({ client, endpoint }: { client: HttpClientImpl; endpoint: string }) {
+  constructor({
+    client,
+    endpoint,
+  }: { client: HttpClientImpl; endpoint: string }) {
     this.client = client;
     this.endpoint = endpoint;
   }

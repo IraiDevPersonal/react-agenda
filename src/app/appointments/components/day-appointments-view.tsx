@@ -27,7 +27,9 @@ function DayAppointmentsView() {
 }
 
 function HeaderRow() {
-  const { filters: { date } } = useAppointmentFilters();
+  const {
+    filters: { date },
+  } = useAppointmentFilters();
 
   return (
     <Table.Header>
@@ -45,30 +47,31 @@ function HeaderRow() {
 }
 
 function AppointmentRows() {
-  const { filters: {
-    date_from,
-    date_to,
-    ...filters
-  } } = useAppointmentFilters();
+  const {
+    filters: { date_from: _, date_to: __, ...filters },
+  } = useAppointmentFilters();
   const { data } = useQuery(appointmentQuery.list({ ...filters }));
   const appointments = useFilterAppointmentByStatus({ appointments: data });
 
   return (
     <For
-      fallback={cls => <AppointmentListFallback colSpan={2} className={cls} />}
+      fallback={(cls) => (
+        <AppointmentListFallback colSpan={2} className={cls} />
+      )}
       items={filters.profession_id ? appointments : []}
     >
-      {appointment => (
+      {(appointment) => (
         <Table.Row key={appointment.uid}>
-          <AppointmentTimeRangeCell timeFrom={appointment.time_from} timeTo={appointment.time_to} />
+          <AppointmentTimeRangeCell
+            timeFrom={appointment.time_from}
+            timeTo={appointment.time_to}
+          />
           <Table.Cell>
             <Show
-              when={
-                isAppointmentOnDay(
-                  appointment.date,
-                  dateHelper.getISODay(dateHelper.createDate(filters.date)),
-                )
-              }
+              when={isAppointmentOnDay(
+                appointment.date,
+                dateHelper.getISODay(dateHelper.createDate(filters.date)),
+              )}
             >
               <AppointmentCard appointment={appointment} />
             </Show>

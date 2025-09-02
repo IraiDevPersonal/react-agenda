@@ -5,18 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/sheet";
 
 import { appointmentQuery } from "../../container";
-import { APPOINTMENT_DETAIL_FORM_ID } from "../../utils/constants";
 import { AppointmentStatus } from "../../models/shared-model";
+import { APPOINTMENT_DETAIL_FORM_ID } from "../../utils/constants";
 
 type Props = {
   uid: string;
 };
 
 function AppointmentDetailFormActions({ uid }: Props) {
-  const {
-    data: appointmentStatus,
-    isLoading,
-  } = useQuery(appointmentQuery.detailStatus(uid));
+  const { data: appointmentStatus, isLoading } = useQuery(
+    appointmentQuery.detailStatus(uid),
+  );
 
   return (
     <Sheet.Footer>
@@ -38,11 +37,9 @@ function AppointmentDetailFormActions({ uid }: Props) {
           disabled={isLoading}
           type="submit"
         >
-          {
-            appointmentStatus === AppointmentStatus.AVAILABLE
-              ? "Agendar"
-              : "Confirmar"
-          }
+          {appointmentStatus === AppointmentStatus.AVAILABLE
+            ? "Agendar"
+            : "Confirmar"}
         </Button>
       </Show>
     </Sheet.Footer>

@@ -6,12 +6,10 @@ import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
 import { RutInput } from "@/components/ui/rut-input";
 import { SelectNative } from "@/components/ui/select-native";
-
+import { DateFormat, dateHelper } from "@/lib/date-helper";
+import { useUpsertPatientMutation } from "../hooks/use-upsert-patient-mutation";
 import type { UpsertPatientServiceFn } from "../models/patient-action-model";
 import type { PatientDetailModel } from "../models/patient-detail-model";
-
-import { useUpsertPatientMutation } from "../hooks/use-upsert-patient-mutation";
-import { DateFormat, dateHelper } from "@/lib/date-helper";
 
 type Props = {
   upsertService: UpsertPatientServiceFn;
@@ -19,10 +17,7 @@ type Props = {
 };
 
 function PatientForm({ patient, upsertService }: Props) {
-  const {
-    mutation,
-    handleBack,
-  } = useUpsertPatientMutation({
+  const { mutation, handleBack } = useUpsertPatientMutation({
     patientUid: patient?.uid,
     upsertService,
   });
@@ -74,12 +69,14 @@ function PatientForm({ patient, upsertService }: Props) {
 
       <FieldWrapper label="Fecha de nacimiento">
         <Input
-        type="date"
+          type="date"
           name="birth_date"
           placeholder="Fecha de nacimiento del paciente"
-          defaultValue={patient?.birth_date
-            ? dateHelper.format(patient?.birth_date, DateFormat["yyyy-MM-dd"])
-            : undefined}
+          defaultValue={
+            patient?.birth_date
+              ? dateHelper.format(patient?.birth_date, DateFormat["yyyy-MM-dd"])
+              : undefined
+          }
           disabled={mutation.isPending}
           key={patient?.birth_date.toDateString()}
         />
@@ -116,7 +113,11 @@ function PatientForm({ patient, upsertService }: Props) {
         />
       </FieldWrapper>
 
-      <Button variant="secondary" onClick={handleBack} disabled={mutation.isPending}>
+      <Button
+        variant="secondary"
+        onClick={handleBack}
+        disabled={mutation.isPending}
+      >
         Volver
       </Button>
 
@@ -124,9 +125,7 @@ function PatientForm({ patient, upsertService }: Props) {
         {mutation.isPending && (
           <Loader2Icon className="text-inherit animate-spin" size={20} />
         )}
-        <span>
-          {mutation.isPending ? "Guardando..." : "Guardar"}
-        </span>
+        <span>{mutation.isPending ? "Guardando..." : "Guardar"}</span>
       </Button>
     </form>
   );

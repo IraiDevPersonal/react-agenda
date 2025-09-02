@@ -2,14 +2,18 @@ import { isAxiosError } from "axios";
 import { treeifyError, ZodError } from "zod";
 
 export class CustomError extends Error {
-  constructor(
-    public readonly message: string,
-  ) {
+  constructor(public readonly message: string) {
     super(message);
   }
 
-  static mapperError = (error: ZodError, options?: { loggerMessage?: string; errorMessage?: string }) => {
-    console.warn(`Error en Mapper: ${options?.loggerMessage ?? "indeterminado"}`, treeifyError(error));
+  static mapperError = (
+    error: ZodError,
+    options?: { loggerMessage?: string; errorMessage?: string },
+  ) => {
+    console.warn(
+      `Error en Mapper: ${options?.loggerMessage ?? "indeterminado"}`,
+      treeifyError(error),
+    );
     throw new CustomError(options?.errorMessage ?? "Datos de API invalidos");
   };
 
@@ -24,7 +28,7 @@ export class CustomError extends Error {
   };
 
   static getError(error: unknown): { message: string; stack?: string } {
-    const errorMessage = this.getErrorMessage(error);
+    const errorMessage = CustomError.getErrorMessage(error);
 
     if (error instanceof Error) {
       return { message: errorMessage, stack: error.stack };
@@ -40,7 +44,9 @@ export class CustomError extends Error {
 
     if (isAxiosError<{ error: string }>(error)) {
       if (error.response) {
-        return error.response.data?.error ?? "Error de respuesta desconocida...";
+        return (
+          error.response.data?.error ?? "Error de respuesta desconocida..."
+        );
       }
       if (error.request) {
         return "No se recibió respuesta del servidor...";
@@ -51,7 +57,7 @@ export class CustomError extends Error {
     if (error instanceof ZodError) {
       const issues = error.issues.map(
         // issue => `[${issue.path.join(".")}] ${issue.message}`,
-        issue => `${issue.message}`,
+        (issue) => `${issue.message}`,
       );
       return issues.join("; \n");
     }

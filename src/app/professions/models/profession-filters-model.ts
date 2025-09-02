@@ -1,6 +1,5 @@
-import { UseQueryStatesKeysMap } from "nuqs"
-
+import type { UseQueryStatesKeysMap } from "nuqs";
 
 export type ProfessionaFiltersModel = UseQueryStatesKeysMap<{
-  name: string
-}>
+  name: string;
+}>;

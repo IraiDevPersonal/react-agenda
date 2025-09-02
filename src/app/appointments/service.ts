@@ -1,10 +1,8 @@
 import type { HttpClientImpl } from "@/lib/http-client";
-
-import type { AppointmentDetailModel } from "./models/appointment-detail-model";
-import type { AppointmentModel } from "./models/appointment-model";
-
 import { AppointmentDetailMapper } from "./mappers/appointment-detail-mapper";
 import { AppointmentMapper } from "./mappers/appointment-mapper";
+import type { AppointmentDetailModel } from "./models/appointment-detail-model";
+import type { AppointmentModel } from "./models/appointment-model";
 
 export type AppointmentServiceImpl = {
   getAppointments: (filters: object) => Promise<AppointmentModel[]>;
@@ -15,7 +13,10 @@ export class AppointmentService implements AppointmentServiceImpl {
   private readonly client: HttpClientImpl;
   private readonly endpoint: string;
 
-  constructor({ client, endpoint }: { client: HttpClientImpl; endpoint: string }) {
+  constructor({
+    client,
+    endpoint,
+  }: { client: HttpClientImpl; endpoint: string }) {
     this.client = client;
     this.endpoint = endpoint;
   }

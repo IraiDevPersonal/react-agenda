@@ -7,9 +7,11 @@ function AppointmentFilters() {
   const matches = useBreakpoints();
   return (
     <div className="flex items-end gap-2">
-      {
-        matches.max3xl ? <ModalAppointmentFilters /> : <InlineAppointmentFilters />
-      }
+      {matches.max3xl ? (
+        <ModalAppointmentFilters />
+      ) : (
+        <InlineAppointmentFilters />
+      )}
     </div>
   );
 }

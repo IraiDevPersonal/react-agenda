@@ -16,8 +16,7 @@ function UpdateUserView() {
     isLoading,
     isError,
     error,
-  }
-  = useQuery(userQuery.detail(userUid));
+  } = useQuery(userQuery.detail(userUid));
 
   if (isError) {
     return <ErrorMessage onRetry={refetch}>{error.message}</ErrorMessage>;
@@ -28,26 +27,20 @@ function UpdateUserView() {
   }
 
   return (
-    <>
-      <User
-        user={user?.data}
-        // upsertService={payload => UserServices.update(userUid, payload)}
-      >
-        {
-          isFetching
-            ? (
-                <UserSkeleton.Data>
-                  <User.Image />
-                </UserSkeleton.Data>
-              )
-            : (
-                <User.Data>
-                  <User.Image />
-                </User.Data>
-              )
-        }
-      </User>
-    </>
+    <User
+      user={user?.data}
+      // upsertService={payload => UserServices.update(userUid, payload)}
+    >
+      {isFetching ? (
+        <UserSkeleton.Data>
+          <User.Image />
+        </UserSkeleton.Data>
+      ) : (
+        <User.Data>
+          <User.Image />
+        </User.Data>
+      )}
+    </User>
   );
 }
 

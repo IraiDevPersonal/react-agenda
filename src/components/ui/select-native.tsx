@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "lucide-react";
-import * as React from "react";
+import type * as React from "react";
 
 import type { Option } from "@/lib/types/global-types";
 
@@ -33,7 +33,9 @@ function SelectNative({
       >
         {withEmptyOption && <option value="">Sin selección</option>}
         {options.map(({ label, value }) => (
-          <option key={value} value={value}>{label}</option>
+          <option key={value} value={value}>
+            {label}
+          </option>
         ))}
       </select>
       {!props.multiple && (

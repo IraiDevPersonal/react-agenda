@@ -12,10 +12,7 @@ import { userQuery } from "../container";
 import { useUserFilters } from "../hooks/use-user-filters";
 
 function UserTableHeader() {
-  const {
-    filters,
-    onFilter,
-  } = useUserFilters();
+  const { filters, onFilter } = useUserFilters();
   const { isFetching } = useQuery(userQuery.forLoader(filters));
 
   return (
@@ -37,7 +34,7 @@ function UserTableHeader() {
           <Search
             autoFocus
             classNames={{ input: "table-filter-field" }}
-            onSearch={v => onFilter({ names: v })}
+            onSearch={(v) => onFilter({ names: v })}
             placeholder="Buscar por nombre..."
             defaultValue={filters.names ?? ""}
             searchIconSize={16}
@@ -47,7 +44,7 @@ function UserTableHeader() {
         <Table.Head>
           <SearchPatient
             classNames={{ input: "table-filter-field", root: "w-36" }}
-            onSearch={v => onFilter({ rut: v })}
+            onSearch={(v) => onFilter({ rut: v })}
             defaultValue={filters.rut ?? ""}
             placeholder="Buscar por rut..."
             searchIconSize={16}
@@ -57,7 +54,7 @@ function UserTableHeader() {
         <Table.Head>
           <Search
             classNames={{ input: "table-filter-field" }}
-            onSearch={v => onFilter({ email: v })}
+            onSearch={(v) => onFilter({ email: v })}
             placeholder="Buscar por correo..."
             defaultValue={filters.email ?? ""}
             searchIconSize={16}

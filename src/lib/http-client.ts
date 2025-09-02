@@ -11,12 +11,30 @@ export const HttpHelper = {
 };
 
 export type HttpClientImpl = {
-  get: <T>(url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse<T>>;
-  post: <T, D>(url: string, data: D, config?: AxiosRequestConfig) => Promise<AxiosResponse<T, D>>;
-  put: <T, D>(url: string, data: D, config?: AxiosRequestConfig) => Promise<AxiosResponse<T, D>>;
-  patch: <T, D>(url: string, data: D, config?: AxiosRequestConfig) => Promise<AxiosResponse<T, D>>;
-  delete: <T>(url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse<T>>;
-  useAuthentication: () => void;
+  get: <T>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ) => Promise<AxiosResponse<T>>;
+  post: <T, D>(
+    url: string,
+    data: D,
+    config?: AxiosRequestConfig,
+  ) => Promise<AxiosResponse<T, D>>;
+  put: <T, D>(
+    url: string,
+    data: D,
+    config?: AxiosRequestConfig,
+  ) => Promise<AxiosResponse<T, D>>;
+  patch: <T, D>(
+    url: string,
+    data: D,
+    config?: AxiosRequestConfig,
+  ) => Promise<AxiosResponse<T, D>>;
+  delete: <T>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ) => Promise<AxiosResponse<T>>;
+  withAuthentication: () => void;
 };
 
 export type ClientConfig = {
@@ -44,7 +62,7 @@ export class HttpClient implements HttpClientImpl {
       headers: this.config.headers,
     });
 
-    this.useResponseDelay();
+    this.withResponseDelay();
   }
 
   private getAuthToken() {
@@ -57,7 +75,7 @@ export class HttpClient implements HttpClientImpl {
     return token;
   }
 
-  private useResponseDelay() {
+  private withResponseDelay() {
     this.client.interceptors.response.use((response) => {
       if (this.config.delay) {
         return new Promise((resolve) => {
@@ -70,34 +88,55 @@ export class HttpClient implements HttpClientImpl {
     });
   }
 
-  useAuthentication() {
-    this.client.interceptors.request.use((config) => {
-      const authToken = this.getAuthToken();
-      config.headers.Authorization = `Bearer ${authToken}`;
+  withAuthentication() {
+    this.client.interceptors.request.use(
+      (config) => {
+        const authToken = this.getAuthToken();
+        config.headers.Authorization = `Bearer ${authToken}`;
 
-      return config;
-    }, (error) => {
-      return Promise.reject(error);
-    });
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      },
+    );
   }
 
-  async get<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  async get<T>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T>> {
     return this.client.get<T>(url, config);
   }
 
-  async post<T, D>(url: string, data: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T, D>> {
-    return (await this.client.post<T>(url, data, config));
+  async post<T, D>(
+    url: string,
+    data: D,
+    config?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T, D>> {
+    return await this.client.post<T>(url, data, config);
   }
 
-  async put<T, D>(url: string, data: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T, D>> {
+  async put<T, D>(
+    url: string,
+    data: D,
+    config?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T, D>> {
     return this.client.put<T>(url, data, config);
   }
 
-  async patch<T, D>(url: string, data: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T, D>> {
+  async patch<T, D>(
+    url: string,
+    data: D,
+    config?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T, D>> {
     return this.client.patch<T>(url, data, config);
   }
 
-  async delete<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  async delete<T>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T>> {
     return this.client.delete<T>(url, config);
   }
 }

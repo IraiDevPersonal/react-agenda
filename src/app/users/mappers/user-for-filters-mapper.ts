@@ -22,7 +22,8 @@ export class UserForFiltersMapper {
   }
 
   static fromApiToDomain(raw: unknown): UserForFilterModel[] {
-    const { success, error, data } = ApiUserForFiltersSchema.array().safeParse(raw);
+    const { success, error, data } =
+      ApiUserForFiltersSchema.array().safeParse(raw);
 
     if (!success) {
       throw CustomError.mapperError(error, {
@@ -30,6 +31,6 @@ export class UserForFiltersMapper {
       });
     }
 
-    return data.map(this.map);
+    return data.map(UserForFiltersMapper.map);
   }
 }

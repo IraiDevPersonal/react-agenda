@@ -21,7 +21,8 @@ function InlineAppointmentFilters() {
     handleSelectToday,
     handleClearAllFilters,
   } = useAppointmentFilters();
-  const { professionOptions, filteredUserOptions } = useAppointmentFilterOptions();
+  const { professionOptions, filteredUserOptions } =
+    useAppointmentFilterOptions();
 
   return (
     <>
@@ -30,7 +31,7 @@ function InlineAppointmentFilters() {
         label="Rut paciente"
         key={filters.patient_rut}
         defaultValue={filters.patient_rut ?? ""}
-        onSearch={v => onFilter({ patient_rut: v })}
+        onSearch={(v) => onFilter({ patient_rut: v })}
       />
 
       <FieldWrapper label="Profesión">
@@ -38,10 +39,12 @@ function InlineAppointmentFilters() {
           className="w-52"
           options={professionOptions}
           value={filters.profession_id ?? ""}
-          onChange={e => onFilter({
-            profession_id: stringToNullableNumber(e.target.value),
-            user_id: null,
-          })}
+          onChange={(e) =>
+            onFilter({
+              profession_id: stringToNullableNumber(e.target.value),
+              user_id: null,
+            })
+          }
         />
       </FieldWrapper>
 
@@ -50,9 +53,11 @@ function InlineAppointmentFilters() {
           className="w-52"
           options={filteredUserOptions}
           value={filters.user_id ?? ""}
-          onChange={e => onFilter({
-            user_id: stringToNullableNumber(e.target.value),
-          })}
+          onChange={(e) =>
+            onFilter({
+              user_id: stringToNullableNumber(e.target.value),
+            })
+          }
         />
       </FieldWrapper>
 

@@ -1,14 +1,16 @@
-import type { ChangeEvent } from "react";
-
 import { useQueryClient } from "@tanstack/react-query";
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
+import type { ChangeEvent } from "react";
 import { useTransition } from "react";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { dateHelper } from "@/lib/date-helper";
 import { parseAsLocalDate } from "@/lib/nuqs-parser";
 
-import type { AppointmentFilters, AppointmentViewMode } from "../models/shared-model";
+import type {
+  AppointmentFilters,
+  AppointmentViewMode,
+} from "../models/shared-model";
 
 import { useViewModeStore } from "../stores/view-mode-store";
 
@@ -28,9 +30,12 @@ function parser(): AppointmentFilters {
 
 export function useAppointmentFilters() {
   const [, startTransition] = useTransition();
-  const [filters, onFilter] = useQueryStates(parser(), { history: "replace", startTransition });
+  const [filters, onFilter] = useQueryStates(parser(), {
+    history: "replace",
+    startTransition,
+  });
 
-  const setViewMode = useViewModeStore(s => s.setViewMode);
+  const setViewMode = useViewModeStore((s) => s.setViewMode);
 
   const { invalidateQueries } = useQueryClient();
 

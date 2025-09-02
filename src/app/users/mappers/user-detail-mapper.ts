@@ -34,11 +34,13 @@ export class UserDetailMapper {
     const { success, error, data } = UserDetailResponseSchema.safeParse(raw);
 
     if (!success) {
-      throw CustomError.mapperError(error, { loggerMessage: "UserDetailMapper.fromApiToDomain" });
+      throw CustomError.mapperError(error, {
+        loggerMessage: "UserDetailMapper.fromApiToDomain",
+      });
     }
 
     return {
-      data: this.map(data.data),
+      data: UserDetailMapper.map(data.data),
       blocks: data.blocks,
     };
   }

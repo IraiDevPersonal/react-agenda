@@ -2,14 +2,9 @@ import { CustomError } from "@/lib/custom-error";
 
 import type { UpsertPatientResponseModel } from "../models/patient-action-model";
 import type { PatientHistoryModel } from "../models/patient-history-model";
-import type {
-  PatientModel,
-} from "../models/patient-model";
+import type { PatientModel } from "../models/patient-model";
+import { PatientResponseSchema } from "../models/patient-model";
 import type { PatientResponseModel } from "../models/patient-response-model";
-
-import {
-  PatientResponseSchema,
-} from "../models/patient-model";
 import { ApiPatientHistorySchema } from "../schemas/api/patient-history-schema";
 import { ApiPatientSchema } from "../schemas/api/patient-schema";
 import { ApiUpsertPatientResponseSchema } from "../schemas/api/upsert-patient-response-schema";
@@ -64,7 +59,7 @@ export class PatientMapper {
     }
 
     return {
-      data: data.data.map(this.map),
+      data: data.data.map(PatientMapper.map),
       pages: data.pages,
       limit: data.limit,
       total: data.total,
@@ -73,7 +68,8 @@ export class PatientMapper {
   }
 
   static upsertFromApiToDomain(raw: unknown): UpsertPatientResponseModel {
-    const { success, error, data } = ApiUpsertPatientResponseSchema.safeParse(raw);
+    const { success, error, data } =
+      ApiUpsertPatientResponseSchema.safeParse(raw);
 
     if (!success) {
       throw CustomError.mapperError(error, {
@@ -82,13 +78,14 @@ export class PatientMapper {
     }
 
     return {
-      data: this.map(data.data),
+      data: PatientMapper.map(data.data),
       message: data.message,
     };
   }
 
   static patientHistoryToArray(raw: unknown): PatientHistoryModel[] {
-    const { success, error, data } = ApiPatientHistorySchema.array().safeParse(raw);
+    const { success, error, data } =
+      ApiPatientHistorySchema.array().safeParse(raw);
 
     if (!success) {
       throw CustomError.mapperError(error, {
@@ -96,6 +93,6 @@ export class PatientMapper {
       });
     }
 
-    return data.map(this.mapHistory);
+    return data.map(PatientMapper.mapHistory);
   }
 }

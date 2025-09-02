@@ -1,7 +1,5 @@
-"use client";
-
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import * as React from "react";
+import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -65,13 +63,14 @@ function TooltipContent({
   );
 }
 
-function DefaultTooltip({ children, content }: React.PropsWithChildren<{ content: string }>) {
+function DefaultTooltip({
+  children,
+  content,
+}: React.PropsWithChildren<{ content: string }>) {
   return (
     <TooltipProvider delayDuration={0}>
       <Tooltip>
-        <TooltipTrigger asChild>
-          {children}
-        </TooltipTrigger>
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent className="px-2 py-1 text-xs" showArrow>
           {content}
         </TooltipContent>
@@ -80,4 +79,10 @@ function DefaultTooltip({ children, content }: React.PropsWithChildren<{ content
   );
 }
 
-export { DefaultTooltip, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };
+export {
+  DefaultTooltip,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+};

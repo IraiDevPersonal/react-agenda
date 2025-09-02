@@ -3,12 +3,8 @@ import { OptionSelectorControl } from "@/components/ui/option-selector-control";
 import { useUserProfessionsControl } from "../hooks/use-user-professions-control";
 
 function UserProfessionsControl() {
-  const {
-    options,
-    professions,
-    handleAddProfession,
-    handleRemoveProfession,
-  } = useUserProfessionsControl();
+  const { options, professions, handleAddProfession, handleRemoveProfession } =
+    useUserProfessionsControl();
 
   return (
     <OptionSelectorControl

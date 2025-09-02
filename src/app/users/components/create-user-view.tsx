@@ -2,11 +2,9 @@ import { User } from "./user";
 
 function CreateUserView() {
   return (
-    <>
-      <User>
-        <User.Image showCaption={true} />
-      </User>
-    </>
+    <User>
+      <User.Image showCaption={true} />
+    </User>
   );
 }
 

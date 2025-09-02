@@ -1,11 +1,8 @@
 import type { UseQueryOptions } from "@tanstack/react-query";
-import type { Values } from "nuqs";
-
 import { queryOptions } from "@tanstack/react-query";
-
-import type { TQueryKey } from "@/lib/types/global-types";
-
+import type { Values } from "nuqs";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import type { TQueryKey } from "@/lib/types/global-types";
 import { queryParser } from "@/lib/utils";
 
 import type { UserFilters } from "./models/shared-model";
@@ -17,31 +14,26 @@ import type { UserServiceImpl } from "./service";
 type Filters = Values<UserFilters>;
 
 type UserQueryImpl = {
-  list: (filters: Filters) => UseQueryOptions<
-    UserResponseModel,
-    Error,
-    UserResponseModel,
-    TQueryKey
-  >;
-  pagination: (filters: Filters) => UseQueryOptions<
+  list: (
+    filters: Filters,
+  ) => UseQueryOptions<UserResponseModel, Error, UserResponseModel, TQueryKey>;
+  pagination: (
+    filters: Filters,
+  ) => UseQueryOptions<
     UserResponseModel,
     Error,
     Omit<UserResponseModel, "data">,
     TQueryKey
   >;
-  total: (filters: Filters) => UseQueryOptions<
-    UserResponseModel,
-    Error,
-    number,
-    TQueryKey
-  >;
-  forLoader: (filters: Filters) => UseQueryOptions<
-    UserResponseModel,
-    Error,
-    null,
-    TQueryKey
-  >;
-  detail: (uid: string) => UseQueryOptions<
+  total: (
+    filters: Filters,
+  ) => UseQueryOptions<UserResponseModel, Error, number, TQueryKey>;
+  forLoader: (
+    filters: Filters,
+  ) => UseQueryOptions<UserResponseModel, Error, null, TQueryKey>;
+  detail: (
+    uid: string,
+  ) => UseQueryOptions<
     UserDetailResponseModel,
     Error,
     UserDetailResponseModel,
@@ -74,7 +66,7 @@ export class UserQuery implements UserQueryImpl {
       ...this.defaultListOptions(filters),
       staleTime({ state }) {
         const data = state.data as UserResponseModel | undefined;
-        return (data?.total ?? 0) > 0 ? (1 * 60 * 1000) : 0;
+        return (data?.total ?? 0) > 0 ? 1 * 60 * 1000 : 0;
       },
     });
   };
@@ -97,7 +89,7 @@ export class UserQuery implements UserQueryImpl {
   total = (filters: Filters) => {
     return queryOptions({
       ...this.defaultListOptions(filters),
-      select: data => data.total,
+      select: (data) => data.total,
       throwOnError: false,
     });
   };
