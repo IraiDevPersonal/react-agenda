@@ -5,7 +5,7 @@ import { useTransition } from "react";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { pagination } from "@/lib/utils";
 
-import type { UserFilters } from "../models/types";
+import type { UserFilters } from "../models/shared-model";
 
 import { userQuery } from "../container";
 

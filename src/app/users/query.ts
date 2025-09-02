@@ -8,7 +8,7 @@ import type { TQueryKey } from "@/lib/types/global-types";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { queryParser } from "@/lib/utils";
 
-import type { UserFilters } from "./models/types";
+import type { UserFilters } from "./models/shared-model";
 import type { UserDetailResponseModel } from "./models/user-detail-response-model";
 import type { UserForFilterModel } from "./models/user-for-filters-model";
 import type { UserResponseModel } from "./models/user-response-model";

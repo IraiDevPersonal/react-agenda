@@ -10,7 +10,7 @@ import { SelectNative } from "@/components/ui/select-native";
 
 import type { UserDetailModel } from "../models/user-detail-model";
 
-import { UserGender } from "../models/types";
+import { UserGender } from "../models/shared-model";
 
 type Props = PropsWithChildren<{
   // upsertService: UpsertPatientServiceFn;

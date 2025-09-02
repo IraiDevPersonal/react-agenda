@@ -3,7 +3,7 @@ import z from "zod";
 import { UidScheme } from "@/lib/schemas/global-schemas";
 import { PersonSchema } from "@/lib/schemas/person-schemas";
 
-import { UserStatus } from "../../models/types";
+import { UserStatus } from "../../models/shared-model";
 import { UserProfessionSchema } from "./user-profession-schema";
 import { UserRoleSchema } from "./user-role-schema";
 

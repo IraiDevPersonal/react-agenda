@@ -1,4 +1,4 @@
-import type { UserStatus } from "./types";
+import type { UserStatus } from "./shared-model";
 
 export type UserModel = {
   uid: string;

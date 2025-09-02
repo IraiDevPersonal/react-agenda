@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { UserGender } from "../../models/types";
+import { UserGender } from "../../models/shared-model";
 import { ApiUserSchema } from "./user-schema";
 
 export const ApiUserDetailSchema = ApiUserSchema.extend({
