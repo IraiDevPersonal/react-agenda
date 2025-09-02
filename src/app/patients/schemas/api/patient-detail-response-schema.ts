@@ -1,8 +1,8 @@
 import z from "zod";
 
-import { ApiPatientSchema } from "./patient-schema";
+import { ApiPatientDetailSchema } from "./patient-detail-schema";
 
 export const ApiPatientDetailResponseSchema = z.object({
-  data: ApiPatientSchema,
+  data: ApiPatientDetailSchema,
   appointment_history: z.array(z.any()).optional(),
 });

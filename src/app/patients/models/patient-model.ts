@@ -1,4 +1,4 @@
-import type { ResponseWithPagination } from "@/lib/types/global-types";
+import type { UserStatus } from "@/app/users/models/shared-model";
 
 import { ResponseWithPaginationSchema as ApiResponseWithPaginationSchema } from "@/lib/schemas/global-schemas";
 
@@ -13,8 +13,8 @@ export type PatientModel = {
   email: string;
   phone: string;
   address: string;
+  birth_date: Date;
   last_names: string;
-  is_deleted?: boolean;
+  status: UserStatus;
   avatar_image?: string | null;
 };
-export type PatientResponseModel = ResponseWithPagination<PatientModel>;

@@ -4,8 +4,8 @@ import type { UpsertPatientResponseModel } from "../models/patient-action-model"
 import type { PatientHistoryModel } from "../models/patient-history-model";
 import type {
   PatientModel,
-  PatientResponseModel,
 } from "../models/patient-model";
+import type { PatientResponseModel } from "../models/patient-response-model";
 
 import {
   PatientResponseSchema,
@@ -46,9 +46,10 @@ export class PatientMapper {
       names: data.names,
       email: data.email,
       phone: data.phone,
+      status: data.status,
       address: data.address,
       last_names: data.last_names,
-      is_deleted: data.is_deleted ?? false,
+      birth_date: new Date(data.birth_date),
       avatar_image: data.avatar_image ?? null,
     };
   }

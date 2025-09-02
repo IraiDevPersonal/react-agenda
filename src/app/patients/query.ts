@@ -8,8 +8,8 @@ import type { TQueryKey } from "@/lib/types/global-types";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { queryParser } from "@/lib/utils";
 
-import type { PatientDetailResponseModel } from "./models/patient-detail-model";
-import type { PatientResponseModel } from "./models/patient-model";
+import type { PatientDetailResponseModel } from "./models/patient-detail-response-model";
+import type { PatientResponseModel } from "./models/patient-response-model";
 import type { PatientFilters } from "./models/shared-model";
 import type { PatientServiceImpl } from "./service";
 

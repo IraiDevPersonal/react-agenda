@@ -23,6 +23,7 @@ function PatientTableHeader() {
       <Table.HeaderRow>
         <Table.Head className="w-[286px]">Nombre</Table.Head>
         <Table.Head className="w-[147px]">Rut</Table.Head>
+        <Table.Head className="w-[147px]">Fecha de nacimiento</Table.Head>
         <Table.Head className="w-[229px]">Correo</Table.Head>
         <Table.Head className="w-[206px]">Dirección</Table.Head>
         <Table.Head className="w-[136px]">Estado</Table.Head>
@@ -53,6 +54,7 @@ function PatientTableHeader() {
             key={filters.rut}
           />
         </Table.Head>
+        <Table.Head></Table.Head>
         <Table.Head>
           <Search
             classNames={{ input: "table-filter-field" }}

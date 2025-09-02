@@ -1,19 +1,21 @@
 import { Loader2Icon } from "lucide-react";
 
-import type { PatientModel } from "@/app/patients/models/patient-model";
-
+import { USER_GENDER_OPTIONS } from "@/app/users/utils/constants";
 import { Button } from "@/components/ui/button";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
 import { RutInput } from "@/components/ui/rut-input";
+import { SelectNative } from "@/components/ui/select-native";
 
 import type { UpsertPatientServiceFn } from "../models/patient-action-model";
+import type { PatientDetailModel } from "../models/patient-detail-model";
 
 import { useUpsertPatientMutation } from "../hooks/use-upsert-patient-mutation";
+import { DateFormat, dateHelper } from "@/lib/date-helper";
 
 type Props = {
   upsertService: UpsertPatientServiceFn;
-  patient?: PatientModel;
+  patient?: PatientDetailModel;
 };
 
 function PatientForm({ patient, upsertService }: Props) {
@@ -70,6 +72,19 @@ function PatientForm({ patient, upsertService }: Props) {
         />
       </FieldWrapper>
 
+      <FieldWrapper label="Fecha de nacimiento">
+        <Input
+        type="date"
+          name="birth_date"
+          placeholder="Fecha de nacimiento del paciente"
+          defaultValue={patient?.birth_date
+            ? dateHelper.format(patient?.birth_date, DateFormat["yyyy-MM-dd"])
+            : undefined}
+          disabled={mutation.isPending}
+          key={patient?.birth_date.toDateString()}
+        />
+      </FieldWrapper>
+
       <FieldWrapper label="Correo">
         <Input
           name="email"
@@ -88,6 +103,16 @@ function PatientForm({ patient, upsertService }: Props) {
           defaultValue={patient?.address}
           disabled={mutation.isPending}
           key={patient?.address}
+        />
+      </FieldWrapper>
+
+      <FieldWrapper label="Sexo" classNames={{ root: "col-span-2" }}>
+        <SelectNative
+          name="gender"
+          defaultValue={patient?.gender}
+          // disabled={mutation.isPending}
+          options={USER_GENDER_OPTIONS}
+          key={patient?.gender}
         />
       </FieldWrapper>
 

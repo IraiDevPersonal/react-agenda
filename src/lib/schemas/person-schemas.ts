@@ -25,4 +25,5 @@ export const PersonSchema = {
   Rut: z.string()
     .min(1, "rut obligatorio")
     .refine(checkRut, "rut invalido"),
+  BirthDate: z.string(),
 };

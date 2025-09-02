@@ -10,7 +10,7 @@ import { SelectNative } from "@/components/ui/select-native";
 
 import type { UserDetailModel } from "../models/user-detail-model";
 
-import { UserGender } from "../models/shared-model";
+import { USER_GENDER_OPTIONS } from "../utils/constants";
 
 type Props = PropsWithChildren<{
   // upsertService: UpsertPatientServiceFn;
@@ -102,10 +102,7 @@ function UserForm({ user, children }: Props) {
           name="gender"
           defaultValue={user?.gender}
           // disabled={mutation.isPending}
-          options={[
-            { label: "Masculino", value: UserGender.MASCULINE },
-            { label: "Femenino", value: UserGender.FEMENINE },
-          ]}
+          options={USER_GENDER_OPTIONS}
           key={user?.gender}
         />
       </FieldWrapper>

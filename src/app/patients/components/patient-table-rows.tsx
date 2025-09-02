@@ -2,9 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { PencilIcon, PhoneIcon } from "lucide-react";
 import { Link } from "react-router";
 
+import { UserStatus } from "@/app/users/models/shared-model";
 import { For } from "@/components/for";
 import { buttonVariants } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";
+import { DateFormat, dateHelper } from "@/lib/date-helper";
 import { cn, formatPhoneNumber } from "@/lib/utils";
 
 import { UserAvatar } from "../../profile/components/user-avatar";
@@ -54,6 +56,7 @@ function PatientTableRows() {
             </div>
           </Table.Cell>
           <Table.Cell>{patient.rut}</Table.Cell>
+          <Table.Cell align="center">{dateHelper.format(patient.birth_date, DateFormat["dd-MM-yyyy"])}</Table.Cell>
           <Table.Cell>
             <div>
               <span className="block font-semibold">{patient.email}</span>
@@ -67,7 +70,7 @@ function PatientTableRows() {
           </Table.Cell>
           <Table.Cell>{patient.address}</Table.Cell>
           <Table.Cell align="center">
-            <UserStatusBadge isDeleted={!!patient.is_deleted} />
+            <UserStatusBadge isDeleted={patient.status !== UserStatus.ACTIVE} />
           </Table.Cell>
           <Table.Cell>
             <div className="flex items-center justify-end">

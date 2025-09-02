@@ -3,7 +3,7 @@ import z from "zod";
 import { UidScheme } from "@/lib/schemas/global-schemas";
 import { PersonSchema } from "@/lib/schemas/person-schemas";
 
-import { UserStatus } from "../../models/shared-model";
+import { UserGenericSchema } from "../user-generic-schema";
 import { UserProfessionSchema } from "./user-profession-schema";
 import { UserRoleSchema } from "./user-role-schema";
 
@@ -15,8 +15,8 @@ export const ApiUserSchema = z.object({
   email: PersonSchema.Email,
   address: PersonSchema.Address,
   roles: z.array(UserRoleSchema),
+  status: UserGenericSchema.STATUS,
   last_names: PersonSchema.LastNames,
   avatar_image: PersonSchema.AvatarImage,
   professions: z.array(UserProfessionSchema).optional(),
-  status: z.enum(UserStatus, { error: "Estado invalido" }),
 });

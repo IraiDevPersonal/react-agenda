@@ -1,6 +1,7 @@
+import type { UserGender } from "@/app/users/models/shared-model";
+
 import type { PatientModel } from "./patient-model";
 
-export type PatientDetailResponseModel = {
-  data: PatientModel;
-  appointment_history?: any[];
+export type PatientDetailModel = PatientModel & {
+  gender: UserGender;
 };
