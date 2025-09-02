@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/sheet";
 
 import { appointmentQuery } from "../../container";
-import { APPOINTMENT_DETAIL_FORM_ID } from "../../lib/constants";
+import { APPOINTMENT_DETAIL_FORM_ID } from "../../utils/constants";
 import { AppointmentStatus } from "../../models/shared-model";
 
 type Props = {

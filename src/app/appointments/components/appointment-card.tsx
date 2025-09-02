@@ -7,23 +7,23 @@ import { cn, formatPhoneNumber } from "@/lib/utils";
 import type { AppointmentModel } from "../models/appointment-model";
 
 import { useAppointmentCard } from "../hooks/use-appointment-card";
-import { formatAppointmentDateTime } from "../lib/utils";
+import { formatAppointmentDateTime } from "../utils/utils";
 
 type Props = PropsWithChildren<{
   appointment: AppointmentModel;
 }>;
 
 function AppointmentCard({ appointment }: Props) {
-  const { date, time_from, time_to, patient, user } = appointment;
+  const { date, time_from, time_to, patient, professional: user } = appointment;
   const { isAvailable, handleNavigate } = useAppointmentCard({
-    status: appointment.appointment_status,
+    status: appointment.status,
     uid: appointment.uid,
   });
 
   return (
     <div
       onClick={handleNavigate}
-      data-status={appointment.appointment_status.toLocaleLowerCase().replace("_", "")}
+      data-status={appointment.status.toLocaleLowerCase().replace("_", "")}
       className={cn(
         "relative py-2 px-4 text-xs flex flex-col rounded-lg overflow-hidden shadow w-full h-full justify-center cursor-pointer transition-colors",
         "before:content-[' '] before:absolute before:top-0 before:left-0 before:w-2 before:h-full",
@@ -48,7 +48,7 @@ function AppointmentCard({ appointment }: Props) {
             )
           : (
               <>
-                <h6 className="font-medium text-sm capitalize">{user.full_name}</h6>
+                <h6 className="font-medium text-sm capitalize">{user.name}</h6>
                 <div>
                   <HeartHandshakeIcon size={14} className="inline-block mr-1" />
                   <span className="italic">{user.professions.join(", ")}</span>
@@ -56,14 +56,14 @@ function AppointmentCard({ appointment }: Props) {
                 {
                   patient && (
                     <>
-                      <h6 className="font-medium text-sm capitalize mt-2">{patient.patient_name}</h6>
+                      <h6 className="font-medium text-sm capitalize mt-2">{patient.name}</h6>
                       <div>
                         <UserIcon size={14} className="inline-block mr-1" />
-                        <span>{patient.patient_rut}</span>
+                        <span>{patient.rut}</span>
                       </div>
                       <div>
                         <PhoneIcon size={12} className="inline-block ms-0.5 mr-1" />
-                        <span>{formatPhoneNumber(patient.patient_phone)}</span>
+                        <span>{formatPhoneNumber(patient.phone)}</span>
                       </div>
                     </>
                   )

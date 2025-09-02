@@ -18,6 +18,6 @@ export const ApiAppointmentDetailSchema = z.object({
     is_required: z.boolean(),
   }),
   patient: ApiPatientForAppointmentDetailSchema,
+  professional: ApiUserForAppointmentDetailSchema,
   patient_history: z.array(ApiPatientHistorySchema),
-  user: ApiUserForAppointmentDetailSchema,
 });

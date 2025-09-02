@@ -1,7 +1,7 @@
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { SelectNative } from "@/components/ui/select-native";
 
-import { APPOINTMENT_DETAIL_FORM_ID } from "../../lib/constants";
+import { APPOINTMENT_DETAIL_FORM_ID } from "../../utils/constants";
 
 type Props = {
   pay_method: string;

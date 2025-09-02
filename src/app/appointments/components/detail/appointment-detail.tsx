@@ -41,7 +41,7 @@ function AppointmentDetail({ uid }: Props) {
     return <ErrorMessage onRetry={refetch}>No se obtuvieron datos</ErrorMessage>;
   }
 
-  const { alert, patient, user, status, date, time_from, time_to } = data;
+  const { alert, patient, professional: user, status, date, time_from, time_to } = data;
 
   return (
     <AppointmentDetailWrapper>

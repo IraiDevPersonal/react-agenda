@@ -8,7 +8,7 @@ import { DateFormat, dateHelper } from "@/lib/date-helper";
 import { appointmentQuery } from "../container";
 import { useAppointmentFilters } from "../hooks/use-appointment-filters";
 import { useFilterAppointmentByStatus } from "../hooks/use-filter-appointment-by-status";
-import { isAppointmentOnDay } from "../lib/utils";
+import { isAppointmentOnDay } from "../utils/utils";
 import { AppointmentCard } from "./appointment-card";
 import { AppointmentListFallback } from "./appointment-list-fallback";
 import { AppointmentTimeRangeCell } from "./appointment-time-range-cell";

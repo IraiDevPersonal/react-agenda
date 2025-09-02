@@ -4,7 +4,7 @@ import { DefaultTooltip } from "@/components/ui/tooltip";
 
 import type { AppointmentStatus } from "../../models/shared-model";
 
-import { STATUS_NAMES } from "../../lib/constants";
+import { STATUS_NAMES } from "../../utils/constants";
 import { AppointmentStatusIcon } from "../appoinment-status-icon";
 
 type Props = {

@@ -2,7 +2,6 @@ import { CustomError } from "@/lib/custom-error";
 
 import type { AppointmentModel } from "../models/appointment-model";
 
-import { AppointmentStatus } from "../models/shared-model";
 import { AppointmentSchema } from "../schemas/api/appointment-schema";
 
 export class AppointmentMapper {
@@ -15,25 +14,25 @@ export class AppointmentMapper {
       });
     }
 
-    const isAvailable = data.appointment_status === AppointmentStatus.AVAILABLE;
+    const patient = data.patient;
+    const professional = data.professional;
 
     return {
       uid: data.uid,
       date: data.date,
       time_to: data.time_to,
       time_from: data.time_from,
-      appointment_status: data.appointment_status,
-      // FIXME: modificar cuando la api lo entrege de forma adecuada
-      patient: isAvailable
-        ? null
-        : {
-            patient_rut: data.patient_rut!,
-            patient_name: data.patient_name!,
-            patient_phone: data.patient_phone!,
-          },
-      user: {
-        professions: data.professions,
-        full_name: data.full_name,
+      status: data.appointment_status,
+      patient: patient
+        ? {
+            rut: patient.rut,
+            phone: patient.phone,
+            name: patient.full_name,
+          }
+        : null,
+      professional: {
+        professions: professional.professions,
+        name: professional.full_name,
       },
     };
   }

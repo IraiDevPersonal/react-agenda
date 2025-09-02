@@ -2,7 +2,6 @@ import { CustomError } from "@/lib/custom-error";
 
 import type { AppointmentDetailModel } from "../models/appointment-detail-model";
 
-import { AppointmentStatus } from "../models/shared-model";
 import { ApiAppointmentDetailSchema } from "../schemas/api/appointment-detail-schema";
 
 export class AppointmentDetailMapper {
@@ -15,7 +14,7 @@ export class AppointmentDetailMapper {
       });
     }
 
-    const isAvailable = data.status === AppointmentStatus.AVAILABLE;
+    const patient = data.patient;
 
     return {
       uid: data.uid,
@@ -25,9 +24,13 @@ export class AppointmentDetailMapper {
       time_to: data.time_to,
       time_from: data.time_from,
       is_enabled: data.is_enabled,
-      user: data.user,
-      patient_history: data.patient_history,
-      patient: isAvailable ? null : data.patient,
+      professional: data.professional,
+      patient: patient
+        ? {
+            ...patient,
+            history: data.patient_history,
+          }
+        : null,
     };
   }
 

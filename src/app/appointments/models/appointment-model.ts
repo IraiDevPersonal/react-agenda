@@ -1,3 +1,4 @@
+import type { PatientForAppointmentModel } from "../../patients/models/patient-for-appointment-model";
 import type { AppointmentStatus } from "./shared-model";
 
 export type AppointmentModel = {
@@ -5,18 +6,12 @@ export type AppointmentModel = {
   date: string;
   time_to: string;
   time_from: string;
-  appointment_status: AppointmentStatus;
-  user: UserForAppointment;
+  status: AppointmentStatus;
+  professional: UserForAppointment;
   patient: PatientForAppointmentModel | null;
-};
-
-export type PatientForAppointmentModel = {
-  patient_rut: string;
-  patient_name: string;
-  patient_phone: string;
 };
 
 export type UserForAppointment = {
   professions: string[];
-  full_name: string;
+  name: string;
 };

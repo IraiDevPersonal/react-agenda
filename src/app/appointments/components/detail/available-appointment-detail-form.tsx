@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { RutInput } from "@/components/ui/rut-input";
 import { SelectNative } from "@/components/ui/select-native";
 
-import { APPOINTMENT_DETAIL_FORM_ID } from "../../lib/constants";
+import { APPOINTMENT_DETAIL_FORM_ID } from "../../utils/constants";
 
 type Props = {
   patient?: PatientForAppointmentDetailModel | null;
