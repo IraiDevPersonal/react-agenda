@@ -6,12 +6,15 @@ import { Button } from "@/components/ui/button";
 import { FieldWrapper } from "@/components/ui/field-wrapper";
 import { Input } from "@/components/ui/input";
 import { RutInput } from "@/components/ui/rut-input";
+import { SelectNative } from "@/components/ui/select-native";
 
-import type { UserModel } from "../models/user-model";
+import type { UserDetailModel } from "../models/user-detail-model";
+
+import { UserGender } from "../models/types";
 
 type Props = PropsWithChildren<{
   // upsertService: UpsertPatientServiceFn;
-  user?: UserModel;
+  user?: UserDetailModel;
 }>;
 
 function UserForm({ user, children }: Props) {
@@ -91,6 +94,19 @@ function UserForm({ user, children }: Props) {
           defaultValue={user?.address}
           // disabled={mutation.isPending}
           key={user?.address}
+        />
+      </FieldWrapper>
+
+      <FieldWrapper label="Sexo" classNames={{ root: "col-span-2" }}>
+        <SelectNative
+          name="gender"
+          defaultValue={user?.gender}
+          // disabled={mutation.isPending}
+          options={[
+            { label: "Masculino", value: UserGender.MASCULINE },
+            { label: "Femenino", value: UserGender.FEMENINE },
+          ]}
+          key={user?.gender}
         />
       </FieldWrapper>
 

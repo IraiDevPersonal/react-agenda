@@ -9,7 +9,7 @@ export function useUserRolesControl() {
   const onAddRole = useRolesStore(s => s.onAddRole);
   const onRemoveRole = useRolesStore(s => s.onRemoveRole);
 
-  useUserObserver({ onSave: ({ roles }) => setRoles(roles) });
+  useUserObserver({ setData: ({ roles }) => setRoles(roles) });
 
   // TODO: desde aqui se deberian obtener los roles const { data: options = [] } = useQueryRoles({ queryOptions: roleQuery.forFitlers });
   const options: Option[] = [

@@ -1,6 +1,7 @@
 import { CustomError } from "@/lib/custom-error";
 
-import type { UserModel, UserResponseModel } from "../models/user-model";
+import type { UserModel } from "../models/user-model";
+import type { UserResponseModel } from "../models/user-response-model";
 
 import { ApiUserResponseSchema } from "../schemas/api/user-response-schema";
 import { ApiUserSchema } from "../schemas/api/user-schema";
@@ -16,10 +17,11 @@ export class UserMapper {
     return {
       uid: data.uid,
       rut: data.rut,
-      role: data.role,
+      roles: data.roles,
       names: data.names,
       phone: data.phone,
       email: data.email,
+      status: data.status,
       address: data.address,
       last_names: data.last_names,
       professions: data.professions,

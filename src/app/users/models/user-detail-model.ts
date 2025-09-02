@@ -1,6 +1,6 @@
+import type { UserGender } from "./types";
 import type { UserModel } from "./user-model";
 
-export type UserDetailResponseModel = {
-  data: UserModel;
-  blocks?: any[];
+export type UserDetailModel = UserModel & {
+  gender: UserGender;
 };

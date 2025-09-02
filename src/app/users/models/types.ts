@@ -10,3 +10,14 @@ export type UserFilters = UseQueryStatesKeysMap<FiltersWithPagination<{
   rut: string;
   id: number;
 }>>;
+
+export enum UserStatus {
+  ACTIVE = "ACTIVE",
+  BLOCKED = "BLOCKED",
+  INACTIVE = "INACTIVE",
+}
+
+export enum UserGender {
+  MASCULINE = "MA",
+  FEMENINE = "FE",
+}

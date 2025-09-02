@@ -1,8 +1,8 @@
 import z from "zod";
 
-import { ApiUserSchema } from "./user-schema";
+import { ApiUserDetailSchema } from "./user-detail-schema";
 
 export const UserDetailResponseSchema = z.object({
-  data: ApiUserSchema,
+  data: ApiUserDetailSchema,
   blocks: z.array(z.any()).optional(),
 });

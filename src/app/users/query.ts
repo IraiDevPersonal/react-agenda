@@ -9,9 +9,9 @@ import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { queryParser } from "@/lib/utils";
 
 import type { UserFilters } from "./models/types";
-import type { UserDetailResponseModel } from "./models/user-detail-model";
+import type { UserDetailResponseModel } from "./models/user-detail-response-model";
 import type { UserForFilterModel } from "./models/user-for-filters-model";
-import type { UserResponseModel } from "./models/user-model";
+import type { UserResponseModel } from "./models/user-response-model";
 import type { UserServiceImpl } from "./service";
 
 type Filters = Values<UserFilters>;

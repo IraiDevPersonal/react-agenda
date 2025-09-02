@@ -66,9 +66,9 @@ function UserTableRows() {
             </div>
           </Table.Cell>
           <Table.Cell>{user.address}</Table.Cell>
-          <Table.Cell>
-            {user.professions.map(p => p.name).join(", ")}
-          </Table.Cell>
+          {/* <Table.Cell>
+            {user.professions?.map(p => p.name).join(", ")}
+          </Table.Cell> */}
           <Table.Cell align="center">
             <UserStatusBadge isDeleted={false} />
           </Table.Cell>

@@ -1,8 +1,8 @@
 import type { HttpClientImpl } from "@/lib/http-client";
 
-import type { UserDetailResponseModel } from "./models/user-detail-model";
+import type { UserDetailResponseModel } from "./models/user-detail-response-model";
 import type { UserForFilterModel } from "./models/user-for-filters-model";
-import type { UserResponseModel } from "./models/user-model";
+import type { UserResponseModel } from "./models/user-response-model";
 
 import { UserDetailMapper } from "./mappers/user-detail-mapper";
 import { UserForFiltersMapper } from "./mappers/user-for-filters-mapper";

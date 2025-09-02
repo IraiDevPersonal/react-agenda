@@ -3,7 +3,9 @@ import z from "zod";
 import { UidScheme } from "@/lib/schemas/global-schemas";
 import { PersonSchema } from "@/lib/schemas/person-schemas";
 
-import { UserRoleOrProfessionSchema } from "./user-profession-schema";
+import { UserStatus } from "../../models/types";
+import { UserProfessionSchema } from "./user-profession-schema";
+import { UserRoleSchema } from "./user-role-schema";
 
 export const ApiUserSchema = z.object({
   uid: UidScheme,
@@ -12,8 +14,9 @@ export const ApiUserSchema = z.object({
   phone: PersonSchema.Phone,
   email: PersonSchema.Email,
   address: PersonSchema.Address,
+  roles: z.array(UserRoleSchema),
   last_names: PersonSchema.LastNames,
   avatar_image: PersonSchema.AvatarImage,
-  role: UserRoleOrProfessionSchema,
-  professions: z.array(UserRoleOrProfessionSchema),
+  professions: z.array(UserProfessionSchema).optional(),
+  status: z.enum(UserStatus, { error: "Estado invalido" }),
 });

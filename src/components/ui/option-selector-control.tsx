@@ -42,7 +42,7 @@ function OptionSelectorControl({
         >
           {profession => (
             <li key={profession.id}>
-              <Badge variant="outline" className="text-sm py-1 px-3">
+              <Badge variant="outline" className="text-sm py-1 px-3 capitalize">
                 {profession.name}
                 <button
                   type="button"

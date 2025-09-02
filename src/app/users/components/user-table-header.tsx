@@ -25,7 +25,7 @@ function UserTableHeader() {
         <Table.Head className="w-[147px]">Rut</Table.Head>
         <Table.Head className="w-[229px]">Correo</Table.Head>
         <Table.Head className="w-[206px]">Dirección</Table.Head>
-        <Table.Head className="w-[136px]">Profesiones</Table.Head>
+        {/* <Table.Head className="w-[136px]">Profesiones</Table.Head> */}
         <Table.Head className="w-[136px]">Estado</Table.Head>
         <Table.Head className="w-[98px]">
           {isFetching && <Loader2Icon size={20} className="animate-spin" />}
@@ -65,7 +65,7 @@ function UserTableHeader() {
           />
         </Table.Head>
         <Table.Head></Table.Head>
-        <Table.Head></Table.Head>
+        {/* <Table.Head></Table.Head> */}
         <Table.Head>
           <SelectNative
             options={[

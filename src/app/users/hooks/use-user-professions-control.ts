@@ -11,7 +11,7 @@ export function useUserProfessionsControl() {
   const onAddProfession = useProfessionStore(s => s.onAddProfession);
   const onRemoveProfession = useProfessionStore(s => s.onRemoveProfession);
 
-  useUserObserver({ onSave: ({ professions }) => setProfessions(professions) });
+  useUserObserver({ setData: ({ professions }) => setProfessions(professions) });
 
   const { data: options = [] } = useQuery(professionQuery.forFitlers());
 

@@ -7,19 +7,19 @@ import type { UserProfessionModel, UserRoleModel } from "../models/user-model";
 import { userQuery } from "../container";
 
 type Props = {
-  onSave: (data: {
+  setData: (data: {
     professions: UserProfessionModel[];
     roles: UserRoleModel[];
   }) => void;
 };
 
-export function useUserObserver({ onSave }: Props) {
+export function useUserObserver({ setData }: Props) {
   const { userUid } = useParams();
   const queryClient = useQueryClient();
 
   useEffect(() => {
     if (!userUid) {
-      onSave({ professions: [], roles: [] });
+      setData({ professions: [], roles: [] });
       return;
     }
 
@@ -27,24 +27,22 @@ export function useUserObserver({ onSave }: Props) {
       ...userQuery.detail(userUid),
       select: ({ data }) => ({
         professions: data.professions,
-        roles: data.role,
-        // FIXME: trabajar esto cuando este ne BE como un arreglo
+        roles: data.roles,
       }),
     });
 
     const result = observer.getCurrentResult();
 
     if (result.data) {
-      onSave({
-        professions: result.data.professions,
-        roles: [result.data.roles],
-        // FIXME: trabajar esto cuando este ne BE como un arreglo
+      setData({
+        professions: result.data.professions ?? [],
+        roles: result.data.roles,
       });
     }
 
     return () => {
       observer.destroy();
-      onSave({ professions: [], roles: [] });
+      setData({ professions: [], roles: [] });
     };
-  }, [queryClient, userUid, onSave]);
+  }, [queryClient, userUid, setData]);
 }

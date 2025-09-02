@@ -8,16 +8,15 @@ import { Avatar } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DefaultTooltip } from "@/components/ui/tooltip";
 
-import type { UserModel } from "../models/user-model";
+import type { UserDetailModel } from "../models/user-detail-model";
 
 import { UserContext, useUserContext } from "../context/user-context";
 import { UserForm } from "./user-form";
-import { UserProfessionsControl } from "./user-professions-control";
 import { UserRolesControl } from "./user-roles-control";
 
 type Props = PropsWithChildren<{
   // upsertService: UpsertUserServiceFn;
-  user?: UserModel | undefined;
+  user?: UserDetailModel | undefined;
 }>;
 
 function User({ children, user }: Props) {
@@ -33,7 +32,7 @@ function User({ children, user }: Props) {
             user={user}
           >
             <UserRolesControl />
-            <UserProfessionsControl />
+            {/* <UserProfessionsControl /> */}
           </UserForm>
         </User.FormWrapper>
       </User.Wrapper>

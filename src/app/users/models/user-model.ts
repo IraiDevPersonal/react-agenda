@@ -1,3 +1,5 @@
+import type { UserStatus } from "./types";
+
 export type UserModel = {
   uid: string;
   rut: string;
@@ -6,9 +8,10 @@ export type UserModel = {
   email: string;
   address: string;
   last_names: string;
+  status: UserStatus;
+  roles: UserRoleModel[];
   avatar_image: string | null;
-  role: UserRoleModel;
-  professions: UserProfessionModel[];
+  professions?: UserProfessionModel[];
 };
 
 export type UserRoleModel = {
@@ -19,12 +22,4 @@ export type UserRoleModel = {
 export type UserProfessionModel = {
   id: number;
   name: string;
-};
-
-export type UserResponseModel = {
-  page: number;
-  total: number;
-  pages: number;
-  limit: number;
-  data: UserModel[];
 };
