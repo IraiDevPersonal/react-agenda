@@ -1,6 +1,6 @@
 import type { PatientForAppointmentDetailModel } from "@/app/patients/models/patient-for-appointment-detail-model";
 import type { PatientHistoryModel } from "@/app/patients/models/patient-history-model";
-import type { ProfessionalForAppointmentDetailModel } from "@/app/professionals/models/professional-for-appointment-detail-model";
+import type { UserForAppointmentDetailModel } from "@/app/users/models/user-for-appointment-detail-model";
 
 import type { AppointmentStatus } from "./shared-model";
 
@@ -14,7 +14,7 @@ export type AppointmentDetailModel = {
   alert: AlertForAppointmentDetailModel;
   patient_history: PatientHistoryModel[];
   patient: PatientForAppointmentDetailModel | null;
-  professional: ProfessionalForAppointmentDetailModel;
+  user: UserForAppointmentDetailModel;
 };
 
 export type AlertForAppointmentDetailModel = {

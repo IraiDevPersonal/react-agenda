@@ -31,9 +31,9 @@ export class AppointmentMapper {
             patient_name: data.patient_name!,
             patient_phone: data.patient_phone!,
           },
-      professional: {
+      user: {
         professions: data.professions,
-        professional_name: data.professional_name,
+        full_name: data.full_name,
       },
     };
   }

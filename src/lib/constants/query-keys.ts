@@ -1,7 +1,7 @@
 export const QUERY_KEYS = {
   appointments: "appointments",
-  prefessions: "professions",
-  prefessionals: "professionals",
+  professions: "professions",
+  users: "users",
   patients: "patients",
   generic: {
     detail: "detail",

@@ -4,7 +4,7 @@ import type { ProfessionForFilterModel } from "../models/profession-for-filters-
 
 import { ProfessionForFiltersSchema } from "../schemas/profession-for-filters-schema";
 
-export class ProfessionalForFiltersMapper {
+export class ProfessionForFiltersMapper {
   static map(raw: unknown): ProfessionForFilterModel {
     const { success, error, data } = ProfessionForFiltersSchema.safeParse(raw);
 

@@ -24,7 +24,7 @@ function ModalAppointmentFilters() {
   } = useAppointmentFilters();
   const {
     professionOptions,
-    filteredProfessionalOptions,
+    filteredUserOptions,
   } = useAppointmentFilterOptions();
 
   return (
@@ -61,17 +61,17 @@ function ModalAppointmentFilters() {
                 value={filters.profession_id ?? ""}
                 onChange={e => onFilter({
                   profession_id: stringToNullableNumber(e.target.value),
-                  professional_id: null,
+                  user_id: null,
                 })}
               />
             </FieldWrapper>
 
-            <FieldWrapper label="Profesional">
+            <FieldWrapper label="Usuario">
               <SelectNative
-                options={filteredProfessionalOptions}
-                value={filters.professional_id ?? ""}
+                options={filteredUserOptions}
+                value={filters.user_id ?? ""}
                 onChange={e => onFilter({
-                  professional_id: stringToNullableNumber(e.target.value),
+                  user_id: stringToNullableNumber(e.target.value),
                 })}
               />
             </FieldWrapper>

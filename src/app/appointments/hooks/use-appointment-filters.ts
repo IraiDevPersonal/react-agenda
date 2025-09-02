@@ -20,7 +20,7 @@ function parser(): AppointmentFilters {
     date_from: parseAsLocalDate.withDefault(rangeDate.from),
     date_to: parseAsLocalDate.withDefault(rangeDate.to),
     date: parseAsLocalDate.withDefault(currentDate),
-    professional_id: parseAsInteger,
+    user_id: parseAsInteger,
     profession_id: parseAsInteger,
     patient_rut: parseAsString,
   };
@@ -62,7 +62,7 @@ export function useAppointmentFilters() {
 
   const handleClearAllFilters = () => {
     onFilter({
-      professional_id: null,
+      user_id: null,
       profession_id: null,
       patient_rut: null,
       date_from: null,
@@ -74,8 +74,8 @@ export function useAppointmentFilters() {
   const handleRefresh = () => {
     Promise.all([
       invalidateQueries({ queryKey: [QUERY_KEYS.appointments] }),
-      invalidateQueries({ queryKey: [QUERY_KEYS.prefessionals] }),
-      invalidateQueries({ queryKey: [QUERY_KEYS.prefessions] }),
+      invalidateQueries({ queryKey: [QUERY_KEYS.users] }),
+      invalidateQueries({ queryKey: [QUERY_KEYS.professions] }),
     ]);
   };
 

@@ -28,7 +28,7 @@ export class ProfessionQuery implements ProfessionQueryImpl {
   forFitlers = () => {
     return queryOptions({
       refetchOnWindowFocus: false,
-      queryKey: [QUERY_KEYS.prefessions, "for-filter"] as TQueryKey,
+      queryKey: [QUERY_KEYS.professions, "for-filter"] as TQueryKey,
       queryFn: () => this.service.getProfessionsForFilters(),
     });
   };

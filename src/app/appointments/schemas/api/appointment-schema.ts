@@ -15,7 +15,7 @@ export const AppointmentSchema = z.object({
   time_to: z.string(),
   time_from: z.string(),
   professions: z.string().array(),
-  professional_name: PersonSchema.FullName,
+  full_name: PersonSchema.FullName,
   patient_rut: PersonSchema.Rut.nullable(),
   appointment_status: AppointmentStatusSchema,
   patient_phone: PersonSchema.Phone.nullable(),

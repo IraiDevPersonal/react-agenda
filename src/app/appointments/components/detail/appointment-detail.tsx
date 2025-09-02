@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { PatientInfoForAppointment } from "@/app/patients/components/patient-info-for-appointment";
-import { ProfessionalInfoForAppointment } from "@/app/professionals/components/professional-info-for-appointment";
+import { UserInfoForAppointment } from "@/app/users/components/user-info-for-appointment";
 import { Show } from "@/components/show";
 import { Alert } from "@/components/ui/alert";
 import { ErrorMessage } from "@/components/ui/error-message";
@@ -41,7 +41,7 @@ function AppointmentDetail({ uid }: Props) {
     return <ErrorMessage onRetry={refetch}>No se obtuvieron datos</ErrorMessage>;
   }
 
-  const { alert, patient, professional, status, date, time_from, time_to } = data;
+  const { alert, patient, user, status, date, time_from, time_to } = data;
 
   return (
     <AppointmentDetailWrapper>
@@ -49,7 +49,7 @@ function AppointmentDetail({ uid }: Props) {
 
       <AppointmentHours datetime={{ time_from, time_to, date }} />
 
-      <ProfessionalInfoForAppointment professional={professional} />
+      <UserInfoForAppointment user={user} />
 
       <Show when={alert.is_required}>
         <Alert>

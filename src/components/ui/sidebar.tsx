@@ -10,7 +10,7 @@ import { For } from "../for";
 const PATHS = [
   { href: ROUTES.agenda, label: "Mi agenda", icon: <CalendarIcon size={20} /> },
   { href: ROUTES.patients, label: "Pacientes", icon: <UsersIcon size={20} /> },
-  { href: ROUTES.professionals, label: "Profesionales", icon: <BookUserIcon size={20} /> },
+  { href: ROUTES.users, label: "Usuarios", icon: <BookUserIcon size={20} /> },
 ];
 
 export function Sidebar() {

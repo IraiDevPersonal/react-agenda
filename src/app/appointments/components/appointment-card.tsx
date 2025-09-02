@@ -14,7 +14,7 @@ type Props = PropsWithChildren<{
 }>;
 
 function AppointmentCard({ appointment }: Props) {
-  const { date, time_from, time_to, patient, professional } = appointment;
+  const { date, time_from, time_to, patient, user } = appointment;
   const { isAvailable, handleNavigate } = useAppointmentCard({
     status: appointment.appointment_status,
     uid: appointment.uid,
@@ -48,10 +48,10 @@ function AppointmentCard({ appointment }: Props) {
             )
           : (
               <>
-                <h6 className="font-medium text-sm capitalize">{professional.professional_name}</h6>
+                <h6 className="font-medium text-sm capitalize">{user.full_name}</h6>
                 <div>
                   <HeartHandshakeIcon size={14} className="inline-block mr-1" />
-                  <span className="italic">{professional.professions.join(", ")}</span>
+                  <span className="italic">{user.professions.join(", ")}</span>
                 </div>
                 {
                   patient && (

@@ -2,7 +2,7 @@ import z from "zod";
 
 import { ApiPatientForAppointmentDetailSchema } from "@/app/patients/schemas/api/patient-for-appointment-detail-schema";
 import { ApiPatientHistorySchema } from "@/app/patients/schemas/api/patient-history-schema";
-import { ApiProfessionalForAppointmentDetailSchema } from "@/app/professionals/schemas/api/professional-for-appointment-detail-schema";
+import { ApiUserForAppointmentDetailSchema } from "@/app/users/schemas/api/user-for-appointment-detail-schema";
 
 import { AppointmentStatusSchema } from "./appointment-schema";
 
@@ -19,5 +19,5 @@ export const ApiAppointmentDetailSchema = z.object({
   }),
   patient: ApiPatientForAppointmentDetailSchema,
   patient_history: z.array(ApiPatientHistorySchema),
-  professional: ApiProfessionalForAppointmentDetailSchema,
+  user: ApiUserForAppointmentDetailSchema,
 });

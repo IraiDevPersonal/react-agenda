@@ -36,7 +36,7 @@ function Patient({ children, patient, upsertService }: Props) {
   );
 }
 
-function ProfessionalWrapper({ children }: PropsWithChildren) {
+function PatientWrapper({ children }: PropsWithChildren) {
   return (
     <div
       className="flex flex-col xl:flex-row items-center justify-center h-full gap-x-4 lg:gap-x-8"
@@ -46,7 +46,7 @@ function ProfessionalWrapper({ children }: PropsWithChildren) {
   );
 }
 
-function ProfessionalDataWrapper({ children }: PropsWithChildren) {
+function PatientDataWrapper({ children }: PropsWithChildren) {
   return (
     <div className="flex flex-col items-center mb-8 xl:mb-0">
       {children}
@@ -54,7 +54,7 @@ function ProfessionalDataWrapper({ children }: PropsWithChildren) {
   );
 }
 
-function ProfessionalFormWrapper({ children }: PropsWithChildren) {
+function PatientFormWrapper({ children }: PropsWithChildren) {
   return (
     <div className="max-w-lg min-w-lg xl:border-l md:pl-4 lg:pl-8">
       {children}
@@ -130,8 +130,8 @@ function PatientImage({ showCaption }: { showCaption?: boolean }) {
 
 Patient.Data = PatientData;
 Patient.Image = PatientImage;
-Patient.Wrapper = ProfessionalWrapper;
-Patient.DataWrapper = ProfessionalDataWrapper;
-Patient.FormWrapper = ProfessionalFormWrapper;
+Patient.Wrapper = PatientWrapper;
+Patient.DataWrapper = PatientDataWrapper;
+Patient.FormWrapper = PatientFormWrapper;
 
 export { Patient };

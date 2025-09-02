@@ -25,7 +25,7 @@ export class AppointmentDetailMapper {
       time_to: data.time_to,
       time_from: data.time_from,
       is_enabled: data.is_enabled,
-      professional: data.professional,
+      user: data.user,
       patient_history: data.patient_history,
       patient: isAvailable ? null : data.patient,
     };

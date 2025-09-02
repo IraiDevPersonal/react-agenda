@@ -6,7 +6,7 @@ export type AppointmentModel = {
   time_to: string;
   time_from: string;
   appointment_status: AppointmentStatus;
-  professional: ProfessionalForAppointment;
+  user: UserForAppointment;
   patient: PatientForAppointmentModel | null;
 };
 
@@ -16,7 +16,7 @@ export type PatientForAppointmentModel = {
   patient_phone: string;
 };
 
-export type ProfessionalForAppointment = {
+export type UserForAppointment = {
   professions: string[];
-  professional_name: string;
+  full_name: string;
 };

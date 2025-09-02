@@ -2,7 +2,7 @@ export const ROUTES = {
   root: "/",
   agenda: "/agenda",
   patients: "/pacientes",
-  professionals: "/profesionales",
+  users: "/users",
   reports: "/informes",
   actions: {
     create: "crear-paciente",

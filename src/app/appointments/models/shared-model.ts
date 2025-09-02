@@ -14,7 +14,7 @@ export enum AppointmentStatus {
 }
 
 export type AppointmentFilters = UseQueryStatesKeysMap<{
-  professional_id: number;
+  user_id: number;
   profession_id: number;
   patient_rut: string;
   date_from: Date;
