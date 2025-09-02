@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "npx @biomejs/biome check src/",
+    "lint:fix": "npx @biomejs/biome check --apply-unsafe src/",
     "preview": "vite preview"
   },
   "dependencies": {
