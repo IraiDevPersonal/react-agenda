@@ -1,15 +1,12 @@
 import type { HttpClientImpl } from "@/lib/http-client";
 import { UserDetailMapper } from "./mappers/user-detail-mapper";
-import { UserForFiltersMapper } from "./mappers/user-for-filters-mapper";
 import { UserMapper } from "./mappers/user-mapper";
 import type { UserDetailResponseModel } from "./models/user-detail-response-model";
-import type { UserForFilterModel } from "./models/user-for-filters-model";
 import type { UserResponseModel } from "./models/user-response-model";
 
 export type UserServiceImpl = {
   getUsers: (filters: object) => Promise<UserResponseModel>;
   getUserByUid: (uid: string) => Promise<UserDetailResponseModel>;
-  getUsersForFilters: () => Promise<UserForFilterModel[]>;
 };
 
 export class UserService implements UserServiceImpl {
@@ -28,10 +25,6 @@ export class UserService implements UserServiceImpl {
     return `${this.endpoint}/${uid}`;
   };
 
-  private forFilter = () => {
-    return `${this.endpoint}/for-filter`;
-  };
-
   getUsers = async (filters: object) => {
     // this.client.useAuthentication() TODO: para endpoint que requieran autenticacion
     const { data } = await this.client.get(this.endpoint, { params: filters });
@@ -41,10 +34,5 @@ export class UserService implements UserServiceImpl {
   getUserByUid = async (uid: string) => {
     const { data } = await this.client.get(this.withUid(uid));
     return UserDetailMapper.fromApiToDomain(data);
-  };
-
-  getUsersForFilters = async () => {
-    const { data } = await this.client.get(this.forFilter());
-    return UserForFiltersMapper.fromApiToDomain(data);
   };
 }

@@ -4,10 +4,8 @@ import type { Values } from "nuqs";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import type { TQueryKey } from "@/lib/types/global-types";
 import { queryParser } from "@/lib/utils";
-
 import type { UserFilters } from "./models/shared-model";
 import type { UserDetailResponseModel } from "./models/user-detail-response-model";
-import type { UserForFilterModel } from "./models/user-for-filters-model";
 import type { UserResponseModel } from "./models/user-response-model";
 import type { UserServiceImpl } from "./service";
 
@@ -37,12 +35,6 @@ type UserQueryImpl = {
     UserDetailResponseModel,
     Error,
     UserDetailResponseModel,
-    TQueryKey
-  >;
-  forFilters: () => UseQueryOptions<
-    UserForFilterModel[],
-    Error,
-    UserForFilterModel[],
     TQueryKey
   >;
 };
@@ -109,14 +101,6 @@ export class UserQuery implements UserQueryImpl {
       refetchOnWindowFocus: false,
       throwOnError: false,
       retry: 0,
-    });
-  };
-
-  forFilters = () => {
-    return queryOptions({
-      refetchOnWindowFocus: false,
-      queryKey: [QUERY_KEYS.users, QUERY_KEYS.generic.forFilters] as TQueryKey,
-      queryFn: () => this.service.getUsersForFilters(),
     });
   };
 }
