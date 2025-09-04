@@ -42,7 +42,7 @@ function AppointmentCard({ appointment }: Props) {
         <h6 className="font-semibold text-center text-sm">Disponible</h6>
       ) : (
         <>
-          <h6 className="font-medium text-sm capitalize">{user.name}</h6>
+          <h6 className="font-medium text-sm capitalize">{user.full_name}</h6>
           <div>
             <HeartHandshakeIcon size={14} className="inline-block mr-1" />
             <span className="italic">{user.professions.join(", ")}</span>
@@ -50,7 +50,7 @@ function AppointmentCard({ appointment }: Props) {
           {patient && (
             <>
               <h6 className="font-medium text-sm capitalize mt-2">
-                {patient.name}
+                {patient.full_name}
               </h6>
               <div>
                 <UserIcon size={14} className="inline-block mr-1" />

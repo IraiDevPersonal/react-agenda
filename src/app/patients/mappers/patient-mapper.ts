@@ -41,6 +41,7 @@ export class PatientMapper {
       names: data.names,
       email: data.email,
       phone: data.phone,
+      gender: data.gender,
       status: data.status,
       address: data.address,
       last_names: data.last_names,

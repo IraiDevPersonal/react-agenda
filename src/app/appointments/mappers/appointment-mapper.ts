@@ -22,17 +22,17 @@ export class AppointmentMapper {
       date: data.date,
       time_to: data.time_to,
       time_from: data.time_from,
-      status: data.appointment_status,
+      status: data.status,
       patient: patient
         ? {
             rut: patient.rut,
             phone: patient.phone,
-            name: patient.full_name,
+            full_name: patient.full_name,
           }
         : null,
       professional: {
         professions: professional.professions,
-        name: professional.full_name,
+        full_name: professional.full_name,
       },
     };
   }

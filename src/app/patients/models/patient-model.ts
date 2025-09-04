@@ -1,4 +1,4 @@
-import type { UserStatus } from "@/app/users/models/shared-model";
+import type { UserGender, UserStatus } from "@/app/users/models/shared-model";
 
 import { ResponseWithPaginationSchema as ApiResponseWithPaginationSchema } from "@/lib/schemas/global-schemas";
 
@@ -15,6 +15,7 @@ export type PatientModel = {
   phone: string;
   address: string;
   birth_date: Date;
+  gender: UserGender;
   last_names: string;
   status: UserStatus;
   avatar_image?: string | null;

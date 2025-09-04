@@ -15,6 +15,7 @@ export class AppointmentDetailMapper {
     }
 
     const patient = data.patient;
+    const professional = data.professional;
 
     return {
       uid: data.uid,
@@ -24,18 +25,30 @@ export class AppointmentDetailMapper {
       time_to: data.time_to,
       time_from: data.time_from,
       is_enabled: data.is_enabled,
-      professional: data.professional,
+      professional: {
+        full_name: professional.full_name,
+        pay_methods: professional.pay_methods,
+        professions: professional.professions,
+        confirm_methods: professional.confirm_methods,
+      },
       patient: patient
         ? {
-            ...patient,
-            history: data.patient_history,
+            uid: patient.uid,
+            rut: patient.rut,
+            email: patient.email,
+            phone: patient.phone,
+            names: patient.names,
+            address: patient.address,
+            history: patient.history,
+            avatar_image: patient.address,
+            last_names: patient.last_names,
+            full_name: `${patient.names} ${patient.last_names}`,
           }
         : null,
     };
   }
 
   static fromApiToDomain(raw: unknown): AppointmentDetailModel {
-    const data = AppointmentDetailMapper.map(raw);
-    return data;
+    return AppointmentDetailMapper.map(raw);
   }
 }

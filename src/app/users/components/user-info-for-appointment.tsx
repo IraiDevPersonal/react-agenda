@@ -1,9 +1,9 @@
 import { TextItem } from "@/components/ui/text-item";
 
-import type { UserForAppointmentDetailModel } from "../models/user-for-appointment-detail-model";
+import type { ProfessionalForAppointmentDetailModel } from "../../professional/models/professional-for-appointment-detail-model";
 
 type Props = {
-  user: UserForAppointmentDetailModel;
+  user: ProfessionalForAppointmentDetailModel;
 };
 
 function UserInfoForAppointment({ user }: Props) {
@@ -13,7 +13,7 @@ function UserInfoForAppointment({ user }: Props) {
 
       <TextItem>
         <TextItem.Label>Nombre:</TextItem.Label>
-        <TextItem.Value capitalize>{user.fullname}</TextItem.Value>
+        <TextItem.Value capitalize>{user.full_name}</TextItem.Value>
       </TextItem>
 
       <TextItem>

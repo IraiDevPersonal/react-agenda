@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import { DateFormat, dateHelper } from "@/lib/date-helper";
 import { notification } from "@/lib/notification";
 import { patientQuery } from "../container";
 import type { UpsertPatientServiceFn } from "../models/patient-action-model";
@@ -28,7 +29,13 @@ export function useUpsertPatientMutation({ upsertService, patientUid }: Props) {
       const formValues = Object.fromEntries(
         new FormData(e.target as HTMLFormElement),
       );
-      const payload = PatientFormSchema.parse(formValues);
+      const payload = PatientFormSchema.parse({
+        ...formValues,
+        birth_date: dateHelper.format(
+          formValues.birth_date.toString(),
+          DateFormat["yyyy-MM-dd"],
+        ),
+      });
 
       return upsertService(payload);
     },

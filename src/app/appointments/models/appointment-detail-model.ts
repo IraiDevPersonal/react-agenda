@@ -1,5 +1,5 @@
 import type { PatientForAppointmentDetailModel } from "@/app/patients/models/patient-for-appointment-detail-model";
-import type { UserForAppointmentDetailModel } from "@/app/users/models/user-for-appointment-detail-model";
+import type { ProfessionalForAppointmentDetailModel } from "@/app/professional/models/professional-for-appointment-detail-model";
 
 import type { AppointmentStatus } from "./shared-model";
 
@@ -11,8 +11,8 @@ export type AppointmentDetailModel = {
   is_enabled: boolean;
   status: AppointmentStatus;
   alert: AlertForAppointmentDetailModel;
-  professional: UserForAppointmentDetailModel;
   patient: PatientForAppointmentDetailModel | null;
+  professional: ProfessionalForAppointmentDetailModel;
 };
 
 export type AlertForAppointmentDetailModel = {
