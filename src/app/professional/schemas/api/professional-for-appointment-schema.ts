@@ -3,5 +3,6 @@ import { PersonSchema } from "@/lib/schemas/person-schemas";
 
 export const ApiProfessionalForAppointmentSchema = z.object({
   professions: z.string().array(),
-  full_name: PersonSchema.FullName,
+  names: PersonSchema.Names,
+  last_names: PersonSchema.LastNames,
 });

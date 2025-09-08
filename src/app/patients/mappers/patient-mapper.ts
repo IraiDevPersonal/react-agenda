@@ -21,8 +21,11 @@ export class PatientMapper {
 
     return {
       uid: data.uid,
+      date: data.date,
       status: data.status,
-      date_time: data.date_time,
+      time_to: data.time_to,
+      time_from: data.time_from,
+      date_time: `${data.date} ${data.time_from} ${data.time_to}`,
     };
   }
 
@@ -80,7 +83,6 @@ export class PatientMapper {
 
     return {
       data: PatientMapper.map(data.data),
-      message: data.message,
     };
   }
 

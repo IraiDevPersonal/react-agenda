@@ -27,12 +27,12 @@ export class AppointmentMapper {
         ? {
             rut: patient.rut,
             phone: patient.phone,
-            full_name: patient.full_name,
+            full_name: `${patient.names} ${patient.last_names}`,
           }
         : null,
       professional: {
         professions: professional.professions,
-        full_name: professional.full_name,
+        full_name: `${professional.names} ${professional.last_names}`,
       },
     };
   }

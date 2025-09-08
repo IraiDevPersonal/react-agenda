@@ -1,7 +1,6 @@
 import { CustomError } from "@/lib/custom-error";
-
+import { DateFormat, dateHelper } from "@/lib/date-helper";
 import type { AppointmentDetailModel } from "../models/appointment-detail-model";
-
 import { ApiAppointmentDetailSchema } from "../schemas/api/appointment-detail-schema";
 
 export class AppointmentDetailMapper {
@@ -26,10 +25,12 @@ export class AppointmentDetailMapper {
       time_from: data.time_from,
       is_enabled: data.is_enabled,
       professional: {
-        full_name: professional.full_name,
+        names: professional.names,
+        last_names: professional.last_names,
         pay_methods: professional.pay_methods,
         professions: professional.professions,
         confirm_methods: professional.confirm_methods,
+        full_name: `${professional.names} ${professional.last_names}`,
       },
       patient: patient
         ? {
@@ -39,10 +40,13 @@ export class AppointmentDetailMapper {
             phone: patient.phone,
             names: patient.names,
             address: patient.address,
-            history: patient.history,
             avatar_image: patient.address,
             last_names: patient.last_names,
             full_name: `${patient.names} ${patient.last_names}`,
+            history: patient.history.map((h) => ({
+              ...h,
+              date_time: `${dateHelper.format(h.date, DateFormat["dd-MM-yyyy"])} ${h.time_to} ${h.time_to}`,
+            })),
           }
         : null,
     };

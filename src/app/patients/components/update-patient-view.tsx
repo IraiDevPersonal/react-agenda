@@ -12,7 +12,6 @@ function UpdatePatientView() {
   const {
     refetch,
     data: patient,
-    isFetching,
     isLoading,
     isError,
     error,
@@ -33,15 +32,15 @@ function UpdatePatientView() {
         patientService.updatePatient(patientUid, payload)
       }
     >
-      {isFetching ? (
+      {/* {isFetching ? (
         <PatientSkeleton.Data>
           <Patient.Image />
         </PatientSkeleton.Data>
-      ) : (
-        <Patient.Data>
-          <Patient.Image />
-        </Patient.Data>
-      )}
+      ) : ( */}
+      <Patient.Data>
+        <Patient.Image />
+      </Patient.Data>
+      {/* )} */}
     </Patient>
   );
 }

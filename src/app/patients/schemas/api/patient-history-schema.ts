@@ -5,6 +5,8 @@ import { UidScheme } from "@/lib/schemas/global-schemas";
 
 export const ApiPatientHistorySchema = z.object({
   uid: UidScheme,
-  date_time: z.string(),
+  date: z.string(),
+  time_to: z.string(),
+  time_from: z.string(),
   status: AppointmentStatusSchema,
 });
